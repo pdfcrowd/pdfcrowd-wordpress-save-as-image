@@ -1,0 +1,61 @@
+.save-as-image-pdfcrowd-m-description {
+    max-height: 84px;
+    overflow-y: auto;
+}
+
+.save-as-image-pdfcrowd-m-description ul {
+    list-style: disc;
+    margin: 0 0 0 30px;
+}
+
+.save-as-image-pdfcrowd-m-description ul ul {
+    list-style: circle;
+}
+
+.save-as-image-pdfcrowd-m-description ul ul ul {
+    list-style: square;
+}
+
+#save-as-image-pdfcrowd-options select {
+    max-width: 500px !important;
+}
+
+
+.save-as-image-pdfcrowd-reset,
+.save-as-image-pdfcrowd-reset * {
+    all: initial;
+}
+
+.save-as-image-pdfcrowd-button-wrap {
+    display: block;
+}
+
+.save-as-image-pdfcrowd-button-wrap * {
+    cursor: pointer;
+}
+
+.save-as-image-pdfcrowd-button img {
+    vertical-align: middle;
+}
+
+
+.save-as-image-pdfcrowd-inner-table {
+    margin: 0;
+    padding: 0;
+}
+
+.save-as-image-pdfcrowd-inner-table td {
+    padding: 0 3em 0 0;
+}
+
+#save-as-image-pdfcrowd-images img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.save-as-image-pdfcrowd-warning {
+    padding: 1em;
+    color: #800000;
+    background-color: #ffffbb;
+}
