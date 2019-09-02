@@ -5,7 +5,7 @@
 *
 *
 *
-* @link       https://pdfcrowd.com/wordpress/
+* @link       https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
 * @since      1.0.0
 *
 * @package    Save_As_Image_Pdfcrowd
@@ -16,6 +16,7 @@
 <div id="save-as-image-pdfcrowd-conversion-format" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Conversion Format</h2>
+    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
 
 
     <table class="form-table">
@@ -47,6 +48,9 @@
                     <option value="webp" <?php selected($output_format, 'webp');?>>webp</option>
                     </select>
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>output_format</strong>"<br/>Possible values: "png", "jpg", "gif", "tiff", "bmp", "ico", "ppm", "pgm", "pbm", "pnm", "psb", "pct", "ras", "tga", "sgi", "sun", "webp"
+                        </p>
                         <p class='description'>
                             The format of the output file.
                         </p>
@@ -59,6 +63,7 @@
 <div id="save-as-image-pdfcrowd-general-options" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>General Options</h2>
+    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
 
 
     <table class="form-table">
@@ -72,6 +77,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-no_background" name="save-as-image-pdfcrowd[no_background]" value="1" <?php checked( $no_background, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>no_background</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Do not print the background graphics.
                         </p>
@@ -87,6 +95,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-disable_javascript" name="save-as-image-pdfcrowd[disable_javascript]" value="1" <?php checked( $disable_javascript, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>disable_javascript</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Do not execute JavaScript.
                         </p>
@@ -102,6 +113,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-disable_image_loading" name="save-as-image-pdfcrowd[disable_image_loading]" value="1" <?php checked( $disable_image_loading, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>disable_image_loading</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Do not load images.
                         </p>
@@ -117,6 +131,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-disable_remote_fonts" name="save-as-image-pdfcrowd[disable_remote_fonts]" value="1" <?php checked( $disable_remote_fonts, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>disable_remote_fonts</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Disable loading fonts from remote sources.
                         </p>
@@ -132,6 +149,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-block_ads" name="save-as-image-pdfcrowd[block_ads]" value="1" <?php checked( $block_ads, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>block_ads</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Try to block ads. Enabling this option can produce smaller output and speed up the conversion.
                         </p>
@@ -147,6 +167,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-default_encoding" name="save-as-image-pdfcrowd[default_encoding]" value="<?php if(!empty($default_encoding)) esc_attr_e($default_encoding, $this->plugin_name);?>" placeholder="auto detect" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>default_encoding</strong>"
+                        </p>
                         <p class='description'>
                             Set the default HTML content text encoding.
                             
@@ -163,6 +186,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_user_name" name="save-as-image-pdfcrowd[http_auth_user_name]" value="<?php if(!empty($http_auth_user_name)) esc_attr_e($http_auth_user_name, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>http_auth_user_name</strong>"
+                        </p>
                         <p class='description'>
                             Set the HTTP authentication user name.
                             
@@ -179,8 +205,30 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_password" name="save-as-image-pdfcrowd[http_auth_password]" value="<?php if(!empty($http_auth_password)) esc_attr_e($http_auth_password, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>http_auth_password</strong>"
+                        </p>
                         <p class='description'>
                             Set the HTTP authentication password.
+                            
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-http_auth">
+                        Http Auth
+                    </label>
+                </th>
+                <td>
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth" name="save-as-image-pdfcrowd[http_auth]" value="<?php if(!empty($http_auth)) esc_attr_e($http_auth, $this->plugin_name);?>" placeholder="" />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>http_auth</strong>"
+                        </p>
+                        <p class='description'>
+                            Set credentials to access HTTP base authentication protected websites.
                             
                         </p>
                     </div>
@@ -195,6 +243,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-use_print_media" name="save-as-image-pdfcrowd[use_print_media]" value="1" <?php checked( $use_print_media, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>use_print_media</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Use the print version of the page if available (@media print).
                         </p>
@@ -210,6 +261,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-no_xpdfcrowd_header" name="save-as-image-pdfcrowd[no_xpdfcrowd_header]" value="1" <?php checked( $no_xpdfcrowd_header, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>no_xpdfcrowd_header</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Do not send the X-Pdfcrowd HTTP header in Pdfcrowd HTTP requests.
                         </p>
@@ -225,6 +279,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-cookies" name="save-as-image-pdfcrowd[cookies]" value="<?php if(!empty($cookies)) esc_attr_e($cookies, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>cookies</strong>"
+                        </p>
                         <p class='description'>
                             Set cookies that are sent in Pdfcrowd HTTP requests.
                             
@@ -241,6 +298,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-verify_ssl_certificates" name="save-as-image-pdfcrowd[verify_ssl_certificates]" value="1" <?php checked( $verify_ssl_certificates, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>verify_ssl_certificates</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Do not allow insecure HTTPS connections.
                         </p>
@@ -256,6 +316,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-fail_on_main_url_error" name="save-as-image-pdfcrowd[fail_on_main_url_error]" value="1" <?php checked( $fail_on_main_url_error, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>fail_on_main_url_error</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Abort the conversion if the main URL HTTP status code is greater than or equal to 400.
                         </p>
@@ -271,6 +334,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-fail_on_any_url_error" name="save-as-image-pdfcrowd[fail_on_any_url_error]" value="1" <?php checked( $fail_on_any_url_error, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>fail_on_any_url_error</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Abort the conversion if any of the sub-request HTTP status code is greater than or equal to 400 or if some sub-requests are still pending. See details in a debug log.
                         </p>
@@ -286,6 +352,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" value="<?php if(!empty($custom_javascript)) esc_attr_e($custom_javascript, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>custom_javascript</strong>"
+                        </p>
                         <p class='description'>
                             Run a custom JavaScript after the document is loaded and ready to print. The script is intended for post-load DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/doc/api/libpdfcrowd/'>JavaScript library</a>.
                             
@@ -302,6 +371,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" value="<?php if(!empty($on_load_javascript)) esc_attr_e($on_load_javascript, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>on_load_javascript</strong>"
+                        </p>
                         <p class='description'>
                             Run a custom JavaScript right after the document is loaded. The script is intended for early DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/doc/api/libpdfcrowd/'>JavaScript library</a>.
                             
@@ -318,6 +390,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_http_header" name="save-as-image-pdfcrowd[custom_http_header]" value="<?php if(!empty($custom_http_header)) esc_attr_e($custom_http_header, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>custom_http_header</strong>"
+                        </p>
                         <p class='description'>
                             Set a custom HTTP header that is sent in Pdfcrowd HTTP requests.
                             A string containing the header name and value separated by a colon.
@@ -334,6 +409,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-javascript_delay" name="save-as-image-pdfcrowd[javascript_delay]" value="<?php if(!empty($javascript_delay)) esc_attr_e($javascript_delay, $this->plugin_name);?>" placeholder="200" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>javascript_delay</strong>"
+                        </p>
                         <p class='description'>
                             Wait the specified number of milliseconds to finish all JavaScript after the document is loaded. The maximum value is determined by your API license.
                         </p>
@@ -349,6 +427,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-element_to_convert" name="save-as-image-pdfcrowd[element_to_convert]" value="<?php if(!empty($element_to_convert)) esc_attr_e($element_to_convert, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>element_to_convert</strong>"
+                        </p>
                         <p class='description'>
                             Convert only the specified element from the main document and its children. The element is specified by one or more <a href='https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Selectors'>CSS selectors</a>. If the element is not found, the conversion fails. If multiple elements are found, the first one is used.
                             
@@ -364,11 +445,14 @@
                 </th>
                 <td>
                     <select name="save-as-image-pdfcrowd[element_to_convert_mode]">
-                    <option value="cut-out" <?php selected($element_to_convert_mode, 'cut-out');?>>cut-out - The element and its children are cut out of the document.</option>
-                    <option value="remove-siblings" <?php selected($element_to_convert_mode, 'remove-siblings');?>>remove-siblings - All element's siblings are removed.</option>
-                    <option value="hide-siblings" <?php selected($element_to_convert_mode, 'hide-siblings');?>>hide-siblings - All element's sibilings are hidden.</option>
+                    <option value="cut-out" <?php selected($element_to_convert_mode, 'cut-out');?>>The element and its children are cut out of the document.</option>
+                    <option value="remove-siblings" <?php selected($element_to_convert_mode, 'remove-siblings');?>>All element's siblings are removed.</option>
+                    <option value="hide-siblings" <?php selected($element_to_convert_mode, 'hide-siblings');?>>All element's sibilings are hidden.</option>
                     </select>
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>element_to_convert_mode</strong>"<br/>Possible values: "cut-out", "remove-siblings", "hide-siblings"
+                        </p>
                         <p class='description'>
                             Specify the DOM handling when only a part of the document is converted.
                         </p>
@@ -384,6 +468,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-wait_for_element" name="save-as-image-pdfcrowd[wait_for_element]" value="<?php if(!empty($wait_for_element)) esc_attr_e($wait_for_element, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>wait_for_element</strong>"
+                        </p>
                         <p class='description'>
                             Wait for the specified element in a source document. The element is specified by one or more <a href='https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Selectors'>CSS selectors</a>. The element is searched for in the main document and all iframes. If the element is not found, the conversion fails. Your API license defines the maximum wait time by "Max Delay" parameter.
                             
@@ -397,6 +484,7 @@
 <div id="save-as-image-pdfcrowd-image-output" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Image Output</h2>
+    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
 
 
     <table class="form-table">
@@ -410,6 +498,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_width" name="save-as-image-pdfcrowd[screenshot_width]" value="<?php if(!empty($screenshot_width)) esc_attr_e($screenshot_width, $this->plugin_name);?>" placeholder="1024" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>screenshot_width</strong>"
+                        </p>
                         <p class='description'>
                             Set the output image width in pixels.
                         </p>
@@ -425,8 +516,11 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_height" name="save-as-image-pdfcrowd[screenshot_height]" value="<?php if(!empty($screenshot_height)) esc_attr_e($screenshot_height, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>screenshot_height</strong>"
+                        </p>
                         <p class='description'>
-                            Set the output image height in pixels. If it's not specified, actual document height is used.
+                            Set the output image height in pixels. If it is not specified, actual document height is used.
                         </p>
                     </div>
                 </td>
@@ -440,6 +534,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-scale_factor" name="save-as-image-pdfcrowd[scale_factor]" value="<?php if(!empty($scale_factor)) esc_attr_e($scale_factor, $this->plugin_name);?>" placeholder="100" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>scale_factor</strong>"
+                        </p>
                         <p class='description'>
                             Set the scaling factor (zoom) for the output image.
                         </p>
@@ -452,6 +549,7 @@
 <div id="save-as-image-pdfcrowd-miscellaneous" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Miscellaneous</h2>
+    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
 
 
     <table class="form-table">
@@ -465,6 +563,9 @@
                 <td>
                     <input type="checkbox" id="save-as-image-pdfcrowd-debug_log" name="save-as-image-pdfcrowd[debug_log]" value="1" <?php checked( $debug_log, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>debug_log</strong>"<br/>Possible values: 0, 1
+                        </p>
                         <p class='description'>
                             Turn on the debug logging. Details about the conversion are stored in the debug log. The URL of the log can be obtained from the <a href='https://pdfcrowd.com/doc/api/html-to-pdf/php/#get_debug_log_url'>getDebugLogUrl</a> method or available in <a href='https://pdfcrowd.com/user/account/log/conversion/'>conversion statistics</a>.
                         </p>
@@ -480,6 +581,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-tag" name="save-as-image-pdfcrowd[tag]" value="<?php if(!empty($tag)) esc_attr_e($tag, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>tag</strong>"
+                        </p>
                         <p class='description'>
                             Tag the conversion with a custom value. The tag is used in <a href='https://pdfcrowd.com/user/account/log/conversion/'>conversion statistics</a>. A value longer than 32 characters is cut off.
                             
@@ -496,6 +600,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_proxy" name="save-as-image-pdfcrowd[http_proxy]" value="<?php if(!empty($http_proxy)) esc_attr_e($http_proxy, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>http_proxy</strong>"
+                        </p>
                         <p class='description'>
                             A proxy server used by Pdfcrowd conversion process for accessing the source URLs with HTTP scheme. It can help to circumvent regional restrictions or provide limited access to your intranet.
                             The value must have format DOMAIN_OR_IP_ADDRESS:PORT.
@@ -512,6 +619,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-https_proxy" name="save-as-image-pdfcrowd[https_proxy]" value="<?php if(!empty($https_proxy)) esc_attr_e($https_proxy, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>https_proxy</strong>"
+                        </p>
                         <p class='description'>
                             A proxy server used by Pdfcrowd conversion process for accessing the source URLs with HTTPS scheme. It can help to circumvent regional restrictions or provide limited access to your intranet.
                             The value must have format DOMAIN_OR_IP_ADDRESS:PORT.
@@ -528,6 +638,9 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate" name="save-as-image-pdfcrowd[client_certificate]" value="<?php if(!empty($client_certificate)) esc_attr_e($client_certificate, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>client_certificate</strong>"
+                        </p>
                         <p class='description'>
                             A client certificate to authenticate Pdfcrowd converter on your web server. The certificate is used for two-way SSL/TLS authentication and adds extra security.
                             The file must exist and not be empty.
@@ -544,9 +657,96 @@
                 <td>
                     <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate_password" name="save-as-image-pdfcrowd[client_certificate_password]" value="<?php if(!empty($client_certificate_password)) esc_attr_e($client_certificate_password, $this->plugin_name);?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>client_certificate_password</strong>"
+                        </p>
                         <p class='description'>
-                            A password for PKCS12 file with a client certificate if it's needed.
+                            A password for PKCS12 file with a client certificate if it is needed.
                             
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="save-as-image-pdfcrowd-api-client-options" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
+
+    <h2>API Client Options</h2>
+    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
+
+
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-use_http">
+                        Use Http
+                    </label>
+                </th>
+                <td>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-use_http" name="save-as-image-pdfcrowd[use_http]" value="1" <?php checked( $use_http, 1 ); ?> />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>use_http</strong>"<br/>Possible values: 0, 1
+                        </p>
+                        <p class='description'>
+                            Specifies if the client communicates over HTTP or HTTPS with Pdfcrowd API.
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-proxy">
+                        Proxy
+                    </label>
+                </th>
+                <td>
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-proxy" name="save-as-image-pdfcrowd[proxy]" value="<?php if(!empty($proxy)) esc_attr_e($proxy, $this->plugin_name);?>" placeholder="" />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>proxy</strong>"
+                        </p>
+                        <p class='description'>
+                            Specifies an HTTP proxy that the API client library will use to connect to the internet.
+                            
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-use_curl">
+                        Use Curl
+                    </label>
+                </th>
+                <td>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-use_curl" name="save-as-image-pdfcrowd[use_curl]" value="1" <?php checked( $use_curl, 1 ); ?> />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>use_curl</strong>"<br/>Possible values: 0, 1
+                        </p>
+                        <p class='description'>
+                            Use cURL for the conversion request instead of the file_get_contents() PHP function.
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-retry_count">
+                        Retry Count
+                    </label>
+                </th>
+                <td>
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-retry_count" name="save-as-image-pdfcrowd[retry_count]" value="<?php if(!empty($retry_count)) esc_attr_e($retry_count, $this->plugin_name);?>" placeholder="1" />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>retry_count</strong>"
+                        </p>
+                        <p class='description'>
+                            Specifies the number of retries when the 502 HTTP status code is received. The 502 status code indicates a temporary network issue. This feature can be disabled by setting to 0.
                         </p>
                     </div>
                 </td>

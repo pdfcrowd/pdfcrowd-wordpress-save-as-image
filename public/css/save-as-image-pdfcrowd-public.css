@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+.save-as-image-pdfcrowd-button {
+    display: inline-block;
+}
+
 .save-as-image-pdfcrowd-button img {
     vertical-align: middle;
 }

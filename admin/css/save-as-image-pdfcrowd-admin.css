@@ -1,5 +1,5 @@
 .save-as-image-pdfcrowd-m-description {
-    max-height: 84px;
+    max-height: 86px;
     overflow-y: auto;
 }
 
@@ -34,6 +34,10 @@
     cursor: pointer;
 }
 
+.save-as-image-pdfcrowd-button {
+    display: inline-block;
+}
+
 .save-as-image-pdfcrowd-button img {
     vertical-align: middle;
 }
@@ -54,8 +58,23 @@
     vertical-align: middle;
 }
 
-.save-as-image-pdfcrowd-warning {
-    padding: 1em;
-    color: #800000;
-    background-color: #ffffbb;
+.save-as-image-pdfcrowd-expert {
+    float: right;
+}
+
+.save-as-image-pdfcrowd-devi {
+    display: none;
+}
+
+.save-as-image-pdfcrowd-devi,
+.save-as-image-pdfcrowd-note {
+    padding: .5em;
+    color: #856000;
+    background-color: #fefebb;
+    font-size: 13px !important;
+}
+
+.save-as-image-pdfcrowd-lic-stat {
+    padding-left: 6px;
+    font-weight: bold;
 }
