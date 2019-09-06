@@ -73,7 +73,6 @@
         $use_print_media = isset($options['use_print_media']) ? $options['use_print_media'] : '';
         $username = isset($options['username']) ? $options['username'] : '';
 
-        $__init__ = isset($options['__init__']) ? $options['__init__'] : '';
         $output_format = isset($options['output_format']) ? $options['output_format'] : 'png';
         $no_background = isset($options['no_background']) ? $options['no_background'] : '';
         $disable_javascript = isset($options['disable_javascript']) ? $options['disable_javascript'] : '';
@@ -83,7 +82,6 @@
         $default_encoding = isset($options['default_encoding']) ? $options['default_encoding'] : '';
         $http_auth_user_name = isset($options['http_auth_user_name']) ? $options['http_auth_user_name'] : '';
         $http_auth_password = isset($options['http_auth_password']) ? $options['http_auth_password'] : '';
-        $http_auth = isset($options['http_auth']) ? $options['http_auth'] : '';
         $use_print_media = isset($options['use_print_media']) ? $options['use_print_media'] : '';
         $no_xpdfcrowd_header = isset($options['no_xpdfcrowd_header']) ? $options['no_xpdfcrowd_header'] : '';
         $cookies = isset($options['cookies']) ? $options['cookies'] : '';
@@ -107,8 +105,6 @@
         $client_certificate = isset($options['client_certificate']) ? $options['client_certificate'] : '';
         $client_certificate_password = isset($options['client_certificate_password']) ? $options['client_certificate_password'] : '';
         $use_http = isset($options['use_http']) ? $options['use_http'] : '';
-        $proxy = isset($options['proxy']) ? $options['proxy'] : '';
-        $use_curl = isset($options['use_curl']) ? $options['use_curl'] : '';
         $retry_count = isset($options['retry_count']) ? $options['retry_count'] : '';
 
         /*

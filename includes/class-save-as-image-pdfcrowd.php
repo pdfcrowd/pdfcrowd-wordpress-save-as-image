@@ -127,8 +127,6 @@ class Save_As_Image_Pdfcrowd {
          */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-save-as-image-pdfcrowd-public.php';
 
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'client/pdfcrowd.php';
-
         $this->loader = new Save_As_Image_Pdfcrowd_Loader();
 
     }

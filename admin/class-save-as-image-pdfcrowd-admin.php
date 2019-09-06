@@ -180,9 +180,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         $options = get_option($this->plugin_name);
         $valid = $input;
 
-        $valid['__init__'] = $input['__init__'];
-
-        if (isset($input['output_format']) && !empty($input['output_format'])) {
+        if (isset($input['output_format']) &&
+            $input['output_format'] != '') {
             $output_format = $input['output_format'];
             if (!preg_match("/(?i)^(png|jpg|gif|tiff|bmp|ico|ppm|pgm|pbm|pnm|psb|pct|ras|tga|sgi|sun|webp)$/", $output_format))
                 add_settings_error(
@@ -209,8 +208,6 @@ class Save_As_Image_Pdfcrowd_Admin {
 
         $valid['http_auth_password'] = $input['http_auth_password'];
 
-        $valid['http_auth'] = $input['http_auth'];
-
         $valid['use_print_media'] = (isset($input['use_print_media']) && !empty($input['use_print_media'])) ? 1: 0;
 
         $valid['no_xpdfcrowd_header'] = (isset($input['no_xpdfcrowd_header']) && !empty($input['no_xpdfcrowd_header'])) ? 1: 0;
@@ -223,7 +220,8 @@ class Save_As_Image_Pdfcrowd_Admin {
 
         $valid['fail_on_any_url_error'] = (isset($input['fail_on_any_url_error']) && !empty($input['fail_on_any_url_error'])) ? 1: 0;
 
-        if (isset($input['custom_javascript']) && !empty($input['custom_javascript'])) {
+        if (isset($input['custom_javascript']) &&
+            $input['custom_javascript'] != '') {
             $custom_javascript = $input['custom_javascript'];
             if (!($custom_javascript != null && $custom_javascript !== ''))
                 add_settings_error(
@@ -234,7 +232,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['custom_javascript'] = $input['custom_javascript'];
 
-        if (isset($input['on_load_javascript']) && !empty($input['on_load_javascript'])) {
+        if (isset($input['on_load_javascript']) &&
+            $input['on_load_javascript'] != '') {
             $on_load_javascript = $input['on_load_javascript'];
             if (!($on_load_javascript != null && $on_load_javascript !== ''))
                 add_settings_error(
@@ -245,7 +244,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['on_load_javascript'] = $input['on_load_javascript'];
 
-        if (isset($input['custom_http_header']) && !empty($input['custom_http_header'])) {
+        if (isset($input['custom_http_header']) &&
+            $input['custom_http_header'] != '') {
             $custom_http_header = $input['custom_http_header'];
             if (!preg_match("/^.+:.+$/", $custom_http_header))
                 add_settings_error(
@@ -256,7 +256,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['custom_http_header'] = $input['custom_http_header'];
 
-        if (isset($input['javascript_delay']) && !empty($input['javascript_delay'])) {
+        if (isset($input['javascript_delay']) &&
+            $input['javascript_delay'] != '') {
             $javascript_delay = $input['javascript_delay'];
             if (!(intval($javascript_delay) >= 0))
                 add_settings_error(
@@ -267,7 +268,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['javascript_delay'] = $input['javascript_delay'];
 
-        if (isset($input['element_to_convert']) && !empty($input['element_to_convert'])) {
+        if (isset($input['element_to_convert']) &&
+            $input['element_to_convert'] != '') {
             $selectors = $input['element_to_convert'];
             if (!($selectors != null && $selectors !== ''))
                 add_settings_error(
@@ -278,7 +280,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['element_to_convert'] = $input['element_to_convert'];
 
-        if (isset($input['element_to_convert_mode']) && !empty($input['element_to_convert_mode'])) {
+        if (isset($input['element_to_convert_mode']) &&
+            $input['element_to_convert_mode'] != '') {
             $mode = $input['element_to_convert_mode'];
             if (!preg_match("/(?i)^(cut-out|remove-siblings|hide-siblings)$/", $mode))
                 add_settings_error(
@@ -289,7 +292,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['element_to_convert_mode'] = $input['element_to_convert_mode'];
 
-        if (isset($input['wait_for_element']) && !empty($input['wait_for_element'])) {
+        if (isset($input['wait_for_element']) &&
+            $input['wait_for_element'] != '') {
             $selectors = $input['wait_for_element'];
             if (!($selectors != null && $selectors !== ''))
                 add_settings_error(
@@ -300,7 +304,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['wait_for_element'] = $input['wait_for_element'];
 
-        if (isset($input['screenshot_width']) && !empty($input['screenshot_width'])) {
+        if (isset($input['screenshot_width']) &&
+            $input['screenshot_width'] != '') {
             $screenshot_width = $input['screenshot_width'];
             if (!(intval($screenshot_width) >= 96 && intval($screenshot_width) <= 65000))
                 add_settings_error(
@@ -311,7 +316,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['screenshot_width'] = $input['screenshot_width'];
 
-        if (isset($input['screenshot_height']) && !empty($input['screenshot_height'])) {
+        if (isset($input['screenshot_height']) &&
+            $input['screenshot_height'] != '') {
             $screenshot_height = $input['screenshot_height'];
             if (!(intval($screenshot_height) > 0))
                 add_settings_error(
@@ -322,7 +328,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['screenshot_height'] = $input['screenshot_height'];
 
-        if (isset($input['scale_factor']) && !empty($input['scale_factor'])) {
+        if (isset($input['scale_factor']) &&
+            $input['scale_factor'] != '') {
             $scale_factor = $input['scale_factor'];
             if (!(intval($scale_factor) > 0))
                 add_settings_error(
@@ -337,7 +344,8 @@ class Save_As_Image_Pdfcrowd_Admin {
 
         $valid['tag'] = $input['tag'];
 
-        if (isset($input['http_proxy']) && !empty($input['http_proxy'])) {
+        if (isset($input['http_proxy']) &&
+            $input['http_proxy'] != '') {
             $http_proxy = $input['http_proxy'];
             if (!preg_match("/(?i)^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z0-9]{1,}:\d+$/", $http_proxy))
                 add_settings_error(
@@ -348,7 +356,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['http_proxy'] = $input['http_proxy'];
 
-        if (isset($input['https_proxy']) && !empty($input['https_proxy'])) {
+        if (isset($input['https_proxy']) &&
+            $input['https_proxy'] != '') {
             $https_proxy = $input['https_proxy'];
             if (!preg_match("/(?i)^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z0-9]{1,}:\d+$/", $https_proxy))
                 add_settings_error(
@@ -359,7 +368,8 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['https_proxy'] = $input['https_proxy'];
 
-        if (isset($input['client_certificate']) && !empty($input['client_certificate'])) {
+        if (isset($input['client_certificate']) &&
+            $input['client_certificate'] != '') {
             $client_certificate = $input['client_certificate'];
             if (!(filesize($client_certificate) > 0))
                 add_settings_error(
@@ -373,10 +383,6 @@ class Save_As_Image_Pdfcrowd_Admin {
         $valid['client_certificate_password'] = $input['client_certificate_password'];
 
         $valid['use_http'] = (isset($input['use_http']) && !empty($input['use_http'])) ? 1: 0;
-
-        $valid['proxy'] = $input['proxy'];
-
-        $valid['use_curl'] = (isset($input['use_curl']) && !empty($input['use_curl'])) ? 1: 0;
 
         $valid['retry_count'] = $input['retry_count'];
 

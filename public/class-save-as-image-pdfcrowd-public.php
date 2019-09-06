@@ -108,7 +108,7 @@ class Save_As_Image_Pdfcrowd_Public {
         'button_disposition' => 'attachment',
         'button_format' => 'image-text',
         'button_hidden' => '1',
-        'button_image' => 'images/image1.svg',
+        'button_image' => 'image1.svg',
         'button_image_height' => '24',
         'button_image_url' => '',
         'button_image_width' => '24',
@@ -137,6 +137,50 @@ class Save_As_Image_Pdfcrowd_Public {
         'output_format' => 'png',
         'use_print_media' => '1',
         'username' => '',
+    );
+
+    private static $API_OPTIONS = array(
+        'output_format',
+        'no_background',
+        'disable_javascript',
+        'disable_image_loading',
+        'disable_remote_fonts',
+        'block_ads',
+        'default_encoding',
+        'http_auth_user_name',
+        'http_auth_password',
+        'use_print_media',
+        'no_xpdfcrowd_header',
+        'cookies',
+        'verify_ssl_certificates',
+        'fail_on_main_url_error',
+        'fail_on_any_url_error',
+        'custom_javascript',
+        'on_load_javascript',
+        'custom_http_header',
+        'javascript_delay',
+        'element_to_convert',
+        'element_to_convert_mode',
+        'wait_for_element',
+        'screenshot_width',
+        'screenshot_height',
+        'scale_factor',
+        'debug_log',
+        'tag',
+        'http_proxy',
+        'https_proxy',
+        'client_certificate',
+        'client_certificate_password',
+        'url',
+        'text'
+    );
+
+    private static $DEFAULT_IMAGES = array(
+        'image1.svg' => 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzBweCIgaGVpZ2h0PSIzMHB4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMS4zODA4IiB5PSIxLjI1NTIiIHdpZHRoPSIyNy42MTUiIGhlaWdodD0iMjYuMTA5IiBmaWxsPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAiLz48cGF0aCBkPSJNMjkuOTI4LDI4LjU4M0gwVjBoMjkuOTI4VjI4LjU4MyBNMi44NzYsMjUuNzA3ICBIMjcuMDVWMi44NzZIMi44NzYgTTguMjE3LDcuMTA2YzEuNjExLDAsMi45MTYsMS4yMTYsMi45MTYsMi43MTZjMCwxLjUtMS4zMDUsMi43MTctMi45MTYsMi43MTdjLTEuNjEsMC0yLjkxNC0xLjIxNi0yLjkxNC0yLjcxNyAgQzUuMzAzLDguMzIyLDYuNjA3LDcuMTA2LDguMjE3LDcuMTA2eiBNNC4zNzQsMjEuMDIxbDQuMzItMy4yNGwyLjE5OSwxLjYwNWw4LjcxNS02LjQ1bDMuMjQsMi40MDhsMi4xOTgtMS42MDR2Ny4yODFINC4zNzR6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiM1QjJEOEQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgb3BhY2l0eT0iLjg5OCIvPjwvc3ZnPgo=',
+        'image2.svg' => 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzBweCIgaGVpZ2h0PSIzMHB4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMS4zODA4IiB5PSIxLjI1NTIiIHdpZHRoPSIyNy42MTUiIGhlaWdodD0iMjYuMTA5IiBmaWxsPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAiLz48cGF0aCBkPSJtMS42MjI1IDI0LjM0OXM0LjIxMzQtNS45OTc5IDUuODczMy02LjA2MzZjMS40OTA3LTAuMDU5MDMgMS43OCAxLjY1MDMgNC4xMDczIDEuNDE2NCAyLjI3MDktMC4yMjgzMSAxLjg4MDUtNS4yNTczIDUuNjUyOC01LjMwMTcgMy43NzI0LTAuMDQ0MzkgMy4zOTc3IDMuNjA1MyA0LjgzNzYgMy42MTE4IDAuOTY5MTggMC4wMDQ0IDUuNzQ4My0zLjEwMTYgNS43NDgzLTMuMTAxNmwwLjA4ODc2IDguNjg0MnoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iIzAwNjQwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBvcGFjaXR5PSIuODk4IiBzdHJva2Utd2lkdGg9IjEuMDg5MyIvPjxwYXRoIGQ9Im05Ljg4MDkgNS4wMjAyYzIuMTM4MyAwIDMuODcwNSAxLjYxNCAzLjg3MDUgMy42MDUgMCAxLjk5MS0xLjczMjIgMy42MDYzLTMuODcwNSAzLjYwNjMtMi4xMzcgMC0zLjg2NzgtMS42MTQtMy44Njc4LTMuNjA2MyAwLTEuOTkxIDEuNzMwOC0zLjYwNSAzLjg2NzgtMy42MDV6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNmZmE1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgb3BhY2l0eT0iLjg5OCIgc3Ryb2tlLXdpZHRoPSIxLjMyNzMiLz48cGF0aCBkPSJtMS45NTI3IDI0LjcxOXMyLjAzMTgtMS43MjA1IDMuMjg0MS0xLjk1MjdjMS41NDk1LTAuMjg3MyAzLjA4NTkgMC43MTk5NiA0LjY1OTggMC43OTg4MiAxLjI3MzcgMC4wNjM4MiAyLjU0MTQtMC4yNzY4MyAzLjgxNjYtMC4yNjYyNyAxLjIwMjcgMC4wMSAyLjM5NTcgMC40MDQ0NSAzLjU5NDcgMC4zMTA2NSAxLjM1MjEtMC4xMDU3NiAyLjYxMjktMC43NDc2OSAzLjk0OTctMC45NzYzNCAwLjkwODI2LTAuMTU1MzUgMS44Mzg2LTAuMzkxNDMgMi43NTE1LTAuMjY2MjggMS4xNzg1IDAuMTYxNTYgNC4wODI5IDEuNDY0NSA0LjA4MjkgMS40NjQ1bDFlLTYgMi45NzM0LTI2LjAwNi0wLjMxMDY1eiIgZmlsbD0iIzQwZTBkMCIvPjxwYXRoIGQ9Ik0gMjkuOTI4LDI4LjU4MyBIIDAgViAwIEggMjkuOTI4IFYgMjguNTgzIE0gMi44NzYsMjUuNzA3IEggMjcuMDUgViAyLjg3NiBIIDIuODc2IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiM1YjJkOGQiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPgo=',
+        'image3.svg' => 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzBweCIgaGVpZ2h0PSIzMHB4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIwIj48cmVjdCB4PSIyMi4yOTIiIHk9IjkuMTQ2MyIgd2lkdGg9IjYuNjE0NCIgaGVpZ2h0PSIxOS4wNTYiLz48cmVjdCB4PSI3LjAzMTIiIHk9IjEuNTA2IiB3aWR0aD0iMTUuODMzIiBoZWlnaHQ9IjI2Ljc4NiIvPjxyZWN0IHg9Ii43ODEyNSIgeT0iNy41IiB3aWR0aD0iMTguNzUiIGhlaWdodD0iMTYuNTY3Ii8+PC9nPjxwb2x5bGluZSBwb2ludHM9IjIuOTU0IDIwLjMzMSA1Ljg2NyAxOC4xNDUgNy4zNTIgMTkuMjI5IDEzLjIzNiAxNC44NzUgMTUuNDIyIDE2LjUgMTYuOTA1IDE1LjQxNyAxNi45MDUgMjAuMzMxIDIuOTU0IDIwLjMzMSIgZmlsbD0iIzVCMkQ4RCIgb3BhY2l0eT0iLjg5OCIvPjxwYXRoIGQ9Im01LjU0NyAxMC45MzljMS4wODUgMCAxLjk2NyAwLjgyMiAxLjk2NyAxLjgzMyAwIDEuMDE0LTAuODgyIDEuODMzLTEuOTY3IDEuODMzLTEuMDg4IDAtMS45NjgtMC44MTktMS45NjgtMS44MzMgMC0xLjAxMSAwLjg4LTEuODMzIDEuOTY4LTEuODMzIiBmaWxsPSIjNUIyRDhEIiBvcGFjaXR5PSIuODk4Ii8+PHBhdGggZD0ibTI4LjY3NiA3LjU4LTUuNDU0LTYuMzI3LTEuMDgyLTEuMjUzaC0xMi44ODdjLTEuNzMxIDAtMy4xMzIgMS40MDEtMy4xMzIgMy4xMzJ2My45ODFoMS45NDFsLTFlLTMgLTMuMjE4YzRlLTMgLTAuOTc0IDAuNzg2LTEuNzYxIDEuNzU3LTEuNzYxbDExLjAyNC0wLjAxdjUuMjIyYzJlLTMgMS45NDUgMS41NzIgMy41MiAzLjUxOCAzLjUyaDMuODE2bC0wLjE4NiAxNS4wNjVjLTZlLTMgMC45NjktMC43ODggMS43NTEtMS43NTkgMS43NTlsLTE2LjU1Mi04ZS0zYy0wLjg4NiAwLTEuNTk4LTAuODctMS42MDQtMS45Mzl2LTEuMjc3aC0xLjk0NHYxLjkwMWMwIDEuOTE0IDEuMjggMy40NjUgMi44NTMgMy40NjVsMTcuODEyLTVlLTNjMS43MzIgMCAzLjEzNC0xLjQwNiAzLjEzNC0zLjEzNHYtMTcuNjU1bC0xLjI1NC0xLjQ1OCIgZmlsbD0iIzQzNDQ0MCIvPjxwYXRoIGQ9Ik0yMC4yMDEsMjUuNDM3SDBWNi4xNDNoMjAuMjAxVjI1LjQzNyBNMS45NCwyMy40OTRoMTYuMzE5VjguMDg1SDEuOTQiIGZpbGw9IiM1QjJEOEQiLz48L3N2Zz4K',
+        'image4.svg' => 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkuNzE0IiBoZWlnaHQ9IjI3LjQwOCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0xLjAwMDYgMSAxMi40NCAwLjA5NTg3OSA1LjI3MzMgNi40MjM5LTAuMDcxOTEgMTguODg4aC0xNy42NDJ6IiBmaWxsPSIjZmZmYWZhIi8+PHBhdGggZD0ibTEyLjY5OCAwLjkwNDA5IDAuMzM1NTggNi40NzE4IDUuODAwNyAwLjMzNTU4eiIgZmlsbD0iIzY5Njk2OSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02Ljc2NTYgLTIuNzYzNykiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iIzkyOTI5MiI+PHBhdGggZD0ibTE5LjUgM2gtMTAuNDk3Yy0xLjEwNjEgMC0yLjAwMjggMC44OTgzNC0yLjAwMjggMi4wMDczdjIyLjk4NWMwIDEuMTA4NiAwLjg5MDkzIDIuMDA3MyAxLjk5NzQgMi4wMDczaDE1LjAwNWMxLjEwMzEgMCAxLjk5NzQtMC44OTgyMSAxLjk5NzQtMS45OTA4di0xOC4wMDlsLTYtN3ptLTAuNSAxaC0xMC4wMDRjLTAuNTQ5ODQgMC0wLjk5NTU4IDAuNDU1MjYtMC45OTU1OCAwLjk5NTQ2djIzLjAwOWMwIDAuNTQ5NzggMC40NTQ3MSAwLjk5NTQ2IDAuOTk5OTYgMC45OTU0NmgxNWMwLjU1MjI2IDAgMC45OTk5Ni0wLjQ0NDk1IDAuOTk5OTYtMC45OTM0di0xNy4wMDdoLTQuMDAyMWMtMS4xMDM0IDAtMS45OTc5LTAuODg2NTYtMS45OTc5LTIuMDA1OXptMSAwLjV2NC40OTEyYzAgMC41NTcxNCAwLjQ1MDY1IDEuMDA4OCAwLjk5Njc0IDEuMDA4OGgzLjcwMzJ6Ii8+PC9nPjxwYXRoIGQ9Im0yMS45NzYgMjMuMDM5di02LjA0NTdoLTExdjdsMi41LTIgMS40NTc5IDEuMjQ5NyAzLjYzNTEtMy4yNDk3em0tMTItNy4wNDU3djEwaDEzdi0xMHptNCA0YzAuNTUyMjggMCAxLTAuNDQ3NzIgMS0xcy0wLjQ0NzcyLTEtMS0xLTEgMC40NDc3Mi0xIDEgMC40NDc3MiAxIDEgMXoiIGZpbGw9IiM1YjJkOGQiLz48cGF0aCBkPSJtMTAgN2g3IiBzdHJva2U9IiM4MDgwODAiIHN0cm9rZS13aWR0aD0iMXB4Ii8+PHBhdGggZD0ibTEwIDEwaDUiIHN0cm9rZT0iIzgwODA4MCIgc3Ryb2tlLXdpZHRoPSIxcHgiLz48L2c+PC9zdmc+Cg==',
+        'pdfcrowd.svg' => 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTkuMjI3IiBoZWlnaHQ9IjQzLjI1NiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03My44MDIgLTM4Ni4wNikiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEuNzk0OCAwIDAgMS43OTQ4IC0yNjI2LjUgLTIxMi4wNikiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmOTUwMCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTE1MTQuNSAzMzUuODZjMC40NDI2IDAuMDU0IDEuMjM2Ni0wLjI0MzM2IDEuMDAwMiAwLjQ4OTY1djE4LjUxMWMtMC40NDI2LTAuMDU0LTEuMjM2NiAwLjI0MzM3LTEuMDAwMi0wLjQ4OTY1di0xOC41MTF6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC45OTk4Ii8+PHBhdGggZD0ibTE1MDYuMyAzNDQuNTRoMS40NzQ4djEwLjU1NWgtMS40NzQ4di0xMC41NTV6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC41MjUxIi8+PHBhdGggZD0ibTE1MjIuNCAzMzkuNzhjMC4zNzU1IDAuMTIzMSAxLjI5ODYtMC4zMDEzMyAxLjE2OTQgMC4zMjY0M3YxNC44NDNjLTAuMzc1NS0wLjEyMzExLTEuMjk4NiAwLjMwMTMzLTEuMTY5NC0wLjMyNjQzdi0xNC44NDN6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC44MzA2Ii8+PHBhdGggZD0ibTE1MzUuMSAzNTMuMjh2Mi4xNjQ5aC01LjE2NDl2LTIuMTY0OWg1LjE2NDl6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iMy44MzUxIi8+PC9nPjwvZz48L3N2Zz4K',
     );
 
     private static $ERROR_MESSAGES = array(
@@ -189,25 +233,19 @@ class Save_As_Image_Pdfcrowd_Public {
         return $result;
     }
 
-    private static function startsWith($text, $start)
-    {
-        $len = strlen($start);
-        return (substr($text, 0, $len) === $start);
-    }
-
     public static function create_button_from_style(
         $options, $custom_options, $content='') {
         $image = '';
         if(strpos($options['button_format'], 'image') !== false) {
             $image_style = "style='width: {$options['button_image_width']}px; height: {$options['button_image_height']}px;'";
-            $image_url = $options['button_image'] == 'custom_image' ? $options['button_image_url'] : 'https://cdn.pdfcrowd.com/' . $options['button_image'];
+            $image_url = $options['button_image'] == 'custom_image' ? $options['button_image_url'] : self::$DEFAULT_IMAGES[$options['button_image']];
             $image = "<img $image_style src=\"$image_url\"/>";
         }
 
         $btn_style = self::rect_to_style('margin', $options);
 
         $classes = 'save-as-image-pdfcrowd-button-wrap';
-        if(!empty($options['button_hidden'])) {
+        if(isset($options['button_hidden']) && $options['button_hidden'] == 1) {
             $classes .= ' pdfcrowd-remove';
         }
         if($options['button_styling'] == 'custom') {
@@ -313,7 +351,7 @@ class Save_As_Image_Pdfcrowd_Public {
 
         if($attrs) {
             foreach($attrs as $key => $value) {
-                if(self::startsWith($key, 'button_')) {
+                if(self::starts_with($key, 'button_')) {
                     $options[$key] = $value;
                 } else {
                     $custom_options[$key] = $value;
@@ -336,7 +374,7 @@ class Save_As_Image_Pdfcrowd_Public {
         // run shortcode parser recursively
         $content = do_shortcode($content);
 
-        $custom_options = array('html' => $content);
+        $custom_options = array('text' => $content);
         if(!isset($attrs['output_name'])) {
             // add url so default name can be created
             $custom_options['url'] = get_permalink();
@@ -344,7 +382,7 @@ class Save_As_Image_Pdfcrowd_Public {
         return $this->eval_shortcode($attrs, $content, $custom_options);
     }
 
-    private function embed_styles($html) {
+    private static function embed_styles($html) {
         $my_domain = $_SERVER['SERVER_NAME'];
         $output = preg_replace_callback(
             "/(?i)\<link rel=[\'\"]stylesheet[\'\"](?<pre>.*?)href=[\'\"](?<url>https?:\/\/{$my_domain}.*?)[\'\"](?<post>.*?)\/\>/",
@@ -383,7 +421,7 @@ class Save_As_Image_Pdfcrowd_Public {
         $i = count($page_name) - 1;
         while($i >= 0) {
             $part = explode('#', explode('?', $page_name[$i])[0])[0];
-            if(!empty($part)) {
+            if($part != '') {
                 $page_name = $part;
                 break;
             }
@@ -394,6 +432,132 @@ class Save_As_Image_Pdfcrowd_Public {
         }
         $format = isset($options['output_format']) ? $options['output_format'] : 'png';
         return $page_name . ".{$format}";
+    }
+
+    private static function add_file_field($name, $file_name, $data, $boundary, &$body) {
+        $body .= "--" . $boundary . "\r\n";
+        $body .= 'Content-Disposition: form-data; name="' . $name . '";' . ' filename="' . $file_name . '"' . "\r\n";
+        $body .= 'Content-Type: application/octet-stream' . "\r\n";
+        $body .= "\r\n";
+        $body .= $data . "\r\n";
+    }
+
+    private static function build_body($fields, $files, $boundary) {
+        $body = '';
+
+        foreach ($fields as $name => $content) {
+            $body .= "--" . $boundary . "\r\n";
+            $body .= 'Content-Disposition: form-data; name="' . $name . '"' . "\r\n\r\n";
+            $body .= $content . "\r\n";
+        }
+
+        foreach ($files as $name => $file_name) {
+            self::add_file_field($name, $file_name,
+                                 file_get_contents($file_name),
+                                 $boundary,
+                                 $body);
+        }
+
+        return $body . "--" . $boundary . "--\r\n";
+    }
+
+    private static function starts_with($string, $startString)
+    {
+        $len = strlen($startString);
+        return (substr($string, 0, $len) === $startString);
+    }
+
+    public static function do_post_request($options) {
+        $auth = 'Basic ' . base64_encode(
+            $options['username'] . ':' . $options['api_key']);
+
+        $boundary = wp_generate_password(24);
+
+        global $wp_version;
+        $headers = array(
+            'Authorization' => $auth,
+            'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.0.0 ('
+            . $wp_version . '/' . phpversion() . ')'
+        );
+
+        if(!empty($options['dev_mode'])) {
+            // use convert string method instead
+            $html = null;
+            if(isset($options['text'])) {
+                $html = $options['text'];
+            } else {
+                $html = wp_remote_retrieve_body(wp_remote_get($options['url']));
+            }
+
+            $options['text'] = self::embed_styles($html);
+        }
+
+        $fields = array();
+        $files = array();
+
+        // configure the conversion
+        foreach($options as $key => $value) {
+            if(!in_array($key, self::$API_OPTIONS) || $value == '') {
+                // ignore empty values
+                continue;
+            }
+
+            if($key == 'url') {
+                // use url only if text is not set
+                if(!isset($options['text'])) {
+                    $fields[$key] = $value;
+                }
+            } elseif(
+                $key == 'client_certificate' ) {
+                $files[$key] = $value;
+            } else {
+                // use only valid Pdfcrowd options
+                $fields[$key] = $value;
+            }
+        }
+
+        $args = array(
+            'method' => 'POST',
+            'timeout' => 300,
+            'headers' => $headers,
+            'body' => self::build_body($fields, $files, $boundary)
+        );
+
+        $protocol = (isset($options['use_http']) && $options['use_http'] == 1)
+                  ? 'http' : 'https';
+
+        $retry_count = (isset($options['retry_count']) &&
+                        !empty($options['retry_count']) &&
+                        $options['retry_count'] > 0)
+                     ? $options['retry_count'] : 0;
+
+        $error = null;
+        while($retry_count >= 0) {
+            $response = wp_remote_post(
+                $protocol . '://api.pdfcrowd.com/convert/', $args);
+            if(is_wp_error($response)) {
+                if($response->get_error_code() != 502) {
+                    return $response;
+                }
+                $error = $response;
+            } else {
+                $code = wp_remote_retrieve_response_code($response);
+                if($code == 200) {
+                    // conversion was ok
+                    return wp_remote_retrieve_body($response);
+                }
+
+                $error = new WP_Error($code,
+                                      wp_remote_retrieve_body($response));
+                if($code != 502) {
+                    return $error;
+                }
+            }
+            // only 502 error is used for retry
+            $retry_count--;
+        };
+        return $error;
     }
 
     function save_as_image_pdfcrowd() {
@@ -411,42 +575,14 @@ class Save_As_Image_Pdfcrowd_Public {
             $options['api_key'] = 'a182eb08c32a11e992c42c4d5455307a';
         }
 
-        $client = new \SaveAsImagePdfcrowd\HtmlToImageClient(
-            $options['username'],
-            $options['api_key']);
-
-        global $wp_version;
-        $client->setUserAgent('pdfcrowd_wordpress_plugin/1.0.0 ('
-                             . $wp_version . '/' . phpversion() . ')');
-
-        $html = $url = null;
-        if(isset($options['html'])) {
-            $html = $options['html'];
+        $output = self::do_post_request($options);
+        if(is_wp_error($output)) {
+            $code = $output->get_error_code();
+            $message = $output->get_error_message();
+            status_header($code, $message);
+            echo $this->get_error_page($code, $message);
         } else {
-            $url = $options['url'];
-        }
-
-        try {
-            // configure conversion
-            foreach($options as $key => $value) {
-                $method = 'set' . $this->get_function_name($key);
-                if(method_exists($client, $method) && $value) {
-                    $client->$method($value);
-                }
-            }
-
             $name = $this->get_output_name($options);
-
-            if($html != null) {
-                $output = $client->convertString($html);
-            } elseif(empty($options['dev_mode'])) {
-                $output = $client->convertUrl($url);
-            } else {
-                // use convert string method instead
-                $content = wp_remote_retrieve_body(wp_remote_get($url));
-                $content = $this->embed_styles($content);
-                $output = $client->convertString($content);
-            }
 
             // send the generated file to the browser
             header('Content-Type: ' . $this->get_mime_type($options['output_format']));
@@ -455,10 +591,8 @@ class Save_As_Image_Pdfcrowd_Public {
             header('Accept-Ranges: none');
 
             echo $output;
-        } catch(\SaveAsImagePdfcrowd\Error $why) {
-            status_header($why->getCode(), $why->getMessage());
-            echo $this->get_error_page($why->getCode(), $why->getMessage());
         }
+
         wp_die();
     }
 

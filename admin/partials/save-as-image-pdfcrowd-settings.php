@@ -16,7 +16,7 @@
 <div id="save-as-image-pdfcrowd-conversion-format" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Conversion Format</h2>
-    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
+    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</a>
 
 
     <table class="form-table">
@@ -63,7 +63,7 @@
 <div id="save-as-image-pdfcrowd-general-options" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>General Options</h2>
-    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
+    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</a>
 
 
     <table class="form-table">
@@ -165,7 +165,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-default_encoding" name="save-as-image-pdfcrowd[default_encoding]" value="<?php if(!empty($default_encoding)) esc_attr_e($default_encoding, $this->plugin_name);?>" placeholder="auto detect" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-default_encoding" name="save-as-image-pdfcrowd[default_encoding]" value="<?php echo($default_encoding); ?>" placeholder="auto detect" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>default_encoding</strong>"
@@ -184,7 +184,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_user_name" name="save-as-image-pdfcrowd[http_auth_user_name]" value="<?php if(!empty($http_auth_user_name)) esc_attr_e($http_auth_user_name, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_user_name" name="save-as-image-pdfcrowd[http_auth_user_name]" value="<?php echo($http_auth_user_name); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>http_auth_user_name</strong>"
@@ -203,32 +203,13 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_password" name="save-as-image-pdfcrowd[http_auth_password]" value="<?php if(!empty($http_auth_password)) esc_attr_e($http_auth_password, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_password" name="save-as-image-pdfcrowd[http_auth_password]" value="<?php echo($http_auth_password); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>http_auth_password</strong>"
                         </p>
                         <p class='description'>
                             Set the HTTP authentication password.
-                            
-                        </p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <label for="save-as-image-pdfcrowd-http_auth">
-                        Http Auth
-                    </label>
-                </th>
-                <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth" name="save-as-image-pdfcrowd[http_auth]" value="<?php if(!empty($http_auth)) esc_attr_e($http_auth, $this->plugin_name);?>" placeholder="" />
-                    <div class='save-as-image-pdfcrowd-m-description'>
-                        <p class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>http_auth</strong>"
-                        </p>
-                        <p class='description'>
-                            Set credentials to access HTTP base authentication protected websites.
                             
                         </p>
                     </div>
@@ -277,7 +258,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-cookies" name="save-as-image-pdfcrowd[cookies]" value="<?php if(!empty($cookies)) esc_attr_e($cookies, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-cookies" name="save-as-image-pdfcrowd[cookies]" value="<?php echo($cookies); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>cookies</strong>"
@@ -350,7 +331,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" value="<?php if(!empty($custom_javascript)) esc_attr_e($custom_javascript, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" value="<?php echo($custom_javascript); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>custom_javascript</strong>"
@@ -369,7 +350,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" value="<?php if(!empty($on_load_javascript)) esc_attr_e($on_load_javascript, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" value="<?php echo($on_load_javascript); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>on_load_javascript</strong>"
@@ -388,7 +369,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_http_header" name="save-as-image-pdfcrowd[custom_http_header]" value="<?php if(!empty($custom_http_header)) esc_attr_e($custom_http_header, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_http_header" name="save-as-image-pdfcrowd[custom_http_header]" value="<?php echo($custom_http_header); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>custom_http_header</strong>"
@@ -407,7 +388,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-javascript_delay" name="save-as-image-pdfcrowd[javascript_delay]" value="<?php if(!empty($javascript_delay)) esc_attr_e($javascript_delay, $this->plugin_name);?>" placeholder="200" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-javascript_delay" name="save-as-image-pdfcrowd[javascript_delay]" value="<?php echo($javascript_delay); ?>" placeholder="200" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>javascript_delay</strong>"
@@ -425,7 +406,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-element_to_convert" name="save-as-image-pdfcrowd[element_to_convert]" value="<?php if(!empty($element_to_convert)) esc_attr_e($element_to_convert, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-element_to_convert" name="save-as-image-pdfcrowd[element_to_convert]" value="<?php echo($element_to_convert); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>element_to_convert</strong>"
@@ -466,7 +447,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-wait_for_element" name="save-as-image-pdfcrowd[wait_for_element]" value="<?php if(!empty($wait_for_element)) esc_attr_e($wait_for_element, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-wait_for_element" name="save-as-image-pdfcrowd[wait_for_element]" value="<?php echo($wait_for_element); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>wait_for_element</strong>"
@@ -484,7 +465,7 @@
 <div id="save-as-image-pdfcrowd-image-output" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Image Output</h2>
-    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
+    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</a>
 
 
     <table class="form-table">
@@ -496,7 +477,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_width" name="save-as-image-pdfcrowd[screenshot_width]" value="<?php if(!empty($screenshot_width)) esc_attr_e($screenshot_width, $this->plugin_name);?>" placeholder="1024" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_width" name="save-as-image-pdfcrowd[screenshot_width]" value="<?php echo($screenshot_width); ?>" placeholder="1024" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>screenshot_width</strong>"
@@ -514,7 +495,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_height" name="save-as-image-pdfcrowd[screenshot_height]" value="<?php if(!empty($screenshot_height)) esc_attr_e($screenshot_height, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_height" name="save-as-image-pdfcrowd[screenshot_height]" value="<?php echo($screenshot_height); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>screenshot_height</strong>"
@@ -532,7 +513,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-scale_factor" name="save-as-image-pdfcrowd[scale_factor]" value="<?php if(!empty($scale_factor)) esc_attr_e($scale_factor, $this->plugin_name);?>" placeholder="100" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-scale_factor" name="save-as-image-pdfcrowd[scale_factor]" value="<?php echo($scale_factor); ?>" placeholder="100" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>scale_factor</strong>"
@@ -549,7 +530,7 @@
 <div id="save-as-image-pdfcrowd-miscellaneous" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Miscellaneous</h2>
-    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
+    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</a>
 
 
     <table class="form-table">
@@ -579,7 +560,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-tag" name="save-as-image-pdfcrowd[tag]" value="<?php if(!empty($tag)) esc_attr_e($tag, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-tag" name="save-as-image-pdfcrowd[tag]" value="<?php echo($tag); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>tag</strong>"
@@ -598,7 +579,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_proxy" name="save-as-image-pdfcrowd[http_proxy]" value="<?php if(!empty($http_proxy)) esc_attr_e($http_proxy, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_proxy" name="save-as-image-pdfcrowd[http_proxy]" value="<?php echo($http_proxy); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>http_proxy</strong>"
@@ -617,7 +598,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-https_proxy" name="save-as-image-pdfcrowd[https_proxy]" value="<?php if(!empty($https_proxy)) esc_attr_e($https_proxy, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-https_proxy" name="save-as-image-pdfcrowd[https_proxy]" value="<?php echo($https_proxy); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>https_proxy</strong>"
@@ -636,7 +617,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate" name="save-as-image-pdfcrowd[client_certificate]" value="<?php if(!empty($client_certificate)) esc_attr_e($client_certificate, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate" name="save-as-image-pdfcrowd[client_certificate]" value="<?php echo($client_certificate); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>client_certificate</strong>"
@@ -655,7 +636,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate_password" name="save-as-image-pdfcrowd[client_certificate_password]" value="<?php if(!empty($client_certificate_password)) esc_attr_e($client_certificate_password, $this->plugin_name);?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate_password" name="save-as-image-pdfcrowd[client_certificate_password]" value="<?php echo($client_certificate_password); ?>" placeholder="" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>client_certificate_password</strong>"
@@ -673,7 +654,7 @@
 <div id="save-as-image-pdfcrowd-api-client-options" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>API Client Options</h2>
-    <button class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</button>
+    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</a>
 
 
     <table class="form-table">
@@ -698,49 +679,12 @@
             </tr>
             <tr>
                 <th scope="row">
-                    <label for="save-as-image-pdfcrowd-proxy">
-                        Proxy
-                    </label>
-                </th>
-                <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-proxy" name="save-as-image-pdfcrowd[proxy]" value="<?php if(!empty($proxy)) esc_attr_e($proxy, $this->plugin_name);?>" placeholder="" />
-                    <div class='save-as-image-pdfcrowd-m-description'>
-                        <p class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>proxy</strong>"
-                        </p>
-                        <p class='description'>
-                            Specifies an HTTP proxy that the API client library will use to connect to the internet.
-                            
-                        </p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <label for="save-as-image-pdfcrowd-use_curl">
-                        Use Curl
-                    </label>
-                </th>
-                <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-use_curl" name="save-as-image-pdfcrowd[use_curl]" value="1" <?php checked( $use_curl, 1 ); ?> />
-                    <div class='save-as-image-pdfcrowd-m-description'>
-                        <p class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>use_curl</strong>"<br/>Possible values: 0, 1
-                        </p>
-                        <p class='description'>
-                            Use cURL for the conversion request instead of the file_get_contents() PHP function.
-                        </p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
                     <label for="save-as-image-pdfcrowd-retry_count">
                         Retry Count
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-retry_count" name="save-as-image-pdfcrowd[retry_count]" value="<?php if(!empty($retry_count)) esc_attr_e($retry_count, $this->plugin_name);?>" placeholder="1" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-retry_count" name="save-as-image-pdfcrowd[retry_count]" value="<?php echo($retry_count); ?>" placeholder="1" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>retry_count</strong>"
