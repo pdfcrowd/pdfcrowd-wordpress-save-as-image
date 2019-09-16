@@ -135,7 +135,6 @@ class Save_As_Image_Pdfcrowd_Public {
         'button_text_weight' => 'bold',
         'dev_mode' => '0',
         'output_format' => 'png',
-        'use_print_media' => '1',
         'username' => '',
     );
 

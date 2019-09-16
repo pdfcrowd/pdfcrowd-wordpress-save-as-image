@@ -70,10 +70,8 @@
         $button_text_weight = isset($options['button_text_weight']) ? $options['button_text_weight'] : '';
         $dev_mode = isset($options['dev_mode']) ? $options['dev_mode'] : '';
         $output_format = isset($options['output_format']) ? $options['output_format'] : '';
-        $use_print_media = isset($options['use_print_media']) ? $options['use_print_media'] : '';
         $username = isset($options['username']) ? $options['username'] : '';
 
-        $output_format = isset($options['output_format']) ? $options['output_format'] : 'png';
         $no_background = isset($options['no_background']) ? $options['no_background'] : '';
         $disable_javascript = isset($options['disable_javascript']) ? $options['disable_javascript'] : '';
         $disable_image_loading = isset($options['disable_image_loading']) ? $options['disable_image_loading'] : '';
