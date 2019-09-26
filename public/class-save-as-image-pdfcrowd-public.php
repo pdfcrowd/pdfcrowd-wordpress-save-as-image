@@ -547,8 +547,9 @@ class Save_As_Image_Pdfcrowd_Public {
                     return wp_remote_retrieve_body($response);
                 }
 
-                $error = new WP_Error($code,
-                                      wp_remote_retrieve_body($response));
+                $error = new WP_Error(
+                    $code, self::prepare_error_message(
+                        $code, wp_remote_retrieve_body($response)));
                 if($code != 502) {
                     return $error;
                 }
@@ -557,6 +558,20 @@ class Save_As_Image_Pdfcrowd_Public {
             $retry_count--;
         };
         return $error;
+    }
+
+    private static function prepare_error_message($code, $text) {
+        switch($code) {
+        case 471:
+        case 478:
+            $link = '<a href="' .
+                  admin_url('options-general.php?page=save-as-image-pdfcrowd#save-as-image-pdfcrowd-wordpress-settings') .
+                  '"><b>WordPress Settings</b></a>';
+            $text = $text . '<p>Enable the <b>"Run in DEV MODE"</b> option on the ' .
+                  $link . ' page of the "Save as Image by Pdfcrowd" plugin.</p>';
+            break;
+        }
+        return $text;
     }
 
     function save_as_image_pdfcrowd() {
