@@ -51,7 +51,7 @@
             var cursor = document.body.style.cursor;
 
             function getFormData(){
-                var unindexed_array = $('#save-as-image-pdfcrowd-wordpress-settings :input').serializeArray();
+                var unindexed_array = $('#save-as-image-pdfcrowd-appearance :input').serializeArray();
                 var indexed_array = {};
 
                 $.map(unindexed_array, function(n, i){
@@ -76,7 +76,9 @@
                     $('#save-as-image-pdfcrowd-button-preview-content').html(data);
                 },
                 error: function(xhr) {
-                    alert('Error ' + xhr.status + ' - ' + xhr.statusText);
+                    if(xhr.status) {
+                        alert('Error ' + xhr.status + ' - ' + xhr.statusText);
+                    }
                 }
             });
         };
@@ -86,7 +88,7 @@
             window.SaveAsImagePdfcrowdShowButtonPreview(style_button[0]);
         }
 
-        $('#save-as-image-pdfcrowd-wordpress-settings :input').change(function() {
+        $('#save-as-image-pdfcrowd-appearance :input').change(function() {
             window.SaveAsImagePdfcrowdShowButtonPreview(this);
         });
 

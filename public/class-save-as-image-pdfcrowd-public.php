@@ -47,15 +47,17 @@ class Save_As_Image_Pdfcrowd_Public {
      * @param      string    $plugin_name       The name of the plugin.
      * @param      string    $version    The version of this plugin.
      */
-    public function __construct( $plugin_name, $version ) {
+    public function __construct($plugin_name, $version, $add_filters = true) {
         global $wpdb;
 
         $this->plugin_name = $plugin_name;
         $this->version = $version;
         $this->table_name = $wpdb->prefix . "save-as-image-pdfcrowd";
 
-        add_filter('the_content', array(&$this, 'show_button'));
-        add_filter('the_excerpt', array(&$this, 'show_button'));
+        if($add_filters) {
+            add_filter('the_content', array(&$this, 'show_button'));
+            add_filter('the_excerpt', array(&$this, 'show_button'));
+        }
     }
 
     private $table_name;
@@ -105,6 +107,7 @@ class Save_As_Image_Pdfcrowd_Public {
         'button_border_color' => '#007bff',
         'button_border_style' => 'solid',
         'button_border_width' => '1',
+        'button_custom_html' => '',
         'button_disposition' => 'attachment',
         'button_format' => 'image-text',
         'button_hidden' => '1',
@@ -133,9 +136,12 @@ class Save_As_Image_Pdfcrowd_Public {
         'button_text_color' => '#fff',
         'button_text_size' => '14',
         'button_text_weight' => 'bold',
+        'conversion_mode' => 'upload',
         'dev_mode' => '0',
+        'image_created_callback' => '',
         'output_format' => 'png',
         'username' => '',
+        'version' => '110',
     );
 
     private static $API_OPTIONS = array(
@@ -217,8 +223,31 @@ class Save_As_Image_Pdfcrowd_Public {
         502 => "The 502 status code indicates a temporary network issue. Try the request again.",
     );
 
-    private function get_options() {
-        return get_option($this->plugin_name, self::$DEFAULTS);
+    public static function get_options() {
+        $options = get_option('save-as-image-pdfcrowd', self::$DEFAULTS);
+
+        // error_log('upgrade');
+        // error_log(print_r($options, true));
+
+        if(!isset($options['version'])) {
+            // error_log('the first version');
+            if(isset($options['dev_mode']) && $options['dev_mode']) {
+                $options['conversion_mode'] = 'development';
+            } else {
+                $options['conversion_mode'] = 'url';
+            }
+        } else {
+            if($options['version'] == 110) {
+                // error_log('the same version');
+                return $options;
+            }
+        }
+
+        // error_log('save new options');
+        $options['version'] = 110;
+        update_option('save-as-image-pdfcrowd', $options);
+
+        return $options;
     }
 
     private static function rect_to_style($prefix, $options) {
@@ -236,9 +265,14 @@ class Save_As_Image_Pdfcrowd_Public {
         $options, $custom_options, $content='') {
         $image = '';
         if(strpos($options['button_format'], 'image') !== false) {
-            $image_style = "style='width: {$options['button_image_width']}px; height: {$options['button_image_height']}px;'";
-            $image_url = $options['button_image'] == 'custom_image' ? $options['button_image_url'] : self::$DEFAULT_IMAGES[$options['button_image']];
-            $image = "<img $image_style src=\"$image_url\"/>";
+            if($options['button_image'] == 'custom_html') {
+                $image = $options['button_custom_html'];
+            }
+            else if($options['button_image'] != 'custom_image' || $options['button_image_url']) {
+                $image_style = "style='width: {$options['button_image_width']}px; height: {$options['button_image_height']}px;'";
+                $image_url = $options['button_image'] == 'custom_image' ? $options['button_image_url'] : self::$DEFAULT_IMAGES[$options['button_image']];
+                $image = "<img $image_style src=\"$image_url\"/>";
+            }
         }
 
         $btn_style = self::rect_to_style('margin', $options);
@@ -330,6 +364,8 @@ class Save_As_Image_Pdfcrowd_Public {
     function show_button($content) {
         $options = $this->get_options();
 
+        // error_log(print_r($options, true));
+
         if(!(
             (is_home() && isset($options['button_on_home']) && $options['button_on_home']) ||
             (is_front_page() && isset($options['button_on_front']) && $options['button_on_front']) ||
@@ -367,9 +403,6 @@ class Save_As_Image_Pdfcrowd_Public {
    }
 
     function block_save_as_image_pdfcrowd_shortcode($attrs = array(), $content = null) {
-        // merge attrs with the default options defined on the settings page
-        $options = $this->get_options();
-
         // run shortcode parser recursively
         $content = do_shortcode($content);
 
@@ -381,12 +414,26 @@ class Save_As_Image_Pdfcrowd_Public {
         return $this->eval_shortcode($attrs, $content, $custom_options);
     }
 
-    private static function embed_styles($html) {
-        $my_domain = $_SERVER['SERVER_NAME'];
+    private static function get_url($url, $args) {
+        $response = wp_remote_get($url, $args);
+        if(is_wp_error($response)) {
+            error_log($response->get_error_message() .' ' . $url);
+            return '';
+        }
+        return wp_remote_retrieve_body($response);
+    }
+
+    private static function embed_styles($html, $site, $args) {
         $output = preg_replace_callback(
-            "/(?i)\<link rel=[\'\"]stylesheet[\'\"](?<pre>.*?)href=[\'\"](?<url>https?:\/\/{$my_domain}.*?)[\'\"](?<post>.*?)\/\>/",
-            function ($match) {
-                $content = wp_remote_retrieve_body(wp_remote_get($match['url']));
+            "`(?i)\<link rel=[\'\"]stylesheet[\'\"](?<pre>.*?)href=[\'\"](?<url>(?:http:|https:)?\/\/{$site}.*?)[\'\"](?<post>.*?)\s*\/\s*\>`",
+            function ($match) use($args) {
+                $url = $match['url'];
+                if(!self::starts_with($url, 'http')) {
+                    $protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
+                    $url = $protocol . ':' . $url;
+                }
+                // error_log('embed ' . $url);
+                $content = self::get_url($url, $args);
                 return '<style ' . $match['pre'] . $match['post'] . ">\r\n" . $content . '</style>';
             },
             $html);
@@ -466,6 +513,26 @@ class Save_As_Image_Pdfcrowd_Public {
         return (substr($string, 0, $len) === $startString);
     }
 
+    private static function strip_https($url) {
+        $https = array('http://', 'https://');
+        foreach($https as $schema) {
+            if(strpos($url, $schema) === 0) {
+                return str_replace($schema, '', $url);
+            }
+        }
+        return $url;
+    }
+
+    private static function collect_cookies() {
+        // error_log('use cookies');
+        $cookies = array();
+        foreach($_COOKIE as $name => $value) {
+            $cookies[] = new WP_Http_Cookie(
+                array('name' => $name, 'value' => $value));
+        }
+        return $cookies;
+    }
+
     public static function do_post_request($options) {
         $auth = 'Basic ' . base64_encode(
             $options['username'] . ':' . $options['api_key']);
@@ -476,20 +543,37 @@ class Save_As_Image_Pdfcrowd_Public {
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.0.1 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.1.0 ('
             . $wp_version . '/' . phpversion() . ')'
         );
 
-        if(!empty($options['dev_mode'])) {
-            // use convert string method instead
+        // error_log('conversion mode ' . $options['conversion_mode']);
+        if(isset($options['conversion_mode']) &&
+           $options['conversion_mode'] != 'url') {
             $html = null;
+            $args = array('sslverify' => false);
+            $site = self::strip_https(get_site_url());
+
             if(isset($options['text'])) {
                 $html = $options['text'];
+                $args['cookies'] = self::collect_cookies();
             } else {
-                $html = wp_remote_retrieve_body(wp_remote_get($options['url']));
+                if($site) {
+                    $url_site = self::strip_https($options['url']);
+
+                    if(self::starts_with($url_site, $site)) {
+                        $args['cookies'] = self::collect_cookies();
+                    }
+                }
+                // error_log('download ' . $options['url']);
+
+                $html = self::get_url($options['url'], $args);
             }
 
-            $options['text'] = self::embed_styles($html);
+            $options['text'] = $site &&
+                             $options['conversion_mode'] == 'development'
+                             ? self::embed_styles($html, $site, $args)
+                             : $html;
         }
 
         $fields = array();
@@ -565,10 +649,10 @@ class Save_As_Image_Pdfcrowd_Public {
         case 471:
         case 478:
             $link = '<a href="' .
-                  admin_url('options-general.php?page=save-as-image-pdfcrowd#save-as-image-pdfcrowd-wordpress-settings') .
-                  '"><b>WordPress Settings</b></a>';
-            $text = $text . '<p>Enable the <b>"Run in DEV MODE"</b> option on the ' .
-                  $link . ' page of the "Save as Image by Pdfcrowd" plugin.</p>';
+                  admin_url('options-general.php?page=save-as-image-pdfcrowd#save-as-image-pdfcrowd-behavior') .
+                  '"><b>Behavior</b></a>';
+            $text = $text . '<p>Set <b>"Conversion Mode"</b> to <b>"upload"</b> or <b>"development"</b> on the ' .
+                  $link . ' settings page of the "Save as Image by Pdfcrowd" plugin.</p>';
             break;
         }
         return $text;
@@ -582,6 +666,9 @@ class Save_As_Image_Pdfcrowd_Public {
             $options = wp_parse_args($custom_options, $options);
         }
 
+        // error_log('decrypted options:');
+        // error_log(print_r($options, true));
+
         if(!isset($options['username']) || empty($options['username']) &&
            !isset($options['api_key']) || empty($options['api_key'])) {
             // use demo credentials
@@ -590,17 +677,30 @@ class Save_As_Image_Pdfcrowd_Public {
         }
 
         $output = self::do_post_request($options);
+
+        $hook_data = array(
+            'output' => $output,
+            'options' => $options,
+            'file_name' => $this->get_output_name($options),
+            'error' => is_wp_error($output) ? $output : null
+        );
+
+        if(isset($options['image_created_callback']) &&
+           !empty($options['image_created_callback'])) {
+            if($options['image_created_callback']($hook_data)) {
+                return;
+            }
+        }
+
         if(is_wp_error($output)) {
             $code = $output->get_error_code();
             $message = $output->get_error_message();
             status_header($code, $message);
             echo $this->get_error_page($code, $message);
         } else {
-            $name = $this->get_output_name($options);
-
             // send the generated file to the browser
             header('Content-Type: ' . $this->get_mime_type($options['output_format']));
-            header("Content-Disposition: {$options['button_disposition']}; filename=\"$name\"");
+            header("Content-Disposition: {$options['button_disposition']}; filename=\"{$hook_data['file_name']}\"");
             header('Cache-Control: no-cache');
             header('Accept-Ranges: none');
 

@@ -19,7 +19,8 @@
 
   <h2 id="save-as-image-pdfcrowd-nav-tab" class="nav-tab-wrapper">
     <a href="#save-as-image-pdfcrowd-license-settings" class="nav-tab nav-tab-active">Pdfcrowd API License</a>
-    <a href="#save-as-image-pdfcrowd-wordpress-settings" class="nav-tab">WordPress Settings</a>
+    <a href="#save-as-image-pdfcrowd-appearance" class="nav-tab">Appearance</a>
+    <a href="#save-as-image-pdfcrowd-behavior" class="nav-tab">Behavior</a>
 <a href="#save-as-image-pdfcrowd-conversion-format" class="nav-tab">Conversion Format</a>
 <a href="#save-as-image-pdfcrowd-general-options" class="nav-tab">General Options</a>
 <a href="#save-as-image-pdfcrowd-image-output" class="nav-tab">Image Output</a>
@@ -30,7 +31,7 @@
       <form method="post" id="save-as-image-pdfcrowd-options" name="save_as_image_pdfcrowd-options" action="options.php">
         <?php
 
-        $options = get_option($this->plugin_name, Save_As_Image_Pdfcrowd_Public::$DEFAULTS);
+        $options = Save_As_Image_Pdfcrowd_Public::get_options();
 
         $license_status = Save_As_Image_Pdfcrowd_Admin::get_license_status($options);
 
@@ -40,6 +41,7 @@
         $button_border_color = isset($options['button_border_color']) ? $options['button_border_color'] : '';
         $button_border_style = isset($options['button_border_style']) ? $options['button_border_style'] : '';
         $button_border_width = isset($options['button_border_width']) ? $options['button_border_width'] : '';
+        $button_custom_html = isset($options['button_custom_html']) ? $options['button_custom_html'] : '';
         $button_disposition = isset($options['button_disposition']) ? $options['button_disposition'] : '';
         $button_format = isset($options['button_format']) ? $options['button_format'] : '';
         $button_hidden = isset($options['button_hidden']) ? $options['button_hidden'] : '';
@@ -68,9 +70,12 @@
         $button_text_color = isset($options['button_text_color']) ? $options['button_text_color'] : '';
         $button_text_size = isset($options['button_text_size']) ? $options['button_text_size'] : '';
         $button_text_weight = isset($options['button_text_weight']) ? $options['button_text_weight'] : '';
+        $conversion_mode = isset($options['conversion_mode']) ? $options['conversion_mode'] : '';
         $dev_mode = isset($options['dev_mode']) ? $options['dev_mode'] : '';
+        $image_created_callback = isset($options['image_created_callback']) ? $options['image_created_callback'] : '';
         $output_format = isset($options['output_format']) ? $options['output_format'] : '';
         $username = isset($options['username']) ? $options['username'] : '';
+        $version = isset($options['version']) ? $options['version'] : '';
 
         $no_background = isset($options['no_background']) ? $options['no_background'] : '';
         $disable_javascript = isset($options['disable_javascript']) ? $options['disable_javascript'] : '';
@@ -114,7 +119,8 @@
 
         // Include tabs partials
         require_once('license-settings.php');
-        require_once('wordpress-settings.php');
+        require_once('appearance.php');
+        require_once('behavior.php');
         require_once('save-as-image-pdfcrowd-settings.php');
         ?>
 
@@ -124,4 +130,13 @@
 
     </form>
 
+    <div id='save-as-image-pdfcrowd-support-notes'>
+        <hr/>
+        <p>
+            If you like "Save as Image by Pdfcrowd" plugin, please rate us using <a href='https://wordpress.org/support/plugin/save-as-image-by-pdfcrowd/reviews/#new-post' target='_blank'>★★★★★</a>.
+        </p>
+        <p>
+            Feel free to contact Pdfcrowd support at <a href="mailto:support@pdfcrowd.com">support@pdfcrowd.com</a> for any help.
+        </p>
+    </div>
 </div>

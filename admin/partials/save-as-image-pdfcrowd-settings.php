@@ -331,7 +331,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" value="<?php echo($custom_javascript); ?>" placeholder="" />
+                    <textarea class="regular-text" id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" placeholder="" rows=5 cols=70><?php echo($custom_javascript); ?></textarea>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>custom_javascript</strong>"
@@ -350,7 +350,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" value="<?php echo($on_load_javascript); ?>" placeholder="" />
+                    <textarea class="regular-text" id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" placeholder="" rows=5 cols=70><?php echo($on_load_javascript); ?></textarea>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>on_load_javascript</strong>"
