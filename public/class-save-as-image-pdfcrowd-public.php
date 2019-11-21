@@ -146,7 +146,7 @@ class Save_As_Image_Pdfcrowd_Public {
         'image_created_callback' => '',
         'output_format' => 'png',
         'username' => '',
-        'version' => '110',
+        'version' => '120',
     );
 
     private static $API_OPTIONS = array(
@@ -239,14 +239,14 @@ class Save_As_Image_Pdfcrowd_Public {
                 $options['conversion_mode'] = 'auto';
             }
         } else {
-            if($options['version'] == 110) {
+            if($options['version'] == 120) {
                 // error_log('the same version');
                 return $options;
             }
         }
 
         // error_log('save new options');
-        $options['version'] = 110;
+        $options['version'] = 120;
         update_option('save-as-image-pdfcrowd', $options);
 
         return $options;
@@ -555,7 +555,7 @@ class Save_As_Image_Pdfcrowd_Public {
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.1.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.2.0 ('
             . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -601,7 +601,7 @@ class Save_As_Image_Pdfcrowd_Public {
                 $options['cookies'] = '';
             }
             $cookies = implode(';', array_map(function($name, $value) {
-                return $name . '=' . $value;
+                return $name . '=' . rawurlencode($value);
             }, array_keys($_COOKIE), array_values($_COOKIE)));
             $options['cookies'] .= $cookies;
             error_log(print_r($options['cookies'], true));
