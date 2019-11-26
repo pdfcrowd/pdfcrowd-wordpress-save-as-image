@@ -146,7 +146,7 @@ class Save_As_Image_Pdfcrowd_Public {
         'image_created_callback' => '',
         'output_format' => 'png',
         'username' => '',
-        'version' => '120',
+        'version' => '121',
     );
 
     private static $API_OPTIONS = array(
@@ -239,14 +239,14 @@ class Save_As_Image_Pdfcrowd_Public {
                 $options['conversion_mode'] = 'auto';
             }
         } else {
-            if($options['version'] == 120) {
+            if($options['version'] == 121) {
                 // error_log('the same version');
                 return $options;
             }
         }
 
         // error_log('save new options');
-        $options['version'] = 120;
+        $options['version'] = 121;
         update_option('save-as-image-pdfcrowd', $options);
 
         return $options;
@@ -401,7 +401,7 @@ class Save_As_Image_Pdfcrowd_Public {
 
     function save_as_image_pdfcrowd_shortcode($attrs = array(), $content = null) {
         $custom_options = array();
-        if($attrs && !isset($attrs['url'])) {
+        if(!$attrs || !isset($attrs['url'])) {
             // remember permalink for url conversion
             $custom_options['permalink'] = get_permalink();
         }
@@ -413,7 +413,7 @@ class Save_As_Image_Pdfcrowd_Public {
         $content = do_shortcode($content);
 
         $custom_options = array('text' => $content);
-        if(!isset($attrs['output_name']) && !isset($attrs['url'])) {
+        if(!$attrs || (!isset($attrs['output_name']) && !isset($attrs['url']))) {
             // add url so default name can be created
             $custom_options['permalink'] = get_permalink();
         }
@@ -555,13 +555,12 @@ class Save_As_Image_Pdfcrowd_Public {
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.2.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.2.1 ('
             . $wp_version . '/' . phpversion() . ')'
         );
 
         // error_log('conversion start with mode: ' . $options['conversion_mode']);
-        if(isset($options['conversion_mode']) &&
-           $options['conversion_mode'] != 'url') {
+        if($options['conversion_mode'] != 'url') {
             $html = null;
             $args = array('sslverify' => false);
             $site = self::strip_https(get_site_url());
@@ -604,7 +603,6 @@ class Save_As_Image_Pdfcrowd_Public {
                 return $name . '=' . rawurlencode($value);
             }, array_keys($_COOKIE), array_values($_COOKIE)));
             $options['cookies'] .= $cookies;
-            error_log(print_r($options['cookies'], true));
         }
 
         $fields = array();
@@ -700,6 +698,9 @@ class Save_As_Image_Pdfcrowd_Public {
             $options = wp_parse_args($custom_options, $options);
         }
 
+        // error_log('decrypted options:');
+        // error_log(print_r($options, true));
+
         $default_conv_mode = 'url';
         if(!isset($options['url']) && isset($options['permalink'])) {
             // use permalink as url
@@ -713,9 +714,6 @@ class Save_As_Image_Pdfcrowd_Public {
             $options['conversion_mode'] = isset($options['url'])
                                         ? $default_conv_mode : 'upload';
         }
-
-        // error_log('decrypted options:');
-        // error_log(print_r($options, true));
 
         if(!isset($options['username']) || empty($options['username']) &&
            !isset($options['api_key']) || empty($options['api_key'])) {
