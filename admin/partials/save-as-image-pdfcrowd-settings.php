@@ -495,7 +495,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_height" name="save-as-image-pdfcrowd[screenshot_height]" value="<?php echo($screenshot_height); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_height" name="save-as-image-pdfcrowd[screenshot_height]" value="<?php echo($screenshot_height); ?>" placeholder="actual document height is used" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>screenshot_height</strong>"
