@@ -179,7 +179,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 121;
+        $valid['version'] = 122;
 
         if (isset($input['output_format']) &&
             $input['output_format'] != '') {
