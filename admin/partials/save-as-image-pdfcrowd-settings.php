@@ -49,7 +49,7 @@
                     </select>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>output_format</strong>"<br/>Possible values: "png", "jpg", "gif", "tiff", "bmp", "ico", "ppm", "pgm", "pbm", "pnm", "psb", "pct", "ras", "tga", "sgi", "sun", "webp"
+                            Shortcode & function parameter: "<strong>output_format</strong>"<br>Possible values: "png", "jpg", "gif", "tiff", "bmp", "ico", "ppm", "pgm", "pbm", "pnm", "psb", "pct", "ras", "tga", "sgi", "sun", "webp"
                         </div>
                         <div class='description'>
                             The format of the output file.
@@ -78,7 +78,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-no_background" name="save-as-image-pdfcrowd[no_background]" value="1" <?php checked( $no_background, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>no_background</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>no_background</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Do not print the background graphics.
@@ -96,7 +96,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-disable_javascript" name="save-as-image-pdfcrowd[disable_javascript]" value="1" <?php checked( $disable_javascript, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>disable_javascript</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>disable_javascript</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Do not execute JavaScript.
@@ -114,7 +114,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-disable_image_loading" name="save-as-image-pdfcrowd[disable_image_loading]" value="1" <?php checked( $disable_image_loading, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>disable_image_loading</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>disable_image_loading</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Do not load images.
@@ -132,7 +132,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-disable_remote_fonts" name="save-as-image-pdfcrowd[disable_remote_fonts]" value="1" <?php checked( $disable_remote_fonts, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>disable_remote_fonts</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>disable_remote_fonts</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Disable loading fonts from remote sources.
@@ -150,7 +150,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-block_ads" name="save-as-image-pdfcrowd[block_ads]" value="1" <?php checked( $block_ads, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>block_ads</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>block_ads</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Try to block ads. Enabling this option can produce smaller output and speed up the conversion.
@@ -225,7 +225,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-use_print_media" name="save-as-image-pdfcrowd[use_print_media]" value="1" <?php checked( $use_print_media, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>use_print_media</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>use_print_media</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Use the print version of the page if available (@media print).
@@ -243,7 +243,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-no_xpdfcrowd_header" name="save-as-image-pdfcrowd[no_xpdfcrowd_header]" value="1" <?php checked( $no_xpdfcrowd_header, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>no_xpdfcrowd_header</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>no_xpdfcrowd_header</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Do not send the X-Pdfcrowd HTTP header in Pdfcrowd HTTP requests.
@@ -280,7 +280,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-verify_ssl_certificates" name="save-as-image-pdfcrowd[verify_ssl_certificates]" value="1" <?php checked( $verify_ssl_certificates, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>verify_ssl_certificates</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>verify_ssl_certificates</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Do not allow insecure HTTPS connections.
@@ -298,7 +298,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-fail_on_main_url_error" name="save-as-image-pdfcrowd[fail_on_main_url_error]" value="1" <?php checked( $fail_on_main_url_error, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>fail_on_main_url_error</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>fail_on_main_url_error</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Abort the conversion if the main URL HTTP status code is greater than or equal to 400.
@@ -316,7 +316,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-fail_on_any_url_error" name="save-as-image-pdfcrowd[fail_on_any_url_error]" value="1" <?php checked( $fail_on_any_url_error, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>fail_on_any_url_error</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>fail_on_any_url_error</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Abort the conversion if any of the sub-request HTTP status code is greater than or equal to 400 or if some sub-requests are still pending. See details in a debug log.
@@ -432,7 +432,7 @@
                     </select>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>element_to_convert_mode</strong>"<br/>Possible values: <ul><li>"cut-out" - The element and its children are cut out of the document.</li><li>"remove-siblings" - All element's siblings are removed.</li><li>"hide-siblings" - All element's sibilings are hidden.</li></ul>
+                            Shortcode & function parameter: "<strong>element_to_convert_mode</strong>"<br>Possible values: <ul><li>"cut-out" - The element and its children are cut out of the document.</li><li>"remove-siblings" - All element's siblings are removed.</li><li>"hide-siblings" - All element's sibilings are hidden.</li></ul>
                         </div>
                         <div class='description'>
                             Specify the DOM handling when only a part of the document is converted.
@@ -545,7 +545,7 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-debug_log" name="save-as-image-pdfcrowd[debug_log]" value="1" <?php checked( $debug_log, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>debug_log</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>debug_log</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
                             Turn on the debug logging. Details about the conversion are stored in the debug log. The URL of the log can be obtained from the <a href='https://pdfcrowd.com/doc/api/html-to-pdf/php/#get_debug_log_url'>getDebugLogUrl</a> method or available in <a href='https://pdfcrowd.com/user/account/log/conversion/'>conversion statistics</a>.
@@ -669,10 +669,10 @@
                     <input type="checkbox" id="save-as-image-pdfcrowd-use_http" name="save-as-image-pdfcrowd[use_http]" value="1" <?php checked( $use_http, 1 ); ?> />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>use_http</strong>"<br/>Possible values: 0, 1
+                            Shortcode & function parameter: "<strong>use_http</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
-                            Specifies if the client communicates over HTTP or HTTPS with Pdfcrowd API.
+                            Specifies if the client communicates over HTTP or HTTPS with Pdfcrowd API. <div class='bg-warning'>Warning: Using HTTP is insecure as data sent over HTTP is not encrypted. Enable this option only if you know what you are doing.</div>
                         </div>
                     </div>
                 </td>
