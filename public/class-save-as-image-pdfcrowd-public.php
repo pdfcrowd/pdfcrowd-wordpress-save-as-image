@@ -146,7 +146,7 @@ class Save_As_Image_Pdfcrowd_Public {
         'image_created_callback' => '',
         'output_format' => 'png',
         'username' => '',
-        'version' => '140',
+        'version' => '141',
     );
 
     private static $API_OPTIONS = array(
@@ -240,14 +240,14 @@ class Save_As_Image_Pdfcrowd_Public {
                 $options['conversion_mode'] = 'auto';
             }
         } else {
-            if($options['version'] == 140) {
+            if($options['version'] == 141) {
                 // error_log('the same version');
                 return $options;
             }
         }
 
         // error_log('save new options');
-        $options['version'] = 140;
+        $options['version'] = 141;
         update_option('save-as-image-pdfcrowd', $options);
 
         return $options;
@@ -601,7 +601,7 @@ class Save_As_Image_Pdfcrowd_Public {
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.4.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.4.1 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -801,12 +801,14 @@ class Save_As_Image_Pdfcrowd_Public {
             }
          }
 
-        if(!isset($options['username']) || empty($options['username'])) {
+        if(!isset($options['username']) || empty($options['username']) ||
+           $options['username'] === 'demo') {
             // use demo username
             $options['username'] = 'wp-demo';
         }
 
-        if(!isset($options['api_key']) || empty($options['api_key'])) {
+        if(!isset($options['api_key']) || empty($options['api_key']) ||
+           $options['username'] === 'wp-demo') {
             // use demo api key
             $options['api_key'] = 'a182eb08c32a11e992c42c4d5455307a';
         }

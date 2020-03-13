@@ -108,6 +108,8 @@ class Save_As_Image_Pdfcrowd_Admin {
 
         if(empty($options['username'])) {
             $options['username'] = 'null';
+        } else if($options['username'] === 'demo') {
+            return array('status' => 'invalid');
         }
 
         $url = 'https://pdfcrowd.com/admin-api/api2/username:' . $options['username'] . '/';
@@ -179,7 +181,13 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 140;
+        $valid['version'] = 141;
+
+        if(isset($input['wp_reset_settings']) &&
+           $input['wp_reset_settings'] === 'reset') {
+            delete_option('save-as-image-pdfcrowd');
+            return Save_As_Image_Pdfcrowd_Public::get_options();
+        }
 
         if (isset($input['output_format']) &&
             $input['output_format'] != '') {
@@ -191,7 +199,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($output_format, 'Output Format', 'Allowed values are png, jpg, gif, tiff, bmp, ico, ppm, pgm, pbm, pnm, psb, pct, ras, tga, sgi, sun, webp.'));
             
         }
-        $valid['output_format'] = $input['output_format'];
+        $valid['output_format'] = isset($input['output_format']) ? $input['output_format'] : '';
 
         $valid['no_background'] = (isset($input['no_background']) && !empty($input['no_background'])) ? 1: 0;
 
@@ -203,17 +211,17 @@ class Save_As_Image_Pdfcrowd_Admin {
 
         $valid['block_ads'] = (isset($input['block_ads']) && !empty($input['block_ads'])) ? 1: 0;
 
-        $valid['default_encoding'] = $input['default_encoding'];
+        $valid['default_encoding'] = isset($input['default_encoding']) ? $input['default_encoding'] : '';
 
-        $valid['http_auth_user_name'] = $input['http_auth_user_name'];
+        $valid['http_auth_user_name'] = isset($input['http_auth_user_name']) ? $input['http_auth_user_name'] : '';
 
-        $valid['http_auth_password'] = $input['http_auth_password'];
+        $valid['http_auth_password'] = isset($input['http_auth_password']) ? $input['http_auth_password'] : '';
 
         $valid['use_print_media'] = (isset($input['use_print_media']) && !empty($input['use_print_media'])) ? 1: 0;
 
         $valid['no_xpdfcrowd_header'] = (isset($input['no_xpdfcrowd_header']) && !empty($input['no_xpdfcrowd_header'])) ? 1: 0;
 
-        $valid['cookies'] = $input['cookies'];
+        $valid['cookies'] = isset($input['cookies']) ? $input['cookies'] : '';
 
         $valid['verify_ssl_certificates'] = (isset($input['verify_ssl_certificates']) && !empty($input['verify_ssl_certificates'])) ? 1: 0;
 
@@ -231,7 +239,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($custom_javascript, 'Custom Javascript', 'The string must not be empty.'));
             
         }
-        $valid['custom_javascript'] = $input['custom_javascript'];
+        $valid['custom_javascript'] = isset($input['custom_javascript']) ? $input['custom_javascript'] : '';
 
         if (isset($input['on_load_javascript']) &&
             $input['on_load_javascript'] != '') {
@@ -243,7 +251,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($on_load_javascript, 'On Load Javascript', 'The string must not be empty.'));
             
         }
-        $valid['on_load_javascript'] = $input['on_load_javascript'];
+        $valid['on_load_javascript'] = isset($input['on_load_javascript']) ? $input['on_load_javascript'] : '';
 
         if (isset($input['custom_http_header']) &&
             $input['custom_http_header'] != '') {
@@ -255,7 +263,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($custom_http_header, 'Custom Http Header', 'A string containing the header name and value separated by a colon.'));
             
         }
-        $valid['custom_http_header'] = $input['custom_http_header'];
+        $valid['custom_http_header'] = isset($input['custom_http_header']) ? $input['custom_http_header'] : '';
 
         if (isset($input['javascript_delay']) &&
             $input['javascript_delay'] != '') {
@@ -267,7 +275,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($javascript_delay, 'Javascript Delay', 'Must be a positive integer number or 0.'));
             
         }
-        $valid['javascript_delay'] = $input['javascript_delay'];
+        $valid['javascript_delay'] = isset($input['javascript_delay']) ? $input['javascript_delay'] : '';
 
         if (isset($input['element_to_convert']) &&
             $input['element_to_convert'] != '') {
@@ -279,7 +287,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($selectors, 'Element To Convert', 'The string must not be empty.'));
             
         }
-        $valid['element_to_convert'] = $input['element_to_convert'];
+        $valid['element_to_convert'] = isset($input['element_to_convert']) ? $input['element_to_convert'] : '';
 
         if (isset($input['element_to_convert_mode']) &&
             $input['element_to_convert_mode'] != '') {
@@ -291,7 +299,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($mode, 'Element To Convert Mode', 'Allowed values are cut-out, remove-siblings, hide-siblings.'));
             
         }
-        $valid['element_to_convert_mode'] = $input['element_to_convert_mode'];
+        $valid['element_to_convert_mode'] = isset($input['element_to_convert_mode']) ? $input['element_to_convert_mode'] : '';
 
         if (isset($input['wait_for_element']) &&
             $input['wait_for_element'] != '') {
@@ -303,7 +311,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($selectors, 'Wait For Element', 'The string must not be empty.'));
             
         }
-        $valid['wait_for_element'] = $input['wait_for_element'];
+        $valid['wait_for_element'] = isset($input['wait_for_element']) ? $input['wait_for_element'] : '';
 
         if (isset($input['screenshot_width']) &&
             $input['screenshot_width'] != '') {
@@ -315,7 +323,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($screenshot_width, 'Screenshot Width', 'The value must be in the range 96-65000.'));
             
         }
-        $valid['screenshot_width'] = $input['screenshot_width'];
+        $valid['screenshot_width'] = isset($input['screenshot_width']) ? $input['screenshot_width'] : '';
 
         if (isset($input['screenshot_height']) &&
             $input['screenshot_height'] != '') {
@@ -327,7 +335,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($screenshot_height, 'Screenshot Height', 'Must be a positive integer number.'));
             
         }
-        $valid['screenshot_height'] = $input['screenshot_height'];
+        $valid['screenshot_height'] = isset($input['screenshot_height']) ? $input['screenshot_height'] : '';
 
         if (isset($input['scale_factor']) &&
             $input['scale_factor'] != '') {
@@ -339,11 +347,11 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($scale_factor, 'Scale Factor', 'Must be a positive integer number.'));
             
         }
-        $valid['scale_factor'] = $input['scale_factor'];
+        $valid['scale_factor'] = isset($input['scale_factor']) ? $input['scale_factor'] : '';
 
         $valid['debug_log'] = (isset($input['debug_log']) && !empty($input['debug_log'])) ? 1: 0;
 
-        $valid['tag'] = $input['tag'];
+        $valid['tag'] = isset($input['tag']) ? $input['tag'] : '';
 
         if (isset($input['http_proxy']) &&
             $input['http_proxy'] != '') {
@@ -355,7 +363,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($http_proxy, 'Http Proxy', 'The value must have format DOMAIN_OR_IP_ADDRESS:PORT.'));
             
         }
-        $valid['http_proxy'] = $input['http_proxy'];
+        $valid['http_proxy'] = isset($input['http_proxy']) ? $input['http_proxy'] : '';
 
         if (isset($input['https_proxy']) &&
             $input['https_proxy'] != '') {
@@ -367,7 +375,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($https_proxy, 'Https Proxy', 'The value must have format DOMAIN_OR_IP_ADDRESS:PORT.'));
             
         }
-        $valid['https_proxy'] = $input['https_proxy'];
+        $valid['https_proxy'] = isset($input['https_proxy']) ? $input['https_proxy'] : '';
 
         if (isset($input['client_certificate']) &&
             $input['client_certificate'] != '') {
@@ -379,13 +387,13 @@ class Save_As_Image_Pdfcrowd_Admin {
                 pdfcrowd_create_invalid_value_message($client_certificate, 'Client Certificate', 'The file must exist and not be empty.'));
             
         }
-        $valid['client_certificate'] = $input['client_certificate'];
+        $valid['client_certificate'] = isset($input['client_certificate']) ? $input['client_certificate'] : '';
 
-        $valid['client_certificate_password'] = $input['client_certificate_password'];
+        $valid['client_certificate_password'] = isset($input['client_certificate_password']) ? $input['client_certificate_password'] : '';
 
         $valid['use_http'] = (isset($input['use_http']) && !empty($input['use_http'])) ? 1: 0;
 
-        $valid['retry_count'] = $input['retry_count'];
+        $valid['retry_count'] = isset($input['retry_count']) ? $input['retry_count'] : '';
 
 
         return $valid;

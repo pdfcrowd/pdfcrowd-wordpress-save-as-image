@@ -125,8 +125,25 @@
         require_once('save-as-image-pdfcrowd-settings.php');
         ?>
 
+        <script>
+         function save_as_image_pdfcrowd_reset_settings() {
+             var r = confirm("<?php esc_attr_e('Save as Image settings will be lost. Please confirm.'); ?>");
+             if(r !== true) {
+                 return false;
+             }
+             var form = document.forms['save_as_image_pdfcrowd-options'];
+             form['save-as-image-pdfcrowd[wp_reset_settings]'].value = 'reset';
+             form.submit();
+             return true;
+         }
+        </script>
+        <input type="hidden" name="save-as-image-pdfcrowd[wp_reset_settings]" value="" />
+
         <p class="submit">
-            <input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save All Changes'); ?>" />
+            <input id="pdfcrowd-save" name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save All Changes'); ?>" />
+            <input name="Reset" type="submit" class="button-primary" value="<?php esc_attr_e('Reset to default values'); ?>"
+                   onclick="return save_as_image_pdfcrowd_reset_settings();" />
+            <input type="reset" class="button-secondary" value="<?php esc_attr_e('Cancel'); ?>">
         </p>
 
     </form>
