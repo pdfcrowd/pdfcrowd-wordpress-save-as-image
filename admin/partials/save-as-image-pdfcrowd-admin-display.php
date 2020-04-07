@@ -22,6 +22,7 @@
     <a href="#save-as-image-pdfcrowd-appearance" class="nav-tab">Appearance</a>
     <a href="#save-as-image-pdfcrowd-behavior" class="nav-tab">Behavior</a>
 <a href="#save-as-image-pdfcrowd-conversion-format" class="nav-tab">Conversion Format</a>
+<a href="#save-as-image-pdfcrowd-data" class="nav-tab">Data</a>
 <a href="#save-as-image-pdfcrowd-general-options" class="nav-tab">General Options</a>
 <a href="#save-as-image-pdfcrowd-image-output" class="nav-tab">Image Output</a>
 <a href="#save-as-image-pdfcrowd-miscellaneous" class="nav-tab">Miscellaneous</a>
@@ -78,6 +79,14 @@
         $username = isset($options['username']) ? $options['username'] : '';
         $version = isset($options['version']) ? $options['version'] : '';
 
+        $data_string = isset($options['data_string']) ? $options['data_string'] : '';
+        $data_file = isset($options['data_file']) ? $options['data_file'] : '';
+        $data_format = isset($options['data_format']) ? $options['data_format'] : 'auto';
+        $data_encoding = isset($options['data_encoding']) ? $options['data_encoding'] : '';
+        $data_ignore_undefined = isset($options['data_ignore_undefined']) ? $options['data_ignore_undefined'] : '';
+        $data_auto_escape = isset($options['data_auto_escape']) ? $options['data_auto_escape'] : '';
+        $data_trim_blocks = isset($options['data_trim_blocks']) ? $options['data_trim_blocks'] : '';
+        $data_options = isset($options['data_options']) ? $options['data_options'] : '';
         $no_background = isset($options['no_background']) ? $options['no_background'] : '';
         $disable_javascript = isset($options['disable_javascript']) ? $options['disable_javascript'] : '';
         $disable_image_loading = isset($options['disable_image_loading']) ? $options['disable_image_loading'] : '';
