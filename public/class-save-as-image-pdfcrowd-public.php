@@ -146,7 +146,7 @@ class Save_As_Image_Pdfcrowd_Public {
         'image_created_callback' => '',
         'output_format' => 'png',
         'username' => '',
-        'version' => '160',
+        'version' => '170',
     );
 
     private static $API_OPTIONS = array(
@@ -249,14 +249,14 @@ class Save_As_Image_Pdfcrowd_Public {
                 $options['conversion_mode'] = 'auto';
             }
         } else {
-            if($options['version'] == 160) {
+            if($options['version'] == 170) {
                 // error_log('the same version');
                 return $options;
             }
         }
 
         // error_log('save new options');
-        $options['version'] = 160;
+        $options['version'] = 170;
         update_option('save-as-image-pdfcrowd', $options);
 
         return $options;
@@ -339,7 +339,14 @@ class Save_As_Image_Pdfcrowd_Public {
             $div_style = " style='{$div_style}'";
         }
 
-        $button = "<div class='$classes'{$div_style}><div class='save-as-image-pdfcrowd-button'{$btn_style} onclick='window.SaveAsImagePdfcrowd(\"$custom_options\", $enc_data);' data-pdfcrowd-flags='{$pflags}'>";
+        $config = array();
+        if(isset($options['button_disposition']) &&
+           $options['button_disposition'] == 'inline_new_tab') {
+            $config['target'] = '_blank';
+        }
+        $config = json_encode($config);
+
+        $button = "<div class='$classes'{$div_style}><div class='save-as-image-pdfcrowd-button'{$btn_style} onclick='window.SaveAsImagePdfcrowd(\"$custom_options\", $enc_data, $config);' data-pdfcrowd-flags='{$pflags}'>";
 
         $button_content = '';
         switch($options['button_format']) {
@@ -706,7 +713,7 @@ class Save_As_Image_Pdfcrowd_Public {
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.6.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.7.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -870,7 +877,8 @@ class Save_As_Image_Pdfcrowd_Public {
         } else {
             // send the generated file to the browser
             header('Content-Type: ' . $this->get_mime_type($options['output_format']));
-            header("Content-Disposition: {$options['button_disposition']}; filename=\"{$hook_data['file_name']}\"");
+            $disposition = $options['button_disposition'] == 'inline_new_tab' ? 'inline' : $options['button_disposition'];
+            header("Content-Disposition: {$disposition}; filename=\"{$hook_data['file_name']}\"");
             header('Cache-Control: no-cache');
             header('Accept-Ranges: none');
 
