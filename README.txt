@@ -129,6 +129,9 @@ Yes, Pdfcrowd support (support@pdfcrowd.com) is more than happy to help you with
 
 == Changelog ==
 
+= 1.8.1 =
+* Improved the converted page URL detection.
+
 = 1.8.0 =
 * Fixed the issue with the converted page URL when some third party WP plugins are used.
 
