@@ -68,8 +68,17 @@ class Save_As_Image_Pdfcrowd_Public {
      * @since    1.0.0
      */
     public function enqueue_styles() {
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/save-as-image-pdfcrowd-public.css', array(), $this->version, 'all' );
+        wp_enqueue_style($this->plugin_name,
+                         plugin_dir_url( __FILE__ ) . 'css/save-as-image-pdfcrowd-public.css',
+                         array(),
+                         $this->version,
+                         'all');
 
+        wp_enqueue_style($this->plugin_name . 'indicators',
+                         plugin_dir_url( __FILE__ ) . 'css/save-as-image-pdfcrowd-indicators.css',
+                         array(),
+                         $this->version,
+                         'all');
     }
 
     /**
@@ -81,6 +90,12 @@ class Save_As_Image_Pdfcrowd_Public {
         wp_enqueue_script($this->plugin_name,
                           plugin_dir_url( __FILE__ ) . 'js/save-as-image-pdfcrowd-public.js',
                           array( 'jquery', 'underscore' ),
+                          $this->version,
+                          false);
+
+        wp_enqueue_script($this->plugin_name . 'indicators',
+                          plugin_dir_url( __FILE__ ) . 'js/save-as-image-pdfcrowd-indicators.js',
+                          array('jquery'),
                           $this->version,
                           false);
     }
@@ -113,6 +128,7 @@ class Save_As_Image_Pdfcrowd_Public {
         'button_border_style' => 'solid',
         'button_border_width' => '1',
         'button_custom_html' => '',
+        'button_custom_indicator' => '',
         'button_disposition' => 'attachment',
         'button_format' => 'image-text',
         'button_hidden' => '1',
@@ -120,6 +136,9 @@ class Save_As_Image_Pdfcrowd_Public {
         'button_image_height' => '24',
         'button_image_url' => '',
         'button_image_width' => '24',
+        'button_indicator' => 'ellipsis',
+        'button_indicator_html' => '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
+style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'button_margin_bottom' => '6',
         'button_margin_left' => '6',
         'button_margin_right' => '6',
@@ -146,7 +165,7 @@ class Save_As_Image_Pdfcrowd_Public {
         'image_created_callback' => '',
         'output_format' => 'png',
         'username' => '',
-        'version' => '181',
+        'version' => '190',
     );
 
     private static $API_OPTIONS = array(
@@ -249,14 +268,18 @@ class Save_As_Image_Pdfcrowd_Public {
                 $options['conversion_mode'] = 'auto';
             }
         } else {
-            if($options['version'] == 181) {
+            if($options['version'] == 190) {
                 // error_log('the same version');
                 return $options;
             }
         }
 
         // error_log('save new options');
-        $options['version'] = 181;
+        $options['version'] = 190;
+        if(!isset($options['button_indicator_html'])) {
+            $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
+style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
+        }
         update_option('save-as-image-pdfcrowd', $options);
 
         return $options;
@@ -274,7 +297,7 @@ class Save_As_Image_Pdfcrowd_Public {
     }
 
     public static function create_button_from_style(
-        $options, $custom_options='', $content='', $pflags='', $enc_data='') {
+        $options, $custom_options='', $content='', $pflags='', $enc_data='""') {
         $image = '';
         if(strpos($options['button_format'], 'image') !== false) {
             if($options['button_image'] == 'custom_html') {
@@ -290,6 +313,7 @@ class Save_As_Image_Pdfcrowd_Public {
         $btn_style = self::rect_to_style('margin', $options);
 
         $classes = 'save-as-image-pdfcrowd-button-wrap';
+        $btn_classes = 'save-as-image-pdfcrowd-button';
         if(isset($options['button_hidden']) && $options['button_hidden'] == 1) {
             $classes .= ' pdfcrowd-remove';
         }
@@ -344,9 +368,20 @@ class Save_As_Image_Pdfcrowd_Public {
            $options['button_disposition'] == 'inline_new_tab') {
             $config['target'] = '_blank';
         }
+
+        $config['indicator'] = isset($options['button_indicator'])
+                             ? $options['button_indicator']
+                             : '';
+        if($config['indicator'] == 'custom') {
+            $config['indicator'] = isset($options['button_custom_indicator'])
+                                 ? $options['button_custom_indicator']
+                                 : '';
+        } else if($config['indicator']) {
+            $config['indicator'] = 'SaveAsImagePdfcrowdIndicators.' . $config['indicator'];
+        }
         $config = json_encode($config);
 
-        $button = "<div class='$classes'{$div_style}><div class='save-as-image-pdfcrowd-button'{$btn_style} onclick='window.SaveAsImagePdfcrowd(\"$custom_options\", $enc_data, $config);' data-pdfcrowd-flags='{$pflags}'>";
+        $button = "<div class='$classes'{$div_style}><div class='{$btn_classes}'{$btn_style} onclick='window.SaveAsImagePdfcrowd(\"$custom_options\", $enc_data, $config, this);' data-pdfcrowd-flags='{$pflags}'>";
 
         $button_content = '';
         switch($options['button_format']) {
@@ -362,6 +397,13 @@ class Save_As_Image_Pdfcrowd_Public {
         case 'image':
             $button_content = $image;
             break;
+        }
+
+        if(isset($options['button_indicator']) &&
+           isset($options['button_indicator']) == 'html' &&
+           isset($options['button_indicator_html'])) {
+            $button_content .= '<div class="save-as-image-pdfcrowd-ind save-as-image-pdfcrowd-ind-in" style="display: none !important;">' .
+                            $options['button_indicator_html'] . '</div>';
         }
 
         $button .= $button_content . "</div></div>";
@@ -713,7 +755,7 @@ class Save_As_Image_Pdfcrowd_Public {
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.8.1 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.9.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -803,7 +845,7 @@ class Save_As_Image_Pdfcrowd_Public {
         return $result;
     }
 
-    private function get_location($data, $options) {
+    private function get_location($options) {
         $location = null;
         $permalink = null;
 
@@ -833,6 +875,12 @@ class Save_As_Image_Pdfcrowd_Public {
     }
 
     function save_as_image_pdfcrowd() {
+        // set download cookie at first, so the conversion button
+        // can be re-enabled
+        if(isset($_POST['download-id'])) {
+            setcookie('pdfcrowdDownloadId', $_POST['download-id'], 0, "/");
+        }
+
         $options = $this->get_options();
 
         if(!empty($_POST['options'])) {
@@ -851,7 +899,7 @@ class Save_As_Image_Pdfcrowd_Public {
 
         $default_conv_mode = 'url';
         if(!isset($options['url'])) {
-            $location = $this->get_location($_POST, $options);
+            $location = $this->get_location($options);
             if($location) {
                 // use the location as url
                 $options['url'] = $location;

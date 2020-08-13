@@ -75,7 +75,7 @@
                     </label>
                 </th>
                 <td>
-                    <textarea class="regular-text" id="save-as-image-pdfcrowd-data_string" name="save-as-image-pdfcrowd[data_string]" placeholder="" rows=5 cols=70><?php echo($data_string); ?></textarea>
+                    <textarea id="save-as-image-pdfcrowd-data_string" name="save-as-image-pdfcrowd[data_string]" placeholder="" rows=5 cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($data_string); ?></textarea>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>data_string</strong>"
@@ -496,7 +496,7 @@
                     </label>
                 </th>
                 <td>
-                    <textarea class="regular-text" id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" placeholder="" rows=5 cols=70><?php echo($custom_javascript); ?></textarea>
+                    <textarea id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" placeholder="" rows=5 cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($custom_javascript); ?></textarea>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>custom_javascript</strong>"
@@ -515,7 +515,7 @@
                     </label>
                 </th>
                 <td>
-                    <textarea class="regular-text" id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" placeholder="" rows=5 cols=70><?php echo($on_load_javascript); ?></textarea>
+                    <textarea id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" placeholder="" rows=5 cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($on_load_javascript); ?></textarea>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>on_load_javascript</strong>"
