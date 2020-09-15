@@ -76,6 +76,8 @@
         $button_text_color = isset($options['button_text_color']) ? $options['button_text_color'] : '';
         $button_text_size = isset($options['button_text_size']) ? $options['button_text_size'] : '';
         $button_text_weight = isset($options['button_text_weight']) ? $options['button_text_weight'] : '';
+        $button_translation = isset($options['button_translation']) ? $options['button_translation'] : '';
+        $button_translation_domain = isset($options['button_translation_domain']) ? $options['button_translation_domain'] : '';
         $conversion_mode = isset($options['conversion_mode']) ? $options['conversion_mode'] : '';
         $dev_mode = isset($options['dev_mode']) ? $options['dev_mode'] : '';
         $image_created_callback = isset($options['image_created_callback']) ? $options['image_created_callback'] : '';
