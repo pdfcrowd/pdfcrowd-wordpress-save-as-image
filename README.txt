@@ -3,7 +3,7 @@ Contributors: Pdfcrowd
 Tags: image, print, save, page, save to image, save as image, convert to image, image print, image button, image widget, image plugin, pdfcrowd, html, page as image, png, jpg, jpeg, gif, bmp, webp, tiff
 Requires PHP: 5.1
 Requires at least: 4.0
-Tested up to: 5.5
+Tested up to: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
