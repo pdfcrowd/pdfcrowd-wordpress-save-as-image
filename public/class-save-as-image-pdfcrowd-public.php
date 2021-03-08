@@ -79,6 +79,12 @@ class Save_As_Image_Pdfcrowd_Public {
                          array(),
                          $this->version,
                          'all');
+
+            wp_enqueue_style($this->plugin_name . 'components',
+                         plugin_dir_url( __FILE__ ) . 'css/save-as-image-pdfcrowd-components.css',
+                         array(),
+                         $this->version,
+                         'all');
     }
 
     /**
@@ -98,6 +104,28 @@ class Save_As_Image_Pdfcrowd_Public {
                           array('jquery'),
                           $this->version,
                           false);
+
+        $components = $this->plugin_name . 'components';
+        wp_enqueue_script($components,
+                          plugin_dir_url( __FILE__ ) . 'js/save-as-image-pdfcrowd-components.js',
+                          array('jquery'),
+                          $this->version,
+                          false);
+        $components_translations = array(
+            'email_success' => __('Email with the image has been sent.',
+                                  $this->plugin_name),
+            'email_fail' => __('Error occurred.',
+                               $this->plugin_name),
+            'email_prompt' => __('Enter your email:',
+                                 $this->plugin_name),
+            'ok' => __('Ok',
+                       $this->plugin_name),
+            'cancel' => __('Cancel',
+                           $this->plugin_name)
+        );
+        wp_localize_script($components,
+                           'save_as_image_pdfcrowd_i18n',
+                           $components_translations);
     }
 
     public function setup_shortcodes() {
@@ -164,11 +192,22 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'button_translation' => '',
         'button_translation_domain' => '',
         'conversion_mode' => 'auto',
+        'custom_data' => '',
         'dev_mode' => '0',
+        'email_custom_dialogs' => '',
+        'email_dialogs' => 'system',
+        'email_message' => '<p>Dear {{user_first_name}} {{user_last_name}},</p>
+<p>Please, find {{title}} attached.</p>
+<p>Best Regards,<br>
+<a href="{{site_url}}">{{site}}</a></p>
+        ',
+        'email_recipient' => 'user',
+        'email_recipient_address' => '',
+        'email_subject' => '{{site}} - {{title}} Image',
         'image_created_callback' => '',
         'output_format' => 'png',
         'username' => '',
-        'version' => '1110',
+        'version' => '2000',
     );
 
     private static $API_OPTIONS = array(
@@ -181,20 +220,22 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'data_auto_escape',
         'data_trim_blocks',
         'data_options',
+        'use_print_media',
         'no_background',
         'disable_javascript',
         'disable_image_loading',
         'disable_remote_fonts',
+        'load_iframes',
         'block_ads',
         'default_encoding',
+        'locale',
         'http_auth_user_name',
         'http_auth_password',
-        'use_print_media',
-        'no_xpdfcrowd_header',
         'cookies',
         'verify_ssl_certificates',
         'fail_on_main_url_error',
         'fail_on_any_url_error',
+        'no_xpdfcrowd_header',
         'custom_javascript',
         'on_load_javascript',
         'custom_http_header',
@@ -205,6 +246,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'screenshot_width',
         'screenshot_height',
         'scale_factor',
+        'background_color',
         'debug_log',
         'tag',
         'http_proxy',
@@ -214,6 +256,17 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'url',
         'text',
         'file'
+    );
+
+    private static $IGNORED_OPTIONS = array(
+        '20.10' => array(
+        ),
+        '18.10' => array(
+            'load_iframes',
+            'locale',
+            'background_color',
+        ),
+        'latest' => array()
     );
 
     private static $DEFAULT_IMAGES = array(
@@ -270,15 +323,20 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             } else {
                 $options['conversion_mode'] = 'auto';
             }
+            $options['converter_version'] = '18.10';
         } else {
-            if($options['version'] == 1110) {
+            if($options['version'] == 2000) {
                 // error_log('the same version');
                 return $options;
+            }
+
+            if($options['version'] < 2000) {
+                $options['converter_version'] = '18.10';
             }
         }
 
         // error_log('save new options');
-        $options['version'] = 1110;
+        $options['version'] = 2000;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -324,6 +382,39 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         }
 
         return $text;
+    }
+
+    private static function string_subst($format, $args) {
+        $names = preg_match_all('/\{\{\s*(.*?)\s*\}\}/',
+                                $format,
+                                $matches, PREG_SET_ORDER);
+        $values = array();
+        foreach($matches as $match) {
+            $values[] = $args[$match[1]];
+        }
+        $format = preg_replace('/\{\{(.*?)\}\}/', '%s', $format);
+        return vsprintf($format, $values);
+    }
+
+    private static function get_email_config($options) {
+        $dialogs = 'SaveAsImagePdfcrowdComponents.email.system';
+        if(isset($options['email_dialogs'])) {
+            if($options['email_dialogs'] == 'custom') {
+                $dialogs = isset($options['email_custom_dialogs'])
+                         ? $options['email_custom_dialogs']
+                         : '';
+            } else {
+                $dialogs = 'SaveAsImagePdfcrowdComponents.email.' . $options['email_dialogs'];
+            }
+        }
+        $recipient = '';
+        if(isset($options['email_recipient']) &&
+           $options['email_recipient'] != 'address') {
+            $recipient = is_user_logged_in()
+                       ? $options['email_recipient']
+                       : 'prompt';
+        }
+        return array('dialogs' => $dialogs, 'recipient' => $recipient);
     }
 
     public static function create_button_from_style(
@@ -396,6 +487,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         }
 
         $div_style = '';
+        $button_tag = 'div';
         if($options['button_alignment']) {
             $div_style .= "text-align: {$options['button_alignment']}; ";
         }
@@ -403,6 +495,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             $div_style .= "float: left; ";
         } elseif($options['button_position'] == 'right') {
             $div_style .= "float: right; ";
+        } elseif($options['button_position'] == 'inline') {
+            $button_tag = 'span';
         }
 
         if(!empty($btn_style)) {
@@ -412,14 +506,17 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             $div_style = " style='{$div_style}'";
         }
 
-        if(isset($options['button_disposition']) &&
-           $options['button_disposition'] == 'inline_new_tab') {
-            $config['target'] = '_blank';
+        if(isset($options['button_disposition'])) {
+            if($options['button_disposition'] == 'inline_new_tab') {
+                $config['target'] = '_blank';
+            } else if($options['button_disposition'] == 'email') {
+                $config['email'] = self::get_email_config($options);
+            }
         }
 
         $config = json_encode($config);
 
-        $button = "<div class='$classes'{$div_style}><div class='{$btn_classes}'{$btn_style} onclick='window.SaveAsImagePdfcrowd(\"$custom_options\", $enc_data, $config, this);' data-pdfcrowd-flags='{$pflags}'>";
+        $button = "<{$button_tag} class='$classes'{$div_style}><{$button_tag} class='{$btn_classes}'{$btn_style} onclick='window.SaveAsImagePdfcrowd(\"$custom_options\", $enc_data, $config, this);' data-pdfcrowd-flags='{$pflags}'>";
 
         $button_content = '';
         switch($options['button_format']) {
@@ -442,11 +539,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         if(isset($options['button_indicator']) &&
            isset($options['button_indicator']) == 'html' &&
            isset($options['button_indicator_html'])) {
-            $button_content .= '<div class="save-as-image-pdfcrowd-ind save-as-image-pdfcrowd-ind-in" style="display: none !important;">' .
-                            $options['button_indicator_html'] . '</div>';
+            $button_content .= "<{$button_tag} class='save-as-image-pdfcrowd-ind save-as-image-pdfcrowd-ind-in' style='display: none !important;'>" .
+                            $options['button_indicator_html'] . "</{$button_tag}>";
         }
 
-        $button .= $button_content . "</div></div>";
+        $button .= $button_content . "</{$button_tag}></{$button_tag}>";
 
         if($options['button_position'] == 'below') {
             return $content . $button;
@@ -476,6 +573,17 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             $date_index = (date('z', $custom_options['_time']) + 22) % 30;
             $enc_data = '[' . $custom_options['_token'] . ', ' .
                       $date_index . ']';
+        }
+
+        // prepare strings for emails
+        if(isset($options['email_subject']) ||
+           isset($custom_options['email_message'])) {
+            if(!$custom_options) {
+                $custom_options = array();
+            }
+            $custom_options['email_data'] = json_encode(array(
+                'title' => get_the_title()
+            ));
         }
 
         // serialize custom attributes to string
@@ -530,6 +638,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                     if(self::starts_with($key, 'button_')) {
                         $options[$key] = $value;
                     } else {
+                        if(self::starts_with($key, 'email_')) {
+                            // email settings are used for GUI too
+                            // so store them in both dicts
+                            $options[$key] = $value;
+                        }
                         $custom_options[$key] = $value;
                     }
                 }
@@ -569,7 +682,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $response = wp_remote_get($url, $args);
         if(is_wp_error($response)) {
             $msg = $response->get_error_message() . ' ' . $url;
-            error_log($msg);
+            error_log("Pdfcrowd: failed to get URL {$url}. " . $msg);
             if($throw_error) {
                 throw new Exception(
                     self::prepare_error_message(471, $msg, '<b>"url"</b>') .
@@ -760,10 +873,19 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $fields = array();
         $files = array();
 
+        $converter_version = '20.10';
+        if(isset($options['converter_version'])) {
+            $converter_version = $options['converter_version'];
+        }
+
+        $ignored_options = self::$IGNORED_OPTIONS[$converter_version];
+
         // configure the conversion
         foreach($options as $key => $value) {
-            if(!in_array($key, self::$API_OPTIONS) || $value == '') {
-                // ignore empty values and no API options
+            if(!in_array($key, self::$API_OPTIONS) || $value == '' ||
+               in_array($key, $ignored_options)) {
+                // ignore empty values, no API options and
+                // options not supported by a specific converter version
                 continue;
             }
 
@@ -795,7 +917,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/1.11.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.0.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -817,7 +939,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $error = null;
         while($retry_count >= 0) {
             $response = wp_remote_post(
-                $protocol . '://api.pdfcrowd.com/convert/', $args);
+                $protocol . '://api.pdfcrowd.com/convert/' . $converter_version . '/',
+                $args);
             if(is_wp_error($response)) {
                 if($response->get_error_code() != 502) {
                     return $response;
@@ -914,6 +1037,115 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         return $location;
     }
 
+    private static function delete_file($file_path) {
+        global $wp_filesystem;
+        if(!$wp_filesystem->delete($file_path)) {
+            error_log('Pdfcrowd: can not delete file ' . $file_path);
+        }
+    }
+
+    private static function make_temporary_file(
+        $file_name, $content, $prefix='') {
+        global $wp_filesystem;
+        if(empty($wp_filesystem)) {
+            // init filesystem
+            WP_Filesystem();
+        }
+
+        $upload_dir = wp_upload_dir();
+        if(empty($upload_dir['basedir'])) {
+            error_log('Pdfcrowd: no upload dir specified');
+            return false;
+        }
+
+        $tmp_dir = null;
+        $tmp_dir = $upload_dir['basedir'] . '/_pdfcrowd_mail_tmp';
+        if(!$wp_filesystem->exists($tmp_dir)) {
+            // make temporary folder
+            if(!$wp_filesystem->mkdir($tmp_dir)) {
+                error_log('Pdfcrowd: can not create folder ' . $tmp_dir);
+            }
+        }
+
+        // test if file exists and can be created
+        $file_path = $tmp_dir . '/' . $prefix . $file_name;
+        $fp = @fopen($file_path, 'x');
+        if(!$fp) {
+            if($wp_filesystem->exists($file_path) && empty($prefix)) {
+                // file already exists, retry once with random suffix
+                return self::make_temporary_file(
+                    $file_name, $content, wp_generate_password(6, false) . '_');
+            }
+            error_log('Pdfcrowd: can not save file ' . $file_path);
+            return false;
+        }
+        fclose($fp);
+
+        if(!$wp_filesystem->put_contents($file_path, $content)) {
+            error_log('Pdfcrowd: can not write to file ' . $file_path);
+            self::delete_file($file_path);
+            return false;
+        }
+        return $file_path;
+    }
+
+    private static function send_email($options, $file_name, $output) {
+        // check empty filename
+        if(empty($file_name)) {
+            $format = isset($options['output_format'])
+                    ? $options['output_format']
+                    : 'png';
+            $file_name = 'generated.' . $format;
+        }
+
+        $tmp_file_name = self::make_temporary_file($file_name, $output);
+        if(!$tmp_file_name) {
+            wp_send_json_error();
+            return;
+        }
+
+        $email_to = null;
+        $email_data = json_decode($options['email_data'], true);
+        $email_data['user_name'] = '';
+        $email_data['user_first_name'] = '';
+        $email_data['user_last_name'] = '';
+        $email_data['user_display_name'] = '';
+
+        if($options['email_recipient'] == 'prompt') {
+            $email_to = $_POST['recipient'];
+        } else if($options['email_recipient'] == 'address') {
+            $email_to = $options['email_recipient_address'];
+        } else {
+            $curr_user = wp_get_current_user();
+            $email_to = $curr_user->user_email;
+            $email_data['user_name'] = $curr_user->user_nicename;
+            $email_data['user_first_name'] = $curr_user->user_firstname;
+            $email_data['user_last_name'] = $curr_user->user_lastname;
+            $email_data['user_display_name'] = $curr_user->display_name;
+        }
+        $subject = $options['email_subject'];
+        $message = $options['email_message'];
+
+        $email_data['site'] = get_bloginfo('name');
+        $email_data['site_url'] = get_bloginfo('url');
+        $subject = self::string_subst($subject, $email_data);
+        $message = self::string_subst($message, $email_data);
+
+        $headers = array('Content-Type: text/html; charset=UTF-8');
+        if(!wp_mail($email_to,
+                    $subject,
+                    $message,
+                    $headers,
+                    array($tmp_file_name))) {
+            error_log('Pdfcrowd: send failed to ' . $email_to);
+            self::delete_file($tmp_file_name);
+            wp_send_json_error();
+        } else {
+            self::delete_file($tmp_file_name);
+            wp_send_json_success();
+        }
+    }
+
     function save_as_image_pdfcrowd() {
         // set download cookie at first, so the conversion button
         // can be re-enabled
@@ -927,7 +1159,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             $decrypted = $this->decrypt(urldecode($_POST['options']),
                                         $options['api_key']);
             if($decrypted === false) {
-                echo "Configuration error. Refresh page and retry.";
+                _e('Configuration error. Refresh page and retry.',
+                   $this->plugin_name);
                 wp_die();
             }
             $custom_options = unserialize($decrypted);
@@ -955,10 +1188,15 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         } else if($options['conversion_mode'] == 'content') {
             $options['auto_use_cookies'] = false;
 
-            $options['text'] = self::validate_data($options, $_POST['cdata']);
-            if(!$options['text']) {
-                echo "Internal error. Refresh page and retry.";
-                wp_die();
+            if(!isset($options['text']) && !isset($options['file'])) {
+                // take data from the page if they are not set explicitelly
+                // text is set e.g. when block shortcode is used
+                $options['text'] = self::validate_data($options, $_POST['cdata']);
+                if(!$options['text']) {
+                    _e('Internal error. Refresh page and retry.',
+                       $this->plugin_name);
+                    wp_die();
+                }
             }
         }
 
@@ -996,14 +1234,18 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             status_header($code, $message);
             echo $this->get_error_page($code, $message);
         } else {
-            // send the generated file to the browser
-            header('Content-Type: ' . $this->get_mime_type($options['output_format']));
-            $disposition = $options['button_disposition'] == 'inline_new_tab' ? 'inline' : $options['button_disposition'];
-            header("Content-Disposition: {$disposition}; filename=\"{$hook_data['file_name']}\"");
-            header('Cache-Control: no-cache');
-            header('Accept-Ranges: none');
+            if($options['button_disposition'] == 'email') {
+                self::send_email($options, $hook_data['file_name'], $output);
+            } else {
+                // send the generated file to the browser
+                header('Content-Type: ' . $this->get_mime_type($options['output_format']));
+                $disposition = $options['button_disposition'] == 'inline_new_tab' ? 'inline' : $options['button_disposition'];
+                header("Content-Disposition: {$disposition}; filename=\"{$hook_data['file_name']}\"");
+                header('Cache-Control: no-cache');
+                header('Accept-Ranges: none');
 
-            echo $output;
+                echo $output;
+            }
         }
 
         wp_die();

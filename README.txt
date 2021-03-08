@@ -3,7 +3,7 @@ Contributors: Pdfcrowd
 Tags: image, print, save, page, save to image, save as image, convert to image, image print, image button, image widget, image plugin, pdfcrowd, html, page as image, png, jpg, jpeg, gif, bmp, webp, tiff
 Requires PHP: 5.1
 Requires at least: 4.0
-Tested up to: 5.6
+Tested up to: 5.7
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -129,6 +129,21 @@ Yes, Pdfcrowd support (support@pdfcrowd.com) is more than happy to help you with
 
 == Changelog ==
 
+= 2.0.0 =
+* New "Converter Version" option - specifies the version of the internal Pdfcrowd converter. Details about Pdfcrowd [versioning](https://pdfcrowd.com/doc/api/versioning/).
+* New "Load Iframes" option - specifies how iframes are handled.
+* New "Locale" option - specifies the locale for conversions.
+* New value "Send the image via e-mail" added to the "Button Click Action" options. It sends the output file via customized e-mail using these settings:
+    * Email Recipient
+    * Email Subject
+    * Email Message
+    * Email Dialogs
+* New "Background Color" option - sets an RGBA background color.
+    * "Main Document Css Annotation" - adds special CSS classes into header/footer for page number detection.
+* New value "inline" for the button position - it is useful for placing the button inside a text.
+* More detailed debug log information.
+* Improved the plugin localization.
+
 = 1.11.0 =
 * New "Button Text Translation" option - allows to use translation for the button text.
 
@@ -150,7 +165,7 @@ Yes, Pdfcrowd support (support@pdfcrowd.com) is more than happy to help you with
 * Fixed the issue with the converted page URL when some third party WP plugins are used.
 
 = 1.7.0 =
-* New value "open an image in a new browser tab" for the "Button Click Action" option.
+* New value "open the image in a new browser tab" for the "Button Click Action" option.
 * Minor change of descriptions for values in the "Button Click Action" option.
 
 = 1.6.0 =

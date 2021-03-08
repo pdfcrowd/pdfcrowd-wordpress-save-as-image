@@ -235,6 +235,24 @@
         <tbody>
             <tr>
                 <th scope="row">
+                    <label for="save-as-image-pdfcrowd-use_print_media">
+                        Use Print Media
+                    </label>
+                </th>
+                <td>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-use_print_media" name="save-as-image-pdfcrowd[use_print_media]" value="1" <?php checked( $use_print_media, 1 ); ?> />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>use_print_media</strong>"<br>Possible values: 0, 1
+                        </div>
+                        <div class='description'>
+                            Use the print version of the page if available (@media print).
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
                     <label for="save-as-image-pdfcrowd-no_background">
                         No Background
                     </label>
@@ -307,6 +325,31 @@
             </tr>
             <tr>
                 <th scope="row">
+                    <label for="save-as-image-pdfcrowd-load_iframes">
+                        Load Iframes
+                    </label>
+                </th>
+                <td>
+                    <select name="save-as-image-pdfcrowd[load_iframes]">
+                    <option value="all" <?php selected($load_iframes, 'all');?>>All iframes are loaded.</option>
+                    <option value="same-origin" <?php selected($load_iframes, 'same-origin');?>>Only iframes with the same origin as the main page are loaded.</option>
+                    <option value="none" <?php selected($load_iframes, 'none');?>>Iframe loading is disabled.</option>
+                    </select>
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>load_iframes</strong>"<br>Possible values: <ul><li>"all" - All iframes are loaded.</li><li>"same-origin" - Only iframes with the same origin as the main page are loaded.</li><li>"none" - Iframe loading is disabled.</li></ul>
+                        </div>
+                        <div class='description'>
+                            Specifies how iframes are handled.
+                              <br>
+ It is applicable for converter version >= 20.10.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
                     <label for="save-as-image-pdfcrowd-block_ads">
                         Block Ads
                     </label>
@@ -337,6 +380,28 @@
                         </div>
                         <div class='description'>
                             Set the default HTML content text encoding.
+                            
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-locale">
+                        Locale
+                    </label>
+                </th>
+                <td>
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-locale" name="save-as-image-pdfcrowd[locale]" value="<?php echo($locale); ?>" placeholder="en-US" />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>locale</strong>"
+                        </div>
+                        <div class='description'>
+                            Set the locale for the conversion. This may affect the output format of dates, times and numbers.
+                              <br>
+ It is applicable for converter version >= 20.10.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
                             
                         </div>
                     </div>
@@ -376,42 +441,6 @@
                         <div class='description'>
                             Set the HTTP authentication password.
                             
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <label for="save-as-image-pdfcrowd-use_print_media">
-                        Use Print Media
-                    </label>
-                </th>
-                <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-use_print_media" name="save-as-image-pdfcrowd[use_print_media]" value="1" <?php checked( $use_print_media, 1 ); ?> />
-                    <div class='save-as-image-pdfcrowd-m-description'>
-                        <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>use_print_media</strong>"<br>Possible values: 0, 1
-                        </div>
-                        <div class='description'>
-                            Use the print version of the page if available (@media print).
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <label for="save-as-image-pdfcrowd-no_xpdfcrowd_header">
-                        No Xpdfcrowd Header
-                    </label>
-                </th>
-                <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-no_xpdfcrowd_header" name="save-as-image-pdfcrowd[no_xpdfcrowd_header]" value="1" <?php checked( $no_xpdfcrowd_header, 1 ); ?> />
-                    <div class='save-as-image-pdfcrowd-m-description'>
-                        <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>no_xpdfcrowd_header</strong>"<br>Possible values: 0, 1
-                        </div>
-                        <div class='description'>
-                            Do not send the X-Pdfcrowd HTTP header in Pdfcrowd HTTP requests.
                         </div>
                     </div>
                 </td>
@@ -485,6 +514,24 @@
                         </div>
                         <div class='description'>
                             Abort the conversion if any of the sub-request HTTP status code is greater than or equal to 400 or if some sub-requests are still pending. See details in a debug log.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-no_xpdfcrowd_header">
+                        No Xpdfcrowd Header
+                    </label>
+                </th>
+                <td>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-no_xpdfcrowd_header" name="save-as-image-pdfcrowd[no_xpdfcrowd_header]" value="1" <?php checked( $no_xpdfcrowd_header, 1 ); ?> />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>no_xpdfcrowd_header</strong>"<br>Possible values: 0, 1
+                        </div>
+                        <div class='description'>
+                            Do not send the X-Pdfcrowd HTTP header in Pdfcrowd HTTP requests.
                         </div>
                     </div>
                 </td>
@@ -593,11 +640,11 @@
                     <select name="save-as-image-pdfcrowd[element_to_convert_mode]">
                     <option value="cut-out" <?php selected($element_to_convert_mode, 'cut-out');?>>The element and its children are cut out of the document.</option>
                     <option value="remove-siblings" <?php selected($element_to_convert_mode, 'remove-siblings');?>>All element's siblings are removed.</option>
-                    <option value="hide-siblings" <?php selected($element_to_convert_mode, 'hide-siblings');?>>All element's sibilings are hidden.</option>
+                    <option value="hide-siblings" <?php selected($element_to_convert_mode, 'hide-siblings');?>>All element's siblings are hidden.</option>
                     </select>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode & function parameter: "<strong>element_to_convert_mode</strong>"<br>Possible values: <ul><li>"cut-out" - The element and its children are cut out of the document.</li><li>"remove-siblings" - All element's siblings are removed.</li><li>"hide-siblings" - All element's sibilings are hidden.</li></ul>
+                            Shortcode & function parameter: "<strong>element_to_convert_mode</strong>"<br>Possible values: <ul><li>"cut-out" - The element and its children are cut out of the document.</li><li>"remove-siblings" - All element's siblings are removed.</li><li>"hide-siblings" - All element's siblings are hidden.</li></ul>
                         </div>
                         <div class='description'>
                             Specify the DOM handling when only a part of the document is converted.
@@ -685,6 +732,28 @@
                         </div>
                         <div class='description'>
                             Set the scaling factor (zoom) for the output image.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-background_color">
+                        Background Color
+                    </label>
+                </th>
+                <td>
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-background_color" name="save-as-image-pdfcrowd[background_color]" value="<?php echo($background_color); ?>" placeholder="" />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>background_color</strong>"
+                        </div>
+                        <div class='description'>
+                            The output image background color.
+                              <br>
+ It is applicable for converter version >= 20.10.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                            The value must be in RRGGBB or RRGGBBAA hexadecimal format.
                         </div>
                     </div>
                 </td>
@@ -824,6 +893,28 @@
 
     <table class="form-table">
         <tbody>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-converter_version">
+                        Converter Version
+                    </label>
+                </th>
+                <td>
+                    <select name="save-as-image-pdfcrowd[converter_version]">
+                    <option value="latest" <?php selected($converter_version, 'latest');?>>The latest converter version.</option>
+                    <option value="20.10" <?php selected($converter_version, '20.10');?>>Version 20.10.</option>
+                    <option value="18.10" <?php selected($converter_version, '18.10');?>>Version 18.10.</option>
+                    </select>
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>converter_version</strong>"<br>Possible values: <ul><li>"latest" - The latest converter version.</li><li>"20.10" - Version 20.10.</li><li>"18.10" - Version 18.10.</li></ul>
+                        </div>
+                        <div class='description'>
+                            Set the converter version. Different versions may produce different output. Choose which one provides the best output for your case.
+                        </div>
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <th scope="row">
                     <label for="save-as-image-pdfcrowd-use_http">

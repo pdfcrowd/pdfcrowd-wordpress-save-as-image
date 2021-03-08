@@ -79,7 +79,14 @@
         $button_translation = isset($options['button_translation']) ? $options['button_translation'] : '';
         $button_translation_domain = isset($options['button_translation_domain']) ? $options['button_translation_domain'] : '';
         $conversion_mode = isset($options['conversion_mode']) ? $options['conversion_mode'] : '';
+        $custom_data = isset($options['custom_data']) ? $options['custom_data'] : '';
         $dev_mode = isset($options['dev_mode']) ? $options['dev_mode'] : '';
+        $email_custom_dialogs = isset($options['email_custom_dialogs']) ? $options['email_custom_dialogs'] : '';
+        $email_dialogs = isset($options['email_dialogs']) ? $options['email_dialogs'] : '';
+        $email_message = isset($options['email_message']) ? $options['email_message'] : '';
+        $email_recipient = isset($options['email_recipient']) ? $options['email_recipient'] : '';
+        $email_recipient_address = isset($options['email_recipient_address']) ? $options['email_recipient_address'] : '';
+        $email_subject = isset($options['email_subject']) ? $options['email_subject'] : '';
         $image_created_callback = isset($options['image_created_callback']) ? $options['image_created_callback'] : '';
         $output_format = isset($options['output_format']) ? $options['output_format'] : '';
         $username = isset($options['username']) ? $options['username'] : '';
@@ -93,20 +100,22 @@
         $data_auto_escape = isset($options['data_auto_escape']) ? $options['data_auto_escape'] : '';
         $data_trim_blocks = isset($options['data_trim_blocks']) ? $options['data_trim_blocks'] : '';
         $data_options = isset($options['data_options']) ? $options['data_options'] : '';
+        $use_print_media = isset($options['use_print_media']) ? $options['use_print_media'] : '';
         $no_background = isset($options['no_background']) ? $options['no_background'] : '';
         $disable_javascript = isset($options['disable_javascript']) ? $options['disable_javascript'] : '';
         $disable_image_loading = isset($options['disable_image_loading']) ? $options['disable_image_loading'] : '';
         $disable_remote_fonts = isset($options['disable_remote_fonts']) ? $options['disable_remote_fonts'] : '';
+        $load_iframes = isset($options['load_iframes']) ? $options['load_iframes'] : 'all';
         $block_ads = isset($options['block_ads']) ? $options['block_ads'] : '';
         $default_encoding = isset($options['default_encoding']) ? $options['default_encoding'] : '';
+        $locale = isset($options['locale']) ? $options['locale'] : '';
         $http_auth_user_name = isset($options['http_auth_user_name']) ? $options['http_auth_user_name'] : '';
         $http_auth_password = isset($options['http_auth_password']) ? $options['http_auth_password'] : '';
-        $use_print_media = isset($options['use_print_media']) ? $options['use_print_media'] : '';
-        $no_xpdfcrowd_header = isset($options['no_xpdfcrowd_header']) ? $options['no_xpdfcrowd_header'] : '';
         $cookies = isset($options['cookies']) ? $options['cookies'] : '';
         $verify_ssl_certificates = isset($options['verify_ssl_certificates']) ? $options['verify_ssl_certificates'] : '';
         $fail_on_main_url_error = isset($options['fail_on_main_url_error']) ? $options['fail_on_main_url_error'] : '';
         $fail_on_any_url_error = isset($options['fail_on_any_url_error']) ? $options['fail_on_any_url_error'] : '';
+        $no_xpdfcrowd_header = isset($options['no_xpdfcrowd_header']) ? $options['no_xpdfcrowd_header'] : '';
         $custom_javascript = isset($options['custom_javascript']) ? $options['custom_javascript'] : '';
         $on_load_javascript = isset($options['on_load_javascript']) ? $options['on_load_javascript'] : '';
         $custom_http_header = isset($options['custom_http_header']) ? $options['custom_http_header'] : '';
@@ -117,12 +126,14 @@
         $screenshot_width = isset($options['screenshot_width']) ? $options['screenshot_width'] : '';
         $screenshot_height = isset($options['screenshot_height']) ? $options['screenshot_height'] : '';
         $scale_factor = isset($options['scale_factor']) ? $options['scale_factor'] : '';
+        $background_color = isset($options['background_color']) ? $options['background_color'] : '';
         $debug_log = isset($options['debug_log']) ? $options['debug_log'] : '';
         $tag = isset($options['tag']) ? $options['tag'] : '';
         $http_proxy = isset($options['http_proxy']) ? $options['http_proxy'] : '';
         $https_proxy = isset($options['https_proxy']) ? $options['https_proxy'] : '';
         $client_certificate = isset($options['client_certificate']) ? $options['client_certificate'] : '';
         $client_certificate_password = isset($options['client_certificate_password']) ? $options['client_certificate_password'] : '';
+        $converter_version = isset($options['converter_version']) ? $options['converter_version'] : '20.10';
         $use_http = isset($options['use_http']) ? $options['use_http'] : '';
         $retry_count = isset($options['retry_count']) ? $options['retry_count'] : '';
 
@@ -142,7 +153,7 @@
 
         <script>
          function save_as_image_pdfcrowd_reset_settings() {
-             var r = confirm("<?php esc_attr_e('Save as Image settings will be lost. Please confirm.'); ?>");
+             var r = confirm("<?php esc_attr_e('Save as Image settings will be lost. Please confirm.', $this->plugin_name); ?>");
              if(r !== true) {
                  return false;
              }
@@ -155,10 +166,10 @@
         <input type="hidden" name="save-as-image-pdfcrowd[wp_reset_settings]" value="" />
 
         <p class="submit">
-            <input id="pdfcrowd-save" name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save All Changes'); ?>" />
-            <input name="Reset" type="submit" class="button-primary" value="<?php esc_attr_e('Reset to default values'); ?>"
+            <input id="pdfcrowd-save" name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save All Changes', $this->plugin_name); ?>" />
+            <input name="Reset" type="submit" class="button-primary" value="<?php esc_attr_e('Reset to default values', $this->plugin_name); ?>"
                    onclick="return save_as_image_pdfcrowd_reset_settings();" />
-            <input type="reset" class="button-secondary" value="<?php esc_attr_e('Cancel'); ?>">
+            <input type="reset" class="button-secondary" value="<?php esc_attr_e('Cancel', $this->plugin_name); ?>">
         </p>
 
     </form>
