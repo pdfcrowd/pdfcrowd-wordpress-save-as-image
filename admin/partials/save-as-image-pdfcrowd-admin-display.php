@@ -78,6 +78,7 @@
         $button_text_weight = isset($options['button_text_weight']) ? $options['button_text_weight'] : '';
         $button_translation = isset($options['button_translation']) ? $options['button_translation'] : '';
         $button_translation_domain = isset($options['button_translation_domain']) ? $options['button_translation_domain'] : '';
+        $button_user_drawings = isset($options['button_user_drawings']) ? $options['button_user_drawings'] : '';
         $conversion_mode = isset($options['conversion_mode']) ? $options['conversion_mode'] : '';
         $custom_data = isset($options['custom_data']) ? $options['custom_data'] : '';
         $dev_mode = isset($options['dev_mode']) ? $options['dev_mode'] : '';
@@ -89,6 +90,7 @@
         $email_subject = isset($options['email_subject']) ? $options['email_subject'] : '';
         $image_created_callback = isset($options['image_created_callback']) ? $options['image_created_callback'] : '';
         $output_format = isset($options['output_format']) ? $options['output_format'] : '';
+        $output_name = isset($options['output_name']) ? $options['output_name'] : '';
         $username = isset($options['username']) ? $options['username'] : '';
         $version = isset($options['version']) ? $options['version'] : '';
 

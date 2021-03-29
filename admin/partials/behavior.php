@@ -214,9 +214,25 @@
             </tr>
             <tr>
                 <th scope="row">
-                    <label for="save-as-image-pdfcrowd[conversion_mode]">
-                        Conversion Mode
+                    <label for="save-as-image-pdfcrowd-output-name">
+                        Output Name
                     </label>
+                </th>
+                <td>
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-output-name" name="save-as-image-pdfcrowd[output_name]" value="<?php echo($output_name);?>" placeholder="<?php esc_attr_e('Output filename', $this->plugin_name);?>" />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <p class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>output_name</strong>"
+                        </p>
+                        <p class='description'>
+                            The name of the output file. The name may not be specified and will be automatically created according to the page URL.
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    Conversion Mode
                 </th>
                 <td>
                     <fieldset>
@@ -258,6 +274,18 @@
                                 The current HTML contents shown in the browser is sent for conversion.<br>This mode is suitable for web forms and dynamic HTML contents.
                             </p>
                         </label><br>
+                        <div id="save-as-image-pdfcrowd-cm-content-options" class="save-as-image-pdfcrowd-sub-option">
+                            <input type="checkbox" id="save-as-image-pdfcrowd-button-user-drawings" name="save-as-image-pdfcrowd[button_user_drawings]" value="1" <?php checked( $button_user_drawings, 1 ); ?> />
+                            <label for="save-as-image-pdfcrowd-button-user-drawings">
+                                User-Created Drawings
+                            </label>
+                            <p class="description" style="margin-top: -0.3em;">
+                                Enable this option if you want to capture user-created canvas drawings.
+                            </p>
+                            <p class='save-as-image-pdfcrowd-devi'>
+                                Shortcode & function parameter: "<strong>button_user_drawings</strong>"<br>Possible values: 0, 1
+                            </p>
+                        </div>
                     </fieldset>
                     <p class='save-as-image-pdfcrowd-devi'>
                         Shortcode & function parameter: "<strong>conversion_mode</strong>"<br>Possible values: "auto", "url", "upload", "development", "content"
@@ -266,7 +294,7 @@
             </tr>
             <tr>
                 <th scope="row">
-                    <label for="save-as-image-pdfcrowd[auto_use_cookies]">
+                    <label for="save-as-image-pdfcrowd-auto-use-cookies">
                         Auto Use Cookies
                     </label>
                 </th>

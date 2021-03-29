@@ -115,3 +115,7 @@ span.save-as-image-pdfcrowd-button-wrap {
 #save-as-image-pdfcrowd-lic-invalid .attention {
     font-size: 110%;
 }
+
+.save-as-image-pdfcrowd-sub-option {
+    margin-left: 2em;
+}

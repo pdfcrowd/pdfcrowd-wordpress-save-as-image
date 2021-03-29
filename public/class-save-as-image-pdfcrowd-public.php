@@ -191,6 +191,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'button_text_weight' => 'bold',
         'button_translation' => '',
         'button_translation_domain' => '',
+        'button_user_drawings' => '0',
         'conversion_mode' => 'auto',
         'custom_data' => '',
         'dev_mode' => '0',
@@ -206,8 +207,9 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'email_subject' => '{{site}} - {{title}} Image',
         'image_created_callback' => '',
         'output_format' => 'png',
+        'output_name' => '',
         'username' => '',
-        'version' => '2000',
+        'version' => '2100',
     );
 
     private static $API_OPTIONS = array(
@@ -325,7 +327,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             }
             $options['converter_version'] = '18.10';
         } else {
-            if($options['version'] == 2000) {
+            if($options['version'] == 2100) {
                 // error_log('the same version');
                 return $options;
             }
@@ -336,7 +338,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         }
 
         // error_log('save new options');
-        $options['version'] = 2000;
+        $options['version'] = 2100;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -512,6 +514,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             } else if($options['button_disposition'] == 'email') {
                 $config['email'] = self::get_email_config($options);
             }
+        }
+
+        if(isset($options['button_user_drawings']) &&
+           $options['button_user_drawings']) {
+            $config['persistent_canvases'] = '1';
         }
 
         $config = json_encode($config);
@@ -741,7 +748,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     }
 
     private function get_output_name($options) {
-        if(isset($options['output_name'])) return $options['output_name'];
+        if(isset($options['output_name']) &&
+           $options['output_name']) return $options['output_name'];
 
         // create the default file name
         $i = -1;
@@ -759,6 +767,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         }
         if($i < 0) {
             $page_name = 'generated';
+        } else {
+            $page_name = rawurldecode($page_name);
         }
         $format = isset($options['output_format']) ? $options['output_format'] : 'png';
         return $page_name . ".{$format}";
@@ -917,7 +927,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.0.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.1.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -1240,7 +1250,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 // send the generated file to the browser
                 header('Content-Type: ' . $this->get_mime_type($options['output_format']));
                 $disposition = $options['button_disposition'] == 'inline_new_tab' ? 'inline' : $options['button_disposition'];
-                header("Content-Disposition: {$disposition}; filename=\"{$hook_data['file_name']}\"");
+                header("Content-Disposition: {$disposition}; filename*=UTF-8''" . rawurlencode($hook_data['file_name']));
                 header('Cache-Control: no-cache');
                 header('Accept-Ranges: none');
 
