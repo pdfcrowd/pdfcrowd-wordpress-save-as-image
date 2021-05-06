@@ -1,35 +1,49 @@
 <?php
 
-   /**
-   * Provide a admin area view for the plugin
-   *
-   * This file is used to markup the admin-facing aspects of the plugin.
-   *
-   * @link       https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
-   * @since      1.0.0
-   *
-   * @package    Save_As_Image_Pdfcrowd
-   * @subpackage Save_As_Image_Pdfcrowd/admin/partials
-   */
-   ?>
+/**
+ * Provide a admin area view for the plugin
+ *
+ * This file is used to markup the admin-facing aspects of the plugin.
+ *
+ * @link       https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
+ * @since      1.0.0
+ *
+ * @package    Save_As_Image_Pdfcrowd
+ * @subpackage Save_As_Image_Pdfcrowd/admin/partials
+ */
+?>
 
 <div class="wrap">
 
-  <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+    <form method="post" id="save-as-image-pdfcrowd-options" name="save_as_image_pdfcrowd-options" action="options.php">
 
-  <h2 id="save-as-image-pdfcrowd-nav-tab" class="nav-tab-wrapper">
-    <a href="#save-as-image-pdfcrowd-license-settings" class="nav-tab nav-tab-active">Pdfcrowd API License</a>
-    <a href="#save-as-image-pdfcrowd-appearance" class="nav-tab">Appearance</a>
-    <a href="#save-as-image-pdfcrowd-behavior" class="nav-tab">Behavior</a>
-<a href="#save-as-image-pdfcrowd-conversion-format" class="nav-tab">Conversion Format</a>
-<a href="#save-as-image-pdfcrowd-data" class="nav-tab">Data</a>
-<a href="#save-as-image-pdfcrowd-general-options" class="nav-tab">General Options</a>
-<a href="#save-as-image-pdfcrowd-image-output" class="nav-tab">Image Output</a>
-<a href="#save-as-image-pdfcrowd-miscellaneous" class="nav-tab">Miscellaneous</a>
-<a href="#save-as-image-pdfcrowd-api-client-options" class="nav-tab">API Client Options</a>
-  </h2>
+        <?php
 
-      <form method="post" id="save-as-image-pdfcrowd-options" name="save_as_image_pdfcrowd-options" action="options.php">
+        if(get_transient('save_as_image_pdfcrowd_show_wizard')) {
+            delete_transient('save_as_image_pdfcrowd_show_wizard');
+            require_once('wizard.php');
+        }
+
+        ?>
+
+        <div class="save-as-image-pdfcrowd-admin-settings">
+            <h2>
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTkuMjI3IiBoZWlnaHQ9IjQzLjI1NiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03My44MDIgLTM4Ni4wNikiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEuNzk0OCAwIDAgMS43OTQ4IC0yNjI2LjUgLTIxMi4wNikiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmOTUwMCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTE1MTQuNSAzMzUuODZjMC40NDI2IDAuMDU0IDEuMjM2Ni0wLjI0MzM2IDEuMDAwMiAwLjQ4OTY1djE4LjUxMWMtMC40NDI2LTAuMDU0LTEuMjM2NiAwLjI0MzM3LTEuMDAwMi0wLjQ4OTY1di0xOC41MTF6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC45OTk4Ii8+PHBhdGggZD0ibTE1MDYuMyAzNDQuNTRoMS40NzQ4djEwLjU1NWgtMS40NzQ4di0xMC41NTV6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC41MjUxIi8+PHBhdGggZD0ibTE1MjIuNCAzMzkuNzhjMC4zNzU1IDAuMTIzMSAxLjI5ODYtMC4zMDEzMyAxLjE2OTQgMC4zMjY0M3YxNC44NDNjLTAuMzc1NS0wLjEyMzExLTEuMjk4NiAwLjMwMTMzLTEuMTY5NC0wLjMyNjQzdi0xNC44NDN6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC44MzA2Ii8+PHBhdGggZD0ibTE1MzUuMSAzNTMuMjh2Mi4xNjQ5aC01LjE2NDl2LTIuMTY0OWg1LjE2NDl6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iMy44MzUxIi8+PC9nPjwvZz48L3N2Zz4K" style="height: 24px;"/>
+                <?php echo esc_html( get_admin_page_title() ); ?>
+            </h2>
+
+            <h2 id="save-as-image-pdfcrowd-nav-tab" class="nav-tab-wrapper">
+                <a href="#save-as-image-pdfcrowd-license-settings" class="nav-tab nav-tab-active">Basics</a>
+                <a href="#save-as-image-pdfcrowd-appearance" class="nav-tab">Appearance</a>
+                <a href="#save-as-image-pdfcrowd-behavior" class="nav-tab">Behavior</a>
+                <a href="#save-as-image-pdfcrowd-conversion-format" class="nav-tab">Conversion Format</a>
+                <a href="#save-as-image-pdfcrowd-data" class="nav-tab">Data</a>
+                <a href="#save-as-image-pdfcrowd-general-options" class="nav-tab">General Options</a>
+                <a href="#save-as-image-pdfcrowd-image-output" class="nav-tab">Image Output</a>
+                <a href="#save-as-image-pdfcrowd-miscellaneous" class="nav-tab">Miscellaneous</a>
+                <a href="#save-as-image-pdfcrowd-api-client-options" class="nav-tab">API Client Options</a>
+            </h2>
+
         <?php
 
         $options = Save_As_Image_Pdfcrowd_Public::get_options();
@@ -89,6 +103,7 @@
         $email_recipient_address = isset($options['email_recipient_address']) ? $options['email_recipient_address'] : '';
         $email_subject = isset($options['email_subject']) ? $options['email_subject'] : '';
         $image_created_callback = isset($options['image_created_callback']) ? $options['image_created_callback'] : '';
+        $license_type = isset($options['license_type']) ? $options['license_type'] : '';
         $output_format = isset($options['output_format']) ? $options['output_format'] : '';
         $output_name = isset($options['output_name']) ? $options['output_name'] : '';
         $username = isset($options['username']) ? $options['username'] : '';
@@ -140,9 +155,9 @@
         $retry_count = isset($options['retry_count']) ? $options['retry_count'] : '';
 
         /*
-        * Set up hidden fields
-        *
-        */
+         * Set up hidden fields
+         *
+         */
         settings_fields($this->plugin_name);
         do_settings_sections($this->plugin_name);
 
@@ -154,18 +169,22 @@
         ?>
 
         <script>
+         function save_as_image_pdfcrowd_submit_action(action) {
+             var form = document.forms['save_as_image_pdfcrowd-options'];
+             form['save-as-image-pdfcrowd[wp_submit_action]'].value = action;
+             form.submit();
+             return true;
+         }
+
          function save_as_image_pdfcrowd_reset_settings() {
              var r = confirm("<?php esc_attr_e('Save as Image settings will be lost. Please confirm.', $this->plugin_name); ?>");
              if(r !== true) {
                  return false;
              }
-             var form = document.forms['save_as_image_pdfcrowd-options'];
-             form['save-as-image-pdfcrowd[wp_reset_settings]'].value = 'reset';
-             form.submit();
-             return true;
+             return save_as_image_pdfcrowd_submit_action('reset');
          }
         </script>
-        <input type="hidden" name="save-as-image-pdfcrowd[wp_reset_settings]" value="" />
+        <input type="hidden" name="save-as-image-pdfcrowd[wp_submit_action]" value="" />
 
         <p class="submit">
             <input id="pdfcrowd-save" name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save All Changes', $this->plugin_name); ?>" />
@@ -174,15 +193,14 @@
             <input type="reset" class="button-secondary" value="<?php esc_attr_e('Cancel', $this->plugin_name); ?>">
         </p>
 
+        <hr style="margin-top: 4em;"/>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
+            <a href="https://pdfcrowd.com/contact/?ref=wordpress&pr=save-as-image-pdfcrowd&u=<?php echo($username); ?>" class="thickbox button-secondary" title="Help" target="_blank">
+                Get help
+            </a>
+            <div id="save-as-image-pdfcrowd-support-notes">
+                If you like "Save as Image by Pdfcrowd", please rate us using <a href='https://wordpress.org/support/plugin/save-as-image-by-pdfcrowd/reviews/#new-post' target='_blank'>★★★★★</a>.
+            </div>
+        </div>
     </form>
-
-    <div id='save-as-image-pdfcrowd-support-notes'>
-        <hr/>
-        <p>
-            If you like "Save as Image by Pdfcrowd" plugin, please rate us using <a href='https://wordpress.org/support/plugin/save-as-image-by-pdfcrowd/reviews/#new-post' target='_blank'>★★★★★</a>.
-        </p>
-        <p>
-            Feel free to contact Pdfcrowd support at <a href="mailto:support@pdfcrowd.com">support@pdfcrowd.com</a> for any help.
-        </p>
-    </div>
 </div>

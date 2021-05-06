@@ -28,7 +28,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[output_format]">
+                    <select name="save-as-image-pdfcrowd[output_format]" id="save-as-image-pdfcrowd-output_format">
                     <option value="png" <?php selected($output_format, 'png');?>>png</option>
                     <option value="jpg" <?php selected($output_format, 'jpg');?>>jpg</option>
                     <option value="gif" <?php selected($output_format, 'gif');?>>gif</option>
@@ -94,7 +94,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-data_file" name="save-as-image-pdfcrowd[data_file]" value="<?php echo($data_file); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-data_file" name="save-as-image-pdfcrowd[data_file]" value="<?php echo($data_file); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>data_file</strong>"
@@ -113,7 +113,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[data_format]">
+                    <select name="save-as-image-pdfcrowd[data_format]" id="save-as-image-pdfcrowd-data_format">
                     <option value="auto" <?php selected($data_format, 'auto');?>>the data format is auto detected</option>
                     <option value="json" <?php selected($data_format, 'json');?>>json</option>
                     <option value="xml" <?php selected($data_format, 'xml');?>>xml</option>
@@ -137,7 +137,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-data_encoding" name="save-as-image-pdfcrowd[data_encoding]" value="<?php echo($data_encoding); ?>" placeholder="utf-8" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-data_encoding" name="save-as-image-pdfcrowd[data_encoding]" value="<?php echo($data_encoding); ?>" placeholder="utf-8" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>data_encoding</strong>"
@@ -156,7 +156,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-data_ignore_undefined" name="save-as-image-pdfcrowd[data_ignore_undefined]" value="1" <?php checked( $data_ignore_undefined, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-data_ignore_undefined" name="save-as-image-pdfcrowd[data_ignore_undefined]" value="1" <?php checked( $data_ignore_undefined, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>data_ignore_undefined</strong>"<br>Possible values: 0, 1
@@ -174,7 +174,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-data_auto_escape" name="save-as-image-pdfcrowd[data_auto_escape]" value="1" <?php checked( $data_auto_escape, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-data_auto_escape" name="save-as-image-pdfcrowd[data_auto_escape]" value="1" <?php checked( $data_auto_escape, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>data_auto_escape</strong>"<br>Possible values: 0, 1
@@ -192,7 +192,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-data_trim_blocks" name="save-as-image-pdfcrowd[data_trim_blocks]" value="1" <?php checked( $data_trim_blocks, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-data_trim_blocks" name="save-as-image-pdfcrowd[data_trim_blocks]" value="1" <?php checked( $data_trim_blocks, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>data_trim_blocks</strong>"<br>Possible values: 0, 1
@@ -210,7 +210,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-data_options" name="save-as-image-pdfcrowd[data_options]" value="<?php echo($data_options); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-data_options" name="save-as-image-pdfcrowd[data_options]" value="<?php echo($data_options); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>data_options</strong>"
@@ -240,7 +240,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-use_print_media" name="save-as-image-pdfcrowd[use_print_media]" value="1" <?php checked( $use_print_media, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-use_print_media" name="save-as-image-pdfcrowd[use_print_media]" value="1" <?php checked( $use_print_media, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>use_print_media</strong>"<br>Possible values: 0, 1
@@ -258,7 +258,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-no_background" name="save-as-image-pdfcrowd[no_background]" value="1" <?php checked( $no_background, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-no_background" name="save-as-image-pdfcrowd[no_background]" value="1" <?php checked( $no_background, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>no_background</strong>"<br>Possible values: 0, 1
@@ -276,7 +276,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-disable_javascript" name="save-as-image-pdfcrowd[disable_javascript]" value="1" <?php checked( $disable_javascript, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-disable_javascript" name="save-as-image-pdfcrowd[disable_javascript]" value="1" <?php checked( $disable_javascript, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>disable_javascript</strong>"<br>Possible values: 0, 1
@@ -294,7 +294,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-disable_image_loading" name="save-as-image-pdfcrowd[disable_image_loading]" value="1" <?php checked( $disable_image_loading, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-disable_image_loading" name="save-as-image-pdfcrowd[disable_image_loading]" value="1" <?php checked( $disable_image_loading, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>disable_image_loading</strong>"<br>Possible values: 0, 1
@@ -312,7 +312,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-disable_remote_fonts" name="save-as-image-pdfcrowd[disable_remote_fonts]" value="1" <?php checked( $disable_remote_fonts, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-disable_remote_fonts" name="save-as-image-pdfcrowd[disable_remote_fonts]" value="1" <?php checked( $disable_remote_fonts, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>disable_remote_fonts</strong>"<br>Possible values: 0, 1
@@ -330,7 +330,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[load_iframes]">
+                    <select name="save-as-image-pdfcrowd[load_iframes]" id="save-as-image-pdfcrowd-load_iframes">
                     <option value="all" <?php selected($load_iframes, 'all');?>>All iframes are loaded.</option>
                     <option value="same-origin" <?php selected($load_iframes, 'same-origin');?>>Only iframes with the same origin as the main page are loaded.</option>
                     <option value="none" <?php selected($load_iframes, 'none');?>>Iframe loading is disabled.</option>
@@ -355,7 +355,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-block_ads" name="save-as-image-pdfcrowd[block_ads]" value="1" <?php checked( $block_ads, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-block_ads" name="save-as-image-pdfcrowd[block_ads]" value="1" <?php checked( $block_ads, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>block_ads</strong>"<br>Possible values: 0, 1
@@ -373,7 +373,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-default_encoding" name="save-as-image-pdfcrowd[default_encoding]" value="<?php echo($default_encoding); ?>" placeholder="auto detect" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-default_encoding" name="save-as-image-pdfcrowd[default_encoding]" value="<?php echo($default_encoding); ?>" placeholder="auto detect" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>default_encoding</strong>"
@@ -392,7 +392,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-locale" name="save-as-image-pdfcrowd[locale]" value="<?php echo($locale); ?>" placeholder="en-US" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-locale" name="save-as-image-pdfcrowd[locale]" value="<?php echo($locale); ?>" placeholder="en-US" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>locale</strong>"
@@ -414,7 +414,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_user_name" name="save-as-image-pdfcrowd[http_auth_user_name]" value="<?php echo($http_auth_user_name); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_user_name" name="save-as-image-pdfcrowd[http_auth_user_name]" value="<?php echo($http_auth_user_name); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>http_auth_user_name</strong>"
@@ -433,7 +433,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_password" name="save-as-image-pdfcrowd[http_auth_password]" value="<?php echo($http_auth_password); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_auth_password" name="save-as-image-pdfcrowd[http_auth_password]" value="<?php echo($http_auth_password); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>http_auth_password</strong>"
@@ -452,7 +452,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-cookies" name="save-as-image-pdfcrowd[cookies]" value="<?php echo($cookies); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-cookies" name="save-as-image-pdfcrowd[cookies]" value="<?php echo($cookies); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>cookies</strong>"
@@ -471,7 +471,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-verify_ssl_certificates" name="save-as-image-pdfcrowd[verify_ssl_certificates]" value="1" <?php checked( $verify_ssl_certificates, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-verify_ssl_certificates" name="save-as-image-pdfcrowd[verify_ssl_certificates]" value="1" <?php checked( $verify_ssl_certificates, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>verify_ssl_certificates</strong>"<br>Possible values: 0, 1
@@ -489,7 +489,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-fail_on_main_url_error" name="save-as-image-pdfcrowd[fail_on_main_url_error]" value="1" <?php checked( $fail_on_main_url_error, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-fail_on_main_url_error" name="save-as-image-pdfcrowd[fail_on_main_url_error]" value="1" <?php checked( $fail_on_main_url_error, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>fail_on_main_url_error</strong>"<br>Possible values: 0, 1
@@ -507,7 +507,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-fail_on_any_url_error" name="save-as-image-pdfcrowd[fail_on_any_url_error]" value="1" <?php checked( $fail_on_any_url_error, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-fail_on_any_url_error" name="save-as-image-pdfcrowd[fail_on_any_url_error]" value="1" <?php checked( $fail_on_any_url_error, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>fail_on_any_url_error</strong>"<br>Possible values: 0, 1
@@ -525,7 +525,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-no_xpdfcrowd_header" name="save-as-image-pdfcrowd[no_xpdfcrowd_header]" value="1" <?php checked( $no_xpdfcrowd_header, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-no_xpdfcrowd_header" name="save-as-image-pdfcrowd[no_xpdfcrowd_header]" value="1" <?php checked( $no_xpdfcrowd_header, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>no_xpdfcrowd_header</strong>"<br>Possible values: 0, 1
@@ -581,7 +581,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_http_header" name="save-as-image-pdfcrowd[custom_http_header]" value="<?php echo($custom_http_header); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-custom_http_header" name="save-as-image-pdfcrowd[custom_http_header]" value="<?php echo($custom_http_header); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>custom_http_header</strong>"
@@ -600,7 +600,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-javascript_delay" name="save-as-image-pdfcrowd[javascript_delay]" value="<?php echo($javascript_delay); ?>" placeholder="200" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-javascript_delay" name="save-as-image-pdfcrowd[javascript_delay]" value="<?php echo($javascript_delay); ?>" placeholder="200" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>javascript_delay</strong>"
@@ -618,7 +618,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-element_to_convert" name="save-as-image-pdfcrowd[element_to_convert]" value="<?php echo($element_to_convert); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-element_to_convert" name="save-as-image-pdfcrowd[element_to_convert]" value="<?php echo($element_to_convert); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>element_to_convert</strong>"
@@ -637,7 +637,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[element_to_convert_mode]">
+                    <select name="save-as-image-pdfcrowd[element_to_convert_mode]" id="save-as-image-pdfcrowd-element_to_convert_mode">
                     <option value="cut-out" <?php selected($element_to_convert_mode, 'cut-out');?>>The element and its children are cut out of the document.</option>
                     <option value="remove-siblings" <?php selected($element_to_convert_mode, 'remove-siblings');?>>All element's siblings are removed.</option>
                     <option value="hide-siblings" <?php selected($element_to_convert_mode, 'hide-siblings');?>>All element's siblings are hidden.</option>
@@ -659,7 +659,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-wait_for_element" name="save-as-image-pdfcrowd[wait_for_element]" value="<?php echo($wait_for_element); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-wait_for_element" name="save-as-image-pdfcrowd[wait_for_element]" value="<?php echo($wait_for_element); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>wait_for_element</strong>"
@@ -689,7 +689,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_width" name="save-as-image-pdfcrowd[screenshot_width]" value="<?php echo($screenshot_width); ?>" placeholder="1024" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_width" name="save-as-image-pdfcrowd[screenshot_width]" value="<?php echo($screenshot_width); ?>" placeholder="1024" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>screenshot_width</strong>"
@@ -707,7 +707,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_height" name="save-as-image-pdfcrowd[screenshot_height]" value="<?php echo($screenshot_height); ?>" placeholder="actual document height is used" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-screenshot_height" name="save-as-image-pdfcrowd[screenshot_height]" value="<?php echo($screenshot_height); ?>" placeholder="actual document height is used" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>screenshot_height</strong>"
@@ -725,7 +725,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-scale_factor" name="save-as-image-pdfcrowd[scale_factor]" value="<?php echo($scale_factor); ?>" placeholder="100" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-scale_factor" name="save-as-image-pdfcrowd[scale_factor]" value="<?php echo($scale_factor); ?>" placeholder="100" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>scale_factor</strong>"
@@ -743,7 +743,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-background_color" name="save-as-image-pdfcrowd[background_color]" value="<?php echo($background_color); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-background_color" name="save-as-image-pdfcrowd[background_color]" value="<?php echo($background_color); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>background_color</strong>"
@@ -776,7 +776,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-debug_log" name="save-as-image-pdfcrowd[debug_log]" value="1" <?php checked( $debug_log, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-debug_log" name="save-as-image-pdfcrowd[debug_log]" value="1" <?php checked( $debug_log, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>debug_log</strong>"<br>Possible values: 0, 1
@@ -794,7 +794,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-tag" name="save-as-image-pdfcrowd[tag]" value="<?php echo($tag); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-tag" name="save-as-image-pdfcrowd[tag]" value="<?php echo($tag); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>tag</strong>"
@@ -813,7 +813,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_proxy" name="save-as-image-pdfcrowd[http_proxy]" value="<?php echo($http_proxy); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-http_proxy" name="save-as-image-pdfcrowd[http_proxy]" value="<?php echo($http_proxy); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>http_proxy</strong>"
@@ -832,7 +832,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-https_proxy" name="save-as-image-pdfcrowd[https_proxy]" value="<?php echo($https_proxy); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-https_proxy" name="save-as-image-pdfcrowd[https_proxy]" value="<?php echo($https_proxy); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>https_proxy</strong>"
@@ -851,7 +851,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate" name="save-as-image-pdfcrowd[client_certificate]" value="<?php echo($client_certificate); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate" name="save-as-image-pdfcrowd[client_certificate]" value="<?php echo($client_certificate); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>client_certificate</strong>"
@@ -870,7 +870,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate_password" name="save-as-image-pdfcrowd[client_certificate_password]" value="<?php echo($client_certificate_password); ?>" placeholder="" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-client_certificate_password" name="save-as-image-pdfcrowd[client_certificate_password]" value="<?php echo($client_certificate_password); ?>" placeholder="" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>client_certificate_password</strong>"
@@ -900,7 +900,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[converter_version]">
+                    <select name="save-as-image-pdfcrowd[converter_version]" id="save-as-image-pdfcrowd-converter_version">
                     <option value="latest" <?php selected($converter_version, 'latest');?>>The latest converter version.</option>
                     <option value="20.10" <?php selected($converter_version, '20.10');?>>Version 20.10.</option>
                     <option value="18.10" <?php selected($converter_version, '18.10');?>>Version 18.10.</option>
@@ -922,7 +922,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-use_http" name="save-as-image-pdfcrowd[use_http]" value="1" <?php checked( $use_http, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-use_http" name="save-as-image-pdfcrowd[use_http]" value="1" <?php checked( $use_http, 1 ); ?> autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>use_http</strong>"<br>Possible values: 0, 1
@@ -943,7 +943,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-retry_count" name="save-as-image-pdfcrowd[retry_count]" value="<?php echo($retry_count); ?>" placeholder="1" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-retry_count" name="save-as-image-pdfcrowd[retry_count]" value="<?php echo($retry_count); ?>" placeholder="1" autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>retry_count</strong>"

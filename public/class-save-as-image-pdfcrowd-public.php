@@ -206,10 +206,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'email_recipient_address' => '',
         'email_subject' => '{{site}} - {{title}} Image',
         'image_created_callback' => '',
+        'license_type' => 'demo',
         'output_format' => 'png',
         'output_name' => '',
         'username' => '',
-        'version' => '2100',
+        'version' => '2110',
     );
 
     private static $API_OPTIONS = array(
@@ -325,20 +326,30 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             } else {
                 $options['conversion_mode'] = 'auto';
             }
-            $options['converter_version'] = '18.10';
-        } else {
-            if($options['version'] == 2100) {
-                // error_log('the same version');
-                return $options;
-            }
+            $options['version'] = 1000;
+        }
 
-            if($options['version'] < 2000) {
-                $options['converter_version'] = '18.10';
+        if($options['version'] == 2110) {
+            // error_log('the same version');
+            return $options;
+        }
+
+        if($options['version'] < 2000) {
+            $options['converter_version'] = '18.10';
+        }
+
+        if($options['version'] < 2110) {
+            if(!isset($options['username']) ||
+               empty($options['username']) ||
+               $options['username'] === 'demo') {
+                $options['license_type'] = 'demo';
+            } else {
+                $options['license_type'] = 'regular';
             }
         }
 
         // error_log('save new options');
-        $options['version'] = 2100;
+        $options['version'] = 2110;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -361,9 +372,9 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
 
     public static function get_button_text($options) {
         if(!isset($options['button_translation']) ||
-           !$options['button_translation'] ||
-           !$options['button_text']) {
-            return $options['button_text'];
+           !$options['button_translation']) {
+            return isset($options['button_text']) ?
+                $options['button_text'] : '';
         }
         $text = $options['button_text'];
         if($options['button_translation'] == 'domain') {
@@ -927,7 +938,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.1.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.1.1 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -1210,16 +1221,14 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             }
         }
 
-        if(!isset($options['username']) || empty($options['username']) ||
-           $options['username'] === 'demo') {
-            // use demo username
-            $options['username'] = 'wp-demo';
-        }
-
-        if(!isset($options['api_key']) || empty($options['api_key']) ||
-           $options['username'] === 'wp-demo') {
-            // use demo api key
-            $options['api_key'] = 'a182eb08c32a11e992c42c4d5455307a';
+        if($options['license_type'] === 'demo') {
+            // use demo credentials
+            if(!isset($options['username']) || empty($options['username'])) {
+                $options['username'] = 'wp-demo';
+            }
+            if(!isset($options['api_key']) || empty($options['api_key'])) {
+                $options['api_key'] = 'a182eb08c32a11e992c42c4d5455307a';
+            }
         }
 
         $output = self::do_post_request($options);

@@ -24,12 +24,30 @@
                     Show Button on
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-home" name="save-as-image-pdfcrowd[button_on_home]" value="1" <?php checked( $button_on_home, 1 ); ?> /><label for="save-as-image-pdfcrowd-button-on-home">Home page<br/></label>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-front" name="save-as-image-pdfcrowd[button_on_front]" value="1" <?php checked( $button_on_front, 1 ); ?> /><label for="save-as-image-pdfcrowd-button-on-front">Front page<br/></label>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-pages" name="save-as-image-pdfcrowd[button_on_pages]" value="1" <?php checked( $button_on_pages, 1 ); ?> /><label for="save-as-image-pdfcrowd-button-on-pages">Other pages<br/></label>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-posts" name="save-as-image-pdfcrowd[button_on_posts]" value="1" <?php checked( $button_on_posts, 1 ); ?> /><label for="save-as-image-pdfcrowd-button-on-posts">Posts<br/></label>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-categories" name="save-as-image-pdfcrowd[button_on_categories]" value="1" <?php checked( $button_on_categories, 1 ); ?> /><label for="save-as-image-pdfcrowd-button-on-categories">Category pages<br/></label>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-taxonomies" name="save-as-image-pdfcrowd[button_on_taxonomies]" value="1" <?php checked( $button_on_taxonomies, 1 ); ?> /><label for="save-as-image-pdfcrowd-button-on-taxonomies">Taxonomy pages<br/></label>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-home" name="save-as-image-pdfcrowd[button_on_home]" value="1" <?php checked( $button_on_home, 1 ); ?> autocomplete="off" />
+                    <label for="save-as-image-pdfcrowd-button-on-home">
+                        Home page<br/>
+                    </label>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-front" name="save-as-image-pdfcrowd[button_on_front]" value="1" <?php checked( $button_on_front, 1 ); ?> autocomplete="off" />
+                    <label for="save-as-image-pdfcrowd-button-on-front">
+                        Front page<br/>
+                    </label>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-pages" name="save-as-image-pdfcrowd[button_on_pages]" value="1" <?php checked( $button_on_pages, 1 ); ?> autocomplete="off" />
+                    <label for="save-as-image-pdfcrowd-button-on-pages">
+                        Other pages<br/>
+                    </label>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-posts" name="save-as-image-pdfcrowd[button_on_posts]" value="1" <?php checked( $button_on_posts, 1 ); ?> autocomplete="off" />
+                    <label for="save-as-image-pdfcrowd-button-on-posts">
+                        Posts<br/>
+                    </label>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-categories" name="save-as-image-pdfcrowd[button_on_categories]" value="1" <?php checked( $button_on_categories, 1 ); ?> autocomplete="off" />
+                    <label for="save-as-image-pdfcrowd-button-on-categories">
+                        Category pages<br/>
+                    </label>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-button-on-taxonomies" name="save-as-image-pdfcrowd[button_on_taxonomies]" value="1" <?php checked( $button_on_taxonomies, 1 ); ?> autocomplete="off" />
+                    <label for="save-as-image-pdfcrowd-button-on-taxonomies">
+                        Taxonomy pages<br/>
+                    </label>
                     <div style='margin-top: 1em'>
                         <p>
                             or use shortcode
@@ -53,7 +71,7 @@
                     Hide Button in Output Image
                 </th>
                 <td>
-                    <input type="checkbox" id="save-as-image-pdfcrowd-button-hidden" name="save-as-image-pdfcrowd[button_hidden]" value="1" <?php checked( $button_hidden, 1 ); ?> />
+                    <input type="checkbox" id="save-as-image-pdfcrowd-button-hidden" name="save-as-image-pdfcrowd[button_hidden]" value="1" <?php checked( $button_hidden, 1 ); ?> autocomplete="off" />
                     <p class='save-as-image-pdfcrowd-devi'>
                         Shortcode & function parameter: "<strong>button_hidden</strong>"<br>Possible values: 0, 1
                     </p>
@@ -69,23 +87,23 @@
                             <span>Button Image</span>
                         </legend>
                         <label for="save-as-image-pdfcrowd-image1.svg">
-                            <input type="radio" id="save-as-image-pdfcrowd-image1.svg" name="save-as-image-pdfcrowd[button_image]" value="image1.svg" <?php checked( $button_image, "image1.svg" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-image1.svg" name="save-as-image-pdfcrowd[button_image]" value="image1.svg" <?php checked( $button_image, "image1.svg" ); ?> autocomplete="off" />
                             <img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzBweCIgaGVpZ2h0PSIzMHB4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMS4zODA4IiB5PSIxLjI1NTIiIHdpZHRoPSIyNy42MTUiIGhlaWdodD0iMjYuMTA5IiBmaWxsPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAiLz48cGF0aCBkPSJNMjkuOTI4LDI4LjU4M0gwVjBoMjkuOTI4VjI4LjU4MyBNMi44NzYsMjUuNzA3ICBIMjcuMDVWMi44NzZIMi44NzYgTTguMjE3LDcuMTA2YzEuNjExLDAsMi45MTYsMS4yMTYsMi45MTYsMi43MTZjMCwxLjUtMS4zMDUsMi43MTctMi45MTYsMi43MTdjLTEuNjEsMC0yLjkxNC0xLjIxNi0yLjkxNC0yLjcxNyAgQzUuMzAzLDguMzIyLDYuNjA3LDcuMTA2LDguMjE3LDcuMTA2eiBNNC4zNzQsMjEuMDIxbDQuMzItMy4yNGwyLjE5OSwxLjYwNWw4LjcxNS02LjQ1bDMuMjQsMi40MDhsMi4xOTgtMS42MDR2Ny4yODFINC4zNzR6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiM1QjJEOEQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgb3BhY2l0eT0iLjg5OCIvPjwvc3ZnPgo='/>
                         </label>&nbsp;&nbsp;&nbsp;
                         <label for="save-as-image-pdfcrowd-image2.svg">
-                            <input type="radio" id="save-as-image-pdfcrowd-image2.svg" name="save-as-image-pdfcrowd[button_image]" value="image2.svg" <?php checked( $button_image, "image2.svg" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-image2.svg" name="save-as-image-pdfcrowd[button_image]" value="image2.svg" <?php checked( $button_image, "image2.svg" ); ?> autocomplete="off" />
                             <img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzBweCIgaGVpZ2h0PSIzMHB4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMS4zODA4IiB5PSIxLjI1NTIiIHdpZHRoPSIyNy42MTUiIGhlaWdodD0iMjYuMTA5IiBmaWxsPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAiLz48cGF0aCBkPSJtMS42MjI1IDI0LjM0OXM0LjIxMzQtNS45OTc5IDUuODczMy02LjA2MzZjMS40OTA3LTAuMDU5MDMgMS43OCAxLjY1MDMgNC4xMDczIDEuNDE2NCAyLjI3MDktMC4yMjgzMSAxLjg4MDUtNS4yNTczIDUuNjUyOC01LjMwMTcgMy43NzI0LTAuMDQ0MzkgMy4zOTc3IDMuNjA1MyA0LjgzNzYgMy42MTE4IDAuOTY5MTggMC4wMDQ0IDUuNzQ4My0zLjEwMTYgNS43NDgzLTMuMTAxNmwwLjA4ODc2IDguNjg0MnoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iIzAwNjQwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBvcGFjaXR5PSIuODk4IiBzdHJva2Utd2lkdGg9IjEuMDg5MyIvPjxwYXRoIGQ9Im05Ljg4MDkgNS4wMjAyYzIuMTM4MyAwIDMuODcwNSAxLjYxNCAzLjg3MDUgMy42MDUgMCAxLjk5MS0xLjczMjIgMy42MDYzLTMuODcwNSAzLjYwNjMtMi4xMzcgMC0zLjg2NzgtMS42MTQtMy44Njc4LTMuNjA2MyAwLTEuOTkxIDEuNzMwOC0zLjYwNSAzLjg2NzgtMy42MDV6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNmZmE1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgb3BhY2l0eT0iLjg5OCIgc3Ryb2tlLXdpZHRoPSIxLjMyNzMiLz48cGF0aCBkPSJtMS45NTI3IDI0LjcxOXMyLjAzMTgtMS43MjA1IDMuMjg0MS0xLjk1MjdjMS41NDk1LTAuMjg3MyAzLjA4NTkgMC43MTk5NiA0LjY1OTggMC43OTg4MiAxLjI3MzcgMC4wNjM4MiAyLjU0MTQtMC4yNzY4MyAzLjgxNjYtMC4yNjYyNyAxLjIwMjcgMC4wMSAyLjM5NTcgMC40MDQ0NSAzLjU5NDcgMC4zMTA2NSAxLjM1MjEtMC4xMDU3NiAyLjYxMjktMC43NDc2OSAzLjk0OTctMC45NzYzNCAwLjkwODI2LTAuMTU1MzUgMS44Mzg2LTAuMzkxNDMgMi43NTE1LTAuMjY2MjggMS4xNzg1IDAuMTYxNTYgNC4wODI5IDEuNDY0NSA0LjA4MjkgMS40NjQ1bDFlLTYgMi45NzM0LTI2LjAwNi0wLjMxMDY1eiIgZmlsbD0iIzQwZTBkMCIvPjxwYXRoIGQ9Ik0gMjkuOTI4LDI4LjU4MyBIIDAgViAwIEggMjkuOTI4IFYgMjguNTgzIE0gMi44NzYsMjUuNzA3IEggMjcuMDUgViAyLjg3NiBIIDIuODc2IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiM1YjJkOGQiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPgo='/>
                         </label>&nbsp;&nbsp;&nbsp;
                         <label for="save-as-image-pdfcrowd-image3.svg">
-                            <input type="radio" id="save-as-image-pdfcrowd-image3.svg" name="save-as-image-pdfcrowd[button_image]" value="image3.svg" <?php checked( $button_image, "image3.svg" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-image3.svg" name="save-as-image-pdfcrowd[button_image]" value="image3.svg" <?php checked( $button_image, "image3.svg" ); ?> autocomplete="off" />
                             <img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzBweCIgaGVpZ2h0PSIzMHB4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIwIj48cmVjdCB4PSIyMi4yOTIiIHk9IjkuMTQ2MyIgd2lkdGg9IjYuNjE0NCIgaGVpZ2h0PSIxOS4wNTYiLz48cmVjdCB4PSI3LjAzMTIiIHk9IjEuNTA2IiB3aWR0aD0iMTUuODMzIiBoZWlnaHQ9IjI2Ljc4NiIvPjxyZWN0IHg9Ii43ODEyNSIgeT0iNy41IiB3aWR0aD0iMTguNzUiIGhlaWdodD0iMTYuNTY3Ii8+PC9nPjxwb2x5bGluZSBwb2ludHM9IjIuOTU0IDIwLjMzMSA1Ljg2NyAxOC4xNDUgNy4zNTIgMTkuMjI5IDEzLjIzNiAxNC44NzUgMTUuNDIyIDE2LjUgMTYuOTA1IDE1LjQxNyAxNi45MDUgMjAuMzMxIDIuOTU0IDIwLjMzMSIgZmlsbD0iIzVCMkQ4RCIgb3BhY2l0eT0iLjg5OCIvPjxwYXRoIGQ9Im01LjU0NyAxMC45MzljMS4wODUgMCAxLjk2NyAwLjgyMiAxLjk2NyAxLjgzMyAwIDEuMDE0LTAuODgyIDEuODMzLTEuOTY3IDEuODMzLTEuMDg4IDAtMS45NjgtMC44MTktMS45NjgtMS44MzMgMC0xLjAxMSAwLjg4LTEuODMzIDEuOTY4LTEuODMzIiBmaWxsPSIjNUIyRDhEIiBvcGFjaXR5PSIuODk4Ii8+PHBhdGggZD0ibTI4LjY3NiA3LjU4LTUuNDU0LTYuMzI3LTEuMDgyLTEuMjUzaC0xMi44ODdjLTEuNzMxIDAtMy4xMzIgMS40MDEtMy4xMzIgMy4xMzJ2My45ODFoMS45NDFsLTFlLTMgLTMuMjE4YzRlLTMgLTAuOTc0IDAuNzg2LTEuNzYxIDEuNzU3LTEuNzYxbDExLjAyNC0wLjAxdjUuMjIyYzJlLTMgMS45NDUgMS41NzIgMy41MiAzLjUxOCAzLjUyaDMuODE2bC0wLjE4NiAxNS4wNjVjLTZlLTMgMC45NjktMC43ODggMS43NTEtMS43NTkgMS43NTlsLTE2LjU1Mi04ZS0zYy0wLjg4NiAwLTEuNTk4LTAuODctMS42MDQtMS45Mzl2LTEuMjc3aC0xLjk0NHYxLjkwMWMwIDEuOTE0IDEuMjggMy40NjUgMi44NTMgMy40NjVsMTcuODEyLTVlLTNjMS43MzIgMCAzLjEzNC0xLjQwNiAzLjEzNC0zLjEzNHYtMTcuNjU1bC0xLjI1NC0xLjQ1OCIgZmlsbD0iIzQzNDQ0MCIvPjxwYXRoIGQ9Ik0yMC4yMDEsMjUuNDM3SDBWNi4xNDNoMjAuMjAxVjI1LjQzNyBNMS45NCwyMy40OTRoMTYuMzE5VjguMDg1SDEuOTQiIGZpbGw9IiM1QjJEOEQiLz48L3N2Zz4K'/>
                         </label>&nbsp;&nbsp;&nbsp;
                         <label for="save-as-image-pdfcrowd-image4.svg">
-                            <input type="radio" id="save-as-image-pdfcrowd-image4.svg" name="save-as-image-pdfcrowd[button_image]" value="image4.svg" <?php checked( $button_image, "image4.svg" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-image4.svg" name="save-as-image-pdfcrowd[button_image]" value="image4.svg" <?php checked( $button_image, "image4.svg" ); ?> autocomplete="off" />
                             <img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkuNzE0IiBoZWlnaHQ9IjI3LjQwOCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0xLjAwMDYgMSAxMi40NCAwLjA5NTg3OSA1LjI3MzMgNi40MjM5LTAuMDcxOTEgMTguODg4aC0xNy42NDJ6IiBmaWxsPSIjZmZmYWZhIi8+PHBhdGggZD0ibTEyLjY5OCAwLjkwNDA5IDAuMzM1NTggNi40NzE4IDUuODAwNyAwLjMzNTU4eiIgZmlsbD0iIzY5Njk2OSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02Ljc2NTYgLTIuNzYzNykiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iIzkyOTI5MiI+PHBhdGggZD0ibTE5LjUgM2gtMTAuNDk3Yy0xLjEwNjEgMC0yLjAwMjggMC44OTgzNC0yLjAwMjggMi4wMDczdjIyLjk4NWMwIDEuMTA4NiAwLjg5MDkzIDIuMDA3MyAxLjk5NzQgMi4wMDczaDE1LjAwNWMxLjEwMzEgMCAxLjk5NzQtMC44OTgyMSAxLjk5NzQtMS45OTA4di0xOC4wMDlsLTYtN3ptLTAuNSAxaC0xMC4wMDRjLTAuNTQ5ODQgMC0wLjk5NTU4IDAuNDU1MjYtMC45OTU1OCAwLjk5NTQ2djIzLjAwOWMwIDAuNTQ5NzggMC40NTQ3MSAwLjk5NTQ2IDAuOTk5OTYgMC45OTU0NmgxNWMwLjU1MjI2IDAgMC45OTk5Ni0wLjQ0NDk1IDAuOTk5OTYtMC45OTM0di0xNy4wMDdoLTQuMDAyMWMtMS4xMDM0IDAtMS45OTc5LTAuODg2NTYtMS45OTc5LTIuMDA1OXptMSAwLjV2NC40OTEyYzAgMC41NTcxNCAwLjQ1MDY1IDEuMDA4OCAwLjk5Njc0IDEuMDA4OGgzLjcwMzJ6Ii8+PC9nPjxwYXRoIGQ9Im0yMS45NzYgMjMuMDM5di02LjA0NTdoLTExdjdsMi41LTIgMS40NTc5IDEuMjQ5NyAzLjYzNTEtMy4yNDk3em0tMTItNy4wNDU3djEwaDEzdi0xMHptNCA0YzAuNTUyMjggMCAxLTAuNDQ3NzIgMS0xcy0wLjQ0NzcyLTEtMS0xLTEgMC40NDc3Mi0xIDEgMC40NDc3MiAxIDEgMXoiIGZpbGw9IiM1YjJkOGQiLz48cGF0aCBkPSJtMTAgN2g3IiBzdHJva2U9IiM4MDgwODAiIHN0cm9rZS13aWR0aD0iMXB4Ii8+PHBhdGggZD0ibTEwIDEwaDUiIHN0cm9rZT0iIzgwODA4MCIgc3Ryb2tlLXdpZHRoPSIxcHgiLz48L2c+PC9zdmc+Cg=='/>
                         </label>&nbsp;&nbsp;&nbsp;
                         <label for="save-as-image-pdfcrowd-pdfcrowd.svg">
-                            <input type="radio" id="save-as-image-pdfcrowd-pdfcrowd.svg" name="save-as-image-pdfcrowd[button_image]" value="pdfcrowd.svg" <?php checked( $button_image, "pdfcrowd.svg" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-pdfcrowd.svg" name="save-as-image-pdfcrowd[button_image]" value="pdfcrowd.svg" <?php checked( $button_image, "pdfcrowd.svg" ); ?> autocomplete="off" />
                             <img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTkuMjI3IiBoZWlnaHQ9IjQzLjI1NiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03My44MDIgLTM4Ni4wNikiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEuNzk0OCAwIDAgMS43OTQ4IC0yNjI2LjUgLTIxMi4wNikiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmOTUwMCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTE1MTQuNSAzMzUuODZjMC40NDI2IDAuMDU0IDEuMjM2Ni0wLjI0MzM2IDEuMDAwMiAwLjQ4OTY1djE4LjUxMWMtMC40NDI2LTAuMDU0LTEuMjM2NiAwLjI0MzM3LTEuMDAwMi0wLjQ4OTY1di0xOC41MTF6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC45OTk4Ii8+PHBhdGggZD0ibTE1MDYuMyAzNDQuNTRoMS40NzQ4djEwLjU1NWgtMS40NzQ4di0xMC41NTV6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC41MjUxIi8+PHBhdGggZD0ibTE1MjIuNCAzMzkuNzhjMC4zNzU1IDAuMTIzMSAxLjI5ODYtMC4zMDEzMyAxLjE2OTQgMC4zMjY0M3YxNC44NDNjLTAuMzc1NS0wLjEyMzExLTEuMjk4NiAwLjMwMTMzLTEuMTY5NC0wLjMyNjQzdi0xNC44NDN6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC44MzA2Ii8+PHBhdGggZD0ibTE1MzUuMSAzNTMuMjh2Mi4xNjQ5aC01LjE2NDl2LTIuMTY0OWg1LjE2NDl6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iMy44MzUxIi8+PC9nPjwvZz48L3N2Zz4K'/>
                         </label>&nbsp;&nbsp;&nbsp;
                         <p class='save-as-image-pdfcrowd-devi'>
@@ -93,9 +111,9 @@
                         </p>
                         <br/>
                         <label for="save-as-image-pdfcrowd-custom-image">
-                            <input type="radio" id="save-as-image-pdfcrowd-custom-image" name="save-as-image-pdfcrowd[button_image]" value="custom_image" <?php checked( $button_image, "custom_image" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-custom-image" name="save-as-image-pdfcrowd[button_image]" value="custom_image" <?php checked( $button_image, "custom_image" ); ?> autocomplete="off" />
                             Custom image URL
-                            <input id="save-as-image-pdfcrowd-custom-image-url" type="text" class="clear regular-text save-as-image-pdfcrowd-text-for-radio" name="save-as-image-pdfcrowd[button_image_url]" value="<?php echo($button_image_url);?>">
+                            <input id="save-as-image-pdfcrowd-custom-image-url" type="text" class="clear regular-text save-as-image-pdfcrowd-text-for-radio" name="save-as-image-pdfcrowd[button_image_url]" value="<?php echo($button_image_url);?>"  autocomplete="off" />
                             <p class='save-as-image-pdfcrowd-devi'>
                                 Shortcode & function parameter: "<strong>button_image_url</strong>"
                             </p>
@@ -115,7 +133,7 @@
                         </label>
                         <br/>
                         <label for="save-as-image-pdfcrowd-custom-image-h">
-                            <input type="radio" id="save-as-image-pdfcrowd-custom-image-h" name="save-as-image-pdfcrowd[button_image]" value="custom_html" <?php checked( $button_image, "custom_html" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-custom-image-h" name="save-as-image-pdfcrowd[button_image]" value="custom_html" <?php checked( $button_image, "custom_html" ); ?> autocomplete="off" />
                             Custom HTML
                             <br/>
                             <textarea class="save-as-image-pdfcrowd-text-for-radio" id="save-as-image-pdfcrowd-custom-html" name="save-as-image-pdfcrowd[button_custom_html]" rows=5 style='margin-left: 2em' cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($button_custom_html); ?></textarea>
@@ -147,7 +165,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="number" class="small-text" min="6" id="save-as-image-pdfcrowd-button-image-width" name="save-as-image-pdfcrowd[button_image_width]" value="<?php echo $button_image_width ?>" />px
+                    <input type="number" class="small-text" min="6" id="save-as-image-pdfcrowd-button-image-width" name="save-as-image-pdfcrowd[button_image_width]" value="<?php echo $button_image_width ?>" autocomplete="off" />px
                     <p class='save-as-image-pdfcrowd-devi'>
                         Shortcode & function parameter: "<strong>button_image_width</strong>"<br>Possible values: any numeric value
                     </p>
@@ -160,7 +178,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="number" class="small-text" min="6" id="save-as-image-pdfcrowd-button-image-height" name="save-as-image-pdfcrowd[button_image_height]" value="<?php echo $button_image_height ?>" />px
+                    <input type="number" class="small-text" min="6" id="save-as-image-pdfcrowd-button-image-height" name="save-as-image-pdfcrowd[button_image_height]" value="<?php echo $button_image_height ?>" autocomplete="off" />px
                     <p class='save-as-image-pdfcrowd-devi'>
                         Shortcode & function parameter: "<strong>button_image_height</strong>"<br>Possible values: any numeric value
                     </p>
@@ -173,7 +191,7 @@
                     </label>
                 </th>
                 <td>
-                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-button-text" name="save-as-image-pdfcrowd[button_text]" value="<?php echo($button_text);?>" placeholder="<?php esc_attr_e('Your text', $this->plugin_name);?>" />
+                    <input type="text" class="regular-text" id="save-as-image-pdfcrowd-button-text" name="save-as-image-pdfcrowd[button_text]" value="<?php echo($button_text);?>" placeholder="<?php esc_attr_e('Your text', $this->plugin_name);?>" autocomplete="off" />
                     <p class='save-as-image-pdfcrowd-devi'>
                         Shortcode & function parameter: "<strong>button_text</strong>"
                     </p>
@@ -189,17 +207,17 @@
                             <span>Button Translation</span>
                         </legend>
                         <label for="save-as-image-pdfcrowd-button-translation-">
-                            <input type="radio" id="save-as-image-pdfcrowd-button-translation-" name="save-as-image-pdfcrowd[button_translation]" value="" <?php checked($button_translation, ""); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-button-translation-" name="save-as-image-pdfcrowd[button_translation]" value="" <?php checked($button_translation, ""); ?> autocomplete="off" />
                             No translation
                         </label><br>
                         <label for="save-as-image-pdfcrowd-button-translation-auto">
-                            <input type="radio" id="save-as-image-pdfcrowd-button-translation-auto" name="save-as-image-pdfcrowd[button_translation]" value="auto" <?php checked($button_translation, "auto"); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-button-translation-auto" name="save-as-image-pdfcrowd[button_translation]" value="auto" <?php checked($button_translation, "auto"); ?> autocomplete="off" />
                             Automatic - look up in your internationalization files
                         </label><br>
                         <label for="save-as-image-pdfcrowd-button-translation-domain">
-                            <input type="radio" id="save-as-image-pdfcrowd-button-translation-domain" name="save-as-image-pdfcrowd[button_translation]" value="domain" <?php checked($button_translation, "domain"); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-button-translation-domain" name="save-as-image-pdfcrowd[button_translation]" value="domain" <?php checked($button_translation, "domain"); ?> autocomplete="off" />
                             Look up in the <a href="https://developer.wordpress.org/themes/functionality/internationalization/#text-domain">text domain</a>
-                            <input type="text" class="regular-text save-as-image-pdfcrowd-text-for-radio" id="save-as-image-pdfcrowd-button-translation-domain" name="save-as-image-pdfcrowd[button_translation_domain]" value="<?php echo($button_translation_domain);?>" placeholder="<?php esc_attr_e('default, the slug of your theme or plugin', $this->plugin_name);?>" />
+                            <input type="text" class="regular-text save-as-image-pdfcrowd-text-for-radio" name="save-as-image-pdfcrowd[button_translation_domain]" value="<?php echo($button_translation_domain);?>" placeholder="<?php esc_attr_e('default, the slug of your theme or plugin', $this->plugin_name);?>" autocomplete="off" />
                             <div class="save-as-image-pdfcrowd-m-description" style="padding-left: 2em">
                                 <p class='save-as-image-pdfcrowd-devi'>
                                     Shortcode & function parameter: "<strong>button_translation_domain</strong>"<br>Possible values: "default", the slug of your theme or plugin
@@ -222,19 +240,19 @@
                             <span>Button Display Format</span>
                         </legend>
                         <label for="save-as-image-pdfcrowd-Icon on the left and text">
-                            <input type="radio" id="save-as-image-pdfcrowd-Icon on the left and text" name="save-as-image-pdfcrowd[button_format]" value="image-text" <?php checked( $button_format, "image-text" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-Icon on the left and text" name="save-as-image-pdfcrowd[button_format]" value="image-text" <?php checked( $button_format, "image-text" ); ?> autocomplete="off" />
                             Icon on the left and text
                         </label><br>
                         <label for="save-as-image-pdfcrowd-Text on the left and icon">
-                            <input type="radio" id="save-as-image-pdfcrowd-Text on the left and icon" name="save-as-image-pdfcrowd[button_format]" value="text-image" <?php checked( $button_format, "text-image" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-Text on the left and icon" name="save-as-image-pdfcrowd[button_format]" value="text-image" <?php checked( $button_format, "text-image" ); ?> autocomplete="off" />
                             Text on the left and icon
                         </label><br>
                         <label for="save-as-image-pdfcrowd-Icon only">
-                            <input type="radio" id="save-as-image-pdfcrowd-Icon only" name="save-as-image-pdfcrowd[button_format]" value="image" <?php checked( $button_format, "image" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-Icon only" name="save-as-image-pdfcrowd[button_format]" value="image" <?php checked( $button_format, "image" ); ?> autocomplete="off" />
                             Icon only
                         </label><br>
                         <label for="save-as-image-pdfcrowd-Text only">
-                            <input type="radio" id="save-as-image-pdfcrowd-Text only" name="save-as-image-pdfcrowd[button_format]" value="text" <?php checked( $button_format, "text" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-Text only" name="save-as-image-pdfcrowd[button_format]" value="text" <?php checked( $button_format, "text" ); ?> autocomplete="off" />
                             Text only
                         </label><br>
                     </fieldset>
@@ -258,23 +276,23 @@
                         <legend class="screen-reader-text">
                             <span>Indicator Type</span>
                         </legend>
-                        <label for="save-as-image-pdfcrowd-ellipsis">
-                            <input type="radio" id="save-as-image-pdfcrowd-ellipsis" name="save-as-image-pdfcrowd[button_indicator]" value="ellipsis" <?php checked( $button_indicator, "ellipsis" ); ?> />
+                        <label>
+                            <input type="radio" name="save-as-image-pdfcrowd[button_indicator]" value="ellipsis" <?php checked( $button_indicator, "ellipsis" ); ?> autocomplete="off" />
                             Ellipsis
                         </label>
                         <br>
-                        <label for="save-as-image-pdfcrowd-ring">
-                            <input type="radio" id="save-as-image-pdfcrowd-ring" name="save-as-image-pdfcrowd[button_indicator]" value="ring" <?php checked( $button_indicator, "ring" ); ?> />
+                        <label>
+                            <input type="radio" name="save-as-image-pdfcrowd[button_indicator]" value="ring" <?php checked( $button_indicator, "ring" ); ?> autocomplete="off" />
                             Ring
                         </label>
                         <br>
-                        <label for="save-as-image-pdfcrowd-dualRing">
-                            <input type="radio" id="save-as-image-pdfcrowd-dualRing" name="save-as-image-pdfcrowd[button_indicator]" value="dualRing" <?php checked( $button_indicator, "dualRing" ); ?> />
+                        <label>
+                            <input type="radio" name="save-as-image-pdfcrowd[button_indicator]" value="dualRing" <?php checked( $button_indicator, "dualRing" ); ?> autocomplete="off" />
                             Dual ring
                         </label>
                         <br>
-                        <label for="save-as-image-pdfcrowd-html">
-                            <input type="radio" id="save-as-image-pdfcrowd-html" name="save-as-image-pdfcrowd[button_indicator]" value="html" <?php checked( $button_indicator, "html" ); ?> />
+                        <label>
+                            <input type="radio" name="save-as-image-pdfcrowd[button_indicator]" value="html" <?php checked( $button_indicator, "html" ); ?> autocomplete="off" />
                             Custom HTML
                             <br>
                             <textarea class="save-as-image-pdfcrowd-text-for-radio" id="save-as-image-pdfcrowd-custom-indicator-html" name="save-as-image-pdfcrowd[button_indicator_html]" rows=3 style='margin-left: 2em' cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo(esc_html($button_indicator_html));?></textarea>
@@ -285,10 +303,10 @@
                             </div>
                         </label>
                         <br>
-                        <label for="save-as-image-pdfcrowd-custom">
-                            <input type="radio" id="save-as-image-pdfcrowd-custom" name="save-as-image-pdfcrowd[button_indicator]" value="custom" <?php checked( $button_indicator, "custom" ); ?> />
+                        <label>
+                            <input type="radio" name="save-as-image-pdfcrowd[button_indicator]" value="custom" <?php checked( $button_indicator, "custom" ); ?> autocomplete="off" />
                             Custom function
-                            <input type="text" class="regular-text save-as-image-pdfcrowd-text-for-radio" id="save-as-image-pdfcrowd-button-custom-indicator" name="save-as-image-pdfcrowd[button_custom_indicator]" value="<?php echo($button_custom_indicator);?>" placeholder="<?php esc_attr_e('Your JavaScript function name', $this->plugin_name);?>" />
+                            <input type="text" class="regular-text save-as-image-pdfcrowd-text-for-radio" id="save-as-image-pdfcrowd-button-custom-indicator" name="save-as-image-pdfcrowd[button_custom_indicator]" value="<?php echo($button_custom_indicator);?>" placeholder="<?php esc_attr_e('Your JavaScript function name', $this->plugin_name);?>" autocomplete="off" />
                             <div class="save-as-image-pdfcrowd-m-description" style="padding-left: 2em">
                                 <p class='save-as-image-pdfcrowd-devi'>
                                     Shortcode & function parameter: "<strong>button_custom_indicator</strong>"<br>Possible values: your JavaScript function name
@@ -317,8 +335,8 @@
                             </div>
                         </label>
                         <br>
-                        <label for="save-as-image-pdfcrowd-">
-                            <input type="radio" id="save-as-image-pdfcrowd-" name="save-as-image-pdfcrowd[button_indicator]" value="" <?php checked( $button_indicator, "" ); ?> />
+                        <label>
+                            <input type="radio" name="save-as-image-pdfcrowd[button_indicator]" value="" <?php checked( $button_indicator, "" ); ?> autocomplete="off" />
                             No indicator
                         </label>
                         <br>
@@ -377,18 +395,18 @@
                     <table class="save-as-image-pdfcrowd-inner-table">
                         <tr>
                             <td>
-                                Top <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-margin-top" name="save-as-image-pdfcrowd[button_margin_top]" value="<?php echo $button_margin_top ?>" />px
+                                Top <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-margin-top" name="save-as-image-pdfcrowd[button_margin_top]" value="<?php echo $button_margin_top ?>" autocomplete="off" />px
                             </td>
                             <td>
-                                Right <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-margin-right" name="save-as-image-pdfcrowd[button_margin_right]" value="<?php echo $button_margin_right ?>" />px
+                                Right <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-margin-right" name="save-as-image-pdfcrowd[button_margin_right]" value="<?php echo $button_margin_right ?>" autocomplete="off" />px
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Bottom <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-margin-bottom" name="save-as-image-pdfcrowd[button_margin_bottom]" value="<?php echo $button_margin_bottom ?>" />px
+                                Bottom <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-margin-bottom" name="save-as-image-pdfcrowd[button_margin_bottom]" value="<?php echo $button_margin_bottom ?>" autocomplete="off" />px
                             </td>
                             <td>
-                                Left <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-margin-left" name="save-as-image-pdfcrowd[button_margin_left]" value="<?php echo $button_margin_left ?>" />px
+                                Left <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-margin-left" name="save-as-image-pdfcrowd[button_margin_left]" value="<?php echo $button_margin_left ?>" autocomplete="off" />px
                             </td>
                         </tr>
                     </table>
@@ -413,11 +431,11 @@
                             <span>Button Styling</span>
                         </legend>
                         <label for="save-as-image-pdfcrowd-st-theme">
-                            <input type="radio" id="save-as-image-pdfcrowd-st-theme" name="save-as-image-pdfcrowd[button_styling]" value="theme" <?php checked( $button_styling, "theme" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-st-theme" name="save-as-image-pdfcrowd[button_styling]" value="theme" <?php checked( $button_styling, "theme" ); ?> autocomplete="off" />
                             Defined by your theme
                         </label><br>
                         <label for="save-as-image-pdfcrowd-st-custom">
-                            <input type="radio" id="save-as-image-pdfcrowd-st-custom" name="save-as-image-pdfcrowd[button_styling]" value="custom" <?php checked( $button_styling, "custom" ); ?> />
+                            <input type="radio" id="save-as-image-pdfcrowd-st-custom" name="save-as-image-pdfcrowd[button_styling]" value="custom" <?php checked( $button_styling, "custom" ); ?> autocomplete="off" />
                             Custom
                         </label>
                     </fieldset>
@@ -442,7 +460,7 @@
                         </label>
                     </th>
                     <td>
-                        <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-text-size" name="save-as-image-pdfcrowd[button_text_size]" value="<?php echo $button_text_size ?>" />px
+                        <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-text-size" name="save-as-image-pdfcrowd[button_text_size]" value="<?php echo $button_text_size ?>" autocomplete="off" />px
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>button_text_size</strong>"<br>Possible values: any numeric value
                         </p>
@@ -482,7 +500,7 @@
                         </label>
                     </th>
                     <td>
-                        <input type="text" class="save-as-image-pdfcrowd-color-field" id="save-as-image-pdfcrowd-button-text-color" name="save-as-image-pdfcrowd[button_text_color]" value="<?php echo $button_text_color;?>" data-default-color="#fff" />
+                        <input type="text" class="save-as-image-pdfcrowd-color-field" id="save-as-image-pdfcrowd-button-text-color" name="save-as-image-pdfcrowd[button_text_color]" value="<?php echo $button_text_color;?>" data-default-color="#fff" autocomplete="off" />
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>button_text_color</strong>"<br>Possible values: any HTML color code
                         </p>
@@ -495,7 +513,7 @@
                         </label>
                     </th>
                     <td>
-                        <input type="text" class="save-as-image-pdfcrowd-color-field" id="save-as-image-pdfcrowd-button-background-color" name="save-as-image-pdfcrowd[button_background_color]" value="<?php echo($button_background_color);?>" data-default-color="#007bff" />
+                        <input type="text" class="save-as-image-pdfcrowd-color-field" id="save-as-image-pdfcrowd-button-background-color" name="save-as-image-pdfcrowd[button_background_color]" value="<?php echo($button_background_color);?>" data-default-color="#007bff" autocomplete="off" />
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>button_background_color</strong>"<br>Possible values: any HTML color code
                         </p>
@@ -508,7 +526,7 @@
                         </label>
                     </th>
                     <td>
-                        <input type="text" class="save-as-image-pdfcrowd-color-field" id="save-as-image-pdfcrowd-button-border-color" name="save-as-image-pdfcrowd[button_border_color]" value="<?php echo($button_border_color);?>" data-default-color="#007bff" />
+                        <input type="text" class="save-as-image-pdfcrowd-color-field" id="save-as-image-pdfcrowd-button-border-color" name="save-as-image-pdfcrowd[button_border_color]" value="<?php echo($button_border_color);?>" data-default-color="#007bff" autocomplete="off" />
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>button_border_color</strong>"<br>Possible values: any HTML color code
                         </p>
@@ -545,7 +563,7 @@
                         </label>
                     </th>
                     <td>
-                        <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-border-width" name="save-as-image-pdfcrowd[button_border_width]" value="<?php echo $button_border_width ?>" />px
+                        <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-border-width" name="save-as-image-pdfcrowd[button_border_width]" value="<?php echo $button_border_width ?>" autocomplete="off" />px
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>button_border_width</strong>"<br>Possible values: any numeric value
                         </p>
@@ -559,18 +577,18 @@
                         <table class="save-as-image-pdfcrowd-inner-table">
                             <tr>
                                 <td>
-                                    Top <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-padding-top" name="save-as-image-pdfcrowd[button_padding_top]" value="<?php echo $button_padding_top ?>" />px
+                                    Top <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-padding-top" name="save-as-image-pdfcrowd[button_padding_top]" value="<?php echo $button_padding_top ?>" autocomplete="off" />px
                                 </td>
                                 <td>
-                                    Right <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-padding-right" name="save-as-image-pdfcrowd[button_padding_right]" value="<?php echo $button_padding_right ?>" />px
+                                    Right <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-padding-right" name="save-as-image-pdfcrowd[button_padding_right]" value="<?php echo $button_padding_right ?>" autocomplete="off" />px
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Bottom <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-padding-bottom" name="save-as-image-pdfcrowd[button_padding_bottom]" value="<?php echo $button_padding_bottom ?>" />px
+                                    Bottom <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-padding-bottom" name="save-as-image-pdfcrowd[button_padding_bottom]" value="<?php echo $button_padding_bottom ?>" autocomplete="off" />px
                                 </td>
                                 <td>
-                                    Left <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-padding-left" name="save-as-image-pdfcrowd[button_padding_left]" value="<?php echo $button_padding_left ?>" />px
+                                    Left <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-padding-left" name="save-as-image-pdfcrowd[button_padding_left]" value="<?php echo $button_padding_left ?>" autocomplete="off" />px
                                 </td>
                             </tr>
                         </table>
@@ -586,7 +604,7 @@
                         </label>
                     </th>
                     <td>
-                        <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-radius" name="save-as-image-pdfcrowd[button_radius]" value="<?php echo $button_radius ?>" />px
+                        <input type="number" class="small-text" min="0" id="save-as-image-pdfcrowd-button-radius" name="save-as-image-pdfcrowd[button_radius]" value="<?php echo $button_radius ?>" autocomplete="off" />px
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>button_radius</strong>"<br>Possible values: any numeric value
                         </p>
@@ -597,7 +615,7 @@
                         Change on Mouse Over
                     </th>
                     <td>
-                        <input type="checkbox" id="save-as-image-pdfcrowd-button-hover" name="save-as-image-pdfcrowd[button_hover]" value="1" <?php checked( $button_hover, 1 ); ?> />
+                        <input type="checkbox" id="save-as-image-pdfcrowd-button-hover" name="save-as-image-pdfcrowd[button_hover]" value="1" <?php checked( $button_hover, 1 ); ?> autocomplete="off" />
                         <p class='save-as-image-pdfcrowd-devi'>
                             Shortcode & function parameter: "<strong>button_hover</strong>"<br>Possible values: 0, 1
                         </p>
