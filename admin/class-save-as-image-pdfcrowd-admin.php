@@ -191,7 +191,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 2110;
+        $valid['version'] = 2200;
 
         if(isset($input['wp_submit_action'])) {
             if($input['wp_submit_action'] === 'reset') {
@@ -213,36 +213,44 @@ class Save_As_Image_Pdfcrowd_Admin {
             $valid['api_key'] = trim($input['api_key']);
         }
 
-        if(isset($input['license_type']) &&
-           $input['license_type'] === 'regular') {
-            // check syntax of credentials
-            if(!isset($valid['username']) || empty($valid['username'])) {
-                add_settings_error(
-                    'username',
-                    'empty_username',
-                    'Username can not be empty.');
-            } else if(!preg_match("/^[\w.@+-]*$/", $valid['username'])) {
-                add_settings_error(
-                    'username',
-                    'invalid_username',
-                    pdfcrowd_create_invalid_value_message(
-                        $valid['username'],
-                        'Username',
-                        'Allowed values are alphanumeric, _, @, +, . and - characters.'));
-            }
-            if(!isset($valid['api_key']) || empty($valid['api_key'])) {
-                add_settings_error(
-                    'api_key',
-                    'empty_api_key',
-                    'API key can not be empty.');
-            } else if(!preg_match("/^[a-f0-9]{32}$/", $valid['api_key'])) {
-                add_settings_error(
-                    'api_key',
-                    'invalid_api_key',
-                    pdfcrowd_create_invalid_value_message(
-                        $valid['api_key'],
-                        'API key',
-                        'Must be 32-characters long and have only letters a-f and numbers.'));
+        if(isset($input['license_type'])) {
+            switch($input['license_type']) {
+            case 'regular':
+                // check syntax of credentials
+                if(!isset($valid['username']) || empty($valid['username'])) {
+                    add_settings_error(
+                        'username',
+                        'empty_username',
+                        'Username can not be empty.');
+                } else if(!preg_match("/^[\w.@+-]*$/", $valid['username'])) {
+                    add_settings_error(
+                        'username',
+                        'invalid_username',
+                        pdfcrowd_create_invalid_value_message(
+                            $valid['username'],
+                            'Username',
+                            'Allowed values are alphanumeric, _, @, +, . and - characters.'));
+                }
+                if(!isset($valid['api_key']) || empty($valid['api_key'])) {
+                    add_settings_error(
+                        'api_key',
+                        'empty_api_key',
+                        'API key can not be empty.');
+                } else if(!preg_match("/^[a-f0-9]{32}$/", $valid['api_key'])) {
+                    add_settings_error(
+                        'api_key',
+                        'invalid_api_key',
+                        pdfcrowd_create_invalid_value_message(
+                            $valid['api_key'],
+                            'API key',
+                            'Must be 32-characters long and have only letters a-f and numbers.'));
+                }
+                break;
+            case 'demo':
+                // reset credentials
+                $valid['username'] = '';
+                $valid['api_key'] = '';
+                break;
             }
         }
 
@@ -257,32 +265,6 @@ class Save_As_Image_Pdfcrowd_Admin {
             
         }
         $valid['output_format'] = isset($input['output_format']) ? $input['output_format'] : '';
-
-        $valid['data_string'] = isset($input['data_string']) ? $input['data_string'] : '';
-
-        $valid['data_file'] = isset($input['data_file']) ? $input['data_file'] : '';
-
-        if (isset($input['data_format']) &&
-            $input['data_format'] != '') {
-            $data_format = $input['data_format'];
-            if (!preg_match("/(?i)^(auto|json|xml|yaml|csv)$/", $data_format))
-                add_settings_error(
-                'data_format',
-                'empty_data_format',
-                pdfcrowd_create_invalid_value_message($data_format, 'Data Format', 'Allowed values are auto, json, xml, yaml, csv.'));
-            
-        }
-        $valid['data_format'] = isset($input['data_format']) ? $input['data_format'] : '';
-
-        $valid['data_encoding'] = isset($input['data_encoding']) ? $input['data_encoding'] : '';
-
-        $valid['data_ignore_undefined'] = (isset($input['data_ignore_undefined']) && !empty($input['data_ignore_undefined'])) ? 1: 0;
-
-        $valid['data_auto_escape'] = (isset($input['data_auto_escape']) && !empty($input['data_auto_escape'])) ? 1: 0;
-
-        $valid['data_trim_blocks'] = (isset($input['data_trim_blocks']) && !empty($input['data_trim_blocks'])) ? 1: 0;
-
-        $valid['data_options'] = isset($input['data_options']) ? $input['data_options'] : '';
 
         $valid['use_print_media'] = (isset($input['use_print_media']) && !empty($input['use_print_media'])) ? 1: 0;
 
@@ -458,6 +440,32 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['background_color'] = isset($input['background_color']) ? $input['background_color'] : '';
 
+        $valid['data_string'] = isset($input['data_string']) ? $input['data_string'] : '';
+
+        $valid['data_file'] = isset($input['data_file']) ? $input['data_file'] : '';
+
+        if (isset($input['data_format']) &&
+            $input['data_format'] != '') {
+            $data_format = $input['data_format'];
+            if (!preg_match("/(?i)^(auto|json|xml|yaml|csv)$/", $data_format))
+                add_settings_error(
+                'data_format',
+                'empty_data_format',
+                pdfcrowd_create_invalid_value_message($data_format, 'Data Format', 'Allowed values are auto, json, xml, yaml, csv.'));
+            
+        }
+        $valid['data_format'] = isset($input['data_format']) ? $input['data_format'] : '';
+
+        $valid['data_encoding'] = isset($input['data_encoding']) ? $input['data_encoding'] : '';
+
+        $valid['data_ignore_undefined'] = (isset($input['data_ignore_undefined']) && !empty($input['data_ignore_undefined'])) ? 1: 0;
+
+        $valid['data_auto_escape'] = (isset($input['data_auto_escape']) && !empty($input['data_auto_escape'])) ? 1: 0;
+
+        $valid['data_trim_blocks'] = (isset($input['data_trim_blocks']) && !empty($input['data_trim_blocks'])) ? 1: 0;
+
+        $valid['data_options'] = isset($input['data_options']) ? $input['data_options'] : '';
+
         $valid['debug_log'] = (isset($input['debug_log']) && !empty($input['debug_log'])) ? 1: 0;
 
         $valid['tag'] = isset($input['tag']) ? $input['tag'] : '';
@@ -516,17 +524,6 @@ class Save_As_Image_Pdfcrowd_Admin {
 
         $valid['retry_count'] = isset($input['retry_count']) ? $input['retry_count'] : '';
 
-
-        // check for empty fields
-        if(isset($valid['button_indicator']) &&
-           $valid['button_indicator'] == 'custom' &&
-           (!isset($valid['button_custom_indicator']) ||
-            empty($valid['button_custom_indicator']))) {
-            add_settings_error(
-                'button_custom_indicator',
-                'empty_button_custom_indicator',
-                    'Missing custom indicator function name.');
-        }
 
         return $valid;
     }

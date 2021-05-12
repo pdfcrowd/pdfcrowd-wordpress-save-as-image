@@ -37,9 +37,9 @@
                 <a href="#save-as-image-pdfcrowd-appearance" class="nav-tab">Appearance</a>
                 <a href="#save-as-image-pdfcrowd-behavior" class="nav-tab">Behavior</a>
                 <a href="#save-as-image-pdfcrowd-conversion-format" class="nav-tab">Conversion Format</a>
-                <a href="#save-as-image-pdfcrowd-data" class="nav-tab">Data</a>
                 <a href="#save-as-image-pdfcrowd-general-options" class="nav-tab">General Options</a>
                 <a href="#save-as-image-pdfcrowd-image-output" class="nav-tab">Image Output</a>
+                <a href="#save-as-image-pdfcrowd-data" class="nav-tab">Data</a>
                 <a href="#save-as-image-pdfcrowd-miscellaneous" class="nav-tab">Miscellaneous</a>
                 <a href="#save-as-image-pdfcrowd-api-client-options" class="nav-tab">API Client Options</a>
             </h2>
@@ -63,6 +63,8 @@
         $button_format = isset($options['button_format']) ? $options['button_format'] : '';
         $button_hidden = isset($options['button_hidden']) ? $options['button_hidden'] : '';
         $button_hover = isset($options['button_hover']) ? $options['button_hover'] : '';
+        $button_html_hidden = isset($options['button_html_hidden']) ? $options['button_html_hidden'] : '';
+        $button_id = isset($options['button_id']) ? $options['button_id'] : '';
         $button_image = isset($options['button_image']) ? $options['button_image'] : '';
         $button_image_height = isset($options['button_image_height']) ? $options['button_image_height'] : '';
         $button_image_url = isset($options['button_image_url']) ? $options['button_image_url'] : '';
@@ -94,8 +96,11 @@
         $button_translation_domain = isset($options['button_translation_domain']) ? $options['button_translation_domain'] : '';
         $button_user_drawings = isset($options['button_user_drawings']) ? $options['button_user_drawings'] : '';
         $conversion_mode = isset($options['conversion_mode']) ? $options['conversion_mode'] : '';
+        $converter_version = isset($options['converter_version']) ? $options['converter_version'] : '';
         $custom_data = isset($options['custom_data']) ? $options['custom_data'] : '';
         $dev_mode = isset($options['dev_mode']) ? $options['dev_mode'] : '';
+        $email_bcc = isset($options['email_bcc']) ? $options['email_bcc'] : '';
+        $email_cc = isset($options['email_cc']) ? $options['email_cc'] : '';
         $email_custom_dialogs = isset($options['email_custom_dialogs']) ? $options['email_custom_dialogs'] : '';
         $email_dialogs = isset($options['email_dialogs']) ? $options['email_dialogs'] : '';
         $email_message = isset($options['email_message']) ? $options['email_message'] : '';
@@ -109,14 +114,6 @@
         $username = isset($options['username']) ? $options['username'] : '';
         $version = isset($options['version']) ? $options['version'] : '';
 
-        $data_string = isset($options['data_string']) ? $options['data_string'] : '';
-        $data_file = isset($options['data_file']) ? $options['data_file'] : '';
-        $data_format = isset($options['data_format']) ? $options['data_format'] : 'auto';
-        $data_encoding = isset($options['data_encoding']) ? $options['data_encoding'] : '';
-        $data_ignore_undefined = isset($options['data_ignore_undefined']) ? $options['data_ignore_undefined'] : '';
-        $data_auto_escape = isset($options['data_auto_escape']) ? $options['data_auto_escape'] : '';
-        $data_trim_blocks = isset($options['data_trim_blocks']) ? $options['data_trim_blocks'] : '';
-        $data_options = isset($options['data_options']) ? $options['data_options'] : '';
         $use_print_media = isset($options['use_print_media']) ? $options['use_print_media'] : '';
         $no_background = isset($options['no_background']) ? $options['no_background'] : '';
         $disable_javascript = isset($options['disable_javascript']) ? $options['disable_javascript'] : '';
@@ -144,13 +141,20 @@
         $screenshot_height = isset($options['screenshot_height']) ? $options['screenshot_height'] : '';
         $scale_factor = isset($options['scale_factor']) ? $options['scale_factor'] : '';
         $background_color = isset($options['background_color']) ? $options['background_color'] : '';
+        $data_string = isset($options['data_string']) ? $options['data_string'] : '';
+        $data_file = isset($options['data_file']) ? $options['data_file'] : '';
+        $data_format = isset($options['data_format']) ? $options['data_format'] : 'auto';
+        $data_encoding = isset($options['data_encoding']) ? $options['data_encoding'] : '';
+        $data_ignore_undefined = isset($options['data_ignore_undefined']) ? $options['data_ignore_undefined'] : '';
+        $data_auto_escape = isset($options['data_auto_escape']) ? $options['data_auto_escape'] : '';
+        $data_trim_blocks = isset($options['data_trim_blocks']) ? $options['data_trim_blocks'] : '';
+        $data_options = isset($options['data_options']) ? $options['data_options'] : '';
         $debug_log = isset($options['debug_log']) ? $options['debug_log'] : '';
         $tag = isset($options['tag']) ? $options['tag'] : '';
         $http_proxy = isset($options['http_proxy']) ? $options['http_proxy'] : '';
         $https_proxy = isset($options['https_proxy']) ? $options['https_proxy'] : '';
         $client_certificate = isset($options['client_certificate']) ? $options['client_certificate'] : '';
         $client_certificate_password = isset($options['client_certificate_password']) ? $options['client_certificate_password'] : '';
-        $converter_version = isset($options['converter_version']) ? $options['converter_version'] : '20.10';
         $use_http = isset($options['use_http']) ? $options['use_http'] : '';
         $retry_count = isset($options['retry_count']) ? $options['retry_count'] : '';
 
