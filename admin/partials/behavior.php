@@ -15,7 +15,7 @@
 
 <div id="save-as-image-pdfcrowd-behavior" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
     <h2>Behavior</h2>
-    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</a>
+    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show parameters</a>
 
     <table class="form-table">
         <tbody>
@@ -283,7 +283,7 @@
                         <p>
                         <label for="save-as-image-pdfcrowd-conversion-mode-url">
                             <input type="radio" id="save-as-image-pdfcrowd-conversion-mode-url" name="save-as-image-pdfcrowd[conversion_mode]" value="url" <?php checked( $conversion_mode, "url" ); ?> autocomplete="off" />
-                            Url
+                            URL
                         </label>
                         </p>
                         <p class='description'>
@@ -314,7 +314,7 @@
                         </label>
                         </p>
                         <p class='description'>
-                            The current HTML contents shown in the browser is sent for conversion.<br>This mode is suitable for web forms and dynamic HTML contents.
+                            The current HTML contents shown in the browser is sent for conversion.<br>This mode is suitable for web forms and dynamic HTML contents.<br>This mode is not suitable for cached pages.
                         </p>
                         <div id="save-as-image-pdfcrowd-cm-content-options" class="save-as-image-pdfcrowd-sub-option">
                             <input type="checkbox" id="save-as-image-pdfcrowd-button-user-drawings" name="save-as-image-pdfcrowd[button_user_drawings]" value="1" <?php checked( $button_user_drawings, 1 ); ?> autocomplete="off" />

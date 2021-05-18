@@ -56,6 +56,7 @@ span.save-as-image-pdfcrowd-button-wrap {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: nowrap;
 }
 
 .save-as-image-pdfcrowd-button-hover, .save-as-image-pdfcrowd-has-indicator-func:hover {
@@ -179,4 +180,13 @@ span.save-as-image-pdfcrowd-button-wrap {
 
 #save-as-image-pdfcrowd-license-settings input::placeholder {
     font-size: 80%;
+}
+
+.save-as-image-pdfcrowd-fieldset {
+    border: revert;
+    padding: 0 1em;
+    margin: -1em;
+    border: 1px solid #aaa;
+}
+
 }

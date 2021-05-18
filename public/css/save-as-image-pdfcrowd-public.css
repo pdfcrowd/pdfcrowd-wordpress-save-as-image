@@ -24,6 +24,7 @@ span.save-as-image-pdfcrowd-button-wrap {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: nowrap;
 }
 
 .save-as-image-pdfcrowd-button-hover, .save-as-image-pdfcrowd-has-indicator-func:hover {
