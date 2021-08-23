@@ -15,7 +15,14 @@
 
 <div id="save-as-image-pdfcrowd-appearance" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
     <h2>Appearance</h2>
-    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show Parameters</a>
+    
+    <a href='#' class='save-as-image-pdfcrowd-expert-show button-secondary'>
+        Show parameters
+    </a>
+    <a href='#' class='save-as-image-pdfcrowd-expert-hide button-secondary' style='display: none;'>
+        Hide parameters
+    </a>
+
 
     <table class="form-table">
         <tbody>

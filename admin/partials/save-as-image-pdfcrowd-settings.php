@@ -16,7 +16,14 @@
 <div id="save-as-image-pdfcrowd-conversion-format" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Conversion Format</h2>
-    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show parameters</a>
+    
+    <a href='#' class='save-as-image-pdfcrowd-expert-show button-secondary'>
+        Show parameters
+    </a>
+    <a href='#' class='save-as-image-pdfcrowd-expert-hide button-secondary' style='display: none;'>
+        Hide parameters
+    </a>
+
 
 
     <table class="form-table">
@@ -63,7 +70,14 @@
 <div id="save-as-image-pdfcrowd-general-options" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>General Options</h2>
-    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show parameters</a>
+    
+    <a href='#' class='save-as-image-pdfcrowd-expert-show button-secondary'>
+        Show parameters
+    </a>
+    <a href='#' class='save-as-image-pdfcrowd-expert-hide button-secondary' style='display: none;'>
+        Hide parameters
+    </a>
+
 
 
     <table class="form-table">
@@ -541,7 +555,14 @@
 <div id="save-as-image-pdfcrowd-image-output" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Image Output</h2>
-    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show parameters</a>
+    
+    <a href='#' class='save-as-image-pdfcrowd-expert-show button-secondary'>
+        Show parameters
+    </a>
+    <a href='#' class='save-as-image-pdfcrowd-expert-hide button-secondary' style='display: none;'>
+        Hide parameters
+    </a>
+
 
 
     <table class="form-table">
@@ -628,7 +649,14 @@
 <div id="save-as-image-pdfcrowd-data" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Data</h2>
-    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show parameters</a>
+    
+    <a href='#' class='save-as-image-pdfcrowd-expert-show button-secondary'>
+        Show parameters
+    </a>
+    <a href='#' class='save-as-image-pdfcrowd-expert-hide button-secondary' style='display: none;'>
+        Hide parameters
+    </a>
+
 
 
     <table class="form-table">
@@ -793,7 +821,14 @@
 <div id="save-as-image-pdfcrowd-miscellaneous" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>Miscellaneous</h2>
-    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show parameters</a>
+    
+    <a href='#' class='save-as-image-pdfcrowd-expert-show button-secondary'>
+        Show parameters
+    </a>
+    <a href='#' class='save-as-image-pdfcrowd-expert-hide button-secondary' style='display: none;'>
+        Hide parameters
+    </a>
+
 
 
     <table class="form-table">
@@ -917,7 +952,14 @@
 <div id="save-as-image-pdfcrowd-api-client-options" class="wrap metabox-holder columns-2 save-as-image-pdfcrowd-metaboxes hidden">
 
     <h2>API Client Options</h2>
-    <a href='#' class='save-as-image-pdfcrowd-expert button-secondary'>Show parameters</a>
+    
+    <a href='#' class='save-as-image-pdfcrowd-expert-show button-secondary'>
+        Show parameters
+    </a>
+    <a href='#' class='save-as-image-pdfcrowd-expert-hide button-secondary' style='display: none;'>
+        Hide parameters
+    </a>
+
 
 
     <table class="form-table">

@@ -76,7 +76,7 @@ The output file name is generated automatically or can be specified in custom op
 Please contact us on support@pdfcrowd.com us if you need any help.
 We recommend that you check our [FAQ](https://pdfcrowd.com/faq/). It contains answers to many common questions.
 
-Pdfcrowd [API playground](https://pdfcrowd.com/playground/) may help you to configure the plugin, create a [shortcode](https://pdfcrowd.com/playground/html-to-image/?lang=wf-wpscode) or a [function call](https://pdfcrowd.com/playground/html-to-image/?lang=wf-wpfunc).
+Pdfcrowd [API Playground](https://pdfcrowd.com/playground/) may help you to configure the plugin, create a [shortcode](https://pdfcrowd.com/playground/html-to-image/?lang=wf-wpscode) or a [function call](https://pdfcrowd.com/playground/html-to-image/?lang=wf-wpfunc).
 
 == Installation ==
 
@@ -128,6 +128,10 @@ Yes, Pdfcrowd support (support@pdfcrowd.com) is more than happy to help you with
 2. Sample of settings.
 
 == Changelog ==
+
+= 2.4.0 =
+* Set the default value of "Conversion Mode" to "URL".
+* "Hide parameters" button added in plugin admin settings.
 
 = 2.3.0 =
 * New "Email From" option.
