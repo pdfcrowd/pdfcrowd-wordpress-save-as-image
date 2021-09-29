@@ -216,7 +216,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_format' => 'png',
         'output_name' => '',
         'username' => '',
-        'version' => '2400',
+        'version' => '2410',
     );
 
     private static $API_OPTIONS = array(
@@ -335,7 +335,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 2400) {
+        if($options['version'] == 2410) {
             // error_log('the same version');
             return $options;
         }
@@ -345,9 +345,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         }
 
         if($options['version'] < 2110) {
-            if(!isset($options['username']) ||
-               empty($options['username']) ||
-               $options['username'] === 'demo') {
+            if(empty($options['username']) || $options['username'] === 'demo') {
                 $options['license_type'] = 'demo';
             } else {
                 $options['license_type'] = 'regular';
@@ -355,7 +353,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         }
 
         // error_log('save new options');
-        $options['version'] = 2400;
+        $options['version'] = 2410;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -544,10 +542,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
 
         $config = json_encode($config);
 
-        $button_id = isset($options['button_id']) &&
-                   !empty($options['button_id']) ?
-                   "id='" . $options['button_id'] . "'" :
-                   '';
+        $button_id = !empty($options['button_id']) ?
+                   "id='" . $options['button_id'] . "'" : '';
 
         $button = "<{$button_tag} class='$classes'{$div_style}><{$button_tag} {$button_id} class='{$btn_classes}'{$btn_style} onclick='window.SaveAsImagePdfcrowd(\"$custom_options\", $enc_data, $config, this);' data-pdfcrowd-flags='{$pflags}'>";
 
@@ -722,7 +718,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         return $this->eval_shortcode($attrs, $content, $custom_options, 'bsc');
     }
 
-    private static function get_url($url, $args, $throw_error = false) {
+    private static function get_url(
+        $url, $args, $throw_error = false, $throw_on_400 = false) {
         $response = wp_remote_get($url, $args);
         if(is_wp_error($response)) {
             $msg = $response->get_error_message() . ' ' . $url;
@@ -734,11 +731,21 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             }
             return '';
         }
+
+        if($throw_on_400) {
+            $status_code = wp_remote_retrieve_response_code($response);
+            if($status_code && $status_code >= 400) {
+                throw new Exception(
+                    self::prepare_error_message(473, 'URL Load Error') .
+                    "<p>Failed url is <a href='$url'>$url</a> with status $status_code.</p>" .
+                '<h3>Response</h3><div style="background-color: #eee">' . wp_remote_retrieve_body($response) . '</div>');
+            }
+        }
         return wp_remote_retrieve_body($response);
     }
 
     private static function embed_styles($html, $site, $args) {
-        $protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
+        $protocol = !empty($_SERVER['HTTPS']) ? 'https' : 'http';
 
         $output = preg_replace_callback(
             "`(?i)\<link rel=[\'\"]stylesheet[\'\"](?<pre>.*?)href=[\'\"](?<url>(?:http:|https:)?\/\/{$site}.*?)[\'\"](?<post>.*?)\s*\/\s*\>`",
@@ -756,7 +763,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     }
 
     private static function add_missing_protocol($html) {
-        $protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
+        $protocol = !empty($_SERVER['HTTPS']) ? 'https' : 'http';
 
         $output = preg_replace(
             "`(?im)(\<(?:a|img|link|iframe|input|body|base|script|embed)\s+[^\>]*(?:src|href|background)\s*=\s*[\'\"])(?:\/\/)`",
@@ -864,6 +871,31 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         return $cookies;
     }
 
+    private static function use_connection_args($options, &$args) {
+        if(isset($options['http_auth_user_name']) and
+           $options['http_auth_user_name'] and
+           isset($options['http_auth_password']) and
+           $options['http_auth_password']) {
+            $args['headers'] = array(
+                'Authorization' => 'Basic ' . base64_encode(
+                    $options['http_auth_user_name'] . ':' .
+                    $options['http_auth_password']));
+        }
+
+        if(isset($options['cookies']) and $options['cookies']) {
+            if(!isset($args['cookies'])) {
+                $args['cookies'] = array();
+            }
+
+            foreach(explode(';', $options['cookies']) as $cookie) {
+                $vals = explode('=', $cookie, 2);
+                if(count($vals) == 2) {
+                    $args['cookies'][$vals[0]] = $vals[1];
+                }
+            }
+        }
+    }
+
     public static function do_post_request($options) {
         if($options['conversion_mode'] != 'url' && !isset($options['file'])) {
             $html = null;
@@ -881,10 +913,18 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                         $args['cookies'] = self::collect_cookies();
                     }
                 }
-                // error_log('download ' . $options['url']);
+
+                self::use_connection_args($options, $args);
 
                 try {
-                    $html = self::get_url($options['url'], $args, true);
+                    $html = self::get_url(
+                        $options['url'],
+                        $args,
+                        true,
+                        (isset($options['fail_on_main_url_error']) &&
+                         $options['fail_on_main_url_error'] == 1) ||
+                        (isset($options['fail_on_any_url_error']) &&
+                         $options['fail_on_any_url_error'] == 1));
                 } catch (Exception $ex) {
                     $error = new WP_Error(471, $ex->getMessage());
                     return $error;
@@ -921,8 +961,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $files = array();
 
         $converter_version = '20.10';
-        if(isset($options['converter_version']) &&
-           !empty(isset($options['converter_version']))) {
+        if(!empty($options['converter_version'])) {
             $converter_version = $options['converter_version'];
         }
 
@@ -965,7 +1004,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.4.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.4.1 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -979,8 +1018,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $protocol = (isset($options['use_http']) && $options['use_http'] == 1)
                   ? 'http' : 'https';
 
-        $retry_count = (isset($options['retry_count']) &&
-                        !empty($options['retry_count']) &&
+        $retry_count = (!empty($options['retry_count']) &&
                         $options['retry_count'] > 0)
                      ? $options['retry_count'] : 0;
 
@@ -1015,7 +1053,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         return $error;
     }
 
-    private static function prepare_error_message($code, $text, $cmode) {
+    private static function prepare_error_message($code, $text, $cmode = null) {
         $text = '<h3>' . $text . '</h3>';
         switch($code) {
         case 471:
@@ -1187,13 +1225,13 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $message = self::string_subst($message, $email_data);
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
-        if(isset($options['email_cc']) && !empty($options['email_cc'])) {
+        if(!empty($options['email_cc'])) {
             $headers[] = 'Cc: ' . $options['email_cc'];
         }
-        if(isset($options['email_bcc']) && !empty($options['email_bcc'])) {
+        if(!empty($options['email_bcc'])) {
             $headers[] = 'Bcc: ' . $options['email_bcc'];
         }
-        if(isset($options['email_from']) && !empty($options['email_from'])) {
+        if(!empty($options['email_from'])) {
             $headers[] = 'From: ' . $options['email_from'];
         }
         if(!wp_mail($email_to,
@@ -1266,10 +1304,10 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
 
         if($options['license_type'] === 'demo') {
             // use demo credentials
-            if(!isset($options['username']) || empty($options['username'])) {
+            if(empty($options['username'])) {
                 $options['username'] = 'wp-demo';
             }
-            if(!isset($options['api_key']) || empty($options['api_key'])) {
+            if(empty($options['api_key'])) {
                 $options['api_key'] = 'a182eb08c32a11e992c42c4d5455307a';
             }
         }
@@ -1283,8 +1321,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             'error' => is_wp_error($output) ? $output : null
         );
 
-        if(isset($options['image_created_callback']) &&
-           !empty($options['image_created_callback'])) {
+        if(!empty($options['image_created_callback'])) {
             if($options['image_created_callback']($hook_data)) {
                 return;
             }
@@ -1297,7 +1334,12 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 self::send_json_error(
                     $code, str_replace('h3', 'p', $message), true);
             } else {
-                status_header($code, $message);
+                // use just the main error status for a status_header
+                $status_text = $message;
+                if(preg_match('/<h3>(.*?)<\/h3>/', $message, $matches)) {
+                    $status_text = $matches[1];
+                }
+                status_header($code, $status_text);
                 echo $this->get_error_page($code, $message);
             }
         } else {

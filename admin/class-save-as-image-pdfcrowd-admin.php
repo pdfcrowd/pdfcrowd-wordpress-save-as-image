@@ -114,8 +114,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     */
     public static function get_license_status($options) {
         if($options['license_type'] === 'demo' ||
-           ((!isset($options['username']) || empty($options['username'])) &&
-            (!isset($options['api_key']) || empty($options['api_key'])))) {
+           (empty($options['username']) && empty($options['api_key']))) {
             return null;
         }
 
@@ -191,7 +190,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 2400;
+        $valid['version'] = 2410;
 
         if(isset($input['wp_submit_action'])) {
             if($input['wp_submit_action'] === 'reset') {
@@ -217,7 +216,7 @@ class Save_As_Image_Pdfcrowd_Admin {
             switch($input['license_type']) {
             case 'regular':
                 // check syntax of credentials
-                if(!isset($valid['username']) || empty($valid['username'])) {
+                if(empty($valid['username'])) {
                     add_settings_error(
                         'username',
                         'empty_username',
@@ -231,7 +230,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                             'Username',
                             'Allowed values are alphanumeric, _, @, +, . and - characters.'));
                 }
-                if(!isset($valid['api_key']) || empty($valid['api_key'])) {
+                if(empty($valid['api_key'])) {
                     add_settings_error(
                         'api_key',
                         'empty_api_key',
@@ -266,15 +265,15 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['output_format'] = isset($input['output_format']) ? $input['output_format'] : '';
 
-        $valid['use_print_media'] = (isset($input['use_print_media']) && !empty($input['use_print_media'])) ? 1: 0;
+        $valid['use_print_media'] = empty($input['use_print_media']) ? 0 : 1;
 
-        $valid['no_background'] = (isset($input['no_background']) && !empty($input['no_background'])) ? 1: 0;
+        $valid['no_background'] = empty($input['no_background']) ? 0 : 1;
 
-        $valid['disable_javascript'] = (isset($input['disable_javascript']) && !empty($input['disable_javascript'])) ? 1: 0;
+        $valid['disable_javascript'] = empty($input['disable_javascript']) ? 0 : 1;
 
-        $valid['disable_image_loading'] = (isset($input['disable_image_loading']) && !empty($input['disable_image_loading'])) ? 1: 0;
+        $valid['disable_image_loading'] = empty($input['disable_image_loading']) ? 0 : 1;
 
-        $valid['disable_remote_fonts'] = (isset($input['disable_remote_fonts']) && !empty($input['disable_remote_fonts'])) ? 1: 0;
+        $valid['disable_remote_fonts'] = empty($input['disable_remote_fonts']) ? 0 : 1;
 
         if (isset($input['load_iframes']) &&
             $input['load_iframes'] != '') {
@@ -288,7 +287,7 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['load_iframes'] = isset($input['load_iframes']) ? $input['load_iframes'] : '';
 
-        $valid['block_ads'] = (isset($input['block_ads']) && !empty($input['block_ads'])) ? 1: 0;
+        $valid['block_ads'] = empty($input['block_ads']) ? 0 : 1;
 
         $valid['default_encoding'] = isset($input['default_encoding']) ? $input['default_encoding'] : '';
 
@@ -300,13 +299,13 @@ class Save_As_Image_Pdfcrowd_Admin {
 
         $valid['cookies'] = isset($input['cookies']) ? $input['cookies'] : '';
 
-        $valid['verify_ssl_certificates'] = (isset($input['verify_ssl_certificates']) && !empty($input['verify_ssl_certificates'])) ? 1: 0;
+        $valid['verify_ssl_certificates'] = empty($input['verify_ssl_certificates']) ? 0 : 1;
 
-        $valid['fail_on_main_url_error'] = (isset($input['fail_on_main_url_error']) && !empty($input['fail_on_main_url_error'])) ? 1: 0;
+        $valid['fail_on_main_url_error'] = empty($input['fail_on_main_url_error']) ? 0 : 1;
 
-        $valid['fail_on_any_url_error'] = (isset($input['fail_on_any_url_error']) && !empty($input['fail_on_any_url_error'])) ? 1: 0;
+        $valid['fail_on_any_url_error'] = empty($input['fail_on_any_url_error']) ? 0 : 1;
 
-        $valid['no_xpdfcrowd_header'] = (isset($input['no_xpdfcrowd_header']) && !empty($input['no_xpdfcrowd_header'])) ? 1: 0;
+        $valid['no_xpdfcrowd_header'] = empty($input['no_xpdfcrowd_header']) ? 0 : 1;
 
         if (isset($input['custom_javascript']) &&
             $input['custom_javascript'] != '') {
@@ -458,15 +457,15 @@ class Save_As_Image_Pdfcrowd_Admin {
 
         $valid['data_encoding'] = isset($input['data_encoding']) ? $input['data_encoding'] : '';
 
-        $valid['data_ignore_undefined'] = (isset($input['data_ignore_undefined']) && !empty($input['data_ignore_undefined'])) ? 1: 0;
+        $valid['data_ignore_undefined'] = empty($input['data_ignore_undefined']) ? 0 : 1;
 
-        $valid['data_auto_escape'] = (isset($input['data_auto_escape']) && !empty($input['data_auto_escape'])) ? 1: 0;
+        $valid['data_auto_escape'] = empty($input['data_auto_escape']) ? 0 : 1;
 
-        $valid['data_trim_blocks'] = (isset($input['data_trim_blocks']) && !empty($input['data_trim_blocks'])) ? 1: 0;
+        $valid['data_trim_blocks'] = empty($input['data_trim_blocks']) ? 0 : 1;
 
         $valid['data_options'] = isset($input['data_options']) ? $input['data_options'] : '';
 
-        $valid['debug_log'] = (isset($input['debug_log']) && !empty($input['debug_log'])) ? 1: 0;
+        $valid['debug_log'] = empty($input['debug_log']) ? 0 : 1;
 
         $valid['tag'] = isset($input['tag']) ? $input['tag'] : '';
 
@@ -520,7 +519,7 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
         $valid['converter_version'] = isset($input['converter_version']) ? $input['converter_version'] : '';
 
-        $valid['use_http'] = (isset($input['use_http']) && !empty($input['use_http'])) ? 1: 0;
+        $valid['use_http'] = empty($input['use_http']) ? 0 : 1;
 
         $valid['retry_count'] = isset($input['retry_count']) ? $input['retry_count'] : '';
 
