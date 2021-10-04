@@ -18,7 +18,7 @@
         Quick Setup
     </h2>
     <p>
-        Save as Image by Pdfcrowd offers 100+ settings.
+        Save as Image by Pdfcrowd offers 110+ settings.
         The setup wizard will help you to configure the most common ones.
         <div id="save-as-image-pdfcrowd-wizard-run" class="button-secondary"
              onclick="return save_as_image_pdfcrowd_submit_action('wizard');">
