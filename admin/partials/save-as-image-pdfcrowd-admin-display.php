@@ -37,12 +37,24 @@
                 <a href="#save-as-image-pdfcrowd-appearance" class="nav-tab">Appearance</a>
                 <a href="#save-as-image-pdfcrowd-behavior" class="nav-tab">Behavior</a>
                 <a href="#save-as-image-pdfcrowd-mode" class="nav-tab">Mode</a>
-                <a href="#save-as-image-pdfcrowd-conversion-format" class="nav-tab">Conversion Format</a>
-                <a href="#save-as-image-pdfcrowd-general-options" class="nav-tab">General Options</a>
-                <a href="#save-as-image-pdfcrowd-image-output" class="nav-tab">Image Output</a>
-                <a href="#save-as-image-pdfcrowd-data" class="nav-tab">Data</a>
-                <a href="#save-as-image-pdfcrowd-miscellaneous" class="nav-tab">Miscellaneous</a>
-                <a href="#save-as-image-pdfcrowd-api-client-options" class="nav-tab">API Client Options</a>
+                <a href="#save-as-image-pdfcrowd-conversion-format"
+                   id="nav-save-as-image-pdfcrowd-conversion-format"
+                   class="nav-tab">Conversion Format</a>
+                <a href="#save-as-image-pdfcrowd-general-options"
+                   id="nav-save-as-image-pdfcrowd-general-options"
+                   class="nav-tab">General Options</a>
+                <a href="#save-as-image-pdfcrowd-image-output"
+                   id="nav-save-as-image-pdfcrowd-image-output"
+                   class="nav-tab">Image Output</a>
+                <a href="#save-as-image-pdfcrowd-data"
+                   id="nav-save-as-image-pdfcrowd-data"
+                   class="nav-tab">Data</a>
+                <a href="#save-as-image-pdfcrowd-miscellaneous"
+                   id="nav-save-as-image-pdfcrowd-miscellaneous"
+                   class="nav-tab">Miscellaneous</a>
+                <a href="#save-as-image-pdfcrowd-api-client-options"
+                   id="nav-save-as-image-pdfcrowd-api-client-options"
+                   class="nav-tab">API Client Options</a>
             </h2>
 
         <?php
@@ -101,6 +113,7 @@
         $converter_version = isset($options['converter_version']) ? $options['converter_version'] : '';
         $custom_data = isset($options['custom_data']) ? $options['custom_data'] : '';
         $dev_mode = isset($options['dev_mode']) ? $options['dev_mode'] : '';
+        $diagnostics = isset($options['diagnostics']) ? $options['diagnostics'] : '';
         $email_bcc = isset($options['email_bcc']) ? $options['email_bcc'] : '';
         $email_cc = isset($options['email_cc']) ? $options['email_cc'] : '';
         $email_custom_dialogs = isset($options['email_custom_dialogs']) ? $options['email_custom_dialogs'] : '';
@@ -114,6 +127,7 @@
         $license_type = isset($options['license_type']) ? $options['license_type'] : '';
         $output_format = isset($options['output_format']) ? $options['output_format'] : '';
         $output_name = isset($options['output_name']) ? $options['output_name'] : '';
+        $url_lookup = isset($options['url_lookup']) ? $options['url_lookup'] : '';
         $username = isset($options['username']) ? $options['username'] : '';
         $version = isset($options['version']) ? $options['version'] : '';
 

@@ -35,7 +35,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[output_format]" id="save-as-image-pdfcrowd-output_format">
+                    <select name="save-as-image-pdfcrowd[output_format]" id="save-as-image-pdfcrowd-output_format" autocomplete="off">
                     <option value="png" <?php selected($output_format, 'png');?>>png</option>
                     <option value="jpg" <?php selected($output_format, 'jpg');?>>jpg</option>
                     <option value="gif" <?php selected($output_format, 'gif');?>>gif</option>
@@ -179,7 +179,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[load_iframes]" id="save-as-image-pdfcrowd-load_iframes">
+                    <select name="save-as-image-pdfcrowd[load_iframes]" id="save-as-image-pdfcrowd-load_iframes" autocomplete="off">
                     <option value="all" <?php selected($load_iframes, 'all');?>>All iframes are loaded.</option>
                     <option value="same-origin" <?php selected($load_iframes, 'same-origin');?>>Only iframes with the same origin as the main page are loaded.</option>
                     <option value="none" <?php selected($load_iframes, 'none');?>>Iframe loading is disabled.</option>
@@ -706,7 +706,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[data_format]" id="save-as-image-pdfcrowd-data_format">
+                    <select name="save-as-image-pdfcrowd[data_format]" id="save-as-image-pdfcrowd-data_format" autocomplete="off">
                     <option value="auto" <?php selected($data_format, 'auto');?>>the data format is auto detected</option>
                     <option value="json" <?php selected($data_format, 'json');?>>json</option>
                     <option value="xml" <?php selected($data_format, 'xml');?>>xml</option>
@@ -971,7 +971,7 @@
                     </label>
                 </th>
                 <td>
-                    <select name="save-as-image-pdfcrowd[converter_version]" id="save-as-image-pdfcrowd-converter_version">
+                    <select name="save-as-image-pdfcrowd[converter_version]" id="save-as-image-pdfcrowd-converter_version" autocomplete="off">
                     <option value="latest" <?php selected($converter_version, 'latest');?>>The latest converter version.</option>
                     <option value="20.10" <?php selected($converter_version, '20.10');?>>Version 20.10.</option>
                     <option value="18.10" <?php selected($converter_version, '18.10');?>>Version 18.10.</option>
