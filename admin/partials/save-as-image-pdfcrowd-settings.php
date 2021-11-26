@@ -5,7 +5,7 @@
 *
 *
 *
-* @link       https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
+* @link       https://pdfcrowd.com/save-as-image-wordpress-plugin/
 * @since      1.0.0
 *
 * @package    Save_As_Image_Pdfcrowd

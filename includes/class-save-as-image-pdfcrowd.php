@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
+ * @link       https://pdfcrowd.com/save-as-image-wordpress-plugin/
  * @since      1.0.0
  *
  * @package    Save_As_Image_Pdfcrowd
@@ -83,7 +83,7 @@ class Save_As_Image_Pdfcrowd {
             return SAVE_AS_IMAGE_VERSION;
         }
 
-        return '2.6.0';
+        return '2.6.1';
     }
 
     /**

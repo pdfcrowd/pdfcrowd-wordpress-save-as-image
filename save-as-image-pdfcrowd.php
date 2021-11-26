@@ -8,15 +8,15 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
+ * @link              https://pdfcrowd.com/save-as-image-wordpress-plugin/
  * @since             1.0.0
  * @package           Save_As_Image_Pdfcrowd
  *
  * @wordpress-plugin
  * Plugin Name:       Save as Image by Pdfcrowd
- * Plugin URI:        https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
+ * Plugin URI:        https://pdfcrowd.com/save-as-image-wordpress-plugin/
  * Description:       Let your visitors save pages as an image in a single click. Reliable, fast and highly customizable.
- * Version:           2.6.0
+ * Version:           2.6.1
  * Author:            Pdfcrowd <support@pdfcrowd.com>
  * Author URI:        https://pdfcrowd.com
  * License:           GPL-2.0+
@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
-define( 'SAVE_AS_IMAGE_VERSION', '2.6.0' );
+define( 'SAVE_AS_IMAGE_VERSION', '2.6.1' );
 
 /**
  * The code that runs during plugin activation.

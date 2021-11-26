@@ -5,7 +5,7 @@
 *
 *
 *
-* @link       https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
+* @link       https://pdfcrowd.com/save-as-image-wordpress-plugin/
 * @since      1.0.0
 *
 * @package    Save_As_Image_Pdfcrowd
@@ -59,14 +59,14 @@
                         <p>
                             or use shortcode
                             <strong>[save_as_image_pdfcrowd]</strong> in your page,
-                            <a href='https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/#shortcodes' target='_blank'>
+                            <a href='https://pdfcrowd.com/save-as-image-wordpress-plugin/#shortcodes' target='_blank'>
                                 details
                             </a>
                         </p>
                         <p>
                             or use function call,
                             <strong>create_save_as_image_pdfcrowd_button</strong> in your PHP code
-                            <a href='https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/#functions' target='_blank'>
+                            <a href='https://pdfcrowd.com/save-as-image-wordpress-plugin/#function' target='_blank'>
                                 details
                             </a>
                         </p>

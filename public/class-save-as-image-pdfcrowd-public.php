@@ -3,7 +3,7 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/
+ * @link       https://pdfcrowd.com/save-as-image-wordpress-plugin/
  * @since      1.0.0
  *
  * @package    Save_As_Image_Pdfcrowd
@@ -219,7 +219,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '2600',
+        'version' => '2610',
     );
 
     private static $API_OPTIONS = array(
@@ -333,7 +333,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 2600) {
+        if($options['version'] == 2610) {
             return $options;
         }
 
@@ -353,7 +353,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['url_lookup'] = 'location';
         }
 
-        $options['version'] = 2600;
+        $options['version'] = 2610;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -1093,7 +1093,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.6.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.6.1 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
