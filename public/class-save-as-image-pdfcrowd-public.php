@@ -219,7 +219,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '2620',
+        'version' => '2700',
     );
 
     private static $API_OPTIONS = array(
@@ -229,6 +229,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'disable_javascript',
         'disable_image_loading',
         'disable_remote_fonts',
+        'use_mobile_user_agent',
         'load_iframes',
         'block_ads',
         'default_encoding',
@@ -274,6 +275,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         '20.10' => array(
         ),
         '18.10' => array(
+            'use_mobile_user_agent',
             'load_iframes',
             'locale',
             'background_color',
@@ -333,7 +335,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 2620) {
+        if($options['version'] == 2700) {
             return $options;
         }
 
@@ -353,7 +355,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['url_lookup'] = 'location';
         }
 
-        $options['version'] = 2620;
+        $options['version'] = 2700;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -1093,7 +1095,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.6.2 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.7.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
