@@ -569,6 +569,51 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-auto_detect_element_to_convert">
+                        Auto Detect Element To Convert
+                    </label>
+                </th>
+                <td>
+                    <input type="checkbox" id="save-as-image-pdfcrowd-auto_detect_element_to_convert" name="save-as-image-pdfcrowd[auto_detect_element_to_convert]" value="1" <?php checked( $auto_detect_element_to_convert, 1 ); ?> autocomplete="off" />
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>auto_detect_element_to_convert</strong>"<br>Possible values: 0, 1
+                        </div>
+                        <div class='description'>
+                            The main HTML element for conversion is detected automatically.
+                              <br>
+ It is applicable for converter version >= 20.10.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-readability_enhancements">
+                        Readability Enhancements
+                    </label>
+                </th>
+                <td>
+                    <select name="save-as-image-pdfcrowd[readability_enhancements]" id="save-as-image-pdfcrowd-readability_enhancements" autocomplete="off">
+                    <option value="none" <?php selected($readability_enhancements, 'none');?>>No enhancements are applied.</option>
+                    <option value="readability-v1" <?php selected($readability_enhancements, 'readability-v1');?>>Enhancements are applied.</option>
+                    </select>
+                    <div class='save-as-image-pdfcrowd-m-description'>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode & function parameter: "<strong>readability_enhancements</strong>"<br>Possible values: <ul><li>"none" - No enhancements are applied.</li><li>"readability-v1" - Enhancements are applied.</li></ul>
+                        </div>
+                        <div class='description'>
+                            The input HTML is automatically enhanced to improve the readability.
+                              <br>
+ It is applicable for converter version >= 20.10.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </fieldset>

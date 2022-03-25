@@ -155,6 +155,8 @@
         $element_to_convert = isset($options['element_to_convert']) ? $options['element_to_convert'] : '';
         $element_to_convert_mode = isset($options['element_to_convert_mode']) ? $options['element_to_convert_mode'] : 'cut-out';
         $wait_for_element = isset($options['wait_for_element']) ? $options['wait_for_element'] : '';
+        $auto_detect_element_to_convert = isset($options['auto_detect_element_to_convert']) ? $options['auto_detect_element_to_convert'] : '';
+        $readability_enhancements = isset($options['readability_enhancements']) ? $options['readability_enhancements'] : 'none';
         $screenshot_width = isset($options['screenshot_width']) ? $options['screenshot_width'] : '';
         $screenshot_height = isset($options['screenshot_height']) ? $options['screenshot_height'] : '';
         $scale_factor = isset($options['scale_factor']) ? $options['scale_factor'] : '';

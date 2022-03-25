@@ -16,7 +16,7 @@
  * Plugin Name:       Save as Image by Pdfcrowd
  * Plugin URI:        https://pdfcrowd.com/save-as-image-wordpress-plugin/
  * Description:       Let your visitors save pages as an image in a single click. Reliable, fast and highly customizable.
- * Version:           2.7.1
+ * Version:           2.8.0
  * Author:            Pdfcrowd <support@pdfcrowd.com>
  * Author URI:        https://pdfcrowd.com
  * License:           GPL-2.0+
@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
-define( 'SAVE_AS_IMAGE_VERSION', '2.7.1' );
+define( 'SAVE_AS_IMAGE_VERSION', '2.8.0' );
 
 /**
  * The code that runs during plugin activation.
