@@ -219,7 +219,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '2910',
+        'version' => '2920',
     );
 
     private static $API_OPTIONS = array(
@@ -326,6 +326,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         481 => "<p>There was a problem connecting to Pdfcrowd servers over HTTPS. This could be caused by several reasons, one of them is that your local CA certificate store is out of date or not configured correctly.</p> <p>An alternative is to use the API over HTTP. The HTTP mode can be enabled by the <a href='/doc/api/method-index/#html_to_pdf_set_use_http'>setUseHttp</a> method.<p>",
         482 => "The input template or data is invalid.",
         483 => "The input is password protected. Provide a valid password.",
+        484 => "The input contains some unsupported feature, typically a font type.",
         502 => "The 502 status code indicates a temporary network issue. Try the request again.",
     );
 
@@ -341,7 +342,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 2910) {
+        if($options['version'] == 2920) {
             return $options;
         }
 
@@ -361,7 +362,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['url_lookup'] = 'location';
         }
 
-        $options['version'] = 2910;
+        $options['version'] = 2920;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -1107,7 +1108,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.9.1 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.9.2 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
