@@ -83,7 +83,7 @@ class Save_As_Image_Pdfcrowd {
             return SAVE_AS_IMAGE_VERSION;
         }
 
-        return '2.9.2';
+        return '2.9.3';
     }
 
     /**
