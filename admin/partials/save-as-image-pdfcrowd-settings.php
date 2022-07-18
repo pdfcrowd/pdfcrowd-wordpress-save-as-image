@@ -188,7 +188,7 @@
                             Use a mobile user agent.
                               <br>
  It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                         </div>
                     </div>
                 </td>
@@ -213,7 +213,7 @@
                             Specifies how iframes are handled.
                               <br>
  It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                         </div>
                     </div>
                 </td>
@@ -271,7 +271,7 @@
                             Set the locale for the conversion. This may affect the output format of dates, times and numbers.
                               <br>
  It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                             
                         </div>
                     </div>
@@ -419,7 +419,7 @@
                             Shortcode and function parameter: "<strong>custom_javascript</strong>"
                         </div>
                         <div class='description'>
-                            Run a custom JavaScript after the document is loaded and ready to print. The script is intended for post-load DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/doc/api/libpdfcrowd/'>JavaScript library</a>.
+                            Run a custom JavaScript after the document is loaded and ready to print. The script is intended for post-load DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/api/libpdfcrowd/'>JavaScript library</a>.
                             
                         </div>
                     </div>
@@ -438,7 +438,7 @@
                             Shortcode and function parameter: "<strong>on_load_javascript</strong>"
                         </div>
                         <div class='description'>
-                            Run a custom JavaScript right after the document is loaded. The script is intended for early DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/doc/api/libpdfcrowd/'>JavaScript library</a>.
+                            Run a custom JavaScript right after the document is loaded. The script is intended for early DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/api/libpdfcrowd/'>JavaScript library</a>.
                             
                         </div>
                     </div>
@@ -585,7 +585,7 @@
                             The main HTML element for conversion is detected automatically.
                               <br>
  It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                         </div>
                     </div>
                 </td>
@@ -609,7 +609,7 @@
                             The input HTML is automatically enhanced to improve the readability.
                               <br>
  It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                         </div>
                     </div>
                 </td>
@@ -703,7 +703,7 @@
                             The output image background color.
                               <br>
  It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/doc/api/versioning/'>versioning details</a>.
+                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                             The value must be in RRGGBB or RRGGBBAA hexadecimal format.
                         </div>
                     </div>
@@ -802,7 +802,7 @@
                             Shortcode and function parameter: "<strong>data_encoding</strong>"
                         </div>
                         <div class='description'>
-                             Set the encoding of the data file set by <a href='https://pdfcrowd.com/doc/api/html-to-pdf/php/ref/#set_data_file'>setDataFile</a>.
+                             Set the encoding of the data file set by <a href='https://pdfcrowd.com/api/html-to-pdf-php/ref/#set_data_file'>setDataFile</a>.
                             
                         </div>
                     </div>
