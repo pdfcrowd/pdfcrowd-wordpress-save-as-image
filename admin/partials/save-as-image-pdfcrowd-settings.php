@@ -113,7 +113,7 @@
                             Shortcode and function parameter: "<strong>no_background</strong>"<br>Possible values: 0, 1
                         </div>
                         <div class='description'>
-                            Do not print the background graphics. Absolute or relative filepath can be used. To apply WordPress uploaded media use e.g. ../wp-content/uploads/2019/06/your-file.pdf.
+                            Do not print the background graphics.
                         </div>
                     </div>
                 </td>
@@ -186,9 +186,6 @@
                         </div>
                         <div class='description'>
                             Use a mobile user agent.
-                              <br>
- It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                         </div>
                     </div>
                 </td>
@@ -211,9 +208,6 @@
                         </div>
                         <div class='description'>
                             Specifies how iframes are handled.
-                              <br>
- It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                         </div>
                     </div>
                 </td>
@@ -269,9 +263,6 @@
                         </div>
                         <div class='description'>
                             Set the locale for the conversion. This may affect the output format of dates, times and numbers.
-                              <br>
- It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                             
                         </div>
                     </div>
@@ -583,9 +574,6 @@
                         </div>
                         <div class='description'>
                             The main HTML element for conversion is detected automatically.
-                              <br>
- It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                         </div>
                     </div>
                 </td>
@@ -598,18 +586,17 @@
                 </th>
                 <td>
                     <select name="save-as-image-pdfcrowd[readability_enhancements]" id="save-as-image-pdfcrowd-readability_enhancements" autocomplete="off">
-                    <option value="none" <?php selected($readability_enhancements, 'none');?>>No enhancements are applied.</option>
-                    <option value="readability-v1" <?php selected($readability_enhancements, 'readability-v1');?>>Enhancements are applied.</option>
+                    <option value="none" <?php selected($readability_enhancements, 'none');?>>No enhancements are used.</option>
+                    <option value="readability-v1" <?php selected($readability_enhancements, 'readability-v1');?>>Version 1 of the enhancements is used.</option>
+                    <option value="readability-v2" <?php selected($readability_enhancements, 'readability-v2');?>>Version 2 of the enhancements is used.</option>
+                    <option value="readability-v3" <?php selected($readability_enhancements, 'readability-v3');?>>Version 3 of the enhancements is used.</option>
                     </select>
                     <div class='save-as-image-pdfcrowd-m-description'>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode and function parameter: "<strong>readability_enhancements</strong>"<br>Possible values: <ul><li>"none" - No enhancements are applied.</li><li>"readability-v1" - Enhancements are applied.</li></ul>
+                            Shortcode and function parameter: "<strong>readability_enhancements</strong>"<br>Possible values: <ul><li>"none" - No enhancements are used.</li><li>"readability-v1" - Version 1 of the enhancements is used.</li><li>"readability-v2" - Version 2 of the enhancements is used.</li><li>"readability-v3" - Version 3 of the enhancements is used.</li></ul>
                         </div>
                         <div class='description'>
                             The input HTML is automatically enhanced to improve the readability.
-                              <br>
- It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                         </div>
                     </div>
                 </td>
@@ -701,9 +688,6 @@
                         </div>
                         <div class='description'>
                             The output image background color.
-                              <br>
- It is applicable for converter version >= 20.10.
-                              More Pdfcrowd <a href='https://pdfcrowd.com/api/versioning/'>versioning details</a>.
                             The value must be in RRGGBB or RRGGBBAA hexadecimal format.
                         </div>
                     </div>

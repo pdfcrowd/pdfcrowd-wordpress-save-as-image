@@ -219,7 +219,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '2940',
+        'version' => '2100',
     );
 
     private static $API_OPTIONS = array(
@@ -342,7 +342,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 2940) {
+        if($options['version'] == 2100) {
             return $options;
         }
 
@@ -362,7 +362,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['url_lookup'] = 'location';
         }
 
-        $options['version'] = 2940;
+        $options['version'] = 2100;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -818,7 +818,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             error_log("Pdfcrowd: failed to get URL {$url}. " . $msg);
             if($throw_error) {
                 throw new Exception(
-                    self::prepare_error_message(471, $msg, '<b>"url"</b>') .
+                    self::prepare_error_message(
+                        471, $msg, '<b>"URL" or "Content"</b>') .
                     '<p>Or check your network and PHP configuration.</p>');
             }
             return '';
@@ -1108,7 +1109,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.9.4 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.10.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -1175,8 +1176,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         case 471:
         case 478:
             $link = '<a href="' .
-                  admin_url('options-general.php?page=save-as-image-pdfcrowd#save-as-image-pdfcrowd-behavior') .
-                  '"><b>Behavior</b></a>';
+                  admin_url('options-general.php?page=save-as-image-pdfcrowd#save-as-image-pdfcrowd-mode') .
+                  '"><b>Mode</b></a>';
             $text = $text . '<p>Set <b>"Conversion Mode"</b> to ' .
                   $cmode . ' on the ' .
                   $link . ' settings page of the "Save as Image by Pdfcrowd" plugin.</p>';
