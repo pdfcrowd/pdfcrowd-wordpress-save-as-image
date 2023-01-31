@@ -213,13 +213,14 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'email_recipient' => 'user',
         'email_recipient_address' => '',
         'email_subject' => '{{site}} - {{title}} Image',
+        'enable_cookies_opt' => '0',
         'image_created_callback' => '',
         'license_type' => 'demo',
         'output_format' => 'png',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '2130',
+        'version' => '2140',
     );
 
     private static $API_OPTIONS = array(
@@ -300,7 +301,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         401 => "Authentication credentials were not provided or the API license is not active.",
         403 => "The API service is suspended or there are no credits left.",
         405 => "The method specified in the request is not allowed. The request method must be POST.",
-        413 => "<p>The upload size limit is 100MB.</p> <p>You can zip uploaded HTML to avoid this error.</p>",
+        413 => "<p>The upload size limit is 300MB.</p> <p>You can zip uploaded HTML to avoid this error.</p>",
         429 => "<p>The client has sent too many requests within a certain timeframe (rate limiting).</p> <p>Upgrade to a higher Pdfcrowd API plan to avoid this error.</p>",
         430 => "<p>The client has sent too many concurrent requests at a time.</p> <p>Upgrade to a higher Pdfcrowd API plan to avoid this error.</p>",
         432 => "<p>The limit for the demo license has been exceeded.</p> <p>Use your personal Pdfcrowd API credentials.</p>",
@@ -343,13 +344,18 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 2130) {
+        if($options['version'] == 2140) {
             return $options;
         }
 
         if($options['version'] < 2000) {
             $options['converter_version'] = '18.10';
         }
+
+        $options['enable_cookies_opt'] = (
+            $options['version'] < 2140 &&
+            (!empty($options['auto_use_cookies']) ||
+             !empty($options['use_http']))) ? 1 : 0;
 
         if($options['version'] < 2110) {
             if(empty($options['username']) || $options['username'] === 'demo') {
@@ -363,7 +369,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['url_lookup'] = 'location';
         }
 
-        $options['version'] = 2130;
+        $options['version'] = 2140;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -1110,7 +1116,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.13.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.14.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 

@@ -190,7 +190,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 2130;
+        $valid['version'] = 2140;
 
         if(isset($input['wp_submit_action'])) {
             if($input['wp_submit_action'] === 'reset') {

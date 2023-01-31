@@ -1037,6 +1037,7 @@
                     </div>
                 </td>
             </tr>
+            <?php if($enable_cookies_opt): ?>
             <tr>
                 <th scope="row">
                     <label for="save-as-image-pdfcrowd-use_http">
@@ -1058,6 +1059,7 @@
                     </div>
                 </td>
             </tr>
+            <?php endif; ?>
             <tr>
                 <th scope="row">
                     <label for="save-as-image-pdfcrowd-retry_count">

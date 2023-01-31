@@ -123,6 +123,7 @@
         $email_recipient = isset($options['email_recipient']) ? $options['email_recipient'] : '';
         $email_recipient_address = isset($options['email_recipient_address']) ? $options['email_recipient_address'] : '';
         $email_subject = isset($options['email_subject']) ? $options['email_subject'] : '';
+        $enable_cookies_opt = isset($options['enable_cookies_opt']) ? $options['enable_cookies_opt'] : '';
         $image_created_callback = isset($options['image_created_callback']) ? $options['image_created_callback'] : '';
         $license_type = isset($options['license_type']) ? $options['license_type'] : '';
         $output_format = isset($options['output_format']) ? $options['output_format'] : '';
