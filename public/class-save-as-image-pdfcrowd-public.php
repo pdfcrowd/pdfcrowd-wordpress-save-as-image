@@ -196,7 +196,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'button_radius' => '3',
         'button_styling' => 'custom',
         'button_text' => 'Save as Image',
-        'button_text_color' => '#fff',
+        'button_text_color' => '#ffffff',
         'button_text_size' => '14',
         'button_text_weight' => 'bold',
         'button_translation' => '',
@@ -215,8 +215,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'email_message' => '<p>Dear {{user_first_name}} {{user_last_name}},</p>
 <p>Please, find {{title}} attached.</p>
 <p>Best Regards,<br>
-<a href="{{site_url}}">{{site}}</a></p>
-        ',
+<a href="{{site_url}}">{{site}}</a></p>',
         'email_recipient' => 'user',
         'email_recipient_address' => '',
         'email_subject' => '{{site}} - {{title}} Image',
@@ -228,11 +227,15 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '2170',
+        'version' => '3000',
     );
 
     private static $API_OPTIONS = array(
         'output_format',
+        'screenshot_width',
+        'screenshot_height',
+        'scale_factor',
+        'background_color',
         'use_print_media',
         'no_background',
         'disable_javascript',
@@ -260,10 +263,6 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'wait_for_element',
         'auto_detect_element_to_convert',
         'readability_enhancements',
-        'screenshot_width',
-        'screenshot_height',
-        'scale_factor',
-        'background_color',
         'data_string',
         'data_file',
         'data_format',
@@ -287,13 +286,13 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         '20.10' => array(
         ),
         '18.10' => array(
+            'background_color',
             'use_mobile_user_agent',
             'load_iframes',
             'locale',
             'custom_css',
             'auto_detect_element_to_convert',
             'readability_enhancements',
-            'background_color',
         ),
         'latest' => array()
     );
@@ -354,7 +353,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 2170) {
+        if($options['version'] == 3000) {
             return $options;
         }
 
@@ -379,7 +378,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['url_lookup'] = 'location';
         }
 
-        $options['version'] = 2170;
+        $options['version'] = 3000;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -1141,7 +1140,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/2.17.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/3.0.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 

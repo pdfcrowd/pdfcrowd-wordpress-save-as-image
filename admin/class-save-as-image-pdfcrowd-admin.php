@@ -88,7 +88,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     */
     public function add_plugin_admin_menu() {
         $plugin_screen_hook_suffix = add_options_page(
-            'Save as Image Setup',
+            'Save as Image Settings',
             'Save as Image',
             'manage_options',
             $this->plugin_name,
@@ -190,7 +190,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 2170;
+        $valid['version'] = 3000;
 
         if(isset($input['wp_submit_action'])) {
             if($input['wp_submit_action'] === 'reset') {
@@ -264,6 +264,54 @@ class Save_As_Image_Pdfcrowd_Admin {
             
         }
         $valid['output_format'] = isset($input['output_format']) ? $input['output_format'] : '';
+
+        if (isset($input['screenshot_width']) &&
+            $input['screenshot_width'] != '') {
+            $screenshot_width = $input['screenshot_width'];
+            if (!(intval($screenshot_width) >= 96 && intval($screenshot_width) <= 65000))
+                add_settings_error(
+                'screenshot_width',
+                'empty_screenshot_width',
+                pdfcrowd_create_invalid_value_message($screenshot_width, 'Screenshot Width', 'The value must be in the range 96-65000.'));
+            
+        }
+        $valid['screenshot_width'] = isset($input['screenshot_width']) ? $input['screenshot_width'] : '';
+
+        if (isset($input['screenshot_height']) &&
+            $input['screenshot_height'] != '') {
+            $screenshot_height = $input['screenshot_height'];
+            if (!(intval($screenshot_height) > 0))
+                add_settings_error(
+                'screenshot_height',
+                'empty_screenshot_height',
+                pdfcrowd_create_invalid_value_message($screenshot_height, 'Screenshot Height', 'Must be a positive integer number.'));
+            
+        }
+        $valid['screenshot_height'] = isset($input['screenshot_height']) ? $input['screenshot_height'] : '';
+
+        if (isset($input['scale_factor']) &&
+            $input['scale_factor'] != '') {
+            $scale_factor = $input['scale_factor'];
+            if (!(intval($scale_factor) > 0))
+                add_settings_error(
+                'scale_factor',
+                'empty_scale_factor',
+                pdfcrowd_create_invalid_value_message($scale_factor, 'Scale Factor', 'Must be a positive integer number.'));
+            
+        }
+        $valid['scale_factor'] = isset($input['scale_factor']) ? $input['scale_factor'] : '';
+
+        if (isset($input['background_color']) &&
+            $input['background_color'] != '') {
+            $background_color = $input['background_color'];
+            if (!preg_match("/^[0-9a-fA-F]{6,8}$/", $background_color))
+                add_settings_error(
+                'background_color',
+                'empty_background_color',
+                pdfcrowd_create_invalid_value_message($background_color, 'Background Color', 'The value must be in RRGGBB or RRGGBBAA hexadecimal format.'));
+            
+        }
+        $valid['background_color'] = isset($input['background_color']) ? $input['background_color'] : '';
 
         $valid['use_print_media'] = empty($input['use_print_media']) ? 0 : 1;
 
@@ -418,54 +466,6 @@ class Save_As_Image_Pdfcrowd_Admin {
             
         }
         $valid['readability_enhancements'] = isset($input['readability_enhancements']) ? $input['readability_enhancements'] : '';
-
-        if (isset($input['screenshot_width']) &&
-            $input['screenshot_width'] != '') {
-            $screenshot_width = $input['screenshot_width'];
-            if (!(intval($screenshot_width) >= 96 && intval($screenshot_width) <= 65000))
-                add_settings_error(
-                'screenshot_width',
-                'empty_screenshot_width',
-                pdfcrowd_create_invalid_value_message($screenshot_width, 'Screenshot Width', 'The value must be in the range 96-65000.'));
-            
-        }
-        $valid['screenshot_width'] = isset($input['screenshot_width']) ? $input['screenshot_width'] : '';
-
-        if (isset($input['screenshot_height']) &&
-            $input['screenshot_height'] != '') {
-            $screenshot_height = $input['screenshot_height'];
-            if (!(intval($screenshot_height) > 0))
-                add_settings_error(
-                'screenshot_height',
-                'empty_screenshot_height',
-                pdfcrowd_create_invalid_value_message($screenshot_height, 'Screenshot Height', 'Must be a positive integer number.'));
-            
-        }
-        $valid['screenshot_height'] = isset($input['screenshot_height']) ? $input['screenshot_height'] : '';
-
-        if (isset($input['scale_factor']) &&
-            $input['scale_factor'] != '') {
-            $scale_factor = $input['scale_factor'];
-            if (!(intval($scale_factor) > 0))
-                add_settings_error(
-                'scale_factor',
-                'empty_scale_factor',
-                pdfcrowd_create_invalid_value_message($scale_factor, 'Scale Factor', 'Must be a positive integer number.'));
-            
-        }
-        $valid['scale_factor'] = isset($input['scale_factor']) ? $input['scale_factor'] : '';
-
-        if (isset($input['background_color']) &&
-            $input['background_color'] != '') {
-            $background_color = $input['background_color'];
-            if (!preg_match("/^[0-9a-fA-F]{6,8}$/", $background_color))
-                add_settings_error(
-                'background_color',
-                'empty_background_color',
-                pdfcrowd_create_invalid_value_message($background_color, 'Background Color', 'The value must be in RRGGBB or RRGGBBAA hexadecimal format.'));
-            
-        }
-        $valid['background_color'] = isset($input['background_color']) ? $input['background_color'] : '';
 
         $valid['data_string'] = isset($input['data_string']) ? $input['data_string'] : '';
 
