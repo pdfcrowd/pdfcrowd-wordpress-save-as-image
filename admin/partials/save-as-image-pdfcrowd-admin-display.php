@@ -213,6 +213,7 @@
                  $https_proxy = isset($options['https_proxy']) ? $options['https_proxy'] : '';
                  $client_certificate = isset($options['client_certificate']) ? $options['client_certificate'] : '';
                  $client_certificate_password = isset($options['client_certificate_password']) ? $options['client_certificate_password'] : '';
+                 $max_loading_time = isset($options['max_loading_time']) ? $options['max_loading_time'] : '';
                  $use_http = isset($options['use_http']) ? $options['use_http'] : '';
                  $retry_count = isset($options['retry_count']) ? $options['retry_count'] : '';
 
@@ -305,6 +306,9 @@
                        </option>
                        <option value="save-as-image-pdfcrowd-miscellaneous">
                          Miscellaneous
+                       </option>
+                       <option value="save-as-image-pdfcrowd-tweaks">
+                         Tweaks
                        </option>
                        <option value="save-as-image-pdfcrowd-api-client-options">
                          API Client Options

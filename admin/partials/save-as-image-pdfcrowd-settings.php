@@ -1198,6 +1198,43 @@
         </tbody>
     </table>
      </div>
+     <div id="save-as-image-pdfcrowd-tweaks"
+          class="save-as-image-pdfcrowd-category-wrap">
+       <div class="save-as-image-pdfcrowd-heading-wrap ">
+         <h2>Tweaks</h2>
+       </div>
+
+
+           <table class="form-table">
+        <tbody>
+            <tr class="save-as-image-pdfcrowd-set-group save-as-image-pdfcrowd-adv-input"
+                data-default="">
+                <th scope="row">
+                    <label for="save-as-image-pdfcrowd-max_loading_time">
+                        Max Loading Time
+                    </label>
+                </th>
+                <td>
+                      <input
+                        type="text"
+                        class="regular-text"
+                        id="save-as-image-pdfcrowd-max_loading_time"
+                        name="save-as-image-pdfcrowd[max_loading_time]"
+                        value="<?php echo($max_loading_time); ?>"
+                        placeholder="" autocomplete="off" />
+                        <div class="save-as-image-pdfcrowd-description">
+                          <div>
+                            Set the maximum time to load the page and its resources. After this time, all requests will be considered successful. This can be useful to ensure that the conversion does not timeout. Use this method if there is no other way to fix page loading.
+                          </div>
+                        </div>
+                        <div class='save-as-image-pdfcrowd-devi'>
+                            Shortcode and function parameter: "<strong>max_loading_time</strong>"
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+     </div>
      <div id="save-as-image-pdfcrowd-api-client-options"
           class="save-as-image-pdfcrowd-category-wrap">
        <div class="save-as-image-pdfcrowd-heading-wrap ">
