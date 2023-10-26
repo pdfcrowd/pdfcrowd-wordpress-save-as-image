@@ -294,6 +294,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             'custom_css',
             'auto_detect_element_to_convert',
             'readability_enhancements',
+            'max_loading_time',
         ),
         'latest' => array()
     );
