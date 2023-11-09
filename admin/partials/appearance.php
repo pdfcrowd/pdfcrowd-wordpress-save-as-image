@@ -11,6 +11,14 @@
 * @package    Save_As_Image_Pdfcrowd
 * @subpackage Save_As_Image_Pdfcrowd/admin/partials
 */
+
+function unfiltered_html_notice($option) {
+    if(!current_user_can('unfiltered_html')) {
+        echo('<div style="margin: 1rem 0;"><span class="notice notice-info" style="padding: 0.5rem">Only users with <code>unfiltered_html</code> capability can edit the '
+             . $option . ' option.</span></div>');
+    }
+}
+
 ?>
 
 <div id="save-as-image-pdfcrowd-appearance">
@@ -288,6 +296,7 @@
                             Custom HTML
                           </label>
                           <div class="save-as-image-pdfcrowd-nested-dsc">
+                            <?php unfiltered_html_notice('Custom HTML'); ?>
                             <textarea
                               class="save-as-image-pdfcrowd-text-for-radio"
                               id="save-as-image-pdfcrowd-custom-html"
@@ -295,6 +304,7 @@
                               data-parent-opt="#save-as-image-pdfcrowd-custom-image-h"
                               data-empty-is-not-def="1"
                               rows=5
+                              <?php if(!current_user_can('unfiltered_html')) echo('readonly'); ?>
                               cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($button_custom_html); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -808,12 +818,14 @@
                             autocomplete="off" />
                             Custom HTML
                             <div class="save-as-image-pdfcrowd-nested-dsc">
+                            <?php unfiltered_html_notice('Custom HTML'); ?>
                             <textarea
                               class="save-as-image-pdfcrowd-text-for-radio"
                               id="save-as-image-pdfcrowd-custom-indicator-html"
                               name="save-as-image-pdfcrowd[button_indicator_html]"
                               data-parent-opt="#save-as-image-pdfcrowd-button-indicator-html"
                               rows=3
+                              <?php if(!current_user_can('unfiltered_html')) echo('readonly'); ?>
                               cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo(esc_html($button_indicator_html));?></textarea>
                               <div class="save-as-image-pdfcrowd-devi save-as-image-pdfcrowd-mb-2">
                                 Shortcode and function parameter: "<strong>button_indicator_html</strong>"<br>Possible values: your HTML code
