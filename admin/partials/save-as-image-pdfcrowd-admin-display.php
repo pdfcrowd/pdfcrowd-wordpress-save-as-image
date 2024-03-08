@@ -19,6 +19,7 @@
     method="post"
     id="save-as-image-pdfcrowd-options"
     name="save-as-image-pdfcrowd-options"
+    data-nonce="<?php echo wp_create_nonce('wp_ajax_save_as_image_pdfcrowd_create_button'); ?>"
     action="options.php">
 
         <?php
