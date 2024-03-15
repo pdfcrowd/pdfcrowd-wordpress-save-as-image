@@ -591,7 +591,10 @@
                     </label>
                 </th>
                 <td>
-                    <textarea id="save-as-image-pdfcrowd-custom_css" name="save-as-image-pdfcrowd[custom_css]" placeholder="" rows=5 cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($custom_css); ?></textarea>
+                    <textarea id="save-as-image-pdfcrowd-custom_css" name="save-as-image-pdfcrowd[custom_css]" placeholder=""
+                    rows=5
+                    <?php if(!current_user_can('unfiltered_html')) echo('readonly'); ?>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo(esc_html($custom_css)); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Apply custom CSS to the input HTML document. It allows you to modify the visual appearance and layout of your HTML content dynamically. Tip: Using <span class='field-value'>!important</span> in custom CSS provides a way to prioritize and override conflicting styles.
@@ -611,7 +614,10 @@
                     </label>
                 </th>
                 <td>
-                    <textarea id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" placeholder="" rows=5 cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($custom_javascript); ?></textarea>
+                    <textarea id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" placeholder=""
+                    rows=5
+                    <?php if(!current_user_can('unfiltered_html')) echo('readonly'); ?>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo(esc_html($custom_javascript)); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Run a custom JavaScript after the document is loaded and ready to print. The script is intended for post-load DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/api/libpdfcrowd/'>JavaScript library</a>.
@@ -631,7 +637,10 @@
                     </label>
                 </th>
                 <td>
-                    <textarea id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" placeholder="" rows=5 cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($on_load_javascript); ?></textarea>
+                    <textarea id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" placeholder=""
+                    rows=5
+                    <?php if(!current_user_can('unfiltered_html')) echo('readonly'); ?>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo(esc_html($on_load_javascript)); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Run a custom JavaScript right after the document is loaded. The script is intended for early DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/api/libpdfcrowd/'>JavaScript library</a>.
@@ -862,7 +871,10 @@
                     </label>
                 </th>
                 <td>
-                    <textarea id="save-as-image-pdfcrowd-data_string" name="save-as-image-pdfcrowd[data_string]" placeholder="" rows=5 cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo($data_string); ?></textarea>
+                    <textarea id="save-as-image-pdfcrowd-data_string" name="save-as-image-pdfcrowd[data_string]" placeholder=""
+                    rows=5
+                    <?php if(!current_user_can('unfiltered_html')) echo('readonly'); ?>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo(esc_html($data_string)); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Set the input data for template rendering. The data format can be JSON, XML, YAML or CSV.
