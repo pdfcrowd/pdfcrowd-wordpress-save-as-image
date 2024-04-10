@@ -190,7 +190,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 3220;
+        $valid['version'] = 3230;
 
         if(isset($input['wp_submit_action'])) {
             if($input['wp_submit_action'] === 'reset') {
@@ -711,6 +711,6 @@ if(!function_exists('pdfcrowd_create_invalid_value_message')) {
         if($hint != null) {
             $message = $message . " " . $hint;
         }
-        return $message;
+        return esc_html($message);
     }
 }
