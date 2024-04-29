@@ -227,7 +227,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '3230',
+        'version' => '3300',
     );
 
     private static $API_OPTIONS = array(
@@ -355,7 +355,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 3230) {
+        if($options['version'] == 3300) {
             return $options;
         }
 
@@ -380,7 +380,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['url_lookup'] = 'location';
         }
 
-        $options['version'] = 3230;
+        $options['version'] = 3300;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -469,9 +469,10 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 $image = $options['button_custom_html'];
             }
             else if($options['button_image'] != 'custom_image' || $options['button_image_url']) {
-                $image_style = "style='width: {$options['button_image_width']}px; height: {$options['button_image_height']}px;'";
+                $image_style = "width: {$options['button_image_width']}px; height: {$options['button_image_height']}px;";
                 $image_url = $options['button_image'] == 'custom_image' ? $options['button_image_url'] : self::$DEFAULT_IMAGES[$options['button_image']];
-                $image = "<img $image_style src=\"$image_url\"/>";
+                $image_style = esc_html($image_style);
+                $image = "<img style='$image_style' src=\"$image_url\"/>";
             }
         }
 
@@ -551,9 +552,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         }
 
         if(!empty($btn_style)) {
+            $btn_style = esc_html($btn_style);
             $btn_style = " style='{$btn_style}'";
         }
         if(!empty($div_style)) {
+            $div_style = esc_html($div_style);
             $div_style = " style='{$div_style}'";
         }
 
@@ -1142,7 +1145,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/3.2.3 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/3.3.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -1178,6 +1181,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 $code = wp_remote_retrieve_response_code($response);
                 if($code == 200) {
                     // conversion was ok
+                    delete_option('save_as_image_pdfcrowd_error_code');
                     return wp_remote_retrieve_body($response);
                 }
 
@@ -1194,6 +1198,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 if(empty($options['error_page'])) {
                     $msg = self::prepare_error_message(
                         $code, $msg, '<b>"upload"</b> or <b>"development"</b>');
+                    if($code == 401 || $code == 403 || $code == 432) {
+                        update_option('save_as_image_pdfcrowd_error_code',
+                            "License error {$code}: " . esc_html(
+                               self::$ERROR_MESSAGES[$code]));
+                    }
                 }
                 $error = new WP_Error($code, $msg);
                 if($code != 502 && $code != 503) {
