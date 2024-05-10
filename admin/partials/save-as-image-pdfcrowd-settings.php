@@ -1271,7 +1271,8 @@
                 </th>
                 <td>
                     <select name="save-as-image-pdfcrowd[converter_version]" id="save-as-image-pdfcrowd-converter_version" autocomplete="off">
-                    <option value="latest" <?php selected($converter_version, 'latest');?>>The latest converter version.</option>
+                    <option value="latest" <?php selected($converter_version, 'latest');?>>The latest stable converter version - 20.10.</option>
+                    <option value="24.04" <?php selected($converter_version, '24.04');?>>Version 24.04. Currently in Beta.</option>
                     <option value="20.10" <?php selected($converter_version, '20.10');?>>Version 20.10.</option>
                     <option value="18.10" <?php selected($converter_version, '18.10');?>>Version 18.10.</option>
                     </select>
@@ -1281,7 +1282,7 @@
                           </div>
                         </div>
                         <div class='save-as-image-pdfcrowd-devi'>
-                            Shortcode and function parameter: "<strong>converter_version</strong>"<br>Possible values: <ul><li>"latest" - The latest converter version.</li><li>"20.10" - Version 20.10.</li><li>"18.10" - Version 18.10.</li></ul>
+                            Shortcode and function parameter: "<strong>converter_version</strong>"<br>Possible values: <ul><li>"latest" - The latest stable converter version - 20.10.</li><li>"24.04" - Version 24.04. Currently in Beta.</li><li>"20.10" - Version 20.10.</li><li>"18.10" - Version 18.10.</li></ul>
                         </div>
                 </td>
             </tr>
