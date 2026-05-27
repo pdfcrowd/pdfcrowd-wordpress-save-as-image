@@ -10,6 +10,9 @@
  * @subpackage Save_As_Image_Pdfcrowd/includes
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Register all actions and filters for the plugin.
  *
@@ -19,7 +22,7 @@
  *
  * @package    Save_As_Image_Pdfcrowd
  * @subpackage Save_As_Image_Pdfcrowd/includes
- * @author     Pdfcrowd <support@pdfcrowd.com>
+ * @author     PDFCrowd <support@pdfcrowd.com>
  */
 class Save_As_Image_Pdfcrowd_Loader {
 

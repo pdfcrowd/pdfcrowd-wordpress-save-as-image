@@ -10,6 +10,9 @@
  * @subpackage Save_As_Image_Pdfcrowd/public
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -18,7 +21,7 @@
  *
  * @package    Save_As_Image_Pdfcrowd
  * @subpackage Save_As_Image_Pdfcrowd/public
- * @author     Pdfcrowd <support@pdfcrowd.com>
+ * @author     PDFCrowd <support@pdfcrowd.com>
  */
 class Save_As_Image_Pdfcrowd_Public {
 
@@ -133,6 +136,16 @@ class Save_As_Image_Pdfcrowd_Public {
         wp_localize_script($components,
                            'save_as_image_pdfcrowd_i18n',
                            $components_translations);
+
+        $public_data = array(
+            'ajax_url' => admin_url('admin-ajax.php')
+        );
+
+        wp_localize_script(
+            $this->plugin_name,
+            'save_as_image_pdfcrowd',
+            $public_data
+        );
     }
 
     public function setup_shortcodes() {
@@ -142,16 +155,6 @@ class Save_As_Image_Pdfcrowd_Public {
                       array($this, 'block_save_as_image_pdfcrowd_shortcode'));
         add_action('wp_ajax_save_as_image_pdfcrowd', array($this, 'save_as_image_pdfcrowd'));
         add_action('wp_ajax_nopriv_save_as_image_pdfcrowd', array($this, 'save_as_image_pdfcrowd'));
-        add_action('wp_head', array($this, 'add_ajaxurl'), 1);
-    }
-
-    function add_ajaxurl() { ?>
-            <script type="text/javascript">
-            //<![CDATA[
-            var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
-            //]]>
-            </script>
-        <?php
     }
 
     public static $DEFAULTS = array(
@@ -203,7 +206,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'button_translation_domain' => '',
         'button_user_drawings' => '0',
         'conversion_mode' => 'url',
-        'converter_version' => '20.10',
+        'converter_user_agent' => 'latest-chrome-desktop',
+        'converter_version' => '24.04',
         'custom_data' => '',
         'dev_mode' => '0',
         'diagnostics' => '0',
@@ -227,7 +231,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '3400',
+        'version' => '4580',
     );
 
     private static $API_OPTIONS = array(
@@ -278,6 +282,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'client_certificate',
         'client_certificate_password',
         'max_loading_time',
+        'subprocess_referrer',
+        'converter_user_agent',
         'url',
         'text',
         'file'
@@ -297,8 +303,10 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             'auto_detect_element_to_convert',
             'readability_enhancements',
             'max_loading_time',
+            'subprocess_referrer',
         ),
-        'latest' => array()
+        'latest' => array(
+        ),
     );
 
     private static $DEFAULT_IMAGES = array(
@@ -310,21 +318,20 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
     );
 
     private static $ERROR_MESSAGES = array(
-        400 => "The client sent an invalid request.",
-        401 => "Authentication credentials were not provided or the API license is not active.",
+        400 => "The client sent an invalid request. Refer to the reason code for more information.",
+        401 => "Authentication credentials were not provided or the PDFCrowd license is not active.",
         403 => "The API service is suspended or there are no credits left.",
-        405 => "The method specified in the request is not allowed. The request method must be POST.",
-        413 => "<p>The upload size limit is 300MB.</p> <p>You can zip uploaded HTML to avoid this error.</p>",
-        429 => "<p>The client has sent too many requests within a certain timeframe (rate limiting).</p> <p>Upgrade to a higher Pdfcrowd API plan to avoid this error.</p>",
-        430 => "<p>The client has sent too many concurrent requests at a time.</p> <p>Upgrade to a higher Pdfcrowd API plan to avoid this error.</p>",
-        432 => "<p>The limit for the demo license has been exceeded.</p> <p>Use your personal Pdfcrowd API credentials.</p>",
+        413 => "The upload size limit is 300MB. You can zip uploaded HTML to avoid this error.",
+        429 => "The client has sent too many requests within a certain timeframe (rate limiting). Upgrade to a higher PDFCrowd API plan to avoid this error.",
+        430 => "The client has sent too many concurrent requests at a time. Upgrade to a higher PDFCrowd API plan to avoid this error.",
+        432 => "The limit for the demo license has been exceeded. Use your personal PDFCrowd API credentials.",
         452 => "There is no input specified to be converted.",
         453 => "Unknown conversion option. See details in the HTTP response body.",
         454 => "The input is too complex or large. It can not be converted. Try to simplify the input data.",
         455 => "The conversion can not be completed due to a system error.",
         456 => "The input file is not specified correctly. Multipart/form-data is required for file upload.",
         457 => "The type of the input file is unknown. The file has no extension.",
-        458 => "<p>The request was aborted because it took a long time.</p> <p>The typical cause of this error is too many images in an HTML page that take too long to download. Another cause might be a long running JavaScript.</p> <p>Try to simplify your input data or speed up the page load time.</p>",
+        458 => "The request was aborted because it took a long time. The typical cause of this error is too many images in an HTML page that take too long to download. Another cause might be a long running JavaScript. Try to simplify your input data or speed up the page load time.",
         459 => "The uploaded archive can not be processed. It is too large, corrupted or contains symbolic links.",
         470 => "A conversion option is set to an invalid value.",
         471 => "The input URL can not be loaded.",
@@ -337,7 +344,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         478 => "The URL hostname could not be resolved.",
         479 => "The URL is invalid.",
         480 => "The converter could not establish an HTTPS connection because of an invalid SSL certificate.",
-        481 => "<p>There was a problem connecting to Pdfcrowd servers over HTTPS. This could be caused by several reasons, one of them is that your local CA certificate store is out of date or not configured correctly.</p> <p>An alternative is to use the API over HTTP. The HTTP mode can be enabled by the <a href='/api/method-index/#html_to_pdf_set_use_http'>setUseHttp</a> method.<p>",
+        481 => "There was a problem connecting to PDFCrowd servers over HTTPS. This could be caused by several reasons, one of them is that your local CA certificate store is out of date or not configured correctly. An alternative is to use the API over HTTP. The HTTP mode can be enabled by the <a href='/api/method-index/#html_to_pdf_set_use_http'>setUseHttp</a> method.",
         482 => "The input template or data is invalid.",
         483 => "The input is password protected. Provide a valid password.",
         484 => "The input contains an unsupported feature, typically a font type.",
@@ -357,7 +364,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 3400) {
+        if($options['version'] == 4580) {
             return $options;
         }
 
@@ -382,7 +389,17 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['url_lookup'] = 'location';
         }
 
-        $options['version'] = 3400;
+        if($options['version'] < 4000) {
+            $options['content_viewport_width'] = '';
+            $options['content_window_height'] = '';
+            $options['content_fit_mode'] = '';
+
+            if($options['converter_version'] === 'latest') {
+                $options['converter_version'] = '20.10';
+            }
+        }
+
+        $options['version'] = 4580;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -472,8 +489,10 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             }
             else if($options['button_image'] != 'custom_image' || $options['button_image_url']) {
                 $image_style = "width: {$options['button_image_width']}px; height: {$options['button_image_height']}px;";
-                $image_url = $options['button_image'] == 'custom_image' ? $options['button_image_url'] : self::$DEFAULT_IMAGES[$options['button_image']];
-                $image_style = esc_html($image_style);
+                $image_url = $options['button_image'] == 'custom_image'
+                           ? esc_attr($options['button_image_url'])
+                           : self::$DEFAULT_IMAGES[$options['button_image']];
+                $image_style = esc_attr($image_style);
                 $image = "<img style='$image_style' src=\"$image_url\"/>";
             }
         }
@@ -554,7 +573,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         }
 
         if(!empty($btn_style)) {
-            $btn_style = esc_html($btn_style);
+            $btn_style = esc_attr($btn_style);
             $btn_style = " style='{$btn_style}'";
         }
         if(!empty($div_style)) {
@@ -578,7 +597,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $config = json_encode($config);
 
         $button_id = !empty($options['button_id']) ?
-                   "id='" . $options['button_id'] . "'" : '';
+                   "id='" . esc_attr($options['button_id']) . "'" : '';
 
         $button = "<{$button_tag} class='$classes'{$div_style}><{$button_tag} {$button_id} class='{$btn_classes}'{$btn_style} onclick='window.SaveAsImagePdfcrowd(\"$custom_options\", $enc_data, $config, this);' data-pdfcrowd-flags='{$pflags}'>";
 
@@ -635,7 +654,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             return '';
         }
 
-        $diag = '<div class="save-as-image-pdfcrowd-diag"><h3>Pdfcrowd Diagnostics</h3>';
+        $diag = '<div class="save-as-image-pdfcrowd-diag"><h3>PDFCrowd Diagnostics</h3>';
 
         if(!empty($custom_options['api_key'])) {
             $custom_options['api_key'] = '- secret -';
@@ -735,7 +754,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         if($custom_options) {
             $custom_options['pflags'] = $pflags;
             $custom_options = $this->encrypt(
-                serialize($custom_options), $options['api_key']);
+                json_encode($custom_options), $this->get_encryption_key($options['api_key']));
         } else {
             $custom_options = '';
         }
@@ -782,6 +801,31 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $options = $this->get_options();
 
         if($attrs) {
+            // validate some $attrs
+            if(isset($attrs['button_custom_html']) ||
+               isset($attrs['button_indicator_html'])) {
+                $post_id = get_the_ID();
+                $author_id = $post_id ?
+                    (int) get_post_field('post_author', $post_id) : 0;
+                $author = $author_id ? get_user_by('id', $author_id) : null;
+
+                if($author && !user_can($author, 'unfiltered_html')) {
+                    if(array_key_exists('button_custom_html', $attrs)) {
+                        $attrs['button_custom_html'] = wp_kses_post(
+                            $attrs['button_custom_html']);
+                    }
+
+                    if(array_key_exists('button_indicator_html', $attrs)) {
+                        $attrs['button_custom_html'] = wp_kses_post(
+                            $attrs['button_custom_html']);
+                    }
+
+                    // do not allow to set custom java scripts for conversion
+                    $attrs['custom_javascript'] = '';
+                    $attrs['on_load_javascript'] = '';
+                }
+            }
+
             foreach($attrs as $key => $value) {
                 if(is_string($key)) {
                     // accept only string keys
@@ -839,16 +883,18 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $msg = '';
         if(is_wp_error($response)) {
             $msg = $response->get_error_message() . ' ' . $url;
-            error_log("Pdfcrowd: failed to get URL {$url}. " . $msg);
+            error_log("PDFCrowd: failed to get URL {$url}. " . $msg);
             if($throw_error) {
                 if(empty($options['error_page'])) {
                     $msg = self::prepare_error_message(
-                        471, $msg, '<b>"URL" or "Content"</b>') .
+                        312,
+                        esc_html($msg),
+                        '<b>"URL" or "Content"</b>') .
                          '<p>Or check your network and PHP configuration.</p>';
                 } else {
                     $msg .= ' Please, check your network.';
                 }
-                return new WP_Error(471, $msg);
+                return new WP_Error(400, $msg);
             }
             return '';
         }
@@ -857,14 +903,14 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             $status_code = wp_remote_retrieve_response_code($response);
             if($status_code && $status_code >= 400) {
                 if(empty($options['error_page'])) {
-                    $msg = self::prepare_error_message(473, 'URL Load Error') .
+                    $msg = self::prepare_error_message(314, 'URL Load Error') .
                          "<p>Failed url is <a href='$url'>$url</a> with status $status_code.</p>" .
                          '<h3>Response</h3><div style="background-color: #eee">' . wp_remote_retrieve_body($response) .
                          '</div>';
                 } else {
                     $msg = "URL Load Error $status_code: $url";
                 }
-                return new WP_Error(473, $msg);
+                return new WP_Error(400, $msg);
             }
         }
         return wp_remote_retrieve_body($response);
@@ -905,13 +951,15 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         'jpg' => 'image/jpeg',
         'gif' => 'image/gif',
         'tiff' => 'image/tiff',
-        'bmp' => 'image/x-ms-bmp',
+        'bmp' => 'image/bmp',
         'ico' => 'image/vnd.microsoft.icon',
         'ppm' => 'image/x-portable-pixmap',
         'pgm' => 'image/x-portable-graymap',
         'pbm' => 'image/x-portable-bitmap',
         'pnm' => 'image/x-portable-anymap',
+        'psb' => 'application/vnd.3gpp.pic-bw-small',
         'ras' => 'image/x-cmu-raster',
+        'sgi' => 'image/vnd.sealedmedia.softseal.gif',
         'webp' => 'image/webp',
     );
 
@@ -1095,7 +1143,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $fields = array();
         $files = array();
 
-        $converter_version = '20.10';
+        $converter_version = '24.04';
         if(!empty($options['converter_version'])) {
             $converter_version = $options['converter_version'];
         }
@@ -1123,7 +1171,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             ) {
                 $files[$key] = $value;
             } else {
-                // use only valid Pdfcrowd options
+                // use only valid PDFCrowd options
                 $fields[$key] = $value;
             }
         }
@@ -1147,7 +1195,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/3.4.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/4.5.8 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -1190,7 +1238,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 // wait in case of the concurrency limit for 30 seconds
                 if($retry_attempt <= 15 && ($code == 430 || $code == 429)) {
                     // give time to finish the previous conversion
-                    error_log("concurrency limit reached, attempt {$retry_attempt}/15, waiting, a higher Pdfcrowd API plan is recommended");
+                    error_log("concurrency limit reached, attempt {$retry_attempt}/15, waiting, a higher PDFCrowd plan is recommended");
                     sleep(2);
                     $retry_attempt++;
                     continue;
@@ -1199,11 +1247,13 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 $msg = wp_remote_retrieve_body($response);
                 if(empty($options['error_page'])) {
                     $msg = self::prepare_error_message(
-                        $code, $msg, '<b>"upload"</b> or <b>"development"</b>');
+                        $code,
+                        esc_html($msg),
+                        '<b>"upload"</b> or <b>"development"</b>');
                     if($code == 401 || $code == 403 || $code == 432) {
                         update_option('save_as_image_pdfcrowd_error_code',
-                            "License error {$code}: " . esc_html(
-                               self::$ERROR_MESSAGES[$code]));
+                                      "License error {$code}: " .
+                                      self::$ERROR_MESSAGES[$code]);
                     }
                 }
                 $error = new WP_Error($code, $msg);
@@ -1235,25 +1285,35 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         if(!filter_var($url, FILTER_VALIDATE_URL)) {
             $url = get_permalink(get_page_by_path($url));
         }
-        wp_redirect($url .
+        wp_safe_redirect($url .
                     "?error-code={$code}&error-message={$message}&error-details={$details}");
         exit;
     }
 
     private static function prepare_error_message($code, $text, $cmode = null) {
-        $details = isset(self::$ERROR_MESSAGES[$code]) ?
-                 '<p>' . self::$ERROR_MESSAGES[$code] . '</p>' : '';
-        $text = $details . '<p>' . $text . '</p>';
-        switch($code) {
-        case 471:
-        case 478:
+        $reasonCode = '';
+        $pattern = '/^(\d+)\.(\d+)\s+-\s+(.*?)(?:\s+Documentation link:\s+(.*))?$/';
+        if(preg_match($pattern, $text, $matches)) {
+            $code = $matches[1];
+            $message = '<p>Reason Code: ' . $matches[2] . '</p>' .
+                '<p>' . $matches[3] . '</p>';
+            if(isset($matches[4])) {
+                $docLink = str_replace(
+                    'api/html-to-image-http',
+                    'save-as-image-wordpress-plugin',
+                    $matches[4]);
+                $message .= "<p>More: <a href='{$docLink}'>{$docLink}</a>.</p>";
+            }
+            $text = $message;
+        } else {
+            $details = isset(self::$ERROR_MESSAGES[$code]) ?
+                '<p>' . self::$ERROR_MESSAGES[$code] . '</p>' : '';
+            $text = $details . '<p>' . $text . '</p>';
+        }
+
+        if(in_array($code, [312, 319, 320], true)) {
             $text = $text . '<p>Set <b>"Conversion Mode"</b> to ' .
-                  $cmode . ' on the <b>Mode</b> settings page of the "Save as Image by Pdfcrowd" plugin.</p>';
-            break;
-        default:
-            $text = preg_replace(
-                '/Details:\s(https:\/\/www.pdfcrowd.com\/[^\s<]*)/s',
-                '<br>More: <a href="$1">$1</a>', $text);
+                  $cmode . ' on the <b>Mode</b> settings page of the "Save as Image by PDFCrowd" plugin.</p>';
         }
         return $text;
     }
@@ -1305,7 +1365,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         // check if the location is from my domain
         if(parse_url($location, PHP_URL_HOST) !=
            parse_url($permalink, PHP_URL_HOST)) {
-            error_log('Pdfcrowd: conflict in location URL ' . $location . ' vs ' . $permalink);
+            error_log('PDFCrowd: conflict in location URL ' . $location . ' vs ' . $permalink);
             return $permalink;
         }
 
@@ -1316,7 +1376,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     private static function delete_file($file_path) {
         global $wp_filesystem;
         if(!$wp_filesystem->delete($file_path)) {
-            error_log('Pdfcrowd: can not delete file ' . $file_path);
+            error_log('PDFCrowd: can not delete file ' . $file_path);
         }
     }
 
@@ -1330,7 +1390,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
 
         $upload_dir = wp_upload_dir();
         if(empty($upload_dir['basedir'])) {
-            error_log('Pdfcrowd: no upload dir specified');
+            error_log('PDFCrowd: no upload dir specified');
             return false;
         }
 
@@ -1339,7 +1399,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         if(!$wp_filesystem->exists($tmp_dir)) {
             // make temporary folder
             if(!$wp_filesystem->mkdir($tmp_dir)) {
-                error_log('Pdfcrowd: can not create folder ' . $tmp_dir);
+                error_log('PDFCrowd: can not create folder ' . $tmp_dir);
             }
         }
 
@@ -1352,13 +1412,13 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 return self::make_temporary_file(
                     $file_name, $content, wp_generate_password(6, false) . '_');
             }
-            error_log('Pdfcrowd: can not save file ' . $file_path);
+            error_log('PDFCrowd: can not save file ' . $file_path);
             return false;
         }
         fclose($fp);
 
         if(!$wp_filesystem->put_contents($file_path, $content)) {
-            error_log('Pdfcrowd: can not write to file ' . $file_path);
+            error_log('PDFCrowd: can not write to file ' . $file_path);
             self::delete_file($file_path);
             return false;
         }
@@ -1424,7 +1484,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                     $message,
                     $headers,
                     array($tmp_file_name))) {
-            error_log('Pdfcrowd: send failed to ' . $email_to);
+            error_log('PDFCrowd: send failed to ' . $email_to);
             self::delete_file($tmp_file_name);
             self::send_json_error(455, __('Mail system error.', $plugin_name));
         } else {
@@ -1445,6 +1505,15 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         return wp_get_current_user()->user_email;
     }
 
+    private static function create_referrer($url) {
+        $referrer = preg_replace(
+            ['/^(https?:\/\/)[^@]+@/i', '/#.*$/'],
+            ['$1', ''],
+            $url
+        );
+        return $referrer;
+    }
+
     function save_as_image_pdfcrowd() {
         // set download cookie at first, so the conversion button
         // can be re-enabled
@@ -1456,13 +1525,14 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
 
         if(!empty($_POST['options'])) {
             $decrypted = $this->decrypt(urldecode($_POST['options']),
-                                        $options['api_key']);
+                                        $this->get_encryption_key($options['api_key']));
             if($decrypted === false) {
-                _e('Configuration error. Refresh page and retry.',
-                   $this->plugin_name);
+                esc_html_e(
+                    'Configuration error. Refresh page and retry.',
+                    $this->plugin_name);
                 wp_die();
             }
-            $custom_options = unserialize($decrypted);
+            $custom_options = json_decode($decrypted);
             $options = wp_parse_args($custom_options, $options);
         }
 
@@ -1477,6 +1547,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 $options['url'] = $location;
                 $default_conv_mode = 'upload';
             }
+        } else {
+            $location = $options['url'];
         }
 
         // decide conversion mode
@@ -1490,11 +1562,16 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 // text is set e.g. when block shortcode is used
                 $options['text'] = self::validate_data($options, $_POST['cdata']);
                 if(!$options['text']) {
-                    _e('Invalid token. Use Conversion Mode Url or disable cache for this page.',
+                    esc_html_e(
+                        'Invalid token. Use Conversion Mode Url or disable cache for this page.',
                        $this->plugin_name);
                     wp_die();
                 }
             }
+        }
+
+        if($options['conversion_mode'] != 'url' && $location) {
+            $options['subprocess_referrer'] = self::create_referrer($location);
         }
 
         if($options['license_type'] === 'demo') {
@@ -1549,6 +1626,9 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                     $status_text = $matches[1];
                 }
                 status_header((int) $code, $status_text);
+
+                // error page is our HTML code and dynamic part of the message
+                // is escaped prior
                 echo $this->get_error_page($options, $code, $message);
             }
         } else {
@@ -1563,6 +1643,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 header('Cache-Control: no-cache');
                 header('Accept-Ranges: none');
 
+                // variable $output contains binary form of image
+                // file so it can not be escaped
                 echo $output;
             }
         }
@@ -1587,8 +1669,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     <p>Please try again later.</p>
     {$back}
     <div class="save-as-image-pdfcrowd-err-admin" style="margin-top: 2em">
-    <h2>Details for Administrator</h2>
-    <p>Code: {$code}</p>
+    <h2>Error Details</h2>
+    <p>Status Code: {$code}</p>
     <p>{$message}</p>
     </div>
     </body>
@@ -1598,6 +1680,34 @@ HTML;
 
     private function get_function_name($key) {
         return str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+    }
+
+    /**
+     * Get the encryption key used for encrypting/decrypting options.
+     *
+     * When API key is set, use it for backward compatibility with cached pages.
+     * When API key is empty (demo mode), use a random secret to prevent
+     * attackers from crafting malicious payloads (CVE-2026-0862 fix).
+     *
+     * @since    4.5.6
+     * @param    string    $api_key    The API key from options
+     * @return   string    The encryption key to use
+     */
+    private function get_encryption_key($api_key) {
+        // If API key is set and not 'demo', use it (backward compatible, attacker doesn't know it)
+        if (!empty($api_key) && $api_key !== 'demo') {
+            return $api_key;
+        }
+
+        // For demo mode (empty API key or 'demo'), use a random secret
+        // This prevents CVE-2026-0862 where attacker could craft payloads
+        $secret = get_option('save-as-image-pdfcrowd_encryption_secret');
+        if (empty($secret)) {
+            // Generate a random 32-character secret on first use
+            $secret = wp_generate_password(32, true, true);
+            update_option('save-as-image-pdfcrowd_encryption_secret', $secret);
+        }
+        return $secret;
     }
 
     private function encrypt($string, $key) {

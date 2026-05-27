@@ -11,6 +11,9 @@
  * @package    Save_As_Image_Pdfcrowd
  * @subpackage Save_As_Image_Pdfcrowd/admin/partials
  */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 ?>
 
 <div class="wrap">
@@ -19,7 +22,7 @@
     method="post"
     id="save-as-image-pdfcrowd-options"
     name="save-as-image-pdfcrowd-options"
-    data-nonce="<?php echo wp_create_nonce('wp_ajax_save_as_image_pdfcrowd_create_button'); ?>"
+    data-nonce="<?php esc_attr_e(wp_create_nonce('wp_ajax_save_as_image_pdfcrowd_create_button')); ?>"
     action="options.php">
 
         <?php
@@ -35,7 +38,8 @@
              class="save-as-image-pdfcrowd-basic-mode">
           <h1>
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTkuMjI3IiBoZWlnaHQ9IjQzLjI1NiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03My44MDIgLTM4Ni4wNikiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEuNzk0OCAwIDAgMS43OTQ4IC0yNjI2LjUgLTIxMi4wNikiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmOTUwMCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTE1MTQuNSAzMzUuODZjMC40NDI2IDAuMDU0IDEuMjM2Ni0wLjI0MzM2IDEuMDAwMiAwLjQ4OTY1djE4LjUxMWMtMC40NDI2LTAuMDU0LTEuMjM2NiAwLjI0MzM3LTEuMDAwMi0wLjQ4OTY1di0xOC41MTF6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC45OTk4Ii8+PHBhdGggZD0ibTE1MDYuMyAzNDQuNTRoMS40NzQ4djEwLjU1NWgtMS40NzQ4di0xMC41NTV6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC41MjUxIi8+PHBhdGggZD0ibTE1MjIuNCAzMzkuNzhjMC4zNzU1IDAuMTIzMSAxLjI5ODYtMC4zMDEzMyAxLjE2OTQgMC4zMjY0M3YxNC44NDNjLTAuMzc1NS0wLjEyMzExLTEuMjk4NiAwLjMwMTMzLTEuMTY5NC0wLjMyNjQzdi0xNC44NDN6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC44MzA2Ii8+PHBhdGggZD0ibTE1MzUuMSAzNTMuMjh2Mi4xNjQ5aC01LjE2NDl2LTIuMTY0OWg1LjE2NDl6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iMy44MzUxIi8+PC9nPjwvZz48L3N2Zz4K" style="height: 24px;"/>
-            <?php echo esc_html( get_admin_page_title() ); ?>
+            <?php esc_html_e( get_admin_page_title() ); ?>
+            <span id="save-as-image-pdfcrowd-version">v4.5.8</span>
           </h1>
 
           <div id="save-as-image-pdfcrowd-sticky">
@@ -146,6 +150,7 @@
                $button_translation_domain = isset($options['button_translation_domain']) ? $options['button_translation_domain'] : '';
                $button_user_drawings = isset($options['button_user_drawings']) ? $options['button_user_drawings'] : '';
                $conversion_mode = isset($options['conversion_mode']) ? $options['conversion_mode'] : '';
+               $converter_user_agent = isset($options['converter_user_agent']) ? $options['converter_user_agent'] : '';
                $converter_version = isset($options['converter_version']) ? $options['converter_version'] : '';
                $custom_data = isset($options['custom_data']) ? $options['custom_data'] : '';
                $dev_mode = isset($options['dev_mode']) ? $options['dev_mode'] : '';
@@ -215,6 +220,7 @@
                  $client_certificate = isset($options['client_certificate']) ? $options['client_certificate'] : '';
                  $client_certificate_password = isset($options['client_certificate_password']) ? $options['client_certificate_password'] : '';
                  $max_loading_time = isset($options['max_loading_time']) ? $options['max_loading_time'] : '';
+                 $subprocess_referrer = isset($options['subprocess_referrer']) ? $options['subprocess_referrer'] : '';
                  $use_http = isset($options['use_http']) ? $options['use_http'] : '';
                  $retry_count = isset($options['retry_count']) ? $options['retry_count'] : '';
 
@@ -325,7 +331,7 @@
                          class="save-as-image-pdfcrowd-clearable-input"
                          autocomplete="off"
                          style="width: 100%;"
-                         placeholder="     Filter options by name">
+                         placeholder="Filter options by name">
                          <svg id="save-as-image-pdfcrowd-options-filter-icon"
                               xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -420,9 +426,7 @@
                   You can also use our
                <a href="https://pdfcrowd.com/contact/?ref=wordpress&pr=save-as-image-pdfcrowd"
                   title="Contact us"
-                  target="_blank">
-                  contact form
-               </a>.
+                  target="_blank">contact form</a>.
              </div>
 
              <div style="line-height: normal; margin-top:1em;">
@@ -491,7 +495,7 @@
 
              <hr style="margin-top: 2em">
              <div id="save-as-image-pdfcrowd-support-notes">
-               If you like "Save as Image by Pdfcrowd", please rate it using
+               If you like "Save as Image by PDFCrowd", please rate it using
                <a href='https://wordpress.org/support/plugin/save-as-image-by-pdfcrowd/reviews/#new-post' target='_blank'>★★★★★</a>.
              </div>
         </div>
@@ -500,10 +504,11 @@
     <div style="display: none">
         <input type="hidden" id="save-as-image-pdfcrowd-hidden-header"
                value="<?php
-        $site_name = get_bloginfo('name');
-        $site_desc = get_bloginfo('description');
-        $site_css = get_bloginfo('stylesheet_url');
-        $site_url = get_bloginfo('url');
+        $site_name = esc_html(get_bloginfo('name'));
+        $site_desc = esc_html(get_bloginfo('description'));
+        $site_css = esc_url(get_bloginfo('stylesheet_url'));
+        $site_url = esc_url(get_bloginfo('url'));
+        // variables are escaped prior the echo command
         echo <<<EOT
 <html>
   <head>

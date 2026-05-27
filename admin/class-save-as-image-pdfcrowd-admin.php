@@ -10,12 +10,15 @@
  * @subpackage Save_As_Image_Pdfcrowd/admin
  */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 /**
  * The admin-specific functionality of the plugin.
  *
  * @package    Save_As_Image_Pdfcrowd
  * @subpackage Save_As_Image_Pdfcrowd/admin
- * @author     Pdfcrowd <support@pdfcrowd.com>
+ * @author     PDFCrowd <support@pdfcrowd.com>
  */
 class Save_As_Image_Pdfcrowd_Admin {
 
@@ -72,13 +75,27 @@ class Save_As_Image_Pdfcrowd_Admin {
      * @since    1.0.0
      */
     public function enqueue_scripts() {
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/save-as-image-pdfcrowd-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, false );
+        wp_enqueue_script($this->plugin_name,
+                          plugin_dir_url( __FILE__ ) . 'js/save-as-image-pdfcrowd-admin.js',
+                          array( 'jquery', 'wp-color-picker' ),
+                          $this->version,
+                          false);
 
         wp_enqueue_script($this->plugin_name . 'indicators',
                           plugin_dir_url( __FILE__ ) . '../public/js/save-as-image-pdfcrowd-indicators.js',
                           array('jquery'),
                           $this->version,
                           false);
+
+        $public_data = array(
+            'ajax_url' => admin_url('admin-ajax.php')
+        );
+
+        wp_localize_script(
+            $this->plugin_name,
+            'save_as_image_pdfcrowd',
+            $public_data
+        );
     }
 
     /**
@@ -96,6 +113,72 @@ class Save_As_Image_Pdfcrowd_Admin {
         );
     }
 
+    public function plugin_admin_notices() {
+        // Get the current screen
+        $screen = get_current_screen();
+
+        // Only display the notice on your plugin's settings page
+        if($screen->id !== 'settings_page_save-as-image-pdfcrowd') {
+            return;
+        }
+
+        // Check if the notice has been dismissed
+        if(get_user_meta(get_current_user_id(),
+                         'save_as_image_pdfcrowd_dismissed_upgrade',
+                         true)) {
+            return;
+        }
+
+        $options = get_option($this->plugin_name);
+        if(!$options || (
+            isset($options['converter_version']) &&
+            $options['converter_version'] === '24.04')) {
+            return;
+        }
+
+        // Output the notice
+        ?>
+        <div id="save-as-image-pdfcrowd-upgrade-notice"
+            class="notice notice-info is-dismissible save-as-image-pdfcrowd-notice">
+        <p>
+            <?php printf(
+                esc_html__('The plugin is currently configured to use converter version %1$s. The latest version, 24.04, is now available.',
+                   $this->plugin_name),
+                esc_html($options['converter_version']));
+            ?>
+        </p>
+        <p>
+            <?php esc_html_e('To upgrade, press the button below.', $this->plugin_name); ?>
+        </p>
+        <p style="display: flex; align-items: center">
+            <a id="save-as-image-pdfcrowd-do-upgrade"
+                class="button button-primary" href="#">
+                <?php esc_html_e('Auto-upgrade to 24.04',
+                         $this->plugin_name); ?>
+            </a>
+            <a href="#" class="save-as-image-pdfcrowd-never-show-again">
+                <span class="dashicons dashicons-dismiss"></span>
+                <?php esc_html_e('Never show again', $this->plugin_name); ?>
+            </a>
+        </p>
+        </div>
+        <script type="text/javascript">
+        jQuery(document).on('click',
+                            '.save-as-image-pdfcrowd-never-show-again',
+                            function() {
+            jQuery(this).closest('.save-as-image-pdfcrowd-notice').hide();
+            jQuery.ajax({
+                url: window.save_as_image_pdfcrowd.ajax_url,
+                type: 'post',
+                data: {
+                    action: 'save_as_image_pdfcrowd_dismiss_upgrade'
+                }
+           });
+        });
+        </script>
+        <?php
+    }
+
     /**
     * Build dict holding license status and other info.
     *
@@ -108,7 +191,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     }
 
     /**
-    * Get status of the Pdfcrowd API license.
+    * Get status of the PDFCrowd license.
     *
     * @since    1.0.0
     */
@@ -217,7 +300,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 3400;
+        $valid['version'] = 4580;
 
         if(isset($input['wp_submit_action'])) {
             if($input['wp_submit_action'] === 'reset') {
@@ -261,14 +344,14 @@ class Save_As_Image_Pdfcrowd_Admin {
                     add_settings_error(
                         'api_key',
                         'empty_api_key',
-                        'API key can not be empty.');
+                        'key can not be empty.');
                 } else if(!preg_match("/^[a-f0-9]{32}$/", $valid['api_key'])) {
                     add_settings_error(
                         'api_key',
                         'invalid_api_key',
                         pdfcrowd_create_invalid_value_message(
                             $valid['api_key'],
-                            'API key',
+                            'key',
                             'Must be 32-characters long and have only letters a-f and numbers.'));
                 }
                 break;
@@ -287,7 +370,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'output_format',
                 'empty_output_format',
-                pdfcrowd_create_invalid_value_message($output_format, 'Output Format', 'Allowed values are png, jpg, gif, tiff, bmp, ico, ppm, pgm, pbm, pnm, psb, pct, ras, tga, sgi, sun, webp.'));
+                pdfcrowd_create_invalid_value_message($output_format, "Output Format", "Allowed values are png, jpg, gif, tiff, bmp, ico, ppm, pgm, pbm, pnm, psb, pct, ras, tga, sgi, sun, webp."));
             
         }
         $valid['output_format'] = isset($input['output_format']) ? $input['output_format'] : '';
@@ -299,7 +382,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'screenshot_width',
                 'empty_screenshot_width',
-                pdfcrowd_create_invalid_value_message($screenshot_width, 'Screenshot Width', 'The value must be in the range 96-65000.'));
+                pdfcrowd_create_invalid_value_message($screenshot_width, "Screenshot Width", "The accepted range is 96-65000."));
             
         }
         $valid['screenshot_width'] = isset($input['screenshot_width']) ? $input['screenshot_width'] : '';
@@ -311,7 +394,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'screenshot_height',
                 'empty_screenshot_height',
-                pdfcrowd_create_invalid_value_message($screenshot_height, 'Screenshot Height', 'Must be a positive integer number.'));
+                pdfcrowd_create_invalid_value_message($screenshot_height, "Screenshot Height", "Must be a positive integer."));
             
         }
         $valid['screenshot_height'] = isset($input['screenshot_height']) ? $input['screenshot_height'] : '';
@@ -323,7 +406,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'scale_factor',
                 'empty_scale_factor',
-                pdfcrowd_create_invalid_value_message($scale_factor, 'Scale Factor', 'Must be a positive integer number.'));
+                pdfcrowd_create_invalid_value_message($scale_factor, "Scale Factor", "Must be a positive integer."));
             
         }
         $valid['scale_factor'] = isset($input['scale_factor']) ? $input['scale_factor'] : '';
@@ -335,7 +418,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'background_color',
                 'empty_background_color',
-                pdfcrowd_create_invalid_value_message($background_color, 'Background Color', 'The value must be in RRGGBB or RRGGBBAA hexadecimal format.'));
+                pdfcrowd_create_invalid_value_message($background_color, "Background Color", "The value must be in RRGGBB or RRGGBBAA hexadecimal format."));
             
         }
         $valid['background_color'] = isset($input['background_color']) ? $input['background_color'] : '';
@@ -359,7 +442,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'load_iframes',
                 'empty_load_iframes',
-                pdfcrowd_create_invalid_value_message($load_iframes, 'Load Iframes', 'Allowed values are all, same-origin, none.'));
+                pdfcrowd_create_invalid_value_message($load_iframes, "Load Iframes", "Allowed values are all, same-origin, none."));
             
         }
         $valid['load_iframes'] = isset($input['load_iframes']) ? $input['load_iframes'] : '';
@@ -391,7 +474,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'custom_css',
                 'empty_custom_css',
-                pdfcrowd_create_invalid_value_message($custom_css, 'Custom Css', 'The string must not be empty.'));
+                pdfcrowd_create_invalid_value_message($custom_css, "Custom Css", "The string must not be empty."));
             
         }
         $valid['custom_css'] = isset($input['custom_css']) ? $input['custom_css'] : '';
@@ -403,7 +486,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'custom_javascript',
                 'empty_custom_javascript',
-                pdfcrowd_create_invalid_value_message($custom_javascript, 'Custom Javascript', 'The string must not be empty.'));
+                pdfcrowd_create_invalid_value_message($custom_javascript, "Custom Javascript", "The string must not be empty."));
             
         }
         $valid['custom_javascript'] = isset($input['custom_javascript']) ? $input['custom_javascript'] : '';
@@ -415,7 +498,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'on_load_javascript',
                 'empty_on_load_javascript',
-                pdfcrowd_create_invalid_value_message($on_load_javascript, 'On Load Javascript', 'The string must not be empty.'));
+                pdfcrowd_create_invalid_value_message($on_load_javascript, "On Load Javascript", "The string must not be empty."));
             
         }
         $valid['on_load_javascript'] = isset($input['on_load_javascript']) ? $input['on_load_javascript'] : '';
@@ -427,7 +510,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'custom_http_header',
                 'empty_custom_http_header',
-                pdfcrowd_create_invalid_value_message($custom_http_header, 'Custom Http Header', 'A string containing the header name and value separated by a colon.'));
+                pdfcrowd_create_invalid_value_message($custom_http_header, "Custom Http Header", "A string containing the header name and value separated by a colon."));
             
         }
         $valid['custom_http_header'] = isset($input['custom_http_header']) ? $input['custom_http_header'] : '';
@@ -439,7 +522,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'javascript_delay',
                 'empty_javascript_delay',
-                pdfcrowd_create_invalid_value_message($javascript_delay, 'Javascript Delay', 'Must be a positive integer number or 0.'));
+                pdfcrowd_create_invalid_value_message($javascript_delay, "Javascript Delay", "Must be a positive integer or 0."));
             
         }
         $valid['javascript_delay'] = isset($input['javascript_delay']) ? $input['javascript_delay'] : '';
@@ -451,7 +534,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'element_to_convert',
                 'empty_element_to_convert',
-                pdfcrowd_create_invalid_value_message($element_to_convert, 'Element To Convert', 'The string must not be empty.'));
+                pdfcrowd_create_invalid_value_message($element_to_convert, "Element To Convert", "The string must not be empty."));
             
         }
         $valid['element_to_convert'] = isset($input['element_to_convert']) ? $input['element_to_convert'] : '';
@@ -463,7 +546,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'element_to_convert_mode',
                 'empty_element_to_convert_mode',
-                pdfcrowd_create_invalid_value_message($element_to_convert_mode, 'Element To Convert Mode', 'Allowed values are cut-out, remove-siblings, hide-siblings.'));
+                pdfcrowd_create_invalid_value_message($element_to_convert_mode, "Element To Convert Mode", "Allowed values are cut-out, remove-siblings, hide-siblings."));
             
         }
         $valid['element_to_convert_mode'] = isset($input['element_to_convert_mode']) ? $input['element_to_convert_mode'] : '';
@@ -475,7 +558,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'wait_for_element',
                 'empty_wait_for_element',
-                pdfcrowd_create_invalid_value_message($wait_for_element, 'Wait For Element', 'The string must not be empty.'));
+                pdfcrowd_create_invalid_value_message($wait_for_element, "Wait For Element", "The string must not be empty."));
             
         }
         $valid['wait_for_element'] = isset($input['wait_for_element']) ? $input['wait_for_element'] : '';
@@ -489,7 +572,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'readability_enhancements',
                 'empty_readability_enhancements',
-                pdfcrowd_create_invalid_value_message($readability_enhancements, 'Readability Enhancements', 'Allowed values are none, readability-v1, readability-v2, readability-v3, readability-v4.'));
+                pdfcrowd_create_invalid_value_message($readability_enhancements, "Readability Enhancements", "Allowed values are none, readability-v1, readability-v2, readability-v3, readability-v4."));
             
         }
         $valid['readability_enhancements'] = isset($input['readability_enhancements']) ? $input['readability_enhancements'] : '';
@@ -505,7 +588,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'data_format',
                 'empty_data_format',
-                pdfcrowd_create_invalid_value_message($data_format, 'Data Format', 'Allowed values are auto, json, xml, yaml, csv.'));
+                pdfcrowd_create_invalid_value_message($data_format, "Data Format", "Allowed values are auto, json, xml, yaml, csv."));
             
         }
         $valid['data_format'] = isset($input['data_format']) ? $input['data_format'] : '';
@@ -531,7 +614,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'http_proxy',
                 'empty_http_proxy',
-                pdfcrowd_create_invalid_value_message($http_proxy, 'Http Proxy', 'The value must have format DOMAIN_OR_IP_ADDRESS:PORT.'));
+                pdfcrowd_create_invalid_value_message($http_proxy, "Http Proxy", "The value must have format DOMAIN_OR_IP_ADDRESS:PORT."));
             
         }
         $valid['http_proxy'] = isset($input['http_proxy']) ? $input['http_proxy'] : '';
@@ -543,7 +626,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'https_proxy',
                 'empty_https_proxy',
-                pdfcrowd_create_invalid_value_message($https_proxy, 'Https Proxy', 'The value must have format DOMAIN_OR_IP_ADDRESS:PORT.'));
+                pdfcrowd_create_invalid_value_message($https_proxy, "Https Proxy", "The value must have format DOMAIN_OR_IP_ADDRESS:PORT."));
             
         }
         $valid['https_proxy'] = isset($input['https_proxy']) ? $input['https_proxy'] : '';
@@ -555,7 +638,7 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'client_certificate',
                 'empty_client_certificate',
-                pdfcrowd_create_invalid_value_message($client_certificate, 'Client Certificate', 'The file must exist and not be empty.'));
+                pdfcrowd_create_invalid_value_message($client_certificate, "Client Certificate", "The file must exist and not be empty."));
             
         }
         $valid['client_certificate'] = isset($input['client_certificate']) ? $input['client_certificate'] : '';
@@ -569,19 +652,23 @@ class Save_As_Image_Pdfcrowd_Admin {
                 add_settings_error(
                 'max_loading_time',
                 'empty_max_loading_time',
-                pdfcrowd_create_invalid_value_message($max_loading_time, 'Max Loading Time', 'The value must be in the range 10-30.'));
+                pdfcrowd_create_invalid_value_message($max_loading_time, "Max Loading Time", "The accepted range is 10-30."));
             
         }
         $valid['max_loading_time'] = isset($input['max_loading_time']) ? $input['max_loading_time'] : '';
 
+        $valid['subprocess_referrer'] = isset($input['subprocess_referrer']) ? $input['subprocess_referrer'] : '';
+
+        $valid['converter_user_agent'] = isset($input['converter_user_agent']) ? $input['converter_user_agent'] : '';
+
         if (isset($input['converter_version']) &&
             $input['converter_version'] != '') {
             $converter_version = $input['converter_version'];
-            if (!preg_match("/(?i)^(latest|24.04|20.10|18.10)$/", $converter_version))
+            if (!preg_match("/(?i)^(24.04|20.10|18.10|latest)$/", $converter_version))
                 add_settings_error(
                 'converter_version',
                 'empty_converter_version',
-                pdfcrowd_create_invalid_value_message($converter_version, 'Converter Version', 'Allowed values are latest, 24.04, 20.10, 18.10.'));
+                pdfcrowd_create_invalid_value_message($converter_version, "Converter Version", "Allowed values are 24.04, 20.10, 18.10, latest."));
             
         }
         $valid['converter_version'] = isset($input['converter_version']) ? $input['converter_version'] : '';
@@ -738,7 +825,7 @@ class Save_As_Image_Pdfcrowd_Admin {
  */
 if(!function_exists('pdfcrowd_create_invalid_value_message')) {
     function pdfcrowd_create_invalid_value_message($value, $field, $hint) {
-        $message = "Invalid value '$value' for an option '$field'.";
+        $message = "Invalid value '$value' for the '$field' option.";
         if($hint != null) {
             $message = $message . " " . $hint;
         }
