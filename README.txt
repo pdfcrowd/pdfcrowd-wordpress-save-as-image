@@ -8,111 +8,81 @@ Stable tag: 4.5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add a Save as Image button to WordPress posts, pages, and selected content. Visitors can capture content as an image in one click.
+Add a screenshot button to WordPress in minutes. Visitors can save pages or posts as images with one click.
 
 == Description ==
 
 
-The "Save as Image" plugin is the WordPress-native way to add screenshot buttons to posts, pages, and selected content. Visitors can capture a WordPress page or post as an image in one click, and you can configure button placement and PDFCrowd conversion settings in the WordPress admin area.
+The "Save as Image" plugin lets you add a full-featured screenshot button to your WordPress site in minutes, without custom code or server-side screenshot software. Visitors can save a page or post as an image with one click.
 
-The plugin can be tested in demo mode. Production output without the PDFCrowd watermark and branding requires a PDFCrowd license.
+You can install and test the plugin right away in fully functional demo mode. No registration is needed. When you are ready, activate a paid PDFCrowd license for production use.
+
+Useful links:
+
+* [WordPress plugin guide](https://pdfcrowd.com/save-as-image-wordpress-plugin/): setup, first test, and common workflows.
+* [WordPress FAQ](https://pdfcrowd.com/faq/wordpress/): common issues, examples, licensing, and troubleshooting.
+* [Option reference](https://pdfcrowd.com/save-as-image-wordpress-plugin/ref/): exact plugin settings.
+* [Contact PDFCrowd support](https://pdfcrowd.com/contact/): help with setup or output issues.
 
 === Features ===
 
-* **WordPress-native screenshot button:** Add a Save as Image button to posts, pages, and selected content.
-* **Automatic or manual placement:** Show the button automatically, place it with a shortcode, or add it from PHP.
-* **Selected-content capture:** Capture the full page or only the content enclosed by the block shortcode.
-* **Customizable button appearance:** Configure button text, icon, layout, style, and placement.
-* **PDFCrowd conversion settings:** Control screenshot width, output format, and other conversion options from WordPress admin.
-* **Cloud image generation:** Generate screenshots through PDFCrowd without installing a server-side image rendering library on your WordPress host.
+* **Easy setup:** Install from WordPress admin, activate the plugin, and test the button in demo mode.
+* **One-click screenshot button:** Let visitors save pages or posts as images.
+* **Modern page rendering:** Supports current HTML, CSS, images, and JavaScript.
+* **Flexible button placement:** Show the button automatically or place it manually where needed.
+* **Customizable button appearance:** Configure button text, icon, layout, and style.
+* **Flexible output settings:** Adjust screenshot width, image format, and other output options from WordPress admin.
+* **Selected-content capture:** Capture the full page or a selected part of the page.
+* **No screenshot software to install on your server:** Image generation runs through PDFCrowd.
 
-
-== Usage ==
-
-Once activated, the "Save as Image" button will automatically appear on eligible content according to your settings. Users can click the button to save a screenshot of the current page as an image file, such as PNG or JPEG.
-
-To manually add the "Save as Image" button to specific pages or posts, use the following shortcode:
-
-**[save_as_image_pdfcrowd]**
-
-
-For additional methods of adding the button to your pages, please refer to the [Getting Started Guide](https://pdfcrowd.com/save-as-image-wordpress-plugin/#how-to-use).
-
-== Customization ==
-
-The plugin offers various customization options accessible through the WordPress admin area. You can change the screenshot generation settings and button appearance. For more detailed customization, please refer to the plugin [option reference](https://pdfcrowd.com/save-as-image-wordpress-plugin/ref/).
-
-== Licensing ==
-
-By default, the plugin operates in demo mode. Demo mode is fully functional, but adds a watermark and PDFCrowd branding to the generated image.
-
-To remove the demo watermark and PDFCrowd branding, purchase a [PDFCrowd license](https://pdfcrowd.com/pricing/api/?api=v2&ref=wordpress). Activate the license by entering your PDFCrowd username and key in the plugin settings under the License tab.
-
-A PDFCrowd license can be used across multiple WordPress websites for our [plugins](https://pdfcrowd.com/save-as-pdf-image-wordpress-plugin/). It also grants direct access to the [PDFCrowd API](https://pdfcrowd.com/api/) for custom application integrations.
-
-== Basic Troubleshooting ==
-
-If the default plugin output does not meet your requirements, consider adjusting the following settings individually. You may need to activate the "Expert Settings" option to access some of these features.
-
-* **Mode > Conversion Mode:** Try switching it to either "Upload" or "Content".
-* **Image Output > Screenshot Width:** Experiment with different widths to see which yields the best result.
-
-== Support ==
-
-Please [contact us](https://pdfcrowd.com/contact/) or write to support@pdfcrowd.com if you need any help. We will be happy to assist you with configuring the plugin to ensure its output meets your needs.
-
-Plugin links:
-
-* [Guide](https://pdfcrowd.com/save-as-image-wordpress-plugin/)
-* [Option Reference](https://pdfcrowd.com/save-as-image-wordpress-plugin/ref/)
-* [FAQ](https://pdfcrowd.com/faq/wordpress/)
-
-== About us ==
-
-PDFCrowd provides cloud document conversion APIs and integrations for developers, website owners, WordPress sites, and automation workflows.
 
 == Installation ==
 
-1. **Upload Plugin:** Download the "Save as Image" plugin ZIP file. In your WordPress dashboard, navigate to **Plugins > Add New > Upload Plugin**. Choose the ZIP file you downloaded and click **Install Now**.
-2. **Activate Plugin:** After the installation is complete, click **Activate Plugin** to start using "Save as Image" on your site.
-3. **Configure Settings:** Go to the "Save as Image" settings page to customize the button appearance and conversion settings.
+= Automatic installation =
+
+1. In WordPress admin, go to **Plugins > Add New**.
+2. Search for "Save as Image by PDFCrowd".
+3. Click **Install Now**, then **Activate**.
+4. Go to **Settings > Save as Image** to review button placement and output settings.
+
+= ZIP upload =
+
+1. Download the "Save as Image" plugin ZIP file.
+2. In WordPress admin, go to **Plugins > Add New > Upload Plugin**.
+3. Choose the ZIP file and click **Install Now**.
+4. Click **Activate Plugin**.
+
+= After activation =
+
+The "Save as Image" button appears automatically wherever it is enabled in the plugin settings. Go to **Settings > Save as Image** to review button placement, button text, and output settings.
+
+Test the button on one post or page that you can safely use.
+
+For screenshot size, image format, or other output adjustments, see [Customization](https://pdfcrowd.com/save-as-image-wordpress-plugin/#tips).
+
+For button or screenshot generation problems, see [Troubleshooting](https://pdfcrowd.com/save-as-image-wordpress-plugin/#troubleshooting).
 
 == Frequently Asked Questions ==
 
-= How can I activate the license? =
+= Can I test the plugin before buying a PDFCrowd license? =
 
-1. Purchase a [PDFCrowd license plan](https://pdfcrowd.com/pricing/api/?api=v2&ref=wordpress) that matches your usage level.
-2. Activate the license by entering your PDFCrowd username and key in the "License" tab of the plugin settings.
+Yes. You can install and test the plugin right away in fully functional demo mode. No registration is needed. When you are ready, activate a paid PDFCrowd license for production use.
 
-= Can I use the plugin without a PDFCrowd license? =
+= Does screenshot generation happen on my WordPress server? =
 
-Yes. The plugin can be tested in demo mode. Demo mode is fully functional, but the generated image includes a watermark and PDFCrowd branding. A PDFCrowd license is required to remove the watermark and branding.
+No. Screenshot generation runs through PDFCrowd, so your WordPress host does not need screenshot generation software installed.
 
-= How does the plugin work? =
+= Where can I find the full WordPress plugin documentation? =
 
-The plugin uses the PDFCrowd [HTML to Image API](https://pdfcrowd.com/api/html-to-image-api/), a cloud conversion service. When a visitor clicks the button, the plugin sends either the page URL or the HTML content to PDFCrowd. PDFCrowd processes the request and returns the generated image file.
+Useful links:
 
-This approach has several benefits:
+* [WordPress plugin guide](https://pdfcrowd.com/save-as-image-wordpress-plugin/): setup, first test, and common workflows.
+* [WordPress FAQ](https://pdfcrowd.com/faq/wordpress/): common issues, examples, licensing, and troubleshooting.
+* [Option reference](https://pdfcrowd.com/save-as-image-wordpress-plugin/ref/): exact plugin settings.
 
-* **Performance:** Conversion does not consume your WordPress server's CPU or memory.
-* **Scalability:** Cloud conversion can handle traffic spikes without adding conversion load to your site.
-* **Reliability:** PDFCrowd's conversion infrastructure is maintained separately from your WordPress hosting environment.
+= How can I contact support? =
 
-= Can I choose where the button appears? =
-
-Yes. You can configure automatic button placement in the plugin settings, add the button with a shortcode, or create the button from PHP.
-
-= Can I convert only part of a page? =
-
-Yes. Use the block shortcode to place the button around selected content. The plugin can convert the enclosed block instead of the whole page.
-
-= Where can I find more information about the plugin? =
-
-* [Guide](https://pdfcrowd.com/save-as-image-wordpress-plugin/): Provides basic information about the plugin.
-* [Option Reference](https://pdfcrowd.com/save-as-image-wordpress-plugin/ref/): Offers a detailed reference for plugin options, including examples.
-* [FAQ](https://pdfcrowd.com/faq/wordpress/): An extensive plugin FAQ is available on our website.
-* [Contact Us](https://pdfcrowd.com/contact/): If you need any assistance, we're here to help.
-
+If you need help with setup, output adjustments, or troubleshooting, [contact PDFCrowd support](https://pdfcrowd.com/contact/). We are happy to help you configure the plugin for your WordPress site.
 
 == Changelog ==
 
