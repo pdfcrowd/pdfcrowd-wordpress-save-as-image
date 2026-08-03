@@ -4,7 +4,7 @@ Tags: image, screenshot, save as image, wordpress screenshot, html to image
 Requires PHP: 5.1
 Requires at least: 4.0
 Tested up to: 7.0
-Stable tag: 4.5.8
+Stable tag: 4.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,9 @@ If you need help with setup, output adjustments, or troubleshooting, [contact PD
 
 == Changelog ==
 
+= 4.6.0 =
+* Maintenance release.
+
 = 4.5.8 =
 * Updated the readme file.
 * Fixed the vertical alignment of option labels in the plugin settings.
@@ -98,8 +101,5 @@ If you need help with setup, output adjustments, or troubleshooting, [contact PD
 
 = 4.5.5 =
 * Enhanced descriptions of plugin options.
-
-= 4.5.4 =
-* Fixed: Prevent undefined AJAX URL by reliably exposing admin-ajax.php, avoiding clashes with third-party plugins.
 
 [See changelog for all versions](https://raw.githubusercontent.com/pdfcrowd/pdfcrowd-wordpress-save-as-image/master/changelog.txt).

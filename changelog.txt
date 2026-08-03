@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 4.6.0 =
+* Maintenance release.
+
 = 4.5.8 =
 * Updated the readme file.
 * Fixed the vertical alignment of option labels in the plugin settings.
