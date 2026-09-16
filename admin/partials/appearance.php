@@ -75,13 +75,13 @@ function unfiltered_html_notice($option) {
     You can also manually add the
     <code>[save_as_image_pdfcrowd]</code>
     shortcode to your page to display the button, see
-    <a href="https://pdfcrowd.com/save-as-image-wordpress-plugin/#shortcodes">
+    <a href="https://pdfcrowd.com/save-as-image-wordpress-plugin/docs/#shortcodes">
         details,
     </a>
     or add
     <code>create_save_as_image_pdfcrowd_button</code>
     the function call to your PHP code, see
-    <a href="https://pdfcrowd.com/save-as-image-wordpress-plugin/#function">
+    <a href="https://pdfcrowd.com/save-as-image-wordpress-plugin/docs/#function">
         details.
     </a>
 </div>

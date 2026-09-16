@@ -4,7 +4,7 @@ Tags: image, screenshot, save as image, wordpress screenshot, html to image
 Requires PHP: 5.1
 Requires at least: 4.0
 Tested up to: 7.1
-Stable tag: 4.6.0
+Stable tag: 4.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,10 @@ If you need help with setup, output adjustments, or troubleshooting, [contact PD
 
 == Changelog ==
 
+= 4.6.1 =
+* Updated help text in the plugin settings.
+* Updated documentation links for shortcodes and PHP functions.
+
 = 4.6.0 =
 * Maintenance release.
 
@@ -98,8 +102,5 @@ If you need help with setup, output adjustments, or troubleshooting, [contact PD
 
 = 4.5.6 =
 * Fixed CVE-2026-0862 by avoiding the use of an empty key for encryption.
-
-= 4.5.5 =
-* Enhanced descriptions of plugin options.
 
 [See changelog for all versions](https://raw.githubusercontent.com/pdfcrowd/pdfcrowd-wordpress-save-as-image/master/changelog.txt).

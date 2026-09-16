@@ -305,7 +305,7 @@ Note that disabling JavaScript means lazy-loaded images and AJAX content will no
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Do not load images during conversion to create text-only PDFs. Use this to significantly speed up conversion, reduce file size, or create accessible text-focused documents.
-Ideal for converting documentation where images are not needed, reducing bandwidth usage, or creating lightweight PDFs for email distribution.
+Use this for converting documentation where images are not needed, reducing bandwidth usage, or creating lightweight PDFs for email distribution.
 
                           </div>
                         </div>
@@ -392,7 +392,7 @@ Disabling iframes can significantly improve performance and reliability.
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Automatically block common advertising networks and tracking scripts during conversion, producing cleaner PDFs with faster conversion times. Filters out third-party ad content, analytics beacons, and ad network resources.
-Ideal for converting news sites, blogs, or any ad-heavy content where ads distract from the main message. May occasionally block legitimate third-party content - disable if critical third-party resources are missing.
+Use this for converting news sites, blogs, or any ad-heavy content where ads distract from the main message. May occasionally block legitimate third-party content - disable if critical third-party resources are missing.
 
                           </div>
                         </div>
@@ -886,7 +886,7 @@ If the element is not found, the conversion fails. Your license defines the maxi
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Automatically enhance the input HTML to improve readability by removing clutter and reformatting content. Use this when converting web pages with excessive navigation, ads, or sidebars that distract from the main content.
-Different versions (<code>v1-v4</code>) use progressively aggressive algorithms - start with <code>"v1"</code> and increase if more cleanup is needed. Ideal for converting blog posts, articles, or documentation into clean PDFs.
+Different versions (<code>v1-v4</code>) use progressively aggressive algorithms - start with <code>"v1"</code> and increase if more cleanup is needed. Use this for converting blog posts, articles, or documentation into clean PDFs.
 
                           </div>
                             <br>Possible values: <ul><li>"none" - No enhancements are used.</li><li>"readability-v1" - Version 1 of the enhancements is used. Basic cleanup for simple pages with moderate clutter.</li><li>"readability-v2" - Version 2 of the enhancements is used. More aggressive cleanup for pages with more ads and navigation.</li><li>"readability-v3" - Version 3 of the enhancements is used. Strong cleanup for heavily cluttered pages with multiple sidebars.</li><li>"readability-v4" - Version 4 of the enhancements is used. Maximum cleanup for extremely cluttered pages. May remove some content.</li></ul>
@@ -1001,7 +1001,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         placeholder="utf-8" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
-                             Set the encoding of the data file set by <a href='https://pdfcrowd.com/api/html-to-pdf-php/ref/#set_data_file'>setDataFile</a>.
+                             Set the encoding of the input <a href='https://pdfcrowd.com/save-as-image-wordpress-plugin/ref/#data_file'>data file</a>.
                               
                           </div>
                         </div>
