@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 <?php if(get_option('save_as_image_pdfcrowd_error_code')) : ?>
 <div class='notice notice-error'><p><strong>
 <?php esc_html_e(get_option('save_as_image_pdfcrowd_error_code')) ?>
- <a href="https://pdfcrowd.com/faq/how-to-resolve-plugin-license-errors/" target="_blank">Resolve</a> this issue.</strong></p></div>
+ <a href="https://pdfcrowd.com/faq/wordpress/how-to-resolve-plugin-license-errors/" target="_blank">Resolve</a> this issue.</strong></p></div>
 <?php endif; ?>
 
 <div

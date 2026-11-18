@@ -38,11 +38,11 @@ defined( 'ABSPATH' ) || exit;
             </label>
             - <span id="save-as-image-pdfcrowd-lic-reg-ac">
                 <a class="button-secondary"
-                   href="https://pdfcrowd.com/user/sign_up/?pid=api-trial2&ref=wordpress">
+                   href="https://pdfcrowd.com/user/sign_up/?pid=api-trial2">
                     Free trial
                 </a> or
                 <a class="button-secondary"
-                   href="https://pdfcrowd.com/pricing/api/?api=v2&ref=wordpress">
+                   href="https://pdfcrowd.com/pricing/?api=v2&wp=1">
                     Purchase
                 </a>
             </span>
@@ -87,7 +87,7 @@ defined( 'ABSPATH' ) || exit;
                     <td></td>
                     <td>
                         You can find the PDFCrowd WordPress key in your
-                        <a href='https://pdfcrowd.com/user/account/wordpress/?ref=wordpress' target='blank'>PDFCrowd account</a>.
+                        <a href='https://pdfcrowd.com/user/account/wordpress/' target='blank'>PDFCrowd account</a>.
                     </td>
                 </tr>
             <?php if($license_status) :?>

@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
           <h1>
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTkuMjI3IiBoZWlnaHQ9IjQzLjI1NiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03My44MDIgLTM4Ni4wNikiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEuNzk0OCAwIDAgMS43OTQ4IC0yNjI2LjUgLTIxMi4wNikiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmOTUwMCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTE1MTQuNSAzMzUuODZjMC40NDI2IDAuMDU0IDEuMjM2Ni0wLjI0MzM2IDEuMDAwMiAwLjQ4OTY1djE4LjUxMWMtMC40NDI2LTAuMDU0LTEuMjM2NiAwLjI0MzM3LTEuMDAwMi0wLjQ4OTY1di0xOC41MTF6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC45OTk4Ii8+PHBhdGggZD0ibTE1MDYuMyAzNDQuNTRoMS40NzQ4djEwLjU1NWgtMS40NzQ4di0xMC41NTV6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC41MjUxIi8+PHBhdGggZD0ibTE1MjIuNCAzMzkuNzhjMC4zNzU1IDAuMTIzMSAxLjI5ODYtMC4zMDEzMyAxLjE2OTQgMC4zMjY0M3YxNC44NDNjLTAuMzc1NS0wLjEyMzExLTEuMjk4NiAwLjMwMTMzLTEuMTY5NC0wLjMyNjQzdi0xNC44NDN6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC44MzA2Ii8+PHBhdGggZD0ibTE1MzUuMSAzNTMuMjh2Mi4xNjQ5aC01LjE2NDl2LTIuMTY0OWg1LjE2NDl6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iMy44MzUxIi8+PC9nPjwvZz48L3N2Zz4K" style="height: 24px;"/>
             <?php esc_html_e( get_admin_page_title() ); ?>
-            <span id="save-as-image-pdfcrowd-version">v4.6.3</span>
+            <span id="save-as-image-pdfcrowd-version">v4.7.0</span>
           </h1>
 
           <div id="save-as-image-pdfcrowd-sticky">
@@ -424,24 +424,29 @@ defined( 'ABSPATH' ) || exit;
              </div>
              <div>
                   You can also use our
-               <a href="https://pdfcrowd.com/contact/?ref=wordpress&pr=save-as-image-pdfcrowd"
+               <a href="https://pdfcrowd.com/contact/?pr=save-as-image-pdfcrowd"
                   title="Contact us"
                   target="_blank">contact form</a>.
              </div>
 
              <div style="line-height: normal; margin-top:1em;">
                <div style="font-size:larger;font-weight:bold">
-                 Useful Links
+                 Useful links
                </div>
                <ul>
                  <li>
-                   <a href="https://pdfcrowd.com/save-as-image-wordpress-plugin/" target="_blank">
-                     Plugin Homepage
+                   <a href="https://pdfcrowd.com/save-as-image-wordpress-plugin/docs/" target="_blank">
+                     Plugin guide
+                   </a>
+                 </li>
+                 <li>
+                   <a href="https://pdfcrowd.com/faq/wordpress/" target="_blank">
+                     Plugin FAQ
                    </a>
                  </li>
                  <li>
                    <a href="https://pdfcrowd.com/save-as-image-wordpress-plugin/ref/" target="_blank">
-                     Option Reference
+                     Option reference
                    </a>
                  </li>
                  <li>
@@ -453,7 +458,12 @@ defined( 'ABSPATH' ) || exit;
                  </li>
                  <li>
                    <a href="https://pdfcrowd.com/preview/html-to-image/?lang=wf%2Fwpsettings&url=<?php echo urlencode(get_home_url()); ?>" target="_blank">
-                     Output Image Preview
+                     Image preview
+                   </a>
+                 </li>
+                 <li>
+                   <a href="https://pdfcrowd.com/save-as-image-wordpress-plugin/" target="_blank">
+                     Plugin overview
                    </a>
                  </li>
                </ul>

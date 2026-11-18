@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 4.7.0 =
+* Security hardening for encrypted button options and conversion-indicator HTML. After updating, clear any page and CDN caches so freshly generated buttons are used.
+* Updated help and documentation links.
+* Improved the plugin listing with onboarding help, usage examples, banners, and clearer demo/pricing info.
+
 = 4.6.3 =
 * Updated help text in the plugin settings.
 * Updated documentation links for shortcodes and PHP functions.
