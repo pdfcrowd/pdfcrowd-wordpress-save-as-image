@@ -93,10 +93,12 @@ If you need help with setup, output adjustments, or troubleshooting, [contact su
 
 == Screenshots ==
 
-1. Generated image — property listing
-2. Generated image — car listing
-3. Generated image — recipe
-4. Generated image — event flyer
+1. Generated image — article
+2. Generated image — property listing
+3. Generated image — car listing
+4. Generated image — professional profile
+5. Generated image — recipe
+6. Generated image — event flyer
 
 == Changelog ==
 
