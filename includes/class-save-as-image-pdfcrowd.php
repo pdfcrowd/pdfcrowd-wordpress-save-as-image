@@ -95,7 +95,7 @@ class Save_As_Image_Pdfcrowd {
             return SAVE_AS_IMAGE_VERSION;
         }
 
-        return '4.7.0';
+        return '5.0.0';
     }
 
     /**
@@ -243,24 +243,89 @@ class Save_As_Image_Pdfcrowd {
         return $this->version;
     }
 
-    public function create_sample_button() {
-        if(!wp_verify_nonce($_POST['nonce'],
-                            'wp_ajax_save_as_image_pdfcrowd_create_button' )) {
-            // nonce is not valid
-            die('error, refresh the page');
-        } if(!current_user_can('manage_options')) {
-            // missing right
-            die('access denied');
-        } else {
-            $_POST = stripslashes_deep($_POST);
-            $out = Save_As_Image_Pdfcrowd_Public::create_button_from_style(
-                $_POST['style']);
-
-            // $out contains HTML code with Save as Image button
-            // it can not be escaped
-            echo $out;
-            die();
+    public static function sanitize_button_settings($input, $saved) {
+        $style = array();
+        foreach (array(
+            'button_disposition',
+            'button_position',
+            'button_alignment',
+            'button_on_home',
+            'button_on_front',
+            'button_on_pages',
+            'button_on_posts',
+            'button_on_categories',
+            'button_on_taxonomies',
+            'button_text',
+            'button_text_size',
+            'button_text_weight',
+            'button_translation',
+            'button_translation_domain',
+            'button_image',
+            'button_image_url',
+            'button_image_width',
+            'button_image_height',
+            'button_padding_left',
+            'button_padding_right',
+            'button_padding_top',
+            'button_padding_bottom',
+            'button_radius',
+            'button_margin_left',
+            'button_margin_right',
+            'button_margin_top',
+            'button_margin_bottom',
+            'button_format',
+            'button_styling',
+            'button_text_color',
+            'button_background_color',
+            'button_border_color',
+            'button_border_style',
+            'button_border_width',
+            'button_hidden',
+            'button_html_hidden',
+            'button_indicator',
+            'button_indicator_timeout',
+            'button_custom_indicator',
+            'button_hover',
+            'button_id',
+            'button_user_drawings',
+        ) as $name) {
+            if (isset($input[$name])) {
+                $style[$name] = is_scalar($input[$name]) ? esc_html($input[$name]) : '';
+            }
         }
+
+        $allow_html = current_user_can('unfiltered_html');
+        foreach (array(
+            'button_custom_html',
+            'button_indicator_html',
+        ) as $name) {
+            if (!$allow_html) {
+                $style[$name] = isset($saved[$name]) ? $saved[$name] : '';
+            } elseif (isset($input[$name])) {
+                $style[$name] = is_scalar($input[$name]) ? $input[$name] : '';
+            }
+        }
+        return $style;
+    }
+
+    public function create_sample_button() {
+        if (!isset($_POST['nonce']) || !is_string($_POST['nonce']) ||
+            !wp_verify_nonce(wp_unslash($_POST['nonce']), 'wp_ajax_save_as_image_pdfcrowd_create_button')) {
+            wp_die('error, refresh the page', '', array('response' => 403));
+        }
+        if (!current_user_can('manage_options')) {
+            wp_die('access denied', '', array('response' => 403));
+        }
+        if (!isset($_POST['style']) || !is_array($_POST['style'])) {
+            wp_die('invalid button style', '', array('response' => 400));
+        }
+
+        $style = self::sanitize_button_settings(
+            wp_unslash($_POST['style']), get_option($this->plugin_name, array()));
+        $out = Save_As_Image_Pdfcrowd_Public::create_button_from_style($style);
+        // The preview renders the button markup, including permitted custom HTML.
+        echo $out;
+        wp_die();
     }
 
     public function dismiss_upgrade() {

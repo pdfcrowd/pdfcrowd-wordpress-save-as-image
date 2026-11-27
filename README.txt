@@ -1,10 +1,10 @@
 === Save as Image Plugin by PDFCrowd ===
 Contributors: PDFCrowd
 Tags: image, screenshot, save as image, wordpress screenshot, html to image
-Requires PHP: 5.1
+Requires PHP: 5.4
 Requires at least: 4.0
-Tested up to: 7.1
-Stable tag: 4.7.0
+Tested up to: 7.2
+Stable tag: 5.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,18 @@ If you need help with setup, output adjustments, or troubleshooting, [contact su
 
 == Changelog ==
 
+= 5.0.0 =
+* Improved translations for the settings page, license messages, and email dialogs. Saved usernames and other settings keep their original values in every language.
+* Restricted visitor cookie forwarding to the exact WordPress site hostname during conversion.
+* Fixed email delivery for signed-out visitors when the recipient is set to the logged-in user. The plugin now uses the address the visitor enters and shows an error if it is blank.
+* Fixed an "Invalid token" error in Content conversion mode when the server used different time zones to display the button and process the download.
+* Conversion URLs now preserve query parameters containing special characters and retain page fragments.
+* Button previews now enforce the same custom HTML permissions as saved button settings.
+* When demo credits run out, visitors see a message to contact the site administrator. Administrators see where to enter their PDFCrowd credentials.
+* Download error pages and email dialogs now display server error text safely, including messages containing HTML.
+* Removed the notification sent to PDFCrowd when the plugin was uninstalled.
+* Corrected the declared minimum PHP version to 5.4, which the plugin code already required.
+
 = 4.7.0 =
 * Security hardening for encrypted button options and conversion-indicator HTML. After updating, clear any page and CDN caches so freshly generated buttons are used.
 * Updated help and documentation links.
@@ -117,9 +129,6 @@ If you need help with setup, output adjustments, or troubleshooting, [contact su
 = 4.6.1 =
 * Updated help text in the plugin settings.
 * Updated documentation links for shortcodes and PHP functions.
-
-= 4.6.0 =
-* Maintenance release.
 
 [See changelog for all versions](https://raw.githubusercontent.com/pdfcrowd/pdfcrowd-wordpress-save-as-image/master/changelog.txt).
 

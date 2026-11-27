@@ -25,6 +25,10 @@ defined( 'ABSPATH' ) || exit;
  */
 class Save_As_Image_Pdfcrowd_Public {
 
+    // Identifies plugin-formatted messages when displaying a WP_Error.
+    const ERROR_MESSAGE_HTML = 'pdfcrowd_error_html';
+    const DEMO_CREDITS_STATUS = '403.122';
+
     /**
      * The ID of this plugin.
      *
@@ -123,15 +127,17 @@ class Save_As_Image_Pdfcrowd_Public {
                           false);
         $components_translations = array(
             'email_success' => __('Email with the image has been sent.',
-                                  $this->plugin_name),
+                                  'save-as-image-pdfcrowd'),
             'email_fail' => __('Error occurred.',
-                               $this->plugin_name),
+                               'save-as-image-pdfcrowd'),
+            /* translators: %s: PDFCrowd error code. */
+            'status_code' => __('Status Code: %s', 'save-as-image-pdfcrowd'),
             'email_prompt' => __('Enter your email:',
-                                 $this->plugin_name),
+                                 'save-as-image-pdfcrowd'),
             'ok' => __('Ok',
-                       $this->plugin_name),
+                       'save-as-image-pdfcrowd'),
             'cancel' => __('Cancel',
-                           $this->plugin_name)
+                           'save-as-image-pdfcrowd')
         );
         wp_localize_script($components,
                            'save_as_image_pdfcrowd_i18n',
@@ -231,7 +237,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         'output_name' => '',
         'url_lookup' => 'auto',
         'username' => '',
-        'version' => '4700',
+        'version' => '5000',
     );
 
     private static $API_OPTIONS = array(
@@ -353,8 +359,17 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
         503 => "The 503 status code indicates a temporary network issue. Try the request again.",
     );
 
+    public static function has_legacy_connection_settings($options) {
+        // Older settings saves could omit the flag while a checkbox was active.
+        return !empty($options['enable_cookies_opt']) ||
+               !empty($options['auto_use_cookies']) ||
+               !empty($options['use_http']);
+    }
+
     public static function get_options() {
         $options = get_option('save-as-image-pdfcrowd', self::$DEFAULTS);
+        $options['enable_cookies_opt'] =
+            (int) self::has_legacy_connection_settings($options);
 
         if(!isset($options['version'])) {
             if(isset($options['dev_mode']) && $options['dev_mode']) {
@@ -365,18 +380,13 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             $options['version'] = 1000;
         }
 
-        if($options['version'] == 4700) {
+        if($options['version'] == 5000) {
             return $options;
         }
 
         if($options['version'] < 2000) {
             $options['converter_version'] = '18.10';
         }
-
-        $options['enable_cookies_opt'] = (
-            $options['version'] < 2140 &&
-            (!empty($options['auto_use_cookies']) ||
-             !empty($options['use_http']))) ? 1 : 0;
 
         if($options['version'] < 2110) {
             if(empty($options['username']) || $options['username'] === 'demo') {
@@ -400,7 +410,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">',
             }
         }
 
-        $options['version'] = 4700;
+        $options['version'] = 5000;
         if(!isset($options['button_indicator_html'])) {
             $options['button_indicator_html'] = '<img src="https://storage.googleapis.com/pdfcrowd-cdn/images/spinner.gif"
 style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
@@ -595,7 +605,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             $config['persistent_canvases'] = '1';
         }
 
-        $config = json_encode($config);
+        $config = json_encode($config, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
 
         $button_id = !empty($options['button_id']) ?
                    "id='" . esc_attr($options['button_id']) . "'" : '';
@@ -606,14 +616,14 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         switch($options['button_format']) {
         case 'image-text':
             $button_content = $image . '&nbsp;' .
-                            self::get_button_text($options);
+                            esc_html(self::get_button_text($options));
             break;
         case 'text-image':
-            $button_content = self::get_button_text($options)
+            $button_content = esc_html(self::get_button_text($options))
                             . '&nbsp;' . $image;
             break;
         case 'text':
-            $button_content = self::get_button_text($options);
+            $button_content = esc_html(self::get_button_text($options));
             break;
         case 'image':
             $button_content = $image;
@@ -734,10 +744,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             // add some features to detect valid content
             // token is valid for 2 days
             $custom_options['_time'] = time() + 60 * 60 * 24 * 2;
-            $custom_options['_token'] = rand();
-            $date_index = (date('z', $custom_options['_time']) + 22) % 30;
+            $custom_options['_token'] = wp_rand(0, 0x7fffffff);
+            $custom_options['_date_index'] =
+                (gmdate('z', $custom_options['_time']) + 22) % 30;
             $enc_data = '[' . $custom_options['_token'] . ', ' .
-                      $date_index . ']';
+                      $custom_options['_date_index'] . ']';
         }
 
         // prepare strings for emails
@@ -767,8 +778,29 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     }
 
     private function get_permalink_with_params() {
-        return isset($_GET) ?
-            add_query_arg($_GET, get_permalink()) : get_permalink();
+        $permalink = get_permalink();
+        if(!isset($_GET)) {
+            return $permalink;
+        }
+        $request_params = wp_unslash($_GET);
+        if($permalink === false) {
+            // Use the current request URL, omitting the keys we append below.
+            $permalink = add_query_arg(array_fill_keys(array_keys($request_params), false));
+        }
+        if(!$request_params) {
+            return $permalink;
+        }
+
+        $url_parts = explode('#', $permalink, 2);
+        $fragment = isset($url_parts[1]) ? '#' . $url_parts[1] : '';
+        $path_and_query = explode('?', $url_parts[0], 2);
+        $params = array();
+        if(isset($path_and_query[1])) {
+            wp_parse_str($path_and_query[1], $params);
+        }
+        $params = array_replace($params, $request_params);
+        $query = http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+        return $path_and_query[0] . ($query === '' ? '' : '?' . $query) . $fragment;
     }
 
     function show_button($content) {
@@ -894,13 +926,13 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 if(empty($options['error_page'])) {
                     $msg = self::prepare_error_message(
                         312,
-                        esc_html($msg),
+                        $msg,
                         '<b>"URL" or "Content"</b>') .
                          '<p>Or check your network and PHP configuration.</p>';
                 } else {
                     $msg .= ' Please, check your network.';
                 }
-                return new WP_Error(400, $msg);
+                return new WP_Error(400, $msg, self::ERROR_MESSAGE_HTML);
             }
             return '';
         }
@@ -910,13 +942,15 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             if($status_code && $status_code >= 400) {
                 if(empty($options['error_page'])) {
                     $msg = self::prepare_error_message(314, 'URL Load Error') .
-                         "<p>Failed url is <a href='$url'>$url</a> with status $status_code.</p>" .
-                         '<h3>Response</h3><div style="background-color: #eee">' . wp_remote_retrieve_body($response) .
+                         '<p>Failed url is <a href="' . esc_url($url) . '">' .
+                         esc_html($url) . '</a> with status ' . esc_html($status_code) . '.</p>' .
+                         '<h3>Response</h3><div style="background-color: #eee">' .
+                         esc_html(wp_remote_retrieve_body($response)) .
                          '</div>';
                 } else {
                     $msg = "URL Load Error $status_code: $url";
                 }
-                return new WP_Error(400, $msg);
+                return new WP_Error(400, $msg, self::ERROR_MESSAGE_HTML);
             }
         }
         return wp_remote_retrieve_body($response);
@@ -1043,11 +1077,51 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         return $url;
     }
 
-    private static function collect_cookies() {
+    private static function get_cookie_host($url) {
+        $host = parse_url($url, PHP_URL_HOST);
+        if(!$host) {
+            return '';
+        }
+        $host = strtolower($host);
+        if(!preg_match('/[^\x00-\x7f]/', $host)) {
+            return $host;
+        }
+
+        // Match the encoding used by the installed WordPress HTTP transport.
+        try {
+            if(class_exists('WpOrg\Requests\IdnaEncoder')) {
+                return \WpOrg\Requests\IdnaEncoder::encode($host);
+            }
+            if(class_exists('Requests_IDNAEncoder')) {
+                return Requests_IDNAEncoder::encode($host);
+            }
+        } catch(Exception $e) {
+            return '';
+        }
+        // WordPress before 4.6 can use PHP's intl extension when available.
+        if(function_exists('idn_to_ascii') && defined('INTL_IDNA_VARIANT_UTS46')
+           && defined('IDNA_NONTRANSITIONAL_TO_ASCII')) {
+            return idn_to_ascii($host, IDNA_NONTRANSITIONAL_TO_ASCII,
+                                INTL_IDNA_VARIANT_UTS46);
+        }
+        return $host;
+    }
+
+    private static function collect_cookies($host) {
         $cookies = array();
+        if(!$host) {
+            return $cookies;
+        }
+
         foreach($_COOKIE as $name => $value) {
             $cookies[] = new WP_Http_Cookie(
-                array('name' => $name, 'value' => $value));
+                array(
+                    'name' => $name,
+                    'value' => $value,
+                    // Keep cookies scoped across redirects and asset fetches.
+                    'domain' => $host,
+                    'host_only' => true
+                ));
         }
         return $cookies;
     }
@@ -1087,18 +1161,16 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         if($options['conversion_mode'] != 'url' && !isset($options['file'])) {
             $html = null;
             $args = array('sslverify' => false);
-            $site = self::strip_https(get_site_url());
+            $site_url = get_site_url();
+            $site_host = self::get_cookie_host($site_url);
+            $site = self::strip_https($site_url);
 
             if(isset($options['text'])) {
                 $html = $options['text'];
-                $args['cookies'] = self::collect_cookies();
+                $args['cookies'] = self::collect_cookies($site_host);
             } else {
-                if($site) {
-                    $url_site = self::strip_https($options['url']);
-
-                    if(self::starts_with($url_site, $site)) {
-                        $args['cookies'] = self::collect_cookies();
-                    }
+                if($site_host && $site_host === self::get_cookie_host($options['url'])) {
+                    $args['cookies'] = self::collect_cookies($site_host);
                 }
 
                 self::use_connection_args($options, $args);
@@ -1201,7 +1273,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $headers = array(
             'Authorization' => $auth,
             'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-            'User-Agent' => 'pdfcrowd_wordpress_plugin/4.7.0 ('
+            'User-Agent' => 'pdfcrowd_wordpress_plugin/5.0.0 ('
             . $pflags . '/' . $wp_version . '/' . phpversion() . ')'
         );
 
@@ -1251,10 +1323,20 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 }
 
                 $msg = wp_remote_retrieve_body($response);
+                if($code == 403 && strpos($msg, self::DEMO_CREDITS_STATUS . ' - ') === 0) {
+                    update_option('save_as_image_pdfcrowd_error_code',
+                                  'Demo credits have run out. Enter your PDFCrowd credentials on the License tab. ' .
+                                  'If you need a plan, select Purchase there.');
+                    $error = new WP_Error(
+                        $code,
+                        __('Demo credits have run out. Please contact the site administrator.', 'save-as-image-pdfcrowd'),
+                        self::DEMO_CREDITS_STATUS);
+                    break;
+                }
                 if(empty($options['error_page'])) {
                     $msg = self::prepare_error_message(
                         $code,
-                        esc_html($msg),
+                        $msg,
                         '<b>"upload"</b> or <b>"development"</b>');
                     if($code == 401 || $code == 403 || $code == 432) {
                         update_option('save_as_image_pdfcrowd_error_code',
@@ -1262,7 +1344,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                                       self::$ERROR_MESSAGES[$code]);
                     }
                 }
-                $error = new WP_Error($code, $msg);
+                $error = new WP_Error($code, $msg, self::ERROR_MESSAGE_HTML);
                 if($code != 502 && $code != 503) {
                     break;
                 }
@@ -1283,7 +1365,9 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $code = $error->get_error_code();
         $message = urlencode($error->get_error_message());
         $details = '';
-        if(isset(self::$ERROR_MESSAGES[$code])) {
+        if($error->get_error_data() === self::DEMO_CREDITS_STATUS) {
+            $details = urlencode(self::DEMO_CREDITS_STATUS . ' - ' . $error->get_error_message());
+        } elseif(isset(self::$ERROR_MESSAGES[$code])) {
             $details = $message;
             $message = urlencode(self::$ERROR_MESSAGES[$code]);
         }
@@ -1297,24 +1381,24 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     }
 
     private static function prepare_error_message($code, $text, $cmode = null) {
-        $reasonCode = '';
         $pattern = '/^(\d+)\.(\d+)\s+-\s+(.*?)(?:\s+Documentation link:\s+(.*))?$/';
         if(preg_match($pattern, $text, $matches)) {
             $code = $matches[1];
             $message = '<p>Reason Code: ' . $matches[2] . '</p>' .
-                '<p>' . $matches[3] . '</p>';
+                '<p>' . esc_html($matches[3]) . '</p>';
             if(isset($matches[4])) {
                 $docLink = str_replace(
                     'api/html-to-image-http',
                     'save-as-image-wordpress-plugin',
                     $matches[4]);
-                $message .= "<p>More: <a href='{$docLink}'>{$docLink}</a>.</p>";
+                $message .= '<p>More: <a href="' . esc_url($docLink, array('http', 'https')) .
+                            '">' . esc_html($docLink) . '</a>.</p>';
             }
             $text = $message;
         } else {
             $details = isset(self::$ERROR_MESSAGES[$code]) ?
                 '<p>' . self::$ERROR_MESSAGES[$code] . '</p>' : '';
-            $text = $details . '<p>' . $text . '</p>';
+            $text = $details . '<p>' . esc_html($text) . '</p>';
         }
 
         if(in_array($code, [312, 319, 320], true)) {
@@ -1329,12 +1413,22 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             return null;
         }
 
-        $data = base64_decode($data);
+        $data = base64_decode($data, true);
+        if($data === false) {
+            return null;
+        }
+
         $token = $options['_token'];
         $shift = $token & 15;
         $base = $token & ~((1|2|4|8|16) << $shift);
         $base = $base ^ 0xffffffff;
-        $code = (date('z', $options['_time']) + 22) % 30;
+        if(isset($options['_date_index'])) {
+            $code = $options['_date_index'];
+        } else {
+            // Cached buttons from older releases used the PHP local day.
+            $local_date = getdate($options['_time']);
+            $code = ($local_date['yday'] + 22) % 30;
+        }
 
         $data = unpack('c*', $data);
         $result = '';
@@ -1350,27 +1444,26 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     }
 
     private function get_location($options) {
-        $location = null;
-        $permalink = null;
-
-        if(isset($_POST['location'])) {
-            $location = $_POST['location'];
-        }
-        if(isset($options['permalink'])) {
-            $permalink = $options['permalink'];
-        }
-
-        if(!$location) {
-            return $permalink;
-        }
-
-        if(!$permalink) {
+        if(empty($options['permalink'])) {
             return null;
         }
 
-        // check if the location is from my domain
-        if(parse_url($location, PHP_URL_HOST) !=
-           parse_url($permalink, PHP_URL_HOST)) {
+        $permalink = $options['permalink'];
+        if(!isset($_POST['location']) || !is_string($_POST['location'])) {
+            return $permalink;
+        }
+
+        // Validate the browser URL without rewriting its path, query or fragment.
+        $http_url = '~^https?://[^/?#\\\\\x00-\x20\x7f]+(?:[/?#][^\x00-\x20\x7f]*)?$~iD';
+        $location = filter_var(wp_unslash($_POST['location']), FILTER_VALIDATE_REGEXP,
+                               array('options' => array('regexp' => $http_url)));
+        if($location === false) {
+            return $permalink;
+        }
+
+        $host = parse_url($location, PHP_URL_HOST);
+        $permalink_host = parse_url($permalink, PHP_URL_HOST);
+        if(!$host || !$permalink_host || strcasecmp($host, $permalink_host) !== 0) {
             error_log('PDFCrowd: conflict in location URL ' . $location . ' vs ' . $permalink);
             return $permalink;
         }
@@ -1437,8 +1530,13 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                                  'isHtml' => $is_html));
     }
 
-    private static function send_email($options, $file_name, $output,
-                                       $plugin_name) {
+    private static function send_email($options, $file_name, $output) {
+        $email_to = $options['email_to'];
+        if($email_to === null) {
+            return self::send_json_error(
+                455, __('Enter a recipient email address.', 'save-as-image-pdfcrowd'));
+        }
+
         // check empty filename
         if(empty($file_name)) {
             $format = isset($options['output_format'])
@@ -1450,10 +1548,9 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         $tmp_file_name = self::make_temporary_file($file_name, $output);
         if(!$tmp_file_name) {
             return self::send_json_error(
-                455, __('Output file can not be prepared.', $plugin_name));
+                455, __('Output file can not be prepared.', 'save-as-image-pdfcrowd'));
         }
 
-        $email_to = $options['email_to'];
         $email_data = json_decode($options['email_data'], true);
         $email_data['user_name'] = '';
         $email_data['user_first_name'] = '';
@@ -1492,7 +1589,7 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                     array($tmp_file_name))) {
             error_log('PDFCrowd: send failed to ' . $email_to);
             self::delete_file($tmp_file_name);
-            self::send_json_error(455, __('Mail system error.', $plugin_name));
+            self::send_json_error(455, __('Mail system error.', 'save-as-image-pdfcrowd'));
         } else {
             self::delete_file($tmp_file_name);
             wp_send_json_success();
@@ -1500,8 +1597,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     }
 
     private static function get_email_recipient($options) {
-        if($options['email_recipient'] == 'prompt') {
-            return $_POST['recipient'];
+        if($options['email_recipient'] == 'prompt' ||
+           ($options['email_recipient'] == 'user' && !is_user_logged_in())) {
+            $recipient = isset($_POST['recipient']) && is_string($_POST['recipient'])
+                       ? trim(wp_unslash($_POST['recipient'])) : '';
+            return $recipient === '' ? null : $recipient;
         }
 
         if($options['email_recipient'] == 'address') {
@@ -1523,26 +1623,31 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     function save_as_image_pdfcrowd() {
         // set download cookie at first, so the conversion button
         // can be re-enabled
-        if(isset($_POST['download-id'])) {
-            setcookie('pdfcrowdDownloadId', $_POST['download-id'], 0, "/");
+        $uuid_v4 = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iD';
+        $download_id = filter_input(INPUT_POST, 'download-id', FILTER_VALIDATE_REGEXP,
+                                    array('options' => array('regexp' => $uuid_v4)));
+        if($download_id) {
+            setcookie('pdfcrowdDownloadId', $download_id, 0, "/");
         }
 
         $options = $this->get_options();
 
         if(!empty($_POST['options'])) {
-            $decrypted = $this->decrypt(urldecode($_POST['options']),
-                                        $this->get_encryption_key($options['api_key']));
+            $decrypted = is_string($_POST['options'])
+                ? $this->decrypt(urldecode($_POST['options']),
+                                 $this->get_encryption_key($options['api_key']))
+                : false;
             if($decrypted === false) {
                 esc_html_e(
                     'Configuration error. Refresh page and retry.',
-                    $this->plugin_name);
+                    'save-as-image-pdfcrowd');
                 wp_die();
             }
             $custom_options = json_decode($decrypted);
             if(!is_object($custom_options) && !is_array($custom_options)) {
                 esc_html_e(
                     'Configuration error. Refresh page and retry.',
-                    $this->plugin_name);
+                    'save-as-image-pdfcrowd');
                 wp_die();
             }
             $options = wp_parse_args($custom_options, $options);
@@ -1572,11 +1677,12 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
             if(!isset($options['text']) && !isset($options['file'])) {
                 // take data from the page if they are not set explicitelly
                 // text is set e.g. when block shortcode is used
-                $options['text'] = self::validate_data($options, $_POST['cdata']);
+                $options['text'] = isset($_POST['cdata']) && is_string($_POST['cdata'])
+                    ? self::validate_data($options, $_POST['cdata']) : null;
                 if(!$options['text']) {
                     esc_html_e(
                         'Invalid token. Use Conversion Mode Url or disable cache for this page.',
-                       $this->plugin_name);
+                       'save-as-image-pdfcrowd');
                     wp_die();
                 }
             }
@@ -1629,9 +1735,17 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         if(is_wp_error($output)) {
             $code = $output->get_error_code();
             $message = $output->get_error_message();
+            $error_data = $output->get_error_data();
+            $is_html = $error_data === self::ERROR_MESSAGE_HTML;
             if($options['button_disposition'] == 'email') {
-                self::send_json_error($code, $message, true);
+                self::send_json_error(
+                    $code, $is_html ? wp_kses_post($message) : $message, $is_html);
             } else {
+                $summary = 'Please try again later.';
+                if($error_data === self::DEMO_CREDITS_STATUS) {
+                    $summary = $message;
+                    $message = 'Reason Code: 122';
+                }
                 // use just the main error status for a status_header
                 $status_text = $message;
                 if(preg_match('/<p>(.*?)<\/p>/', $message, $matches)) {
@@ -1639,14 +1753,11 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
                 }
                 status_header((int) $code, $status_text);
 
-                // error page is our HTML code and dynamic part of the message
-                // is escaped prior
-                echo $this->get_error_page($options, $code, $message);
+                $this->render_error_page($options, $code, $message, $is_html, $summary);
             }
         } else {
             if($options['button_disposition'] == 'email') {
-                self::send_email($options, $hook_data['file_name'],
-                                 $output, $this->plugin_name);
+                self::send_email($options, $hook_data['file_name'], $output);
             } else {
                 // send the generated file to the browser
                 header('Content-Type: ' . $this->get_mime_type($options['output_format']));
@@ -1664,13 +1775,8 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
         wp_die();
     }
 
-    private function get_error_page($options, $code, $message) {
-        $back = (empty($options['button_disposition']) ||
-                 $options['button_disposition'] === 'attachment' ||
-                 $options['button_disposition'] === 'inline')
-              ? '<a href="javascript:history.go(-1)">Go Back</a>'
-              : '';
-        return <<<HTML
+    private function render_error_page($options, $code, $message, $is_html, $summary) {
+        ?>
     <!DOCTYPE html>
     <html>
     <head>
@@ -1678,16 +1784,23 @@ style="position: absolute; top: calc(50% - 12px); left: calc(50% - 12px);">';
     </head>
     <body class="save-as-image-pdfcrowd-err">
     <h1>Image Download Failed</h1>
-    <p>Please try again later.</p>
-    {$back}
+    <p><?php echo esc_html($summary); ?></p>
+    <?php if(empty($options['button_disposition']) ||
+             in_array($options['button_disposition'], array('attachment', 'inline'), true)) { ?>
+        <a href="javascript:history.go(-1)">Go Back</a>
+    <?php } ?>
     <div class="save-as-image-pdfcrowd-err-admin" style="margin-top: 2em">
     <h2>Error Details</h2>
-    <p>Status Code: {$code}</p>
-    <p>{$message}</p>
+    <p>Status Code: <?php echo esc_html($code); ?></p>
+    <?php if($is_html) {
+        echo wp_kses_post($message);
+    } else { ?>
+        <p><?php echo esc_html($message); ?></p>
+    <?php } ?>
     </div>
     </body>
     </html>
-HTML;
+        <?php
     }
 
     private function get_function_name($key) {

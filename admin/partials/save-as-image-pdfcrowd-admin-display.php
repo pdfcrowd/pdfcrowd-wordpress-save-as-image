@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
     method="post"
     id="save-as-image-pdfcrowd-options"
     name="save-as-image-pdfcrowd-options"
-    data-nonce="<?php esc_attr_e(wp_create_nonce('wp_ajax_save_as_image_pdfcrowd_create_button')); ?>"
+    data-nonce="<?php echo esc_attr(wp_create_nonce('wp_ajax_save_as_image_pdfcrowd_create_button')); ?>"
     action="options.php">
 
         <?php
@@ -38,8 +38,8 @@ defined( 'ABSPATH' ) || exit;
              class="save-as-image-pdfcrowd-basic-mode">
           <h1>
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTkuMjI3IiBoZWlnaHQ9IjQzLjI1NiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03My44MDIgLTM4Ni4wNikiPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEuNzk0OCAwIDAgMS43OTQ4IC0yNjI2LjUgLTIxMi4wNikiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmOTUwMCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTE1MTQuNSAzMzUuODZjMC40NDI2IDAuMDU0IDEuMjM2Ni0wLjI0MzM2IDEuMDAwMiAwLjQ4OTY1djE4LjUxMWMtMC40NDI2LTAuMDU0LTEuMjM2NiAwLjI0MzM3LTEuMDAwMi0wLjQ4OTY1di0xOC41MTF6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC45OTk4Ii8+PHBhdGggZD0ibTE1MDYuMyAzNDQuNTRoMS40NzQ4djEwLjU1NWgtMS40NzQ4di0xMC41NTV6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC41MjUxIi8+PHBhdGggZD0ibTE1MjIuNCAzMzkuNzhjMC4zNzU1IDAuMTIzMSAxLjI5ODYtMC4zMDEzMyAxLjE2OTQgMC4zMjY0M3YxNC44NDNjLTAuMzc1NS0wLjEyMzExLTEuMjk4NiAwLjMwMTMzLTEuMTY5NC0wLjMyNjQzdi0xNC44NDN6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iNC44MzA2Ii8+PHBhdGggZD0ibTE1MzUuMSAzNTMuMjh2Mi4xNjQ5aC01LjE2NDl2LTIuMTY0OWg1LjE2NDl6IiBvcGFjaXR5PSIuOTkiIHN0cm9rZS13aWR0aD0iMy44MzUxIi8+PC9nPjwvZz48L3N2Zz4K" style="height: 24px;"/>
-            <?php esc_html_e( get_admin_page_title() ); ?>
-            <span id="save-as-image-pdfcrowd-version">v4.7.0</span>
+            <?php echo esc_html( get_admin_page_title() ); ?>
+            <span id="save-as-image-pdfcrowd-version">v5.0.0</span>
           </h1>
 
           <div id="save-as-image-pdfcrowd-sticky">
@@ -78,7 +78,7 @@ defined( 'ABSPATH' ) || exit;
                       style="margin-right: 1em; margin-left: 1em; margin-bottom: 2px;"
                       name="Submit"
                       type="submit"
-                      class="button-primary" value="<?php esc_attr_e('Save Changes', $this->plugin_name); ?>">
+                      class="button-primary" value="<?php esc_attr_e('Save Changes', 'save-as-image-pdfcrowd'); ?>">
                       <div
                         id="save-as-image-pdfcrowd-dirty-flag"
                         class="save-as-image-pdfcrowd-dirty-flag"
@@ -91,7 +91,7 @@ defined( 'ABSPATH' ) || exit;
                     style="margin-bottom: 2px;"
                     type="submit"
                     class="button-primary"
-                    value="<?php esc_attr_e('Reset to Default', $this->plugin_name); ?>"
+                    value="<?php esc_attr_e('Reset to Default', 'save-as-image-pdfcrowd'); ?>"
                     onclick="return save_as_image_pdfcrowd_reset_settings();" />
                 </div>
               </div>
@@ -491,7 +491,7 @@ defined( 'ABSPATH' ) || exit;
               }
 
               function save_as_image_pdfcrowd_reset_settings() {
-                  var r = confirm("<?php esc_attr_e('All Save as Image settings will be reset to default. Please confirm.', $this->plugin_name); ?>");
+                  var r = confirm(<?php echo json_encode(__('All Save as Image settings will be reset to default. Please confirm.', 'save-as-image-pdfcrowd'), JSON_HEX_TAG); ?>);
                   if(r !== true) {
                       return false;
                   }
@@ -512,15 +512,12 @@ defined( 'ABSPATH' ) || exit;
     </form>
 
     <div style="display: none">
-        <input type="hidden" id="save-as-image-pdfcrowd-hidden-header"
-               value="<?php
+        <?php
         $site_name = esc_html(get_bloginfo('name'));
         $site_desc = esc_html(get_bloginfo('description'));
         $site_css = esc_url(get_bloginfo('stylesheet_url'));
         $site_url = esc_url(get_bloginfo('url'));
-        // variables are escaped prior the echo command
-        echo <<<EOT
-<html>
+        $predefined_header = "<html>
   <head>
     <link rel='stylesheet' href='$site_css'>
     <style>
@@ -537,14 +534,8 @@ defined( 'ABSPATH' ) || exit;
       </p>
     </div>
   </body>
-</html>
-EOT;
-
-?>">
-        <input type="hidden" id="save-as-image-pdfcrowd-hidden-footer"
-               value="<?php
-        echo <<<EOT
-<html>
+</html>";
+        $predefined_footer = "<html>
   <head>
     <link rel='stylesheet' href='$site_css'>
     <style>
@@ -560,9 +551,9 @@ EOT;
       <span class='pdfcrowd-page-number'></span>&#47;<span class='pdfcrowd-page-count'></span>
     </div>
   </body>
-</html>
-EOT;
-
-?>">
+</html>";
+        ?>
+        <textarea id="save-as-image-pdfcrowd-hidden-header"><?php echo esc_textarea($predefined_header); ?></textarea>
+        <textarea id="save-as-image-pdfcrowd-hidden-footer"><?php echo esc_textarea($predefined_footer); ?></textarea>
     </div>
 </div>

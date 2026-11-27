@@ -54,7 +54,7 @@ defined( 'ABSPATH' ) || exit;
                 <tr>
                     <td>
                         <label for="save-as-image-pdfcrowd-username">
-                            Username
+                            <?php esc_html_e('Username', 'save-as-image-pdfcrowd'); ?>
                         </label>
                     </td>
                     <td>
@@ -62,15 +62,15 @@ defined( 'ABSPATH' ) || exit;
                              class="regular-text"
                              id="save-as-image-pdfcrowd-username"
                              name="save-as-image-pdfcrowd[username]"
-                             value="<?php esc_attr_e($username); ?>"
-                             placeholder="<?php esc_attr_e('Your PDFCrowd username', $this->plugin_name);?>"
+                             value="<?php echo esc_attr($username); ?>"
+                             placeholder="<?php esc_attr_e('Your PDFCrowd username', 'save-as-image-pdfcrowd');?>"
                              autocomplete="off" />
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="save-as-image-pdfcrowd-api_key">
-                            Key
+                            <?php esc_html_e('Key', 'save-as-image-pdfcrowd'); ?>
                         </label>
                     </td>
                     <td>
@@ -78,8 +78,8 @@ defined( 'ABSPATH' ) || exit;
                              class="regular-text"
                              id="save-as-image-pdfcrowd-api_key"
                              name="save-as-image-pdfcrowd[api_key]"
-                             value="<?php esc_attr_e($api_key); ?>"
-                             placeholder="<?php esc_attr_e('Your PDFCrowd WordPress key', $this->plugin_name);?>"
+                             value="<?php echo esc_attr($api_key); ?>"
+                             placeholder="<?php esc_attr_e('Your PDFCrowd WordPress key', 'save-as-image-pdfcrowd');?>"
                              autocomplete="off" />
                     </td>
                 </tr>
@@ -96,22 +96,28 @@ defined( 'ABSPATH' ) || exit;
                         <td></td>
                         <td id="save-as-image-pdfcrowd-lic-stats">
                             <div>
-                                License:
+                                <?php esc_html_e('License:', 'save-as-image-pdfcrowd'); ?>
                                 <span class='save-as-image-pdfcrowd-lic-stat'>
-                                    <?php esc_html_e($license_status['product']); ?>
+                                    <?php echo esc_html($license_status['product']); ?>
                                 </span>
                             </div>
                             <div>
-                                Status:
+                                <?php esc_html_e('Status:', 'save-as-image-pdfcrowd'); ?>
                                 <span class='save-as-image-pdfcrowd-lic-stat'>
-                                    <?php esc_html_e($license_status['status']); ?>
+                                    <?php
+                                    if ($license_status['status'] === 'active') {
+                                        echo esc_html_x('active', 'license status', 'save-as-image-pdfcrowd');
+                                    } elseif ($license_status['status'] === 'canceled') {
+                                        echo esc_html_x('canceled', 'license status', 'save-as-image-pdfcrowd');
+                                    }
+                                    ?>
                                 </span>
                             </div>
                             <?php if(isset($license_status['credits'])) : ?>
                                 <div>
-                                    Remaining credits:
+                                    <?php esc_html_e('Remaining credits:', 'save-as-image-pdfcrowd'); ?>
                                     <span class='save-as-image-pdfcrowd-lic-stat <?php if($license_status['credits'] <= 0) echo 'attention' ?>'>
-                                        <?php esc_html_e(number_format_i18n($license_status['credits'])); ?>
+                                        <?php echo esc_html(number_format_i18n($license_status['credits'])); ?>
                                     </span>
                                 </div>
                             <?php endif; ?>
@@ -122,7 +128,7 @@ defined( 'ABSPATH' ) || exit;
                         <td id="save-as-image-pdfcrowd-lic-invalid" colspan=2
                             class="align-center">
                             <div class='attention'>
-                                Error: Entered username or key is not valid!
+                                <?php esc_html_e('Error: Entered username or key is not valid!', 'save-as-image-pdfcrowd'); ?>
                             </div>
                         </td>
                     </tr>

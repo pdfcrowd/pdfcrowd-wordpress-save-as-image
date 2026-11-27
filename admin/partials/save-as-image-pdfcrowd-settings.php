@@ -16,10 +16,11 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<?php if(get_option('save_as_image_pdfcrowd_error_code')) : ?>
+<?php $license_error = $this->get_license_error_message(); ?>
+<?php if($license_error) : ?>
 <div class='notice notice-error'><p><strong>
-<?php esc_html_e(get_option('save_as_image_pdfcrowd_error_code')) ?>
- <a href="https://pdfcrowd.com/faq/wordpress/how-to-resolve-plugin-license-errors/" target="_blank">Resolve</a> this issue.</strong></p></div>
+<?php echo esc_html($license_error); ?>
+ <a href="https://pdfcrowd.com/faq/wordpress/how-to-resolve-plugin-license-errors/" target="_blank"><?php esc_html_e('Resolve this issue.', 'save-as-image-pdfcrowd'); ?></a></strong></p></div>
 <?php endif; ?>
 
 <div
@@ -130,7 +131,7 @@ defined( 'ABSPATH' ) || exit;
                         class="regular-text"
                         id="save-as-image-pdfcrowd-screenshot_width"
                         name="save-as-image-pdfcrowd[screenshot_width]"
-                        value="<?php esc_attr_e($screenshot_width); ?>"
+                        value="<?php echo esc_attr($screenshot_width); ?>"
                         placeholder="1024" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -155,7 +156,7 @@ defined( 'ABSPATH' ) || exit;
                         class="regular-text"
                         id="save-as-image-pdfcrowd-screenshot_height"
                         name="save-as-image-pdfcrowd[screenshot_height]"
-                        value="<?php esc_attr_e($screenshot_height); ?>"
+                        value="<?php echo esc_attr($screenshot_height); ?>"
                         placeholder="actual document height is used" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -180,7 +181,7 @@ defined( 'ABSPATH' ) || exit;
                         class="regular-text"
                         id="save-as-image-pdfcrowd-scale_factor"
                         name="save-as-image-pdfcrowd[scale_factor]"
-                        value="<?php esc_attr_e($scale_factor); ?>"
+                        value="<?php echo esc_attr($scale_factor); ?>"
                         placeholder="100" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -205,7 +206,7 @@ defined( 'ABSPATH' ) || exit;
                         class="regular-text"
                         id="save-as-image-pdfcrowd-background_color"
                         name="save-as-image-pdfcrowd[background_color]"
-                        value="<?php esc_attr_e($background_color); ?>"
+                        value="<?php echo esc_attr($background_color); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -414,7 +415,7 @@ Use this for converting news sites, blogs, or any ad-heavy content where ads dis
                         class="regular-text"
                         id="save-as-image-pdfcrowd-default_encoding"
                         name="save-as-image-pdfcrowd[default_encoding]"
-                        value="<?php esc_attr_e($default_encoding); ?>"
+                        value="<?php echo esc_attr($default_encoding); ?>"
                         placeholder="auto detect" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -442,7 +443,7 @@ Set to <code>"utf-8"</code> for modern content, <code>"iso-8859-1"</code> for We
                         class="regular-text"
                         id="save-as-image-pdfcrowd-locale"
                         name="save-as-image-pdfcrowd[locale]"
-                        value="<?php esc_attr_e($locale); ?>"
+                        value="<?php echo esc_attr($locale); ?>"
                         placeholder="en-US" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -470,7 +471,7 @@ Essential for financial reports, invoices, or localized content.
                         class="regular-text"
                         id="save-as-image-pdfcrowd-http_auth_user_name"
                         name="save-as-image-pdfcrowd[http_auth_user_name]"
-                        value="<?php esc_attr_e($http_auth_user_name); ?>"
+                        value="<?php echo esc_attr($http_auth_user_name); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -496,7 +497,7 @@ Essential for financial reports, invoices, or localized content.
                         class="regular-text"
                         id="save-as-image-pdfcrowd-http_auth_password"
                         name="save-as-image-pdfcrowd[http_auth_password]"
-                        value="<?php esc_attr_e($http_auth_password); ?>"
+                        value="<?php echo esc_attr($http_auth_password); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -522,7 +523,7 @@ Essential for financial reports, invoices, or localized content.
                         class="regular-text"
                         id="save-as-image-pdfcrowd-cookies"
                         name="save-as-image-pdfcrowd[cookies]"
-                        value="<?php esc_attr_e($cookies); ?>"
+                        value="<?php echo esc_attr($cookies); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -627,7 +628,7 @@ When disabled, allows conversion from any HTTPS site regardless of certificate v
                     <textarea id="save-as-image-pdfcrowd-custom_css" name="save-as-image-pdfcrowd[custom_css]" placeholder=""
                     rows=5
                     <?php if(!current_user_can('unfiltered_html')) echo 'readonly'; ?>
-                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php esc_html_e($custom_css); ?></textarea>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo esc_textarea($custom_css); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Apply custom CSS to the input HTML document to modify the visual appearance and layout of your content dynamically. Use this to override default styles, adjust spacing, change fonts, or fix layout issues without modifying the source HTML.
@@ -652,7 +653,7 @@ Use <code>!important</code> in your CSS rules to prioritize and override conflic
                     <textarea id="save-as-image-pdfcrowd-custom_javascript" name="save-as-image-pdfcrowd[custom_javascript]" placeholder=""
                     rows=5
                     <?php if(!current_user_can('unfiltered_html')) echo 'readonly'; ?>
-                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php esc_html_e($custom_javascript); ?></textarea>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo esc_textarea($custom_javascript); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Run a custom JavaScript after the document is loaded and ready to print. Use this to modify page content before conversion, remove unwanted elements, or trigger specific page states. The script is intended for post-load DOM manipulation (add/remove elements, update CSS, ...).
@@ -677,7 +678,7 @@ In addition to the standard browser APIs, the custom JavaScript code can use hel
                     <textarea id="save-as-image-pdfcrowd-on_load_javascript" name="save-as-image-pdfcrowd[on_load_javascript]" placeholder=""
                     rows=5
                     <?php if(!current_user_can('unfiltered_html')) echo 'readonly'; ?>
-                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php esc_html_e($on_load_javascript); ?></textarea>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo esc_textarea($on_load_javascript); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Run a custom JavaScript right after the document is loaded. The script is intended for early DOM manipulation (add/remove elements, update CSS, ...). In addition to the standard browser APIs, the custom JavaScript code can use helper functions from our <a href='https://pdfcrowd.com/api/libpdfcrowd/'>JavaScript library</a>.
@@ -702,7 +703,7 @@ In addition to the standard browser APIs, the custom JavaScript code can use hel
                         class="regular-text"
                         id="save-as-image-pdfcrowd-custom_http_header"
                         name="save-as-image-pdfcrowd[custom_http_header]"
-                        value="<?php esc_attr_e($custom_http_header); ?>"
+                        value="<?php echo esc_attr($custom_http_header); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -730,7 +731,7 @@ Essential when converting content from APIs or internal systems that require spe
                         class="regular-text"
                         id="save-as-image-pdfcrowd-javascript_delay"
                         name="save-as-image-pdfcrowd[javascript_delay]"
-                        value="<?php esc_attr_e($javascript_delay); ?>"
+                        value="<?php echo esc_attr($javascript_delay); ?>"
                         placeholder="200" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -755,7 +756,7 @@ Essential when converting content from APIs or internal systems that require spe
                         class="regular-text"
                         id="save-as-image-pdfcrowd-wait_for_element"
                         name="save-as-image-pdfcrowd[wait_for_element]"
-                        value="<?php esc_attr_e($wait_for_element); ?>"
+                        value="<?php echo esc_attr($wait_for_element); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -789,7 +790,7 @@ If the element is not found, the conversion fails. Your license defines the maxi
                         class="regular-text"
                         id="save-as-image-pdfcrowd-element_to_convert"
                         name="save-as-image-pdfcrowd[element_to_convert]"
-                        value="<?php esc_attr_e($element_to_convert); ?>"
+                        value="<?php echo esc_attr($element_to_convert); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -920,7 +921,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                     <textarea id="save-as-image-pdfcrowd-data_string" name="save-as-image-pdfcrowd[data_string]" placeholder=""
                     rows=5
                     <?php if(!current_user_can('unfiltered_html')) echo 'readonly'; ?>
-                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php esc_html_e($data_string); ?></textarea>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><?php echo esc_textarea($data_string); ?></textarea>
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
                             Set the input data for template rendering. The data format can be JSON, XML, YAML or CSV.
@@ -945,7 +946,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-data_file"
                         name="save-as-image-pdfcrowd[data_file]"
-                        value="<?php esc_attr_e($data_file); ?>"
+                        value="<?php echo esc_attr($data_file); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -997,7 +998,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-data_encoding"
                         name="save-as-image-pdfcrowd[data_encoding]"
-                        value="<?php esc_attr_e($data_encoding); ?>"
+                        value="<?php echo esc_attr($data_encoding); ?>"
                         placeholder="utf-8" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -1080,7 +1081,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-data_options"
                         name="save-as-image-pdfcrowd[data_options]"
-                        value="<?php esc_attr_e($data_options); ?>"
+                        value="<?php echo esc_attr($data_options); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -1137,7 +1138,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-tag"
                         name="save-as-image-pdfcrowd[tag]"
-                        value="<?php esc_attr_e($tag); ?>"
+                        value="<?php echo esc_attr($tag); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -1163,7 +1164,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-http_proxy"
                         name="save-as-image-pdfcrowd[http_proxy]"
-                        value="<?php esc_attr_e($http_proxy); ?>"
+                        value="<?php echo esc_attr($http_proxy); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -1189,7 +1190,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-https_proxy"
                         name="save-as-image-pdfcrowd[https_proxy]"
-                        value="<?php esc_attr_e($https_proxy); ?>"
+                        value="<?php echo esc_attr($https_proxy); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -1215,7 +1216,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-client_certificate"
                         name="save-as-image-pdfcrowd[client_certificate]"
-                        value="<?php esc_attr_e($client_certificate); ?>"
+                        value="<?php echo esc_attr($client_certificate); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -1241,7 +1242,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-client_certificate_password"
                         name="save-as-image-pdfcrowd[client_certificate_password]"
-                        value="<?php esc_attr_e($client_certificate_password); ?>"
+                        value="<?php echo esc_attr($client_certificate_password); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -1279,7 +1280,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-max_loading_time"
                         name="save-as-image-pdfcrowd[max_loading_time]"
-                        value="<?php esc_attr_e($max_loading_time); ?>"
+                        value="<?php echo esc_attr($max_loading_time); ?>"
                         placeholder="" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>
@@ -1312,7 +1313,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                            class="regular-text"
                            name="save-as-image-pdfcrowd[converter_user_agent]"
                            id="save-as-image-pdfcrowd-converter_user_agent"
-                           value="<?php esc_attr_e($converter_user_agent); ?>"
+                           value="<?php echo esc_attr($converter_user_agent); ?>"
                            placeholder="Enter custom string"
                            autocomplete="off">
                     </div>
@@ -1401,7 +1402,7 @@ Different versions (<code>v1-v4</code>) use progressively aggressive algorithms 
                         class="regular-text"
                         id="save-as-image-pdfcrowd-retry_count"
                         name="save-as-image-pdfcrowd[retry_count]"
-                        value="<?php esc_attr_e($retry_count); ?>"
+                        value="<?php echo esc_attr($retry_count); ?>"
                         placeholder="1" autocomplete="off" />
                         <div class="save-as-image-pdfcrowd-description">
                           <div>

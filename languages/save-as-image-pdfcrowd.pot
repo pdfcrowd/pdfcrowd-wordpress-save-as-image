@@ -1,63 +1,266 @@
-# Copyright (C) 2020 PDFCrowd <support@pdfcrowd.com>
-# This file is distributed under the same license as the Save as Image by PDFCrowd plugin.
+# Copyright (C) 2026 PDFCrowd <support@pdfcrowd.com>
+# This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Save as Image by PDFCrowd 4.7.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/save-as-image-by-pdfcrowd/\n"
+"Project-Id-Version: Save as Image by PDFCrowd 5.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/save-as-image-by-pdfcrowd\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-12-03T11:27:22+01:00\n"
-"PO-Revision-Date: 2021-01-27T09:46:19+01:00\n"
-"X-Generator: WP-CLI 2.4.0\n"
-"X-Domain: save_as_image_pdfcrowd\n"
+"POT-Creation-Date: 2020-12-03 11:27+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: save-as-image-pdfcrowd\n"
 
+#. Plugin Name of the plugin
+#: save-as-image-pdfcrowd.php
 msgid "Save as Image by PDFCrowd"
 msgstr ""
 
+#. Plugin URI of the plugin
+#: save-as-image-pdfcrowd.php
+msgid "https://pdfcrowd.com/save-as-image-wordpress-plugin/"
+msgstr ""
+
+#. Description of the plugin
+#: save-as-image-pdfcrowd.php
+msgid "Let your visitors save pages as an image in a single click. Reliable, fast and highly customizable."
+msgstr ""
+
+#. Author of the plugin
+#: save-as-image-pdfcrowd.php
+msgid "PDFCrowd <support@pdfcrowd.com>"
+msgstr ""
+
+#. Author URI of the plugin
+#: save-as-image-pdfcrowd.php
+msgid "https://pdfcrowd.com"
+msgstr ""
+
+#: admin/class-save-as-image-pdfcrowd-admin.php:108
+msgid "Save as Image Settings"
+msgstr ""
+
+#: admin/class-save-as-image-pdfcrowd-admin.php:109
+msgid "Save as Image"
+msgstr ""
+
+#. translators: %1$s: Currently configured converter version.
+#: admin/class-save-as-image-pdfcrowd-admin.php:146
 msgid "The plugin is currently configured to use converter version %1$s. The latest version, 24.04, is now available."
 msgstr ""
 
+#: admin/class-save-as-image-pdfcrowd-admin.php:152
 msgid "To upgrade, press the button below."
 msgstr ""
 
+#: admin/class-save-as-image-pdfcrowd-admin.php:157
 msgid "Auto-upgrade to 24.04"
 msgstr ""
 
+#: admin/class-save-as-image-pdfcrowd-admin.php:162
 msgid "Never show again"
 msgstr ""
 
+#: admin/class-save-as-image-pdfcrowd-admin.php:229
+msgctxt "no license"
+msgid "None"
+msgstr ""
+
+#: admin/class-save-as-image-pdfcrowd-admin.php:256
+msgid "Demo credits have run out. Enter your PDFCrowd credentials on the License tab. If you need a plan, select Purchase there."
+msgstr ""
+
+#: admin/class-save-as-image-pdfcrowd-admin.php:258
+msgid "License error 401: Authentication credentials were not provided or the PDFCrowd license is not active."
+msgstr ""
+
+#: admin/class-save-as-image-pdfcrowd-admin.php:260
+msgid "License error 403: The API service is suspended or there are no credits left."
+msgstr ""
+
+#: admin/class-save-as-image-pdfcrowd-admin.php:262
+msgid "License error 432: The limit for the demo license has been exceeded. Use your personal PDFCrowd API credentials."
+msgstr ""
+
+#: admin/class-save-as-image-pdfcrowd-admin.php:275
 msgid "Settings"
 msgstr ""
 
+#: admin/class-save-as-image-pdfcrowd-admin.php:282
 msgid "License error"
 msgstr ""
 
+#: admin/partials/appearance.php:165
+msgid "Your text"
+msgstr ""
+
+#: admin/partials/appearance.php:208
+msgid "default, the slug of your theme or plugin"
+msgstr ""
+
+#: admin/partials/appearance.php:379
+msgid "Your id for the button"
+msgstr ""
+
+#: admin/partials/appearance.php:857
+msgid "Your JavaScript function name"
+msgstr ""
+
+#: admin/partials/behavior.php:81
+msgid "Sender address"
+msgstr ""
+
+#: admin/partials/behavior.php:138
+msgid "info@example.com"
+msgstr ""
+
+#: admin/partials/behavior.php:166
+msgid "Carbon copy address"
+msgstr ""
+
+#: admin/partials/behavior.php:191
+msgid "Blind carbon copy address"
+msgstr ""
+
+#: admin/partials/behavior.php:216
+msgid "Your subject"
+msgstr ""
+
+#: admin/partials/behavior.php:240
+msgid "Your email message"
+msgstr ""
+
+#: admin/partials/behavior.php:307
+msgid "Your JavaScript object name, e.g. mySaveAsImagePdfcrowdEmailDialogs"
+msgstr ""
+
+#: admin/partials/behavior.php:367
+msgid "Output filename"
+msgstr ""
+
+#: admin/partials/behavior.php:390
+msgid "Your function name"
+msgstr ""
+
+#: admin/partials/behavior.php:450
+msgid "Your custom data"
+msgstr ""
+
+#: admin/partials/behavior.php:487
+msgid "URL or slug"
+msgstr ""
+
+#: admin/partials/license-settings.php:57
+msgid "Username"
+msgstr ""
+
+#: admin/partials/license-settings.php:66
+msgid "Your PDFCrowd username"
+msgstr ""
+
+#: admin/partials/license-settings.php:73
+msgid "Key"
+msgstr ""
+
+#: admin/partials/license-settings.php:82
+msgid "Your PDFCrowd WordPress key"
+msgstr ""
+
+#: admin/partials/license-settings.php:99
+msgid "License:"
+msgstr ""
+
+#: admin/partials/license-settings.php:105
+msgid "Status:"
+msgstr ""
+
+#: admin/partials/license-settings.php:109
+msgctxt "license status"
+msgid "active"
+msgstr ""
+
+#: admin/partials/license-settings.php:111
+msgctxt "license status"
+msgid "canceled"
+msgstr ""
+
+#: admin/partials/license-settings.php:118
+msgid "Remaining credits:"
+msgstr ""
+
+#: admin/partials/license-settings.php:131
+msgid "Error: Entered username or key is not valid!"
+msgstr ""
+
+#: admin/partials/save-as-image-pdfcrowd-admin-display.php:81
+msgid "Save Changes"
+msgstr ""
+
+#: admin/partials/save-as-image-pdfcrowd-admin-display.php:94
+msgid "Reset to Default"
+msgstr ""
+
+#: admin/partials/save-as-image-pdfcrowd-admin-display.php:494
+msgid "All Save as Image settings will be reset to default. Please confirm."
+msgstr ""
+
+#: admin/partials/save-as-image-pdfcrowd-settings.php:23
+msgid "Resolve this issue."
+msgstr ""
+
+#: admin/partials/wizard.php:6
+msgid "Save as Image Settings Wizard"
+msgstr ""
+
+#: public/class-save-as-image-pdfcrowd-public.php:129
 msgid "Email with the image has been sent."
 msgstr ""
 
+#: public/class-save-as-image-pdfcrowd-public.php:131
 msgid "Error occurred."
 msgstr ""
 
+#. translators: %s: PDFCrowd error code.
+#: public/class-save-as-image-pdfcrowd-public.php:134
+msgid "Status Code: %s"
+msgstr ""
+
+#: public/class-save-as-image-pdfcrowd-public.php:135
 msgid "Enter your email:"
 msgstr ""
 
+#: public/class-save-as-image-pdfcrowd-public.php:137
 msgid "Ok"
 msgstr ""
 
+#: public/class-save-as-image-pdfcrowd-public.php:139
 msgid "Cancel"
 msgstr ""
 
+#: public/class-save-as-image-pdfcrowd-public.php:1332
+msgid "Demo credits have run out. Please contact the site administrator."
+msgstr ""
+
+#: public/class-save-as-image-pdfcrowd-public.php:1537
+msgid "Enter a recipient email address."
+msgstr ""
+
+#: public/class-save-as-image-pdfcrowd-public.php:1551
 msgid "Output file can not be prepared."
 msgstr ""
 
+#: public/class-save-as-image-pdfcrowd-public.php:1592
 msgid "Mail system error."
 msgstr ""
 
+#: public/class-save-as-image-pdfcrowd-public.php:1641
+#: public/class-save-as-image-pdfcrowd-public.php:1648
 msgid "Configuration error. Refresh page and retry."
 msgstr ""
 
+#: public/class-save-as-image-pdfcrowd-public.php:1683
 msgid "Invalid token. Use Conversion Mode Url or disable cache for this page."
 msgstr ""

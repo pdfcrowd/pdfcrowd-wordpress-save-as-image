@@ -105,8 +105,8 @@ class Save_As_Image_Pdfcrowd_Admin {
     */
     public function add_plugin_admin_menu() {
         $plugin_screen_hook_suffix = add_options_page(
-            'Save as Image Settings',
-            'Save as Image',
+            esc_html__('Save as Image Settings', 'save-as-image-pdfcrowd'),
+            esc_html__('Save as Image', 'save-as-image-pdfcrowd'),
             'manage_options',
             $this->plugin_name,
             array($this, 'display_plugin_setup_page')
@@ -142,23 +142,24 @@ class Save_As_Image_Pdfcrowd_Admin {
             class="notice notice-info is-dismissible save-as-image-pdfcrowd-notice">
         <p>
             <?php printf(
+                /* translators: %1$s: Currently configured converter version. */
                 esc_html__('The plugin is currently configured to use converter version %1$s. The latest version, 24.04, is now available.',
-                   $this->plugin_name),
+                   'save-as-image-pdfcrowd'),
                 esc_html($options['converter_version']));
             ?>
         </p>
         <p>
-            <?php esc_html_e('To upgrade, press the button below.', $this->plugin_name); ?>
+            <?php esc_html_e('To upgrade, press the button below.', 'save-as-image-pdfcrowd'); ?>
         </p>
         <p style="display: flex; align-items: center">
             <a id="save-as-image-pdfcrowd-do-upgrade"
                 class="button button-primary" href="#">
                 <?php esc_html_e('Auto-upgrade to 24.04',
-                         $this->plugin_name); ?>
+                         'save-as-image-pdfcrowd'); ?>
             </a>
             <a href="#" class="save-as-image-pdfcrowd-never-show-again">
                 <span class="dashicons dashicons-dismiss"></span>
-                <?php esc_html_e('Never show again', $this->plugin_name); ?>
+                <?php esc_html_e('Never show again', 'save-as-image-pdfcrowd'); ?>
             </a>
         </p>
         </div>
@@ -225,7 +226,7 @@ class Save_As_Image_Pdfcrowd_Admin {
         }
 
         if($code == 404) {
-            return self::build_status('', 'None');
+            return self::build_status('', _x('None', 'no license', 'save-as-image-pdfcrowd'));
         }
 
         if($code != 200) {
@@ -247,6 +248,22 @@ class Save_As_Image_Pdfcrowd_Admin {
         include_once( 'partials/save-as-image-pdfcrowd-admin-display.php' );
     }
 
+    private function get_license_error_message() {
+        // Stored notices are in English. Translate for the admin viewing them.
+        $message = get_option('save_as_image_pdfcrowd_error_code');
+        switch ($message) {
+        case 'Demo credits have run out. Enter your PDFCrowd credentials on the License tab. If you need a plan, select Purchase there.':
+            return __('Demo credits have run out. Enter your PDFCrowd credentials on the License tab. If you need a plan, select Purchase there.', 'save-as-image-pdfcrowd');
+        case "License error 401: Authentication credentials were not provided or the PDFCrowd license is not active.":
+            return __("License error 401: Authentication credentials were not provided or the PDFCrowd license is not active.", 'save-as-image-pdfcrowd');
+        case "License error 403: The API service is suspended or there are no credits left.":
+            return __("License error 403: The API service is suspended or there are no credits left.", 'save-as-image-pdfcrowd');
+        case "License error 432: The limit for the demo license has been exceeded. Use your personal PDFCrowd API credentials.":
+            return __("License error 432: The limit for the demo license has been exceeded. Use your personal PDFCrowd API credentials.", 'save-as-image-pdfcrowd');
+        }
+        return $message;
+    }
+
     /**
      * Add settings action link to the plugins page.
      *
@@ -255,12 +272,14 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function add_action_links( $links ) {
         $href = admin_url('options-general.php?page=' . $this->plugin_name);
         $our_links = array(
-            'settings' => '<a href="' .  $href . '">' . __( 'Settings', $this->plugin_name ) . '</a>'
+            'settings' => '<a href="' . esc_url($href) . '">' . esc_html__( 'Settings', 'save-as-image-pdfcrowd' ) . '</a>'
         );
-        $error_code = get_option('save_as_image_pdfcrowd_error_code');
-        if($error_code) {
-            $our_links[] = "<a id='save-as-image-pdfcrowd-lic-error' href='{$href}#save-as-image-pdfcrowd-license-settings' style='color: #b32d2e; font-weight: bolder;' title='{$error_code}'>" .
-                         __('License error', $this->plugin_name) .
+        $error_message = $this->get_license_error_message();
+        if($error_message) {
+            $title = esc_attr($error_message);
+            $url = esc_url($href . '#save-as-image-pdfcrowd-license-settings');
+            $our_links[] = "<a id='save-as-image-pdfcrowd-lic-error' href='{$url}' style='color: #b32d2e; font-weight: bolder;' title='{$title}'>" .
+                         esc_html__('License error', 'save-as-image-pdfcrowd') .
                          '</a>';
         }
         return array_merge($our_links, $links);
@@ -300,7 +319,7 @@ class Save_As_Image_Pdfcrowd_Admin {
     public function validate($input) {
         $options = get_option($this->plugin_name);
         $valid = $input;
-        $valid['version'] = 4700;
+        $valid['version'] = 5000;
 
         if(isset($input['wp_submit_action'])) {
             if($input['wp_submit_action'] === 'reset') {
@@ -313,6 +332,10 @@ class Save_As_Image_Pdfcrowd_Admin {
                 set_transient('save_as_image_pdfcrowd_show_wizard', true, 30);
             }
         }
+
+        // This flag belongs to the installation and has no settings form field.
+        $valid['enable_cookies_opt'] =
+            (int) Save_As_Image_Pdfcrowd_Public::has_legacy_connection_settings($options);
 
         if(isset($input['username'])) {
             $valid['username'] = trim($input['username']);
@@ -678,137 +701,7 @@ class Save_As_Image_Pdfcrowd_Admin {
         $valid['retry_count'] = isset($input['retry_count']) ? $input['retry_count'] : '';
 
 
-        if(isset($valid['button_disposition'])) {
-            $valid['button_disposition'] = esc_html($valid['button_disposition']);
-        }
-        if(isset($valid['button_position'])) {
-            $valid['button_position'] = esc_html($valid['button_position']);
-        }
-        if(isset($valid['button_alignment'])) {
-            $valid['button_alignment'] = esc_html($valid['button_alignment']);
-        }
-        if(isset($valid['button_on_home'])) {
-            $valid['button_on_home'] = esc_html($valid['button_on_home']);
-        }
-        if(isset($valid['button_on_front'])) {
-            $valid['button_on_front'] = esc_html($valid['button_on_front']);
-        }
-        if(isset($valid['button_on_pages'])) {
-            $valid['button_on_pages'] = esc_html($valid['button_on_pages']);
-        }
-        if(isset($valid['button_on_posts'])) {
-            $valid['button_on_posts'] = esc_html($valid['button_on_posts']);
-        }
-        if(isset($valid['button_on_categories'])) {
-            $valid['button_on_categories'] = esc_html($valid['button_on_categories']);
-        }
-        if(isset($valid['button_on_taxonomies'])) {
-            $valid['button_on_taxonomies'] = esc_html($valid['button_on_taxonomies']);
-        }
-        if(isset($valid['button_text'])) {
-            $valid['button_text'] = esc_html($valid['button_text']);
-        }
-        if(isset($valid['button_text_size'])) {
-            $valid['button_text_size'] = esc_html($valid['button_text_size']);
-        }
-        if(isset($valid['button_text_weight'])) {
-            $valid['button_text_weight'] = esc_html($valid['button_text_weight']);
-        }
-        if(isset($valid['button_translation'])) {
-            $valid['button_translation'] = esc_html($valid['button_translation']);
-        }
-        if(isset($valid['button_translation_domain'])) {
-            $valid['button_translation_domain'] = esc_html($valid['button_translation_domain']);
-        }
-        if(isset($valid['button_image'])) {
-            $valid['button_image'] = esc_html($valid['button_image']);
-        }
-        if(isset($valid['button_image_url'])) {
-            $valid['button_image_url'] = esc_html($valid['button_image_url']);
-        }
-        if(isset($valid['button_image_width'])) {
-            $valid['button_image_width'] = esc_html($valid['button_image_width']);
-        }
-        if(isset($valid['button_image_height'])) {
-            $valid['button_image_height'] = esc_html($valid['button_image_height']);
-        }
-        if(isset($valid['button_padding_left'])) {
-            $valid['button_padding_left'] = esc_html($valid['button_padding_left']);
-        }
-        if(isset($valid['button_padding_right'])) {
-            $valid['button_padding_right'] = esc_html($valid['button_padding_right']);
-        }
-        if(isset($valid['button_padding_top'])) {
-            $valid['button_padding_top'] = esc_html($valid['button_padding_top']);
-        }
-        if(isset($valid['button_padding_bottom'])) {
-            $valid['button_padding_bottom'] = esc_html($valid['button_padding_bottom']);
-        }
-        if(isset($valid['button_radius'])) {
-            $valid['button_radius'] = esc_html($valid['button_radius']);
-        }
-        if(isset($valid['button_margin_left'])) {
-            $valid['button_margin_left'] = esc_html($valid['button_margin_left']);
-        }
-        if(isset($valid['button_margin_right'])) {
-            $valid['button_margin_right'] = esc_html($valid['button_margin_right']);
-        }
-        if(isset($valid['button_margin_top'])) {
-            $valid['button_margin_top'] = esc_html($valid['button_margin_top']);
-        }
-        if(isset($valid['button_margin_bottom'])) {
-            $valid['button_margin_bottom'] = esc_html($valid['button_margin_bottom']);
-        }
-        if(isset($valid['button_format'])) {
-            $valid['button_format'] = esc_html($valid['button_format']);
-        }
-        if(isset($valid['button_styling'])) {
-            $valid['button_styling'] = esc_html($valid['button_styling']);
-        }
-        if(isset($valid['button_text_color'])) {
-            $valid['button_text_color'] = esc_html($valid['button_text_color']);
-        }
-        if(isset($valid['button_background_color'])) {
-            $valid['button_background_color'] = esc_html($valid['button_background_color']);
-        }
-        if(isset($valid['button_border_color'])) {
-            $valid['button_border_color'] = esc_html($valid['button_border_color']);
-        }
-        if(isset($valid['button_border_style'])) {
-            $valid['button_border_style'] = esc_html($valid['button_border_style']);
-        }
-        if(isset($valid['button_border_width'])) {
-            $valid['button_border_width'] = esc_html($valid['button_border_width']);
-        }
-        if(isset($valid['button_hidden'])) {
-            $valid['button_hidden'] = esc_html($valid['button_hidden']);
-        }
-        if(isset($valid['button_html_hidden'])) {
-            $valid['button_html_hidden'] = esc_html($valid['button_html_hidden']);
-        }
-        if(isset($valid['button_indicator'])) {
-            $valid['button_indicator'] = esc_html($valid['button_indicator']);
-        }
-        if(isset($valid['button_indicator_timeout'])) {
-            $valid['button_indicator_timeout'] = esc_html($valid['button_indicator_timeout']);
-        }
-        if(isset($valid['button_custom_indicator'])) {
-            $valid['button_custom_indicator'] = esc_html($valid['button_custom_indicator']);
-        }
-        if(isset($valid['button_hover'])) {
-            $valid['button_hover'] = esc_html($valid['button_hover']);
-        }
-        if(isset($valid['button_id'])) {
-            $valid['button_id'] = esc_html($valid['button_id']);
-        }
-        if(isset($valid['button_user_drawings'])) {
-            $valid['button_user_drawings'] = esc_html($valid['button_user_drawings']);
-        }
-
-        if(!current_user_can('unfiltered_html')) {
-            $valid['button_custom_html'] = isset($options['button_custom_html']) ? $options['button_custom_html'] : '';
-            $valid['button_indicator_html'] = isset($options['button_indicator_html']) ? $options['button_indicator_html'] : '';
-        }
+        $valid = array_merge($valid, Save_As_Image_Pdfcrowd::sanitize_button_settings($valid, $options));
 
         if($this->check_lic_change($valid, $options)) {
             delete_option('save_as_image_pdfcrowd_error_code');

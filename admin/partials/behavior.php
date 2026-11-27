@@ -77,8 +77,8 @@ defined( 'ABSPATH' ) || exit;
                     id="save-as-image-pdfcrowd-email-from"
                     data-parent-opt="#save-as-image-pdfcrowd-button-disp-email"
                     name="save-as-image-pdfcrowd[email_from]"
-                    value="<?php esc_attr_e($email_from); ?>"
-                    placeholder="<?php esc_attr_e('Sender address', $this->plugin_name); ?>"
+                    value="<?php echo esc_attr($email_from); ?>"
+                    placeholder="<?php esc_attr_e('Sender address', 'save-as-image-pdfcrowd'); ?>"
                     autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-description'>
                       The sender email. It can be empty if specified in your mailer plugin.
@@ -134,8 +134,8 @@ defined( 'ABSPATH' ) || exit;
                                 type="text"
                                 data-parent-opt="#save-as-image-pdfcrowd-er-address"
                                 class="regular-text save-as-image-pdfcrowd-text-for-radio" name="save-as-image-pdfcrowd[email_recipient_address]"
-                                value="<?php esc_attr_e($email_recipient_address); ?>"
-                                placeholder="<?php esc_attr_e('info@example.com', $this->plugin_name); ?>"
+                                value="<?php echo esc_attr($email_recipient_address); ?>"
+                                placeholder="<?php esc_attr_e('info@example.com', 'save-as-image-pdfcrowd'); ?>"
                                 autocomplete="off">
                                 <div class='save-as-image-pdfcrowd-devi save-as-image-pdfcrowd-nested-dsc'>
                                     Shortcode and function parameter: "<strong>email_recipient_address</strong>"
@@ -162,8 +162,8 @@ defined( 'ABSPATH' ) || exit;
                     id="save-as-image-pdfcrowd-email-cc"
                     name="save-as-image-pdfcrowd[email_cc]"
                     data-parent-opt="#save-as-image-pdfcrowd-button-disp-email"
-                    value="<?php esc_attr_e($email_cc); ?>"
-                    placeholder="<?php esc_attr_e('Carbon copy address', $this->plugin_name); ?>"
+                    value="<?php echo esc_attr($email_cc); ?>"
+                    placeholder="<?php esc_attr_e('Carbon copy address', 'save-as-image-pdfcrowd'); ?>"
                     autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-description'>
                       Additional recipients who will receive a copy of the email. It can be either a single email address or a comma-separated list of email addresses.
@@ -187,8 +187,8 @@ defined( 'ABSPATH' ) || exit;
                     id="save-as-image-pdfcrowd-email-bcc"
                     name="save-as-image-pdfcrowd[email_bcc]"
                     data-parent-opt="#save-as-image-pdfcrowd-button-disp-email"
-                    value="<?php esc_attr_e($email_bcc); ?>"
-                    placeholder="<?php esc_attr_e('Blind carbon copy address', $this->plugin_name); ?>"
+                    value="<?php echo esc_attr($email_bcc); ?>"
+                    placeholder="<?php esc_attr_e('Blind carbon copy address', 'save-as-image-pdfcrowd'); ?>"
                     autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-description'>
                       Additional recipients who will receive a copy of the email without revealing their email addresses to the other recipients. It can be either a single email address or a comma-separated list of email addresses.
@@ -212,8 +212,8 @@ defined( 'ABSPATH' ) || exit;
                     id="save-as-image-pdfcrowd-email-subject"
                     name="save-as-image-pdfcrowd[email_subject]"
                     data-parent-opt="#save-as-image-pdfcrowd-button-disp-email"
-                    value="<?php esc_attr_e($email_subject); ?>"
-                    placeholder="<?php esc_attr_e('Your subject', $this->plugin_name); ?>"
+                    value="<?php echo esc_attr($email_subject); ?>"
+                    placeholder="<?php esc_attr_e('Your subject', 'save-as-image-pdfcrowd'); ?>"
                     autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-description'>
                        <div> The email subject template. The template may contain predefined variables enclosed in <code>{{ }}</code> that are dynamically expanded. Available variables are: </div> <ul> <li>site - site name</li> <li>site_url - site url</li> <li>title - current page title</li> </ul> <div> Available variables for logged in user: </div> <ul> <li>user_name - user's login name</li> <li>user_first_name - user's first name</li> <li>user_last_name - user's last name</li> <li>user_display_name - user's display name</li> </ul> <div class='small-text'> If you need custom variables in the template, place <em>Save as</em> button into your code by PHP method with the template argument. </div>
@@ -237,7 +237,7 @@ defined( 'ABSPATH' ) || exit;
                     data-parent-opt="#save-as-image-pdfcrowd-button-disp-email"
                     rows=5
                     <?php if(!current_user_can('unfiltered_html')) echo 'readonly'; ?>
-                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="<?php esc_attr_e('Your email message', $this->plugin_name); ?>"><?php esc_html_e($email_message); ?></textarea>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="<?php esc_attr_e('Your email message', 'save-as-image-pdfcrowd'); ?>"><?php echo esc_textarea($email_message); ?></textarea>
                     <div class='save-as-image-pdfcrowd-description'>
                        <div> The email message template. HTML tags may be used in it. The template may contain predefined variables enclosed in <code>{{ }}</code> that are dynamically expanded. Available variables are: </div> <ul> <li>site - site name</li> <li>site_url - site url</li> <li>title - current page title</li> </ul> <div> Available variables for logged in user: </div> <ul> <li>user_name - user's login name</li> <li>user_first_name - user's first name</li> <li>user_last_name - user's last name</li> <li>user_display_name - user's display name</li> </ul> <div class='small-text'> If you need custom variables in the template, place <em>Save as</em> button into your code by PHP method with the template argument. </div>
                     </div>
@@ -303,8 +303,8 @@ defined( 'ABSPATH' ) || exit;
                                 id="save-as-image-pdfcrowd-custom-edlg"
                                 name="save-as-image-pdfcrowd[email_custom_dialogs]"
                                 data-parent-opt="#save-as-image-pdfcrowd-edlg-custom"
-                                value="<?php esc_attr_e($email_custom_dialogs); ?>"
-                                placeholder="<?php esc_attr_e('Your JavaScript object name, e.g. mySaveAsImagePdfcrowdEmailDialogs', $this->plugin_name); ?>"
+                                value="<?php echo esc_attr($email_custom_dialogs); ?>"
+                                placeholder="<?php esc_attr_e('Your JavaScript object name, e.g. mySaveAsImagePdfcrowdEmailDialogs', 'save-as-image-pdfcrowd'); ?>"
                                 style="min-width: 500px"
                                 autocomplete="off"/>
                             <div class="save-as-image-pdfcrowd-nested-dsc">
@@ -363,8 +363,8 @@ defined( 'ABSPATH' ) || exit;
                            class="regular-text"
                            id="save-as-image-pdfcrowd-output-name"
                            name="save-as-image-pdfcrowd[output_name]"
-                           value="<?php esc_attr_e($output_name); ?>"
-                           placeholder="<?php esc_attr_e('Output filename', $this->plugin_name); ?>"
+                           value="<?php echo esc_attr($output_name); ?>"
+                           placeholder="<?php esc_attr_e('Output filename', 'save-as-image-pdfcrowd'); ?>"
                            autocomplete="off" />
                     <div class='save-as-image-pdfcrowd-description'>
                       The name of the output file. The name may not be specified and will be automatically created according to the page URL.
@@ -386,8 +386,8 @@ defined( 'ABSPATH' ) || exit;
                          class="regular-text"
                          id="save-as-image-pdfcrowd-image-created-callback"
                          name="save-as-image-pdfcrowd[image_created_callback]"
-                         value="<?php esc_attr_e($image_created_callback); ?>"
-                         placeholder="<?php esc_attr_e('Your function name', $this->plugin_name); ?>"
+                         value="<?php echo esc_attr($image_created_callback); ?>"
+                         placeholder="<?php esc_attr_e('Your function name', 'save-as-image-pdfcrowd'); ?>"
                          autocomplete="off" />
                     <div class="save-as-image-pdfcrowd-description">
                         <div>
@@ -447,7 +447,7 @@ function save_to_local($data) {
                     <textarea id="save-as-image-pdfcrowd-custom-data" name="save-as-image-pdfcrowd[custom_data]"
                     rows=5
                     <?php if(!current_user_can('unfiltered_html')) echo 'readonly'; ?>
-                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="<?php esc_attr_e('Your custom data', $this->plugin_name);?>"><?php esc_html_e($custom_data); ?></textarea>
+                    cols=60 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="<?php esc_attr_e('Your custom data', 'save-as-image-pdfcrowd');?>"><?php echo esc_textarea($custom_data); ?></textarea>
                     <div class="save-as-image-pdfcrowd-description">
                       <div>
     Data assigned to the button.
@@ -483,8 +483,8 @@ echo create_save_as_image_pdfcrowd_button(
                          class="regular-text"
                          id="save-as-image-pdfcrowd-error-page"
                          name="save-as-image-pdfcrowd[error_page]"
-                         value="<?php esc_attr_e($error_page); ?>"
-                         placeholder="<?php esc_attr_e('URL or slug', $this->plugin_name); ?>"
+                         value="<?php echo esc_attr($error_page); ?>"
+                         placeholder="<?php esc_attr_e('URL or slug', 'save-as-image-pdfcrowd'); ?>"
                          autocomplete="off" />
                 </div>
                 <div class="save-as-image-pdfcrowd-description">
